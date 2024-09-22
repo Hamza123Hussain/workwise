@@ -5,26 +5,26 @@ const SidebarLinks = () => {
     <div className="flex flex-col p-4 space-y-5 w-full">
       <a
         href="#"
-        className="text-white hover:text-[#FF5733] hover:bg-gray-700 hover:rounded-lg hover:px-2"
+        className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
       >
         Home
       </a>
       <a
         href="#"
-        className="text-white hover:text-[#FF5733] hover:bg-gray-700 hover:rounded-lg hover:px-2"
+        className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
       >
         Tasks
       </a>
 
       <a
         href="#"
-        className="text-white hover:text-[#FF5733] hover:bg-gray-700 hover:rounded-lg hover:px-2"
+        className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
       >
         Profile
       </a>
       <a
         href="#"
-        className="text-white hover:text-[#FF5733] hover:bg-gray-700 hover:rounded-lg hover:px-2"
+        className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
       >
         Logout
       </a>
