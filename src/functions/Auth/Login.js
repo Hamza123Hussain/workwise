@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const handleLogin = async ({ email, password }) => {
   try {
-    const res = await axios.post('/api/auth/login', {
+    const res = await axios.post('http://localhost:8000/Api/Auth/SignIn', {
       Email: email,
       Password: password,
     })
