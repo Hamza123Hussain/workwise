@@ -7,8 +7,6 @@ export const loginUser = async (email: string, password: string) => {
       Password: password,
     })
 
-    // Handle success (e.g., save user data or token)
-    console.log('User logged in successfully:', response.data)
     return response.data
   } catch (error: any) {
     // Handle error

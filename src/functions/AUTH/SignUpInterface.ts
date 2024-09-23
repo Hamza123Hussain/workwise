@@ -4,9 +4,11 @@ export interface InputValues {
   Name: string
   Image: File | null
 }
+
 export interface UserData {
-  Name: string
-  UserID: string
+  _id: string
+  name: string
   email: string
+  createdAt: string
   imageUrl: string
 }
