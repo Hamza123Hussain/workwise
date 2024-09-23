@@ -1,14 +1,18 @@
-import React from 'react'
-import logo from './logo.svg'
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import SignIn from './Auth/SignIn'
-import SignUp from './Auth/Register'
+import SignIn from './components/Auth/SignIn'
+import SignUp from './components/Auth/Register'
+import ResetPassword from './components/Auth/ResetPassword'
 
 function App() {
   return (
-    <div className="App">
-      {/* <SignIn /> */}
-      <SignUp />
+    <div className="    flex  items-center justify-center h-screen ">
+      <Routes>
+        <Route path="/" element={<SignIn />} />
+        <Route path="/Login" element={<SignIn />} />
+        <Route path="/Register" element={<SignUp />} />
+        <Route path="/ResetPassword" element={<ResetPassword />} />
+      </Routes>
     </div>
   )
 }
