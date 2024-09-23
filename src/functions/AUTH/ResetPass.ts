@@ -2,12 +2,9 @@ import axios from 'axios'
 
 export const handlePasswordReset = async (email: string) => {
   try {
-    const response = await axios.post(
-      'https://octtoppus-backend-b76z.vercel.app/API/AUTH/Reset',
-      {
-        email,
-      }
-    )
+    const response = await axios.post('http://localhost:8000/Api/Auth/Reset', {
+      email,
+    })
     if (response.status === 200) {
       return true
     }
