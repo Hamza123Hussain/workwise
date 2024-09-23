@@ -13,9 +13,32 @@ const SidebarLinks = () => {
         href="#"
         className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
       >
+        Create Task
+      </a>
+      <a
+        href="#"
+        className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
+      >
         Tasks
       </a>
-
+      <a
+        href="#"
+        className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
+      >
+        User Attendance
+      </a>
+      <a
+        href="#"
+        className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
+      >
+        Total Attendance
+      </a>
+      <a
+        href="#"
+        className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
+      >
+        Report
+      </a>
       <a
         href="#"
         className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
