@@ -2,7 +2,12 @@
 import React, { useState } from 'react'
 import { loginUser } from '../../functions/AUTH/LoginUser'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { GetUserData } from '../../utils/Redux/Slice/User/UserSlice'
+import { RootState } from '../../utils/Redux/Store/Store'
 const SignIn = () => {
+  const dTAAA = useSelector((state: RootState) => state.user)
+  const Disptach = useDispatch()
   const [inputVal, setInputVal] = useState({
     email: '',
     password: '',
@@ -14,7 +19,10 @@ const SignIn = () => {
   const HandleLogin = async () => {
     const Data = await loginUser(inputVal.email, inputVal.password)
     if (Data) {
-      console.log('USER DATA ', Data)
+      console.log('Usser Data', Data)
+      localStorage.setItem('UserEmail', JSON.stringify(Data.Email))
+      Disptach(GetUserData(Data))
+      console.log('REDUX STATE', dTAAA)
     } else {
       console.error('Login failed')
     }
