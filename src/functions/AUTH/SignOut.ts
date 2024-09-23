@@ -2,9 +2,7 @@ import axios from 'axios'
 
 export const handleSignOut = async () => {
   try {
-    const response = await axios.get(
-      'https://octtoppus-backend-b76z.vercel.app/API/AUTH/SignOut'
-    )
+    const response = await axios.get('http://localhost:8000/Api/Auth/Signout')
     if (response.status === 200) {
       return true
     }
