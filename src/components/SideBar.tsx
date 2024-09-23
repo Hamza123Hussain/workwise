@@ -18,7 +18,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-0 bg-[#003366] transition-transform transform md:relative md:flex md:flex-col  w-64 ${
+        className={`fixed inset-0 min-h-screen bg-[#003366] transition-transform transform md:relative md:flex md:flex-col  w-64 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } md:translate-x-0 md:block`}
       >
@@ -40,7 +40,7 @@ const Sidebar = () => {
           <SidebarLinks />
         </div>
         {/* User Details Section */}
-        <div className="text-white p-4 md:mt-auto mb-10">
+        <div className="text-white p-4 md:mt-auto md:mb-28 ">
           <UserDetails />
         </div>
       </div>
