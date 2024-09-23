@@ -3,27 +3,22 @@ import { InputValues, UserData } from './SignUpInterface'
 export const RegisterUser = async (
   inputValues: InputValues
 ): Promise<UserData | void> => {
-  const { email, password, Name, Image } = inputValues
+  const { email, Name, password, Image } = inputValues
+  const formData = new FormData()
+  formData.append('Name', Name)
+  formData.append('Email', email)
+  formData.append('password', password)
+  if (Image) {
+    formData.append('Image', Image)
+  }
   try {
-    // Create a FormData object
-    const formData = new FormData()
-    formData.append('email', email)
-    formData.append('password', password)
-    formData.append('Name', Name)
-
-    // Append the image file if provided
-    if (Image) {
-      formData.append('image', Image)
-    }
-    // Send the POST request with FormData
-    const response = await axios.post<UserData>(
-      `https://octtoppus-backend-b76z.vercel.app/api/Auth/register`, // Ensure this is the correct endpoint
+    const response = await axios.post(
+      'http://localhost:8000/Api/Auth/Signup',
       formData
     )
-    if (response.status === 201) {
-      return response.data // Return the UserData object
-    }
+    // console.log('User registered successfully:', response.data)
+    return response.data.user
   } catch (error) {
-    console.error('Error in RegisterUser function:', error)
+    console.error('Registration failed:', error)
   }
 }
