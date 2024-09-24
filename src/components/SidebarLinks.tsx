@@ -4,13 +4,13 @@ const SidebarLinks = () => {
   return (
     <div className="flex flex-col p-4 space-y-5 w-full">
       <a
-        href="#"
+        href="/"
         className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
       >
         Home
       </a>
       <a
-        href="#"
+        href="/CreateTask"
         className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
       >
         Create Task
