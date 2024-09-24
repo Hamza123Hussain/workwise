@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 
 import Sidebar from './components/SideBar'
 import { RootState } from './utils/Redux/Store/Store'
+import CreateTaskForm from './components/Tasks/CreateTask'
 
 function App() {
   const UserData = useSelector((state: RootState) => state.user)
@@ -25,7 +26,10 @@ function App() {
       ) : (
         <div className=" min-h-screen flex gap-4">
           <Sidebar />
-          <HomePage />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/CreateTask" element={<CreateTaskForm />} />
+          </Routes>
         </div>
       )}
     </>
