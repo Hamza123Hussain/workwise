@@ -26,30 +26,28 @@ const CreateTaskForm = () => {
     }
   }
   return (
-    <div className="min-h-screen bg-[#333333] flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-        <h1 className="text-2xl font-bold mb-6 text-[#FF9A8B] text-center">
-          Create a New Task
-        </h1>
-        <form onSubmit={handleSubmit}>
-          <TaskForm
-            name={name}
-            description={description}
-            dueDate={dueDate}
-            assignedTo={assignedTo}
-            setName={setName}
-            setDescription={setDescription}
-            setDueDate={setDueDate}
-            setAssignedTo={setAssignedTo}
-          />
-          <button
-            type="submit"
-            className="w-full bg-[#FF9A8B] text-white p-3 rounded-lg shadow hover:bg-[#ff7a6d] transition duration-300"
-          >
-            Create Task
-          </button>
-        </form>
-      </div>
+    <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full mx-auto my-5">
+      <h1 className="text-2xl font-bold mb-6 text-[#FF9A8B] text-center">
+        Create a New Task
+      </h1>
+      <form onSubmit={handleSubmit}>
+        <TaskForm
+          name={name}
+          description={description}
+          dueDate={dueDate}
+          assignedTo={assignedTo}
+          setName={setName}
+          setDescription={setDescription}
+          setDueDate={setDueDate}
+          setAssignedTo={setAssignedTo}
+        />
+        <button
+          type="submit"
+          className="w-full bg-[#FF9A8B] text-white p-3 rounded-lg shadow hover:bg-[#ff7a6d] transition duration-300"
+        >
+          Create Task
+        </button>
+      </form>
     </div>
   )
 }
