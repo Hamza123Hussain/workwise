@@ -1,8 +1,6 @@
-import React from 'react'
 import RecentTasks from './Home/RecentTasks'
 import TaskStatus from './Home/TaskStatus'
 import TimeBtn from './Home/TimeBtn'
-import CreateTaskForm from './Tasks/CreateTask'
 const HomePage = () => {
   return (
     <div className=" px-2  bg-gray-100 w-full ">
@@ -19,7 +17,7 @@ const HomePage = () => {
           <TimeBtn />
           <TaskStatus />
         </div>
-        <CreateTaskForm />
+        <RecentTasks />
       </div>
     </div>
   )
