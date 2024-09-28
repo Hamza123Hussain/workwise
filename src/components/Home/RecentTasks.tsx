@@ -4,15 +4,15 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../utils/Redux/Store/Store'
 const RecentTasks = () => {
   const User = useSelector((state: RootState) => state.user)
-  const FetchData = async () => {
-    const Data = await GetAllTasks(User.Email)
-    if (Data) {
-      console.log('DATA AAAAA ', Data)
-    }
-  }
-  useEffect(() => {
-    FetchData()
-  }, [User.Email])
+  // const FetchData = async () => {
+  //   const Data = await GetAllTasks(User.Email)
+  //   if (Data) {
+  //     console.log('DATA AAAAA ', Data)
+  //   }
+  // }
+  // useEffect(() => {
+  //   FetchData()
+  // }, [User.Email])
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
       <h2 className="font-semibold text-2xl text-[#003366]">Recent Tasks</h2>
