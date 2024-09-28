@@ -3,13 +3,13 @@ import './App.css'
 import SignIn from './components/Auth/SignIn'
 import SignUp from './components/Auth/Register'
 import ResetPassword from './components/Auth/ResetPassword'
-import HomePage from './components/Homepage'
 import { useSelector } from 'react-redux'
 
 import Sidebar from './components/SideBar'
 import { RootState } from './utils/Redux/Store/Store'
 import CreateTaskForm from './components/Tasks/CreateTask'
 import AllAttendance from './components/Attendance/AllAttendance'
+import HomePage from './components/Homepage'
 
 function App() {
   const UserData = useSelector((state: RootState) => state.user)
