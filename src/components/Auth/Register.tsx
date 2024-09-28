@@ -10,6 +10,7 @@ const SignUp = () => {
     email: '',
     password: '',
     Image: null as File | null,
+    Salary: 0,
   })
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -44,6 +45,14 @@ const SignUp = () => {
         placeholder="Enter Email"
         name="email"
         value={inputVal.email}
+        onChange={handleChange}
+        className="mb-4 p-3 w-full rounded bg-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF9A8B]"
+      />
+      <input
+        type="number"
+        placeholder="Enter Salary"
+        name="Salary"
+        value={inputVal.Salary}
         onChange={handleChange}
         className="mb-4 p-3 w-full rounded bg-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF9A8B]"
       />
