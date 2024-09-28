@@ -4,6 +4,7 @@ import { RootState } from '../../utils/Redux/Store/Store'
 import { GetAllAttendance } from '../../functions/Attendance/AllAttendance'
 import { AttendanceRecord } from '../../utils/AttendanceInterface'
 import AttendanceTable from './AttendanceTable'
+import { countUniqueDates } from '../../functions/Attendance/UniqueDateFunction'
 const AllAttendance: React.FC = () => {
   const user = useSelector((state: RootState) => state.user)
   const [allAttendance, setAttendance] = useState<AttendanceRecord[]>([])
@@ -30,6 +31,7 @@ const AllAttendance: React.FC = () => {
       </div>
     )
   }
+
   return <AttendanceTable Attendance={allAttendance} />
 }
 export default AllAttendance
