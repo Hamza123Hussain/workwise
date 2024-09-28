@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import Sidebar from './components/SideBar'
 import { RootState } from './utils/Redux/Store/Store'
 import CreateTaskForm from './components/Tasks/CreateTask'
+import AllAttendance from './components/Attendance/AllAttendance'
 
 function App() {
   const UserData = useSelector((state: RootState) => state.user)
@@ -21,13 +22,14 @@ function App() {
             <Route path="/Login" element={<SignIn />} />
             <Route path="/Register" element={<SignUp />} />
             <Route path="/ResetPassword" element={<ResetPassword />} />
+            {/* <Route path="/AllAttendance" element={<AllAttendance />} /> */}
           </Routes>
         </div>
       ) : (
         <div className=" min-h-screen flex gap-4">
           <Sidebar />
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<AllAttendance />} />
             <Route path="/CreateTask" element={<CreateTaskForm />} />
           </Routes>
         </div>
