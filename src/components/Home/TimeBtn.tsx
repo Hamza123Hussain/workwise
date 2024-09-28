@@ -66,9 +66,9 @@ const TimeBtn = () => {
         <button
           onClick={handleCheckInCheckOut}
           className={`${
-            checkinstatus ? 'bg-green-600' : 'bg-red-600'
+            !checkinstatus ? 'bg-green-600' : 'bg-red-600'
           } text-white p-3 rounded-lg shadow hover:${
-            checkinstatus ? 'bg-green-800' : 'bg-red-900'
+            !checkinstatus ? 'bg-green-800' : 'bg-red-900'
           } transition duration-200`}
         >
           {!checkinstatus ? 'Check In' : 'Check Out'}
