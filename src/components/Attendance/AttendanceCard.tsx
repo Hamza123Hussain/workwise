@@ -28,9 +28,7 @@ const AttendanceCard = ({ element }: { element: AttendanceRecord }) => {
       <td className="border border-gray-300 px-4 py-2 text-sm">
         {remainingTime}
       </td>
-      <td className="border border-gray-300 px-4 py-2 text-sm">
-        {element.isAbsent ? 'Yes' : 'No'}
-      </td>
+
       <td className="border border-gray-300 px-4 py-2 text-sm">
         {element.currentDate
           ? new Date(element.currentDate).toLocaleDateString()
