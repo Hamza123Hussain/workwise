@@ -28,7 +28,7 @@ const SidebarLinks = () => {
         User Attendance
       </a>
       <a
-        href="#"
+        href="/AllAttendance"
         className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
       >
         Total Attendance
