@@ -16,7 +16,7 @@ const AttendanceCard = ({ element }: { element: AttendanceRecord }) => {
   return (
     <tr key={element.id} className="border-b hover:bg-gray-50">
       <td className="border border-gray-300 px-4 py-2 text-sm">
-        {element.userData || '-'}
+        {element.UserData || '-'}
       </td>
       <td className="border border-gray-300 px-4 py-2 text-sm">
         {element.entry ? new Date(element.entry).toLocaleTimeString() : '-'}
