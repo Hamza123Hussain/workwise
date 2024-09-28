@@ -3,6 +3,7 @@ export interface InputValues {
   password: string
   Name: string
   Image: File | null
+  Salary: number
 }
 
 export interface UserData {
