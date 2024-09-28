@@ -6,7 +6,6 @@ export const GetAllAttendance = async (email: string) => {
       `http://localhost:8000/Api/Attendance/AllAttendance?Email=${email} `
     )
     if (Response.status === 200) {
-      console.log('DATA IS HERE', Response.data)
       return Response.data
     }
   } catch (error) {
