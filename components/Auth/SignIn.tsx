@@ -28,7 +28,6 @@ const SignIn = () => {
       console.error('Login failed')
     }
   }
-
   return (
     <div className="flex flex-col bg-[#003366] p-6 rounded-lg shadow-lg w-full max-w-md">
       <h2 className="text-2xl font-semibold text-[#FF9A8B] mb-6 text-center">
@@ -57,14 +56,14 @@ const SignIn = () => {
         Sign In
       </button>
       <div className="flex justify-end text-[#FF9A8B] mt-2 hover:text-[#FF7A6B] cursor-pointer">
-        <span onClick={() => Router.push('/ResetPassword')} className="text-xs">
+        <span onClick={() => Router.push('/reset')} className="text-xs">
           Forgot Your Password?
         </span>
       </div>
       <h6 className="text-xs mt-4 text-gray-400 text-center">
         Don’t Have An Account?{' '}
         <span
-          onClick={() => Router.push('/Register')}
+          onClick={() => Router.push('/signup')}
           className="underline cursor-pointer text-[#FF9A8B] hover:text-[#FF7A6B]"
         >
           Sign Up

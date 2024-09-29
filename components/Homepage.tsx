@@ -4,7 +4,7 @@ import TaskStatus from './Home/TaskStatus'
 import TimeBtn from './Home/TimeBtn'
 const HomePage = () => {
   return (
-    <div className=" px-2  bg-gray-100 w-full ">
+    <div className=" px-2  bg-gray-100 w-full min-h-screen ">
       {/* Welcome Message */}
       <div className="mb-8 flex items-center justify-center">
         <Image

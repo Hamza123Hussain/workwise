@@ -28,7 +28,7 @@ const AttendanceTable = ({
           </thead>
           <tbody>
             {Attendance.map((element) => {
-              return <AttendanceCard element={element} />
+              return <AttendanceCard key={element.id} element={element} />
             })}
           </tbody>
         </table>

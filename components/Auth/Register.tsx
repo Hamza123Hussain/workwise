@@ -78,7 +78,7 @@ const SignUp = () => {
       <h6 className="text-xs mt-4 text-gray-400 text-center">
         Already Have An Account?{' '}
         <span
-          onClick={() => Router.push('/Login')}
+          onClick={() => Router.push('/signin')}
           className="underline cursor-pointer text-[#FF9A8B] hover:text-[#FF7A6B]"
         >
           Sign In
