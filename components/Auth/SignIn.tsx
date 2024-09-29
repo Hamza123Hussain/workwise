@@ -20,7 +20,7 @@ const SignIn = () => {
     const Data = await loginUser(inputVal.email, inputVal.password)
     if (Data) {
       console.log('Usser Data', Data)
-      localStorage.setItem('UserEmail', JSON.stringify(Data.Email))
+      localStorage.setItem('UserData', JSON.stringify(Data))
       Disptach(GetUserData(Data))
       console.log('REDUX STATE', dTAAA)
     } else {
