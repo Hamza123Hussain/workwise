@@ -4,13 +4,15 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import SignIn from './Auth/SignIn'
 import { GetUserData } from '@/utils/Redux/Slice/User/UserSlice'
+import { decryptData } from '@/utils/Encryprion'
 
 const CondtionalLayout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch()
   useEffect(() => {
-    const userData = localStorage.getItem('UserData')
-    if (userData) {
-      dispatch(GetUserData(JSON.parse(userData)))
+    const encryptedData = localStorage.getItem('UserData')
+    if (encryptedData) {
+      const decryptedData = decryptData(encryptedData) // Decrypt the data
+      dispatch(GetUserData(decryptedData))
     }
   }, [])
   const User = useSelector((state: RootState) => state.user)

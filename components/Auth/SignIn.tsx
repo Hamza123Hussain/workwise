@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { loginUser } from '@/functions/AUTH/LoginUser'
 import { GetUserData } from '@/utils/Redux/Slice/User/UserSlice'
+import { encryptData } from '@/utils/Encryprion'
 const SignIn = () => {
   const dTAAA = useSelector((state: RootState) => state.user)
   const Disptach = useDispatch()
@@ -19,8 +20,8 @@ const SignIn = () => {
   const HandleLogin = async () => {
     const Data = await loginUser(inputVal.email, inputVal.password)
     if (Data) {
-      console.log('Usser Data', Data)
-      localStorage.setItem('UserData', JSON.stringify(Data))
+      const encryptedData = encryptData(Data) // Encrypt data before storing
+      localStorage.setItem('UserData', encryptedData)
       Disptach(GetUserData(Data))
       console.log('REDUX STATE', dTAAA)
     } else {
