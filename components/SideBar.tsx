@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import SidebarLinks from './SidebarLinks'
+
 import UserDetails from './UserDetails'
+import Image from 'next/image'
+import SideBarLinks from './SidebarLinks'
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const toggleSidebar = () => {
@@ -24,7 +26,13 @@ const Sidebar = () => {
       >
         {/* Logo and Title */}
         <div className="flex items-center">
-          <img src="/Logo.png" alt="Logo" className="w-24" />
+          <Image
+            width={40}
+            height={40}
+            src="/Logo.png"
+            alt="Logo"
+            className="w-24"
+          />
           <div className="text-white text-2xl text-center font-extrabold ">
             WorkWise
           </div>
@@ -37,7 +45,7 @@ const Sidebar = () => {
         </div>
         {/* Sidebar Links */}
         <div className="flex flex-col gap-5 items-start ">
-          <SidebarLinks />
+          <SideBarLinks />
         </div>
         {/* User Details Section */}
         <div className="text-white p-4 md:mt-auto md:mb-28 ">

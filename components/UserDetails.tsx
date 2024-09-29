@@ -1,9 +1,9 @@
+import { fetchUserData } from '@/functions/AUTH/GetUser'
+import { handleSignOut } from '@/functions/AUTH/SignOut'
+import { ClearUser } from '@/utils/Redux/Slice/User/UserSlice'
+import { RootState } from '@/utils/Redux/Store/Store'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../utils/Redux/Store/Store'
-import { fetchUserData } from '../functions/AUTH/GetUser'
-import { ClearUser } from '../utils/Redux/Slice/User/UserSlice'
-import { handleSignOut } from '../functions/AUTH/SignOut'
 const UserDetails = () => {
   const Dispatch = useDispatch()
   const user = useSelector((State: RootState) => State.user)

@@ -1,52 +1,52 @@
-import React from 'react'
+import Link from 'next/link'
 
-const SidebarLinks = () => {
+const SideBarLinks = () => {
   return (
-    <div className="flex flex-col p-4 space-y-5 w-full">
-      <a
+    <div className="flex flex-col p-4 spLinkce-y-5 w-full">
+      <Link
         href="/"
         className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
       >
         Home
-      </a>
-      <a
-        href="/CreateTask"
+      </Link>
+      <Link
+        href="/CreLinkteTLinksk"
         className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
       >
         Create Task
-      </a>
-      <a
+      </Link>
+      <Link
         href="#"
         className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
       >
-        Tasks
-      </a>
-      <a
+        User Tasks
+      </Link>
+      <Link
         href="#"
         className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
       >
         User Attendance
-      </a>
-      <a
-        href="/AllAttendance"
+      </Link>
+      <Link
+        href={'/AllAttendance'}
         className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
       >
         Total Attendance
-      </a>
-      <a
+      </Link>
+      <Link
         href="#"
         className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
       >
         Report
-      </a>
-      <a
+      </Link>
+      <Link
         href="#"
         className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
       >
         Profile
-      </a>
+      </Link>
     </div>
   )
 }
 
-export default SidebarLinks
+export default SideBarLinks

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../utils/Redux/Store/Store'
-import { createNewAttendance } from '../../functions/Attendance/NewAttendance'
-import { updateAttendance } from '../../functions/Attendance/UpdateAttendance'
+import { createNewAttendance } from '@/functions/Attendance/NewAttendance'
+import { updateAttendance } from '@/functions/Attendance/UpdateAttendance'
 const TimeBtn = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [checkinstatus, setCheckinStatus] = useState(false)

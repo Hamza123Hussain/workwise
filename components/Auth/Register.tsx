@@ -1,10 +1,10 @@
 'use client'
+import { RegisterUser } from '@/functions/AUTH/RegisterUser'
+import { InputValues } from '@/functions/AUTH/SignUpInterface'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
-import { InputValues } from '../../functions/AUTH/SignUpInterface'
-import { RegisterUser } from '../../functions/AUTH/RegisterUser'
-import { useNavigate } from 'react-router-dom'
 const SignUp = () => {
-  const Router = useNavigate()
+  const Router = useRouter()
   const [inputVal, setInputVal] = useState<InputValues>({
     Name: '',
     email: '',
@@ -78,7 +78,7 @@ const SignUp = () => {
       <h6 className="text-xs mt-4 text-gray-400 text-center">
         Already Have An Account?{' '}
         <span
-          onClick={() => Router('/Login')}
+          onClick={() => Router.push('/Login')}
           className="underline cursor-pointer text-[#FF9A8B] hover:text-[#FF7A6B]"
         >
           Sign In

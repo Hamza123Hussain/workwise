@@ -1,10 +1,10 @@
 'use client'
 import React, { useState } from 'react'
-import { loginUser } from '../../functions/AUTH/LoginUser'
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { GetUserData } from '../../utils/Redux/Slice/User/UserSlice'
-import { RootState } from '../../utils/Redux/Store/Store'
+import { useRouter } from 'next/navigation'
+import { RootState } from '@/utils/Redux/Store/Store'
+import { loginUser } from '@/functions/AUTH/LoginUser'
+import { GetUserData } from '@/utils/Redux/Slice/User/UserSlice'
 const SignIn = () => {
   const dTAAA = useSelector((state: RootState) => state.user)
   const Disptach = useDispatch()
@@ -12,7 +12,7 @@ const SignIn = () => {
     email: '',
     password: '',
   })
-  const Router = useNavigate()
+  const Router = useRouter()
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputVal((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
@@ -56,14 +56,14 @@ const SignIn = () => {
         Sign In
       </button>
       <div className="flex justify-end text-[#FF9A8B] mt-2 hover:text-[#FF7A6B] cursor-pointer">
-        <span onClick={() => Router('/ResetPassword')} className="text-xs">
+        <span onClick={() => Router.push('/ResetPassword')} className="text-xs">
           Forgot Your Password?
         </span>
       </div>
       <h6 className="text-xs mt-4 text-gray-400 text-center">
         Don’t Have An Account?{' '}
         <span
-          onClick={() => Router('/Register')}
+          onClick={() => Router.push('/Register')}
           className="underline cursor-pointer text-[#FF9A8B] hover:text-[#FF7A6B]"
         >
           Sign Up

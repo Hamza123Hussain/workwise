@@ -1,15 +1,15 @@
 'use client'
 import { useState } from 'react'
 import { handlePasswordReset } from '../../functions/AUTH/ResetPass'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 const ResetPassword = () => {
-  const Router = useNavigate()
+  const Router = useRouter()
   const [email, setemail] = useState('')
   const HandlePasswordReset = async () => {
     const Data = await handlePasswordReset(email)
     if (Data) {
       console.log('USER DATA ', Data)
-      Router('/Login')
+      Router.push('/Login')
     } else {
       console.error('Login failed')
     }
@@ -24,7 +24,7 @@ const ResetPassword = () => {
         placeholder="Enter Email"
         name="email"
         value={email}
-        onChange={(e: any) => setemail(e.target.value)}
+        onChange={(e) => setemail(e.target.value)}
         className="mb-4 p-3 w-full rounded bg-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF9A8B]"
       />
       <button
