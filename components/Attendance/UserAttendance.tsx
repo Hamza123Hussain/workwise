@@ -47,7 +47,7 @@ const UserAttendance: React.FC = () => {
         No Attendance Records Found
       </h1>
       <p className="text-lg text-gray-300 mb-6">
-        It seems you haven't recorded any attendance yet. Please check back
+        It seems you have not recorded any attendance yet. Please check back
         later or reach out to your administrator.
       </p>
       <button className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded transition duration-300">
