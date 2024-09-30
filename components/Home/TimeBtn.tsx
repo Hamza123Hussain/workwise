@@ -39,7 +39,7 @@ const TimeBtn = () => {
             ExitTime: time,
           })
           // console.log('Checked out successfully:', updatedAttendance)
-          toast.success('You have Checked In')
+          toast.success('You have Checked OUT')
         } catch (error) {
           console.error('Error during check-out:', error)
         }
@@ -51,14 +51,14 @@ const TimeBtn = () => {
   }
   return (
     <div className="bg-purple-black w-4/12 p-6 rounded-lg shadow-md border-2 border-purple-600">
-      <p className="font-bold">
+      <p className="font-bold text-white">
         Date :
         <span className="text-lg text-white">
           {' '}
           {currentTime.toLocaleDateString()}
         </span>
       </p>
-      <p className="font-bold">
+      <p className="font-bold text-white">
         Current Time:
         <span className="text-lg text-white">
           {' '}
