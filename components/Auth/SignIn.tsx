@@ -1,37 +1,31 @@
 'use client'
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/navigation'
-import { RootState } from '@/utils/Redux/Store/Store'
 import { loginUser } from '@/functions/AUTH/LoginUser'
 import { GetUserData } from '@/utils/Redux/Slice/User/UserSlice'
 import { encryptData } from '@/utils/Encryprion'
-
 const SignIn = () => {
-  const userState = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
   const [inputVal, setInputVal] = useState({
     email: '',
     password: '',
   })
   const Router = useRouter()
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputVal((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
-
   const handleLoginClick = async () => {
     const data = await loginUser(inputVal.email, inputVal.password)
     if (data) {
       const encryptedData = encryptData(data) // Encrypt data before storing
       localStorage.setItem('UserData', encryptedData)
       dispatch(GetUserData(data))
-      console.log('REDUX STATE', userState)
+      Router.push('/')
     } else {
       console.error('Login failed')
     }
   }
-
   return (
     <div className="flex flex-col bg-black p-6 rounded-lg shadow-lg w-full max-w-md">
       <h2 className="text-2xl font-semibold text-purple-500 mb-6 text-center">
