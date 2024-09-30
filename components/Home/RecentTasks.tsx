@@ -1,9 +1,4 @@
-import { useEffect } from 'react'
-import { GetAllTasks } from '../../functions/Task/AllTasks'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../utils/Redux/Store/Store'
 const RecentTasks = () => {
-  const User = useSelector((state: RootState) => state.user)
   // const FetchData = async () => {
   //   const Data = await GetAllTasks(User.Email)
   //   if (Data) {
