@@ -9,6 +9,9 @@ import { decryptData } from '@/utils/Encryprion'
 import SignIn from '../Auth/SignIn'
 import Sidebar from '../Home/SideBar/SideBar'
 import HomePage from '../Home/Homepage'
+import { Toaster } from 'react-hot-toast'
+import Footer from './Footer'
+import Header from './Header'
 const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
   const User = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
@@ -37,14 +40,19 @@ const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
   }
 
   return User.Email ? (
-    <div className=" flex bg-slate-900">
+    <div className=" flex bg-purple-black">
       <Sidebar />
       <div className=" flex-1 ">{!isAuthPage ? children : <HomePage />}</div>
+      <Toaster />
     </div>
   ) : (
-    <div className=" min-h-screen flex justify-center items-center">
+    <div className=" min-h-screen flex flex-col  bg-purple-black p-6 ">
       {' '}
-      {isAuthPage ? children : <SignIn />}
+      <Header />
+      <div className=" flex-1 flex justify-center items-center">
+        {isAuthPage ? children : <SignIn />}
+      </div>
+      <Footer />
     </div>
   )
 }
