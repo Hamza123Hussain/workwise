@@ -27,6 +27,7 @@ const TimeBtn = () => {
         setAttendanceId(newAttendance.attendance._id) // Save the new attendance ID for future updates
         // console.log('Checked in successfully:', newAttendance)
         toast.success('You have Checked In')
+        setCheckinStatus(!checkinstatus)
       } catch (error) {
         console.error('Error during check-in:', error)
       }
