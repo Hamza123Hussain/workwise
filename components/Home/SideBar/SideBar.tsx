@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import UserDetails from '../UserDetails'
 import SideBarLinks from './SidebarLinks'
+import Image from 'next/image'
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const toggleSidebar = () => {
@@ -25,10 +26,14 @@ const Sidebar = () => {
       >
         {/* Logo and Title */}
         <div className="flex items-center">
-          {/* <Image width={50} height={50} src="/Logo.png" alt="Logo" className=' object-cover' /> */}
-          <div className="text-white text-4xl text-center font-extrabold ">
-            Octtoppus
-          </div>
+          <Image
+            width={150}
+            height={150}
+            src="/Logo.png"
+            alt="Logo"
+            className=" object-cover"
+          />
+
           <button
             className="text-white md:hidden ml-auto"
             onClick={toggleSidebar}

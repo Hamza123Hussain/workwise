@@ -47,17 +47,17 @@ const TimeBtn = () => {
     setCheckinStatus(!checkinstatus)
   }
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="bg-slate-900 w-4/12 p-6 rounded-lg shadow-md border-2 border-purple-600">
       <p className="font-bold">
-        Date:
-        <span className="text-lg text-gray-700">
+        Date :
+        <span className="text-lg text-white">
           {' '}
           {currentTime.toLocaleDateString()}
         </span>
       </p>
       <p className="font-bold">
         Current Time:
-        <span className="text-lg text-gray-700">
+        <span className="text-lg text-white">
           {' '}
           {currentTime.toLocaleTimeString()}
         </span>
