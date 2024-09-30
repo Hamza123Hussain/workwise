@@ -47,11 +47,11 @@ const AttendanceTable = ({
           </tbody>
         </table>
         <div className="flex flex-col sm:flex-row justify-between gap-4 items-center text-white my-5 space-y-4 sm:space-y-0">
-          <div className="bg-purpleGradientStart p-4 flex flex-col items-center text-center rounded-lg shadow-md transition-transform duration-200 hover:scale-105 w-full sm:w-1/2">
+          <div className="bg-purpleGradientStart p-4 flex flex-col items-center text-center rounded-lg shadow-md transition-transform duration-200 w-full sm:w-1/2">
             <h1 className="text-lg font-bold">Number Of Days Worked</h1>
             <span className="text-2xl">{totalDaysWorked}</span>
           </div>
-          <div className="bg-purpleGradientStart p-4 flex flex-col items-center text-center rounded-lg shadow-md transition-transform duration-200 hover:scale-105 w-full sm:w-1/2">
+          <div className="bg-purpleGradientStart p-4 flex flex-col items-center text-center rounded-lg shadow-md transition-transform duration-200 w-full sm:w-1/2">
             <h1 className="text-lg font-bold">Attendance Percentage</h1>
             <span className="text-2xl">{attendancePercentage}%</span>
           </div>
