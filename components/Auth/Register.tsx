@@ -1,21 +1,28 @@
 'use client'
-import { RegisterUser } from '@/functions/AUTH/RegisterUser'
+
+import { registerUserWithImage } from '@/functions/AUTH/RegisterUser'
 import { InputValues } from '@/functions/AUTH/SignUpInterface'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+
 const SignUp = () => {
   const Router = useRouter()
   const [inputVal, setInputVal] = useState<InputValues>({
     Name: '',
     email: '',
     password: '',
-    Image: null as File | null,
-    Salary: 0,
+    Salary: '', // Assuming you want to capture this
+    JobDescription: '', // Added JobDescription field
+    Image: null,
   })
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target
     setInputVal((prev) => ({ ...prev, [name]: value }))
   }
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null // Get the first file or null
     setInputVal((prev: InputValues) => ({
@@ -23,10 +30,18 @@ const SignUp = () => {
       Image: file,
     }))
   }
+
   const handleSignUp = async () => {
-    const Data = await RegisterUser(inputVal)
-    console.log('Api Has Responded', Data)
+    try {
+      const Data = await registerUserWithImage(inputVal, inputVal.Image as File)
+      console.log('Api Has Responded', Data)
+      // You can redirect or show a success message here
+    } catch (error) {
+      console.error('Registration error:', error)
+      // Handle error (e.g., show a notification)
+    }
   }
+
   return (
     <div className="flex flex-col bg-[#003366] p-6 rounded-lg shadow-lg w-full max-w-md">
       <h2 className="text-2xl font-semibold text-[#FF9A8B] mb-6 text-center">
@@ -48,19 +63,26 @@ const SignUp = () => {
         onChange={handleChange}
         className="mb-4 p-3 w-full rounded bg-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF9A8B]"
       />
-      {/* <input
+      <input
+        type="password"
+        placeholder="Enter Password"
+        name="password"
+        value={inputVal.password}
+        onChange={handleChange}
+        className="mb-4 p-3 w-full rounded bg-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF9A8B]"
+      />
+      <input
         type="number"
         placeholder="Enter Salary"
         name="Salary"
         value={inputVal.Salary}
         onChange={handleChange}
         className="mb-4 p-3 w-full rounded bg-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF9A8B]"
-      /> */}
-      <input
-        type="password"
-        placeholder="Enter Password"
-        name="password"
-        value={inputVal.password}
+      />
+      <textarea
+        placeholder="Enter Job Description"
+        name="JobDescription"
+        value={inputVal.JobDescription}
         onChange={handleChange}
         className="mb-4 p-3 w-full rounded bg-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF9A8B]"
       />
