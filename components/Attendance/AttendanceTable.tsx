@@ -5,8 +5,10 @@ import { countUniqueDates } from '../../functions/Attendance/UniqueDateFunction'
 
 const AttendanceTable = ({
   Attendance,
+  UserName,
 }: {
   Attendance: AttendanceRecord[]
+  UserName: string
 }) => {
   const totalDaysWorked = countUniqueDates(Attendance)
   const attendancePercentage = ((totalDaysWorked / 22) * 100).toFixed(2)
@@ -14,7 +16,7 @@ const AttendanceTable = ({
   return (
     <div className=" mx-auto px-4 py-6">
       <h2 className="text-2xl font-semibold mb-4 text-white text-center">
-        All Attendance Records
+        All Attendance Records For {UserName}
       </h2>
       <div className="overflow-x-auto flex flex-col">
         <table className="min-w-full bg-blend-darken border-2 border-charcoal-gray shadow-md rounded-lg">

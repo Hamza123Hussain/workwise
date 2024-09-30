@@ -40,7 +40,7 @@ const UserAttendance: React.FC = () => {
   }
 
   return UserAttendance.length > 0 ? (
-    <AttendanceTable Attendance={UserAttendance} />
+    <AttendanceTable Attendance={UserAttendance} UserName={user.Name} />
   ) : (
     <div className="min-h-screen flex flex-col justify-center items-center text-center p-4">
       <h1 className="text-6xl text-white font-bold mb-4">
