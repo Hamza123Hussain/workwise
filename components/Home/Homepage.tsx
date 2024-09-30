@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import RecentTasks from './Home/RecentTasks'
-import TaskStatus from './Home/TaskStatus'
-import TimeBtn from './Home/TimeBtn'
+import RecentTasks from './RecentTasks'
+import TaskStatus from './TaskStatus'
+import TimeBtn from './TimeBtn'
 const HomePage = () => {
   return (
     <div className=" px-2  bg-gray-100 w-full min-h-screen ">

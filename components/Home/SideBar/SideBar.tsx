@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import UserDetails from './UserDetails'
+import UserDetails from '../UserDetails'
 import Image from 'next/image'
 import SideBarLinks from './SidebarLinks'
 const Sidebar = () => {

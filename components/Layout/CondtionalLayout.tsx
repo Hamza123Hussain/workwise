@@ -6,9 +6,9 @@ import { GetUserData } from '@/utils/Redux/Slice/User/UserSlice'
 import { usePathname } from 'next/navigation'
 import { decryptData } from '@/utils/Encryprion'
 
-import SignIn from './Auth/SignIn'
-import Sidebar from './SideBar'
-import HomePage from './Homepage'
+import SignIn from '../Auth/SignIn'
+import Sidebar from '../Home/SideBar/SideBar'
+import HomePage from '../Home/Homepage'
 const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
   const User = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
@@ -41,10 +41,11 @@ const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
       <Sidebar />
       {!isAuthPage ? children : <HomePage />}
     </div>
-  ) : isAuthPage ? (
-    <div>{children}</div>
   ) : (
-    <SignIn />
+    <div className=" min-h-screen flex justify-center items-center">
+      {' '}
+      {isAuthPage ? children : <SignIn />}
+    </div>
   )
 }
 
