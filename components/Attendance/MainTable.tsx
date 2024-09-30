@@ -18,6 +18,13 @@ const MainTable = ({
             <th className="border border-gray-300 px-4 py-2">
               Attendance Percentage
             </th>
+            <th className="border border-gray-300 px-4 py-2">Tasks Assigned</th>
+            <th className="border border-gray-300 px-4 py-2">
+              Tasks Completed
+            </th>
+            <th className="border border-gray-300 px-4 py-2">
+              Tasks Percentage
+            </th>
           </tr>
         </thead>
         <tbody>
