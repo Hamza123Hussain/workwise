@@ -6,31 +6,35 @@ import { RootState } from '@/utils/Redux/Store/Store'
 import { loginUser } from '@/functions/AUTH/LoginUser'
 import { GetUserData } from '@/utils/Redux/Slice/User/UserSlice'
 import { encryptData } from '@/utils/Encryprion'
+
 const SignIn = () => {
-  const dTAAA = useSelector((state: RootState) => state.user)
-  const Disptach = useDispatch()
+  const userState = useSelector((state: RootState) => state.user)
+  const dispatch = useDispatch()
   const [inputVal, setInputVal] = useState({
     email: '',
     password: '',
   })
   const Router = useRouter()
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputVal((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
-  const HandleLogin = async () => {
-    const Data = await loginUser(inputVal.email, inputVal.password)
-    if (Data) {
-      const encryptedData = encryptData(Data) // Encrypt data before storing
+
+  const handleLoginClick = async () => {
+    const data = await loginUser(inputVal.email, inputVal.password)
+    if (data) {
+      const encryptedData = encryptData(data) // Encrypt data before storing
       localStorage.setItem('UserData', encryptedData)
-      Disptach(GetUserData(Data))
-      console.log('REDUX STATE', dTAAA)
+      dispatch(GetUserData(data))
+      console.log('REDUX STATE', userState)
     } else {
       console.error('Login failed')
     }
   }
+
   return (
-    <div className="flex flex-col bg-[#003366] p-6 rounded-lg shadow-lg w-full max-w-md">
-      <h2 className="text-2xl font-semibold text-[#FF9A8B] mb-6 text-center">
+    <div className="flex flex-col bg-black p-6 rounded-lg shadow-lg w-full max-w-md">
+      <h2 className="text-2xl font-semibold text-purple-500 mb-6 text-center">
         Sign In
       </h2>
       <input
@@ -39,7 +43,7 @@ const SignIn = () => {
         name="email"
         value={inputVal.email}
         onChange={handleChange}
-        className="mb-4 p-3 w-full rounded bg-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF9A8B]"
+        className="mb-4 p-3 w-full rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
       />
       <input
         type="password"
@@ -47,15 +51,15 @@ const SignIn = () => {
         name="password"
         value={inputVal.password}
         onChange={handleChange}
-        className="mb-4 p-3 w-full rounded bg-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF9A8B]"
+        className="mb-4 p-3 w-full rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
       />
       <button
-        onClick={HandleLogin}
-        className="bg-[#FF9A8B] hover:bg-[#FF7A6B] text-white font-semibold px-6 py-2 rounded transition-all w-full"
+        onClick={handleLoginClick}
+        className="bg-purple-500 hover:bg-purple-600 text-white font-semibold px-6 py-2 rounded transition-all w-full"
       >
         Sign In
       </button>
-      <div className="flex justify-end text-[#FF9A8B] mt-2 hover:text-[#FF7A6B] cursor-pointer">
+      <div className="flex justify-end text-purple-500 mt-2 hover:text-purple-600 cursor-pointer">
         <span onClick={() => Router.push('/reset')} className="text-xs">
           Forgot Your Password?
         </span>
@@ -64,7 +68,7 @@ const SignIn = () => {
         Don’t Have An Account?{' '}
         <span
           onClick={() => Router.push('/signup')}
-          className="underline cursor-pointer text-[#FF9A8B] hover:text-[#FF7A6B]"
+          className="underline cursor-pointer text-purple-500 hover:text-purple-600"
         >
           Sign Up
         </span>
@@ -72,4 +76,5 @@ const SignIn = () => {
     </div>
   )
 }
+
 export default SignIn

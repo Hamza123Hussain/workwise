@@ -20,7 +20,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-0  bg-slate-900  border-r-2 transition-transform transform md:relative md:flex md:flex-col min-h-screen p-5   ${
+        className={`fixed inset-0  bg-purple-black  border-r-2 transition-transform transform md:relative md:flex md:flex-col min-h-screen p-5   ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } md:translate-x-0 md:block`}
       >

@@ -47,7 +47,7 @@ const TimeBtn = () => {
     setCheckinStatus(!checkinstatus)
   }
   return (
-    <div className="bg-slate-900 w-4/12 p-6 rounded-lg shadow-md border-2 border-purple-600">
+    <div className="bg-purple-black w-4/12 p-6 rounded-lg shadow-md border-2 border-purple-600">
       <p className="font-bold">
         Date :
         <span className="text-lg text-white">

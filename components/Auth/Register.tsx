@@ -43,8 +43,8 @@ const SignUp = () => {
   }
 
   return (
-    <div className="flex flex-col bg-[#003366] p-6 rounded-lg shadow-lg w-full max-w-md">
-      <h2 className="text-2xl font-semibold text-[#FF9A8B] mb-6 text-center">
+    <div className="flex flex-col bg-black p-6 rounded-lg shadow-lg w-full max-w-md my-5">
+      <h2 className="text-2xl font-semibold text-purple-500 mb-6 text-center">
         Sign Up
       </h2>
       <input
@@ -53,7 +53,7 @@ const SignUp = () => {
         name="Name"
         value={inputVal.Name}
         onChange={handleChange}
-        className="mb-4 p-3 w-full rounded bg-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF9A8B]"
+        className="mb-4 p-3 w-full rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
       />
       <input
         type="email"
@@ -61,7 +61,7 @@ const SignUp = () => {
         name="email"
         value={inputVal.email}
         onChange={handleChange}
-        className="mb-4 p-3 w-full rounded bg-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF9A8B]"
+        className="mb-4 p-3 w-full rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
       />
       <input
         type="password"
@@ -69,7 +69,7 @@ const SignUp = () => {
         name="password"
         value={inputVal.password}
         onChange={handleChange}
-        className="mb-4 p-3 w-full rounded bg-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF9A8B]"
+        className="mb-4 p-3 w-full rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
       />
       <input
         type="number"
@@ -77,23 +77,23 @@ const SignUp = () => {
         name="Salary"
         value={inputVal.Salary}
         onChange={handleChange}
-        className="mb-4 p-3 w-full rounded bg-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF9A8B]"
+        className="mb-4 p-3 w-full rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
       />
       <textarea
         placeholder="Enter Job Description"
         name="JobDescription"
         value={inputVal.JobDescription}
         onChange={handleChange}
-        className="mb-4 p-3 w-full rounded bg-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF9A8B]"
+        className="mb-4 p-3 w-full rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
       />
       <input
         type="file"
         onChange={handleImageChange}
-        className="mb-4 p-3 w-full rounded bg-slate-700 text-white placeholder-gray-400 focus:outline-none"
+        className="mb-4 p-3 w-full rounded bg-gray-800 text-white focus:outline-none"
       />
       <button
         onClick={handleSignUp}
-        className="bg-[#FF9A8B] hover:bg-[#FF7A6B] text-white font-semibold px-6 py-2 rounded transition-all w-full"
+        className="bg-purple-500 hover:bg-purple-600 text-white font-semibold px-6 py-2 rounded transition-all w-full"
       >
         Sign Up
       </button>
@@ -101,7 +101,7 @@ const SignUp = () => {
         Already Have An Account?{' '}
         <span
           onClick={() => Router.push('/signin')}
-          className="underline cursor-pointer text-[#FF9A8B] hover:text-[#FF7A6B]"
+          className="underline cursor-pointer text-purple-500 hover:text-purple-600"
         >
           Sign In
         </span>
