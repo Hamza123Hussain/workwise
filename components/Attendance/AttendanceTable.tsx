@@ -8,15 +8,18 @@ const AttendanceTable = ({
 }: {
   Attendance: AttendanceRecord[]
 }) => {
+  const totalDaysWorked = countUniqueDates(Attendance)
+  const attendancePercentage = ((totalDaysWorked / 22) * 100).toFixed(2)
+
   return (
     <div className="container mx-auto px-4 py-6">
-      <h2 className="text-2xl font-semibold mb-4 text-black">
+      <h2 className="text-2xl font-semibold mb-4 text-white">
         All Attendance Records
       </h2>
-      <div className="overflow-x-auto flex flex-col ">
-        <table className="min-w-full bg-black border border-purple-800 shadow-md rounded-lg overflow-hidden">
+      <div className="overflow-x-auto flex flex-col">
+        <table className="min-w-full bg-blend-darken border border-purple-800 shadow-md rounded-lg overflow-hidden">
           <thead>
-            <tr className="bg-black">
+            <tr className="bg-blend-darken">
               <th className="border border-purple-800 px-4 py-2">User Data</th>
               <th className="border border-purple-800 px-4 py-2">Entry Time</th>
               <th className="border border-purple-800 px-4 py-2">Exit Time</th>
@@ -24,7 +27,6 @@ const AttendanceTable = ({
               <th className="border border-purple-800 px-4 py-2">
                 Remaining Time
               </th>
-
               <th className="border border-purple-800 px-4 py-2">
                 Current Date
               </th>
@@ -36,12 +38,19 @@ const AttendanceTable = ({
             })}
           </tbody>
         </table>
-        <div className=" flex flex-col justify-end items-end text-black my-5">
-          <h1>Number Of Days Worked :{countUniqueDates(Attendance)}</h1>
-          <h1>
-            Attendance Percentage :{' '}
-            {(countUniqueDates(Attendance) / 22).toFixed(2)}%
-          </h1>
+        <div className="flex flex-col justify-end items-end text-white my-2  space-y-2">
+          <div className="bg-purpleGradientStart p-4 rounded-lg shadow-md transition-transform duration-200 hover:scale-105">
+            <h1 className="text-lg font-bold">
+              Number Of Days Worked:{' '}
+              <span className="text-2xl">{totalDaysWorked}</span>
+            </h1>
+          </div>
+          <div className="bg-purpleGradientStart p-4 rounded-lg shadow-md transition-transform duration-200 hover:scale-105">
+            <h1 className="text-lg font-bold">
+              Attendance Percentage:{' '}
+              <span className="text-2xl">{attendancePercentage}%</span>
+            </h1>
+          </div>
         </div>
       </div>
     </div>
