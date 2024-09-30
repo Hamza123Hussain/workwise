@@ -8,7 +8,7 @@ interface NewAttendanceData {
 export const createNewAttendance = async (data: NewAttendanceData) => {
   try {
     const response = await axios.post(
-      'http://localhost:8000/Api/Attendance/NewAttendace',
+      'https://workwise-backend-five.vercel.app/Api/Attendance/NewAttendace',
       data
     )
     console.log('New Attendance Created Successfully:', response.data)

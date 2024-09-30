@@ -9,7 +9,7 @@ interface UpdateAttendanceData {
 export const updateAttendance = async (data: UpdateAttendanceData) => {
   try {
     const response = await axios.post(
-      'http://localhost:8000/Api/Attendance/UpdateAttendance',
+      'https://workwise-backend-five.vercel.app/Api/Attendance/UpdateAttendance',
       data
     )
     console.log('Attendance Updated Successfully:', response.data)

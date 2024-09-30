@@ -8,7 +8,7 @@ export const createTask = async (
 ) => {
   try {
     const response = await axios.put(
-      'http://localhost:8000/Api/Task/UpdateTask',
+      'https://workwise-backend-five.vercel.app/Api/Task/UpdateTask',
       { id, Email, progressupdate }
     )
     return response.data // Return the response data from the backend

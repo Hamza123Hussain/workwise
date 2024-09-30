@@ -13,7 +13,7 @@ interface TaskData {
 export const createTask = async (taskData: TaskData) => {
   try {
     const response = await axios.post(
-      'http://localhost:8000/Api/Task/CreateNewTask',
+      'https://workwise-backend-five.vercel.app/Api/Task/CreateNewTask',
       taskData
     )
     return response.data // Return the response data from the backend

@@ -5,7 +5,7 @@ export const fetchUserData = async (
 ): Promise<UserData | null> => {
   try {
     const response = await axios.get<UserData>(
-      `http://localhost:8000/Api/Auth/GetUser?Email=${email} `
+      `https://workwise-backend-five.vercel.app/Api/Auth/GetUser?Email=${email} `
     )
 
     if (response.status === 200) {

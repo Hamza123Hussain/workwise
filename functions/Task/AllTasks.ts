@@ -3,7 +3,7 @@ import axios from 'axios'
 export const GetAllTasks = async (email: string) => {
   try {
     const Response = await axios.get(
-      `http://localhost:8000/Api/Task/AllTasks?Email=${email} `
+      `https://workwise-backend-five.vercel.app/Api/Task/AllTasks?Email=${email} `
     )
     if (Response.status === 200) {
       console.log('DATA IS HERE', Response.data)

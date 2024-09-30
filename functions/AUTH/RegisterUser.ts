@@ -21,7 +21,7 @@ export const registerUserWithImage = async (
 
   try {
     const response = await axios.post(
-      'http://localhost:8000/Api/Auth/Signup',
+      'https://workwise-backend-five.vercel.app/Api/Auth/Signup',
       formData,
       {
         headers: {
