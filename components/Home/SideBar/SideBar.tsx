@@ -8,10 +8,10 @@ const Sidebar = () => {
     setIsOpen(!isOpen)
   }
   return (
-    <div className="flex">
+    <div className="flex ">
       {/* Hamburger button for mobile */}
       <button
-        className="md:hidden p-2 text-white bg-[#003366] "
+        className="md:hidden p-2 text-white bg-logo-gradient "
         onClick={toggleSidebar}
       >
         ☰
@@ -19,7 +19,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-0  bg-[#003366] transition-transform transform md:relative md:flex md:flex-col min-h-screen p-5   ${
+        className={`fixed inset-0  bg-slate-900  border-r-2 transition-transform transform md:relative md:flex md:flex-col min-h-screen p-5   ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } md:translate-x-0 md:block`}
       >
@@ -27,7 +27,7 @@ const Sidebar = () => {
         <div className="flex items-center">
           {/* <Image width={50} height={50} src="/Logo.png" alt="Logo" className=' object-cover' /> */}
           <div className="text-white text-4xl text-center font-extrabold ">
-            HRM
+            Octtoppus
           </div>
           <button
             className="text-white md:hidden ml-auto"
