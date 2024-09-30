@@ -14,8 +14,14 @@ const UserDetails = () => {
   }
   return (
     <div className=" flex flex-col items-center gap-2">
-      <div className=" flex items-center">
-        <Image src={user.imageUrl} width={20} height={20} alt="User Image" />
+      <div className=" flex items-center gap-2 ">
+        <Image
+          src={user.imageUrl}
+          width={50}
+          height={50}
+          alt="User Image"
+          className=" rounded-full"
+        />
         <h1 className=" text-xl text-white">{user.Name}</h1>
       </div>
       <button
