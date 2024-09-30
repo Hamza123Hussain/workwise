@@ -40,6 +40,7 @@ const TimeBtn = () => {
           })
           // console.log('Checked out successfully:', updatedAttendance)
           toast.success('You have Checked OUT')
+          setCheckinStatus(!checkinstatus)
         } catch (error) {
           console.error('Error during check-out:', error)
         }
@@ -47,7 +48,6 @@ const TimeBtn = () => {
         console.error('Attendance ID not found for check-out.')
       }
     }
-    setCheckinStatus(!checkinstatus)
   }
   return (
     <div className="bg-purple-black w-4/12 p-6 rounded-lg shadow-md border-2 border-purple-600">
