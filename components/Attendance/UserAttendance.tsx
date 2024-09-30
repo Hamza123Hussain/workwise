@@ -5,6 +5,7 @@ import { AttendanceRecord } from '../../utils/AttendanceInterface'
 import AttendanceTable from './AttendanceTable'
 import Loader from '../Loader'
 import { GetUserAttendance } from '@/functions/Attendance/UserAttendance'
+import Attendance from '@/app/AllAttendance/page'
 const UserAttendance: React.FC = () => {
   const user = useSelector((state: RootState) => state.user)
   const [UserAttendance, setAttendance] = useState<AttendanceRecord[]>([])
@@ -35,6 +36,13 @@ const UserAttendance: React.FC = () => {
     )
   }
 
-  return <AttendanceTable Attendance={UserAttendance} />
+  return Attendance.length > 0 ? (
+    <AttendanceTable Attendance={UserAttendance} />
+  ) : (
+    <div className=" min-h-screen text-center">
+      {' '}
+      <h1 className=" text-6xl text-white">NO ATTENDANCE RECORDS FOUND</h1>
+    </div>
+  )
 }
 export default UserAttendance
