@@ -15,21 +15,23 @@ const AttendanceCard = ({ element }: { element: AttendanceRecord }) => {
   }
   return (
     <tr key={element.id} className="border-b hover:bg-purple-80">
-      <td className="border border-purple-800 px-4 py-2 text-sm">
+      <td className="border border-purple-800 px-4 py-2 text-sm text-white">
         {element.UserData || '-'}
       </td>
-      <td className="border border-purple-800 px-4 py-2 text-sm">
+      <td className="border border-purple-800 px-4 py-2 text-sm text-white">
         {element.entry ? new Date(element.entry).toLocaleTimeString() : '-'}
       </td>
-      <td className="border border-purple-800 px-4 py-2 text-sm">
+      <td className="border border-purple-800 px-4 py-2 text-sm text-white">
         {element.exit ? new Date(element.exit).toLocaleTimeString() : '-'}
       </td>
-      <td className="border border-purple-800 px-4 py-2 text-sm">{duration}</td>
-      <td className="border border-purple-800 px-4 py-2 text-sm">
+      <td className="border border-purple-800 px-4 py-2 text-sm text-white">
+        {duration}
+      </td>
+      <td className="border border-purple-800 px-4 py-2 text-sm text-white">
         {remainingTime}
       </td>
 
-      <td className="border border-purple-800 px-4 py-2 text-sm">
+      <td className="border border-purple-800 px-4 py-2 text-sm text-white">
         {element.currentDate
           ? new Date(element.currentDate).toLocaleDateString()
           : '-'}
