@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../utils/Redux/Store/Store'
 import { createNewAttendance } from '@/functions/Attendance/NewAttendance'
 import { updateAttendance } from '@/functions/Attendance/UpdateAttendance'
+import toast from 'react-hot-toast'
 const TimeBtn = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [checkinstatus, setCheckinStatus] = useState(false)
@@ -24,19 +25,21 @@ const TimeBtn = () => {
           EntryTime: time,
         })
         setAttendanceId(newAttendance.attendance._id) // Save the new attendance ID for future updates
-        console.log('Checked in successfully:', newAttendance)
+        // console.log('Checked in successfully:', newAttendance)
+        toast.success('You have Checked In')
       } catch (error) {
         console.error('Error during check-in:', error)
       }
     } else {
       if (attendanceId) {
         try {
-          const updatedAttendance = await updateAttendance({
+          await updateAttendance({
             Email: user.Email,
             id: attendanceId,
             ExitTime: time,
           })
-          console.log('Checked out successfully:', updatedAttendance)
+          // console.log('Checked out successfully:', updatedAttendance)
+          toast.success('You have Checked In')
         } catch (error) {
           console.error('Error during check-out:', error)
         }
