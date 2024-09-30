@@ -14,8 +14,10 @@ const UserDetails = () => {
   }
   return (
     <div className=" flex flex-col items-center gap-2">
-      <Image src={user.imageUrl} width={20} height={20} alt="User Image" />
-      <h1 className=" text-xl text-white">{user.Name}</h1>
+      <div className=" flex items-center">
+        <Image src={user.imageUrl} width={20} height={20} alt="User Image" />
+        <h1 className=" text-xl text-white">{user.Name}</h1>
+      </div>
       <button
         onClick={() => Signout()}
         className=" bg-red-600 hover:bg-red-900 text-white px-4 py-2 rounded-lg"
