@@ -14,6 +14,11 @@ const config: Config = {
 
         purpleGradientStart: '#7B38F6',
         pinkGradientEnd: '#D13CE8',
+
+        // Color keys need to be in quotes because of the dash
+        'deep-indigo': '#1b1c38',
+        'charcoal-gray': '#2b2b2b',
+        'purple-black': '#141016',
       },
       backgroundImage: {
         'logo-gradient': 'linear-gradient(90deg, #7B38F6, #D13CE8)',
@@ -22,4 +27,5 @@ const config: Config = {
   },
   plugins: [],
 }
+
 export default config
