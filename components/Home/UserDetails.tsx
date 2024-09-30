@@ -22,7 +22,7 @@ const UserDetails = () => {
           alt="User Image"
           className=" rounded-full"
         />
-        <h1 className=" text-xl text-white">{user.Name}</h1>
+        <h1 className=" text-sm text-white">{user.Name}</h1>
       </div>
       <button
         onClick={() => Signout()}

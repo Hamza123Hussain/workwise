@@ -14,22 +14,22 @@ const AttendanceCard = ({ element }: { element: AttendanceRecord }) => {
     remainingTime = calculateRemainingTime(timeDifference)
   }
   return (
-    <tr key={element.id} className="border-b hover:bg-gray-50">
-      <td className="border border-gray-300 px-4 py-2 text-sm">
+    <tr key={element.id} className="border-b hover:bg-purple-80">
+      <td className="border border-purple-800 px-4 py-2 text-sm">
         {element.UserData || '-'}
       </td>
-      <td className="border border-gray-300 px-4 py-2 text-sm">
+      <td className="border border-purple-800 px-4 py-2 text-sm">
         {element.entry ? new Date(element.entry).toLocaleTimeString() : '-'}
       </td>
-      <td className="border border-gray-300 px-4 py-2 text-sm">
+      <td className="border border-purple-800 px-4 py-2 text-sm">
         {element.exit ? new Date(element.exit).toLocaleTimeString() : '-'}
       </td>
-      <td className="border border-gray-300 px-4 py-2 text-sm">{duration}</td>
-      <td className="border border-gray-300 px-4 py-2 text-sm">
+      <td className="border border-purple-800 px-4 py-2 text-sm">{duration}</td>
+      <td className="border border-purple-800 px-4 py-2 text-sm">
         {remainingTime}
       </td>
 
-      <td className="border border-gray-300 px-4 py-2 text-sm">
+      <td className="border border-purple-800 px-4 py-2 text-sm">
         {element.currentDate
           ? new Date(element.currentDate).toLocaleDateString()
           : '-'}
