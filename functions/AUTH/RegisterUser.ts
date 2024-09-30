@@ -1,24 +1,43 @@
 import axios from 'axios'
-import { InputValues, UserData } from './SignUpInterface'
-export const RegisterUser = async (
-  inputValues: InputValues
-): Promise<UserData | void> => {
-  const { email, Name, password, Image } = inputValues
+import { InputValues } from './SignUpInterface'
+
+export const registerUserWithImage = async (
+  userData: InputValues,
+  imageFile: File
+) => {
   const formData = new FormData()
-  formData.append('Name', Name)
-  formData.append('Email', email)
-  formData.append('password', password)
-  if (Image) {
-    formData.append('Image', Image)
+
+  // Append user data to FormData
+  formData.append('Name', userData.Name)
+  formData.append('Email', userData.email)
+  formData.append('password', userData.password)
+  formData.append('Salary', userData.Salary)
+  formData.append('JobDescription', userData.JobDescription)
+
+  // Append the image file if provided
+  if (imageFile) {
+    formData.append('Image', imageFile)
   }
+
   try {
     const response = await axios.post(
       'http://localhost:8000/Api/Auth/Signup',
-      formData
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
     )
-    // console.log('User registered successfully:', response.data)
-    return response.data.user
+    console.log('User registered successfully:', response.data)
+    return response.data
   } catch (error) {
-    console.error('Registration failed:', error)
+    if (axios.isAxiosError(error)) {
+      console.error('Error registering user:', error.response?.data)
+      throw new Error(error.response?.data?.message || 'Registration failed')
+    } else {
+      console.error('Unexpected error:', error)
+      throw new Error('Registration failed')
+    }
   }
 }
