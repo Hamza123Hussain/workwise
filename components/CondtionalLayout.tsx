@@ -7,6 +7,8 @@ import { usePathname } from 'next/navigation'
 import { decryptData } from '@/utils/Encryprion'
 
 import SignIn from './Auth/SignIn'
+import Sidebar from './SideBar'
+import HomePage from './Homepage'
 const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
   const User = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
@@ -27,9 +29,7 @@ const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
 
   // Check if the current route is login or signup
   const isAuthPage =
-    pathname === '/login' ||
-    pathname === '/Register' ||
-    pathname === '/forgotpass'
+    pathname === '/login' || pathname === '/signup' || pathname === '/reset'
 
   // Render the layout based on client-side state
   if (!isClient) {
@@ -37,7 +37,10 @@ const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
   }
 
   return User.Email ? (
-    <div>{children}</div>
+    <div className=" flex">
+      <Sidebar />
+      {!isAuthPage ? children : <HomePage />}
+    </div>
   ) : isAuthPage ? (
     <div>{children}</div>
   ) : (
