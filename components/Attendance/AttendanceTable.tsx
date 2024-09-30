@@ -17,7 +17,7 @@ const AttendanceTable = ({
         All Attendance Records
       </h2>
       <div className="overflow-x-auto flex flex-col">
-        <table className="min-w-full bg-blend-darken border border-purple-800 shadow-md rounded-lg overflow-hidden">
+        <table className="min-w-full bg-blend-darken border-2 border-charcoal-gray shadow-md rounded-lg ">
           <thead>
             <tr className="bg-blend-darken">
               <th className="border border-purple-800 px-4 py-2">User Data</th>
@@ -38,14 +38,14 @@ const AttendanceTable = ({
             })}
           </tbody>
         </table>
-        <div className="flex flex-col justify-end items-end text-white my-2  space-y-2">
-          <div className="bg-purpleGradientStart p-4 rounded-lg shadow-md transition-transform duration-200 hover:scale-105">
+        <div className="flex gap-5 items-center text-white my-5 ">
+          <div className="bg-purpleGradientStart p-2 rounded-lg shadow-md transition-transform duration-200 hover:scale-105">
             <h1 className="text-lg font-bold">
               Number Of Days Worked:{' '}
               <span className="text-2xl">{totalDaysWorked}</span>
             </h1>
           </div>
-          <div className="bg-purpleGradientStart p-4 rounded-lg shadow-md transition-transform duration-200 hover:scale-105">
+          <div className="bg-purpleGradientStart p-2 rounded-lg shadow-md transition-transform duration-200 hover:scale-105">
             <h1 className="text-lg font-bold">
               Attendance Percentage:{' '}
               <span className="text-2xl">{attendancePercentage}%</span>
