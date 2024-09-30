@@ -53,6 +53,16 @@ const SideBarLinks = () => {
         </Link>
       ) : (
         ''
+      )}{' '}
+      {User.Email == '70110719@student.uol.edu.pk' ? (
+        <Link
+          href="#"
+          className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
+        >
+          All Users
+        </Link>
+      ) : (
+        ''
       )}
       <Link
         href="#"
