@@ -34,8 +34,9 @@ const SignUp = () => {
   const handleSignUp = async () => {
     try {
       const Data = await registerUserWithImage(inputVal, inputVal.Image as File)
-      console.log('Api Has Responded', Data)
+      // console.log('Api Has Responded', Data)
       // You can redirect or show a success message here
+      Router.push('/signin')
     } catch (error) {
       console.error('Registration error:', error)
       // Handle error (e.g., show a notification)
