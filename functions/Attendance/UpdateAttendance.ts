@@ -5,6 +5,7 @@ interface UpdateAttendanceData {
   Email: string
   id: string
   ExitTime: string
+  CheckInStatus: boolean
 }
 
 export const updateAttendance = async (data: UpdateAttendanceData) => {

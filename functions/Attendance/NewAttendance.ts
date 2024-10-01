@@ -3,6 +3,7 @@ import axios from 'axios'
 interface NewAttendanceData {
   Email: string
   EntryTime: string
+  CheckInStatus: boolean
 }
 
 export const createNewAttendance = async (data: NewAttendanceData) => {

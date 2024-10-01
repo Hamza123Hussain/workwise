@@ -4,43 +4,37 @@ import { RootState } from '../../utils/Redux/Store/Store'
 import { createNewAttendance } from '@/functions/Attendance/NewAttendance'
 import { updateAttendance } from '@/functions/Attendance/UpdateAttendance'
 import toast from 'react-hot-toast'
-
 const TimeBtn = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [checkinstatus, setCheckinStatus] = useState(false)
   const [attendanceId, setAttendanceId] = useState<string | null>(null)
-
   // Update the current time every second and load stored data
   useEffect(() => {
     const updateTime = () => {
       setCurrentTime(new Date())
     }
-
     const savedAttendanceID = localStorage.getItem('A_I')
     if (savedAttendanceID) {
       setAttendanceId(savedAttendanceID) // Load the attendance ID from localStorage
     }
-
     const savedStatus = localStorage.getItem('BTN_STATUS')
     if (savedStatus) {
       setCheckinStatus(JSON.parse(savedStatus)) // Load the check-in status from localStorage
     }
-
     const timerId = setInterval(updateTime, 1000)
     return () => clearInterval(timerId)
   }, [])
 
   const user = useSelector((state: RootState) => state.user)
-
   const handleCheckInCheckOut = async () => {
     const time = currentTime.toISOString() // Use ISO string for consistency with backend
-
     if (!checkinstatus) {
       // Check-in process
       try {
         const newAttendance = await createNewAttendance({
           Email: user.Email,
           EntryTime: time,
+          CheckInStatus: true,
         })
         setAttendanceId(newAttendance.attendance._id) // Save the new attendance ID
         localStorage.setItem('A_I', newAttendance.attendance._id) // Store the attendance ID in localStorage
@@ -58,6 +52,7 @@ const TimeBtn = () => {
             Email: user.Email,
             id: attendanceId,
             ExitTime: time,
+            CheckInStatus: false,
           })
           toast.success('You have Checked OUT')
           setCheckinStatus(false) // Update status to checked out
