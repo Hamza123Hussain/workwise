@@ -37,7 +37,7 @@ const MainTable = ({
                 {records.length}
               </td>
               <td className="border border-gray-300 px-4 py-2 text-white">
-                {(records.length / 22).toFixed(2)}%
+                {((records.length / 22) * 100).toFixed(2)}%
               </td>
             </tr>
           ))}
