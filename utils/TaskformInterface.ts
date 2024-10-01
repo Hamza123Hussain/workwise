@@ -7,4 +7,6 @@ export interface TaskFormProps {
   setDescription: (value: string) => void
   setDueDate: (value: string) => void
   setAssignedTo: (value: string) => void
+  Priority: string
+  setPriority: (value: string) => void
 }
