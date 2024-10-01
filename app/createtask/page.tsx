@@ -1,3 +1,4 @@
+'use client'
 import CreateTaskForm from '@/components/Tasks/CreateTask'
 import React from 'react'
 
