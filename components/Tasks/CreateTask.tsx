@@ -1,9 +1,9 @@
+'use client'
 import React, { useState } from 'react'
 import { createTask } from '../../functions/Task/CreateTask'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../utils/Redux/Store/Store'
 import TaskForm from './TaskForm'
-
 const CreateTaskForm = () => {
   const [description, setDescription] = useState('')
   const [dueDate, setDueDate] = useState('')
