@@ -12,7 +12,7 @@ const SideBarLinks = () => {
       >
         Home
       </Link>
-      {User.Email == '70110719@student.uol.edu.pk' ? (
+      {User.Email == 'octtoppus1@gmail.com' ? (
         <Link
           href="/CreLinkteTLinksk"
           className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
@@ -34,7 +34,7 @@ const SideBarLinks = () => {
       >
         User Attendance
       </Link>
-      {User.Email == '70110719@student.uol.edu.pk' ? (
+      {User.Email == 'octtoppus1@gmail.com' ? (
         <Link
           href={'/AllAttendance'}
           className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
@@ -44,7 +44,7 @@ const SideBarLinks = () => {
       ) : (
         ''
       )}
-      {User.Email == '70110719@student.uol.edu.pk' ? (
+      {User.Email == 'octtoppus1@gmail.com' ? (
         <Link
           href="#"
           className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
@@ -54,7 +54,7 @@ const SideBarLinks = () => {
       ) : (
         ''
       )}{' '}
-      {User.Email == '70110719@student.uol.edu.pk' ? (
+      {User.Email == 'octtoppus1@gmail.com' ? (
         <Link
           href="#"
           className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
