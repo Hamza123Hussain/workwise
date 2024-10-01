@@ -14,3 +14,12 @@ export interface UserData {
   createdAt: string
   imageUrl: string
 }
+
+export interface UserFetched {
+  Email: string
+  JobDescription: string
+  Name: string
+  Salary: string
+  createdAt: string
+  imageUrl: string
+}
