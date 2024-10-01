@@ -1,3 +1,4 @@
+'use client'
 import Showuser from '@/components/Profile/ShowUser'
 import React from 'react'
 
