@@ -15,13 +15,21 @@ const TimeBtn = () => {
   const GetCurrentAttendance = async () => {
     setLoading(true)
     const Data = await CurrentAttendance(User.Email)
-    if (Data) {
-      setAttendanceId(Data[0]._id)
-      setCheckinStatus(Data[0].CheckInStatus)
+    try {
+      if (Data) {
+        setAttendanceId(Data[0]._id)
+        setCheckinStatus(Data[0].CheckInStatus)
+        setLoading(false)
+      } else {
+        setAttendanceId('')
+        setCheckinStatus(false)
+        setLoading(false)
+      }
+    } catch (error) {
+      setAttendanceId('')
+      setCheckinStatus(false)
       setLoading(false)
-    }
-    {
-      setLoading(false)
+      console.log(error)
     }
   }
   useEffect(() => {
