@@ -1,3 +1,4 @@
+import { ApiUrl } from '@/utils/AttendanceInterface'
 import axios from 'axios'
 
 interface NewAttendanceData {
@@ -8,7 +9,7 @@ interface NewAttendanceData {
 export const createNewAttendance = async (data: NewAttendanceData) => {
   try {
     const response = await axios.post(
-      'https://workwise-backend-five.vercel.app/Api/Attendance/NewAttendace',
+      `${ApiUrl}Api/Attendance/NewAttendace`,
       data
     )
     console.log('New Attendance Created Successfully:', response.data)

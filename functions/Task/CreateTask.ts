@@ -1,3 +1,4 @@
+import { ApiUrl } from '@/utils/AttendanceInterface'
 import axios from 'axios'
 
 // Define types for the task data
@@ -13,7 +14,7 @@ interface TaskData {
 export const createTask = async (taskData: TaskData) => {
   try {
     const response = await axios.post(
-      'https://workwise-backend-five.vercel.app/Api/Task/CreateNewTask',
+      `${ApiUrl}Api/Task/CreateNewTask`,
       taskData
     )
     return response.data // Return the response data from the backend

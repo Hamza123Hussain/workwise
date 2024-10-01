@@ -1,11 +1,12 @@
 import axios from 'axios'
 import { UserData } from './SignUpInterface'
+import { ApiUrl } from '@/utils/AttendanceInterface'
 export const fetchUserData = async (
   email: string
 ): Promise<UserData | null> => {
   try {
     const response = await axios.get<UserData>(
-      `https://workwise-backend-five.vercel.app/Api/Auth/GetUser?Email=${email} `
+      `${ApiUrl}Api/Auth/GetUser?Email=${email} `
     )
 
     if (response.status === 200) {

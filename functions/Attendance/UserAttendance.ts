@@ -1,9 +1,10 @@
+import { ApiUrl } from '@/utils/AttendanceInterface'
 import axios from 'axios'
 
 export const GetUserAttendance = async (email: string) => {
   try {
     const Response = await axios.get(
-      `https://workwise-backend-five.vercel.app/Api/Attendance/UserAttendance?Email=${email} `
+      `${ApiUrl}Api/Attendance/UserAttendance?Email=${email} `
     )
     if (Response.status === 200) {
       console.log('DATA IS HERE', Response.data)

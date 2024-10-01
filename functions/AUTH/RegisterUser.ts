@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { InputValues } from './SignUpInterface'
+import { ApiUrl } from '@/utils/AttendanceInterface'
 
 export const registerUserWithImage = async (
   userData: InputValues,
@@ -20,15 +21,11 @@ export const registerUserWithImage = async (
   }
 
   try {
-    const response = await axios.post(
-      'https://workwise-backend-five.vercel.app/Api/Auth/Signup',
-      formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
-    )
+    const response = await axios.post(`${ApiUrl}Api/Auth/Signup`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
     console.log('User registered successfully:', response.data)
     return response.data
   } catch (error) {

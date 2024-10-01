@@ -1,9 +1,10 @@
+import { ApiUrl } from '@/utils/AttendanceInterface'
 import axios from 'axios'
 
 export const DeleteTask = async (Email: string, id: string) => {
   try {
     const Response = await axios.delete(
-      `https://workwise-backend-five.vercel.app/DeleteTask?Email=${Email}&id=${id}`
+      `${ApiUrl}DeleteTask?Email=${Email}&id=${id}`
     )
     if (Response.status === 200) {
       console.log('DATA GONE')
