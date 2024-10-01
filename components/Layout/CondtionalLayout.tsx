@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GetUserData } from '@/utils/Redux/Slice/User/UserSlice'
 import { usePathname } from 'next/navigation'
 import { decryptData } from '@/utils/Encryprion'
-
 import SignIn from '../Auth/SignIn'
 import Sidebar from '../Home/SideBar/SideBar'
 import HomePage from '../Home/Homepage'
@@ -24,21 +23,17 @@ const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
   }, [dispatch])
   const [isClient, setIsClient] = useState(false)
   const pathname = usePathname()
-
   // Use useEffect to only set isClient on the client-side
   useEffect(() => {
     setIsClient(true)
   }, [])
-
   // Check if the current route is login or signup
   const isAuthPage =
     pathname === '/login' || pathname === '/signup' || pathname === '/reset'
-
   // Render the layout based on client-side state
   if (!isClient) {
     return null // or a loading spinner if preferred
   }
-
   return User.Email ? (
     <div className=" flex bg-purple-black min-h-screen">
       <Sidebar />
@@ -56,5 +51,4 @@ const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
     </div>
   )
 }
-
 export default ConditionalLayout
