@@ -8,6 +8,7 @@ const CreateTaskForm = () => {
   const [description, setDescription] = useState('')
   const [dueDate, setDueDate] = useState('')
   const [assignedTo, setAssignedTo] = useState('')
+  const [Priority, setPriority] = useState('LOW')
   const [name, setName] = useState('')
   const User = useSelector((state: RootState) => state.user)
 
@@ -43,6 +44,8 @@ const CreateTaskForm = () => {
           setDescription={setDescription}
           setDueDate={setDueDate}
           setAssignedTo={setAssignedTo}
+          Priority={Priority}
+          setPriority={setPriority}
         />
         <button
           type="submit"
