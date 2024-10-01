@@ -1,3 +1,4 @@
+import { countUniqueDates } from '@/functions/Attendance/UniqueDateFunction'
 import { AttendanceRecord } from '@/utils/AttendanceInterface'
 import React from 'react'
 
@@ -34,10 +35,10 @@ const MainTable = ({
                 {userData}
               </td>
               <td className="border border-gray-300 px-4 py-2 text-white">
-                {records.length}
+                {countUniqueDates(records)}
               </td>
               <td className="border border-gray-300 px-4 py-2 text-white">
-                {((records.length / 22) * 100).toFixed(2)}%
+                {((countUniqueDates(records) / 22) * 100).toFixed(2)}%
               </td>
             </tr>
           ))}
