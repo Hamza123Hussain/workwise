@@ -4,27 +4,37 @@ import { RootState } from '../../utils/Redux/Store/Store'
 import { createNewAttendance } from '@/functions/Attendance/NewAttendance'
 import { updateAttendance } from '@/functions/Attendance/UpdateAttendance'
 import toast from 'react-hot-toast'
+import { CurrentAttendance } from '@/functions/Attendance/CurrentAttendance'
+import Loader from '../Loader'
 const TimeBtn = () => {
+  const User = useSelector((state: RootState) => state.user)
+  const [loading, setLoading] = useState(false)
   const [currentTime, setCurrentTime] = useState(new Date())
   const [checkinstatus, setCheckinStatus] = useState(false)
   const [attendanceId, setAttendanceId] = useState<string | null>(null)
-  // Update the current time every second and load stored data
+  const GetCurrentAttendance = async () => {
+    setLoading(true)
+    const Data = await CurrentAttendance(User.Email)
+    if (Data) {
+      setAttendanceId(Data[0]._id)
+      setCheckinStatus(Data[0].CheckInStatus)
+      setLoading(false)
+    }
+    {
+      setLoading(false)
+    }
+  }
   useEffect(() => {
     const updateTime = () => {
       setCurrentTime(new Date())
     }
-    const savedAttendanceID = localStorage.getItem('A_I')
-    if (savedAttendanceID) {
-      setAttendanceId(savedAttendanceID) // Load the attendance ID from localStorage
-    }
-    const savedStatus = localStorage.getItem('BTN_STATUS')
-    if (savedStatus) {
-      setCheckinStatus(JSON.parse(savedStatus)) // Load the check-in status from localStorage
-    }
     const timerId = setInterval(updateTime, 1000)
+
     return () => clearInterval(timerId)
   }, [])
-
+  useEffect(() => {
+    GetCurrentAttendance()
+  }, [User.Email])
   const user = useSelector((state: RootState) => state.user)
   const handleCheckInCheckOut = async () => {
     const time = currentTime.toISOString() // Use ISO string for consistency with backend
@@ -36,11 +46,9 @@ const TimeBtn = () => {
           EntryTime: time,
           CheckInStatus: true,
         })
-        setAttendanceId(newAttendance.attendance._id) // Save the new attendance ID
-        localStorage.setItem('A_I', newAttendance.attendance._id) // Store the attendance ID in localStorage
+        setAttendanceId(newAttendance.attendance._id) // Save the new attendance I
         toast.success('You have Checked In')
         setCheckinStatus(true) // Update status to checked in
-        localStorage.setItem('BTN_STATUS', JSON.stringify(true)) // Save the updated status in localStorage
       } catch (error) {
         console.error('Error during check-in:', error)
       }
@@ -56,7 +64,6 @@ const TimeBtn = () => {
           })
           toast.success('You have Checked OUT')
           setCheckinStatus(false) // Update status to checked out
-          localStorage.setItem('BTN_STATUS', JSON.stringify(false)) // Save the updated status in localStorage
         } catch (error) {
           console.error('Error during check-out:', error)
         }
@@ -65,8 +72,11 @@ const TimeBtn = () => {
       }
     }
   }
-
-  return (
+  return loading ? (
+    <div className=" flex justify-center items-center">
+      <Loader />
+    </div>
+  ) : (
     <div className="bg-purple-black w-4/12 p-6 rounded-lg shadow-md border-2 border-purple-600">
       <p className="font-bold text-white">
         Date:
@@ -97,5 +107,4 @@ const TimeBtn = () => {
     </div>
   )
 }
-
 export default TimeBtn
