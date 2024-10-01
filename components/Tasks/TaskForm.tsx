@@ -9,6 +9,8 @@ const TaskForm: React.FC<TaskFormProps> = ({
   setDescription,
   setDueDate,
   setAssignedTo,
+  Priority,
+  setPriority,
 }) => {
   return (
     <div>
@@ -61,6 +63,22 @@ const TaskForm: React.FC<TaskFormProps> = ({
           <option value="user1">User 1</option>
           <option value="user2">User 2</option>
           <option value="user3">User 3</option>
+        </select>
+      </div>
+      <div className="mb-4">
+        <label className="block text-sm font-bold mb-2 text-gray-700">
+          Priority
+        </label>
+        <select
+          className="w-full p-3 rounded-lg shadow-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          value={Priority}
+          onChange={(e) => setPriority(e.target.value)}
+          required
+        >
+          <option value="">Select A Priority</option>
+          <option value="user1">LOW</option>
+          <option value="user2">MEDIUM</option>
+          <option value="user3">HIGH</option>
         </select>
       </div>
     </div>
