@@ -6,6 +6,7 @@ import { updateAttendance } from '@/functions/Attendance/UpdateAttendance'
 import toast from 'react-hot-toast'
 import { CurrentAttendance } from '@/functions/Attendance/CurrentAttendance'
 import Loader from '../Loader'
+import axios from 'axios'
 const TimeBtn = () => {
   const User = useSelector((state: RootState) => state.user)
   const [loading, setLoading] = useState(false)
@@ -14,24 +15,28 @@ const TimeBtn = () => {
   const [attendanceId, setAttendanceId] = useState<string | null>(null)
   const GetCurrentAttendance = async () => {
     setLoading(true)
-    const Data = await CurrentAttendance(User.Email)
     try {
+      const Data = await CurrentAttendance(User.Email)
       if (Data) {
         setAttendanceId(Data[0]._id)
         setCheckinStatus(Data[0].CheckInStatus)
-        setLoading(false)
       } else {
-        setAttendanceId('')
+        setAttendanceId(null)
         setCheckinStatus(false)
-        setLoading(false)
       }
     } catch (error) {
-      setAttendanceId('')
-      setCheckinStatus(false)
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        // If it's a 404 error, handle it appropriately
+        setAttendanceId(null)
+        setCheckinStatus(false)
+      } else {
+        console.error('Error getting current attendance:', error)
+      }
+    } finally {
       setLoading(false)
-      console.log(error)
     }
   }
+
   useEffect(() => {
     const updateTime = () => {
       setCurrentTime(new Date())

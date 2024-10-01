@@ -7,6 +7,8 @@ export const CurrentAttendance = async (Email: string) => {
   try {
     if (Response.status == 200) {
       return Response.data
+    } else if (Response.status === 404) {
+      return false
     }
   } catch (error) {
     console.error('Error getting current attendance:', error)
