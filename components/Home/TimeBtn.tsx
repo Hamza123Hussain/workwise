@@ -36,13 +36,11 @@ const TimeBtn = () => {
       setLoading(false)
     }
   }
-
   useEffect(() => {
     const updateTime = () => {
       setCurrentTime(new Date())
     }
     const timerId = setInterval(updateTime, 1000)
-
     return () => clearInterval(timerId)
   }, [])
   useEffect(() => {
@@ -52,7 +50,6 @@ const TimeBtn = () => {
   const handleCheckInCheckOut = async () => {
     const time = currentTime.toISOString() // Use ISO string for consistency with backend
     if (!checkinstatus) {
-      // Check-in process
       try {
         const newAttendance = await createNewAttendance({
           Email: user.Email,
