@@ -3,29 +3,33 @@ import { createTask } from '../../functions/Task/CreateTask'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../utils/Redux/Store/Store'
 import TaskForm from './TaskForm'
+import toast from 'react-hot-toast'
+import { TaskFormProps } from '@/utils/TaskformInterface'
 
 const CreateTaskForm = () => {
-  const [description, setDescription] = useState('')
-  const [dueDate, setDueDate] = useState('')
-  const [assignedTo, setAssignedTo] = useState('')
-  const [name, setName] = useState('')
-  const [Priority, setPriority] = useState('LOW')
   const User = useSelector((state: RootState) => state.user)
+
+  // State to manage task data
+  const [taskData, setTaskData] = useState<TaskFormProps>({
+    name: '',
+    description: '',
+    dueDate: '',
+    assignedTo: '',
+    Email: User.Email, // Populate from Redux state
+    priority: 'LOW',
+  })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const taskData = {
-      description,
-      dueDate,
-      assignedTo,
-      name,
-      Email: User.Email,
-    }
+
     try {
-      const response = await createTask(taskData)
-      console.log('response', response)
+      const Response = await createTask(taskData)
+      if (Response) {
+        toast.success('Task has been created successfully')
+      }
     } catch (error) {
       console.log('Error in frontend', error)
+      toast.error('Failed to create the task')
     }
   }
 
@@ -35,18 +39,7 @@ const CreateTaskForm = () => {
         Create a New Task
       </h1>
       <form onSubmit={handleSubmit}>
-        <TaskForm
-          name={name}
-          description={description}
-          dueDate={dueDate}
-          assignedTo={assignedTo}
-          setName={setName}
-          setDescription={setDescription}
-          setDueDate={setDueDate}
-          setAssignedTo={setAssignedTo}
-          Priority={Priority}
-          setPriority={setPriority}
-        />
+        <TaskForm taskData={taskData} setTaskData={setTaskData} />
         <button
           type="submit"
           className="w-full bg-purple-600 text-white p-3 rounded-lg shadow hover:bg-purple-500 transition duration-300"
@@ -57,4 +50,5 @@ const CreateTaskForm = () => {
     </div>
   )
 }
+
 export default CreateTaskForm
