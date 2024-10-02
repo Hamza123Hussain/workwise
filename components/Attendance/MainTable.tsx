@@ -10,7 +10,7 @@ const MainTable = ({
   }
 }) => {
   return (
-    <div className="overflow-x-auto p-4 text-center ">
+    <div className="overflow-x-auto p-4 text-center w-[90vw] sm:w-auto ">
       <table className="min-w-full border border-gray-300">
         <thead>
           <tr className="bg-gray-200">

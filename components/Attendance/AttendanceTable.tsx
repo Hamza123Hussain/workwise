@@ -14,7 +14,7 @@ const AttendanceTable = ({
   const attendancePercentage = ((totalDaysWorked / 22) * 100).toFixed(2)
 
   return (
-    <div className=" mx-auto px-4 py-6">
+    <div className=" mx-auto px-4 py-6 w-[90vw] sm:w-auto">
       <h2 className="text-2xl font-semibold mb-4 text-white text-center">
         All Attendance Records For {UserName}
       </h2>
@@ -48,7 +48,7 @@ const AttendanceTable = ({
             ))}
           </tbody>
         </table>
-        <div className="flex flex-col sm:flex-row justify-between gap-4 items-center text-white my-5 space-y-4 sm:space-y-0">
+        <div className="flex flex-col  justify-center   gap-4 items-center text-white my-5 space-y-4 ">
           <div className="bg-purpleGradientStart p-4 flex flex-col items-center text-center rounded-lg shadow-md transition-transform duration-200 w-full sm:w-1/2">
             <h1 className="text-lg font-bold">Number Of Days Worked</h1>
             <span className="text-2xl">{totalDaysWorked}</span>
