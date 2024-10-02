@@ -3,10 +3,31 @@ export interface TaskFormProps {
   description: string
   dueDate: string
   assignedTo: string
-  setName: (value: string) => void
-  setDescription: (value: string) => void
-  setDueDate: (value: string) => void
-  setAssignedTo: (value: string) => void
-  Priority: string
-  setPriority: (value: string) => void
+  Email: string
+  priority: string
+}
+export interface TaskFormComponentProps {
+  taskData: TaskFormProps
+  setTaskData: React.Dispatch<React.SetStateAction<TaskFormProps>>
+}
+
+export interface TaskFieldProps {
+  Label: string
+  name: string
+  value: string
+  handleChange: (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => void
+  type: 'text' | 'date' // To dynamically set the input type (text, date, etc.)
+}
+export interface TaskFetch {
+  assignedTo: string // User to whom the task is assigned
+  createdAt: string // Date when the task was created (ISO string)
+  description: string // Brief description of the task
+  dueDate: string // Due date for the task (ISO string)
+  name: string // Name of the task
+  priority: 'LOW' | 'MEDIUM' | 'HIGH' // Priority level of the task
+  progress: 'TODO' | 'IN_PROGRESS' | 'DONE' // Progress status of the task
 }
