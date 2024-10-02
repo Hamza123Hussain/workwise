@@ -7,8 +7,8 @@ export const GetAllTasks = async (email: string) => {
       `${ApiUrl}Api/Task/AllTasks?Email=${email} `
     )
     if (Response.status === 200) {
-      console.log('DATA IS HERE', Response.data)
-      return Response.data
+      // console.log('DATA IS HERE', Response.data.AllTasks)
+      return Response.data.AllTasks
     }
   } catch (error) {
     console.error('Error creating task:', error)
