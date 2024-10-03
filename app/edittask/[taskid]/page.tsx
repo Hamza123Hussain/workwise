@@ -1,8 +1,10 @@
 'use client'
 import Loader from '@/components/Loader'
 import { GetSingleTask } from '@/functions/Task/GetSingleTask'
+import { updateTask } from '@/functions/Task/UpdateTask'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { TaskFetch } from '@/utils/TaskformInterface'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useSelector } from 'react-redux'
@@ -16,7 +18,7 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
     'TODO'
   )
   const user = useSelector((state: RootState) => state.user)
-
+  const Router = useRouter()
   const getASingleTask = async () => {
     setLoading(true)
     try {
@@ -35,9 +37,16 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
   }
 
   const handleUpdateTask = async () => {
-    // Implement the function to update the task in your backend
-    // Here you should make a call to your update task API
-    // After updating, you can provide feedback to the user
+    const UpdateTask = await updateTask(
+      params.taskid,
+      user.Email,
+      progress,
+      description,
+      priority
+    )
+    if (UpdateTask) {
+      Router.push('/usertasks')
+    }
     toast.success('Task updated successfully!') // Replace with actual feedback after updating
   }
 
