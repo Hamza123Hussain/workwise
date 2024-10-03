@@ -23,6 +23,7 @@ export interface TaskFieldProps {
   type: 'text' | 'date' // To dynamically set the input type (text, date, etc.)
 }
 export interface TaskFetch {
+  _id: string
   assignedTo: string // User to whom the task is assigned
   createdAt: string // Date when the task was created (ISO string)
   description: string // Brief description of the task
@@ -30,4 +31,16 @@ export interface TaskFetch {
   name: string // Name of the task
   priority: 'LOW' | 'MEDIUM' | 'HIGH' // Priority level of the task
   progress: 'TODO' | 'IN_PROGRESS' | 'DONE' // Progress status of the task
+}
+
+export const priorityColors = {
+  LOW: 'bg-green-500',
+  MEDIUM: 'bg-yellow-500',
+  HIGH: 'bg-red-500',
+}
+
+export const progressColors = {
+  TODO: 'bg-gray-500',
+  IN_PROGRESS: 'bg-blue-500',
+  DONE: 'bg-green-500',
 }
