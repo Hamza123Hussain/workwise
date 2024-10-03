@@ -1,7 +1,7 @@
 import { InputValues } from '@/utils/SignUpInterface'
 import axios from 'axios'
 
-export const updateUser = async (userData: InputValues): Promise<void> => {
+export const updateUser = async (userData: InputValues) => {
   try {
     const formData = new FormData()
 
@@ -27,7 +27,8 @@ export const updateUser = async (userData: InputValues): Promise<void> => {
     )
 
     if (response.status === 200) {
-      console.log('User updated successfully', response.data)
+      console.log('User updated successfully', response.data.user)
+      return response.data.user
     } else {
       console.error('Failed to update user', response.data.message)
     }
