@@ -1,7 +1,23 @@
 import { UserFetched } from '@/utils/SignUpInterface'
 import Image from 'next/image'
 import React from 'react'
+import UpdateModal from './UpdateModal'
+import toast from 'react-hot-toast'
+import deleteUser from '@/functions/AUTH/DeleteUser'
+import { useRouter } from 'next/navigation'
 const UserCard = ({ User }: { User: UserFetched }) => {
+  const Router = useRouter()
+  const DeleteMe = async () => {
+    try {
+      const Data = await deleteUser(User.Email)
+      if (Data) {
+        toast.success('User Has Been Deleted')
+        Router.push('/')
+      }
+    } catch (error) {
+      toast.error(`user is not being deleted : ${error}`)
+    }
+  }
   return (
     <div className="bg-black text-white p-4 rounded-lg mx-auto shadow-lg flex flex-col w-64 sm:w-96 items-center border border-purple-700 ">
       {/* User Info Section */}
@@ -23,25 +39,20 @@ const UserCard = ({ User }: { User: UserFetched }) => {
             </div>
           )}
         </div>
-
         <div className="mt-4 sm:mt-0">
           <h2 className="text-xl font-bold text-purple-400">{User.Name}</h2>
           <p className="text-sm text-gray-400">Email: {User.Email}</p>
-          <p className="text-sm text-gray-400">Job: {User.JobTitle || 'N/A'}</p>
+          <p className="text-sm text-gray-400">
+            Title: {User.JobTitle || 'N/A'}
+          </p>
           <p className="text-sm text-gray-400">Salary: PKR {User.Salary}</p>
         </div>
       </div>
-
       {/* Action Buttons */}
-      <div className="mt-4  flex items-center gap-2 ">
+      <div className="mt-4 flex-col sm:flex-row  flex items-center gap-2 ">
+        <UpdateModal />
         <button
-          //   onClick={onUpdate}
-          className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-500 transition duration-300 sm:w-auto sm:self-end"
-        >
-          Update
-        </button>
-        <button
-          //   onClick={onDelete}
+          onClick={DeleteMe}
           className="w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-500 transition duration-300 sm:w-auto sm:self-end"
         >
           Delete
