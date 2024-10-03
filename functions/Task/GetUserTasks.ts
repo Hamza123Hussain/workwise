@@ -1,14 +1,13 @@
 import { ApiUrl } from '@/utils/AttendanceInterface'
 import axios from 'axios'
 
-export const GetAllTasks = async (email: string) => {
+export const GetUserTasks = async (Name: string, Email: string) => {
   try {
     const Response = await axios.get(
-      `${ApiUrl}Api/Task/GetUserTasks?Email=${email} `
+      `${ApiUrl}Api/Task/GetUserTasks?Name=${Name}&Email=${Email} `
     )
     if (Response.status === 200) {
-      console.log('DATA IS HERE', Response.data)
-      return Response.data
+      return Response.data.AllTasks
     }
   } catch (error) {
     console.error('Error creating task:', error)
