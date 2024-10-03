@@ -81,6 +81,14 @@ const SignUp = () => {
         onChange={handleChange}
         className="mb-4 p-3 w-full rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
       />
+      <input
+        type="text"
+        placeholder="Enter Job Title"
+        name="JobTitle"
+        value={inputVal.JobTitle}
+        onChange={handleChange}
+        className="mb-4 p-3 w-full rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+      />
       <textarea
         placeholder="Enter Job Description"
         name="JobDescription"
