@@ -1,6 +1,8 @@
 import { InputValues } from '@/utils/SignUpInterface'
 import React from 'react'
 import ImagePreview from './ImagePreview'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/utils/Redux/Store/Store'
 const UpdateInputFields = ({
   inputVal,
   setInputVal,
@@ -8,6 +10,7 @@ const UpdateInputFields = ({
   inputVal: InputValues
   setInputVal: React.Dispatch<React.SetStateAction<InputValues>>
 }) => {
+  const User = useSelector((state: RootState) => state.user)
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -48,7 +51,36 @@ const UpdateInputFields = ({
         onChange={handleChange}
         className="mb-4 p-3 w-full rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
       />
-
+      {User.Email == 'octtoppus1@gmail.com' ? (
+        <>
+          <label htmlFor="JobDescription" className="block mb-1 text-white">
+            Job Description
+          </label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Enter JobDescription"
+            name="JobDescription"
+            value={inputVal.JobDescription}
+            onChange={handleChange}
+            className="mb-4 p-3 w-full rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+          <label htmlFor="Salary" className="block mb-1 text-white">
+            Salary
+          </label>
+          <input
+            type="number"
+            id="name"
+            placeholder="Enter Salary"
+            name="Salary"
+            value={inputVal.Salary}
+            onChange={handleChange}
+            className="mb-4 p-3 w-full rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+        </>
+      ) : (
+        ''
+      )}
       <label htmlFor="imageUpload" className="block mb-1 text-white">
         Upload Image
       </label>
@@ -62,5 +94,4 @@ const UpdateInputFields = ({
     </>
   )
 }
-
 export default UpdateInputFields
