@@ -8,15 +8,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateUser } from '@/functions/AUTH/UpdateUser'
 import { encryptData } from '@/utils/Encryprion'
 import { GetUserData } from '@/utils/Redux/Slice/User/UserSlice'
+import Loader from '../Loader'
 const UpdateFields = () => {
+  const [Loading, SetLoading] = useState(false)
   const Dispatch = useDispatch()
   const User = useSelector((state: RootState) => state.user)
   const UpdateMe = async () => {
+    SetLoading(true)
     const Data = await updateUser(inputVal)
     if (Data) {
       const encryptedData = encryptData(Data) // Encrypt data before storing
       localStorage.setItem('UserData', encryptedData)
       Dispatch(GetUserData(Data))
+      SetLoading(false)
     }
   }
   const [inputVal, setInputVal] = useState<InputValues>({
@@ -28,6 +32,13 @@ const UpdateFields = () => {
     Image: null,
     JobTitle: User.JobTitle,
   })
+  if (Loading) {
+    return (
+      <div className=" flex justify-center items-center">
+        <Loader />
+      </div>
+    )
+  }
   return (
     <div className="flex flex-col bg-black p-6 rounded-lg shadow-lg w-full max-w-md my-5">
       <UpdateInputFields inputVal={inputVal} setInputVal={setInputVal} />
