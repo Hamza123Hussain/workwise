@@ -14,6 +14,7 @@ export const registerUserWithImage = async (
   formData.append('password', userData.password)
   formData.append('Salary', userData.Salary)
   formData.append('JobDescription', userData.JobDescription)
+  formData.append('JobTitle', userData.JobTitle)
 
   // Append the image file if provided
   if (imageFile) {
