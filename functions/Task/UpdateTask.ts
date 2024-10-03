@@ -1,21 +1,24 @@
 import { ApiUrl } from '@/utils/AttendanceInterface'
 import axios from 'axios'
-
-// Function to create a task
-export const createTask = async (
-  id: string,
-  Email: string,
-  progressupdate: string
+export const updateTask = async (
+  taskId: string,
+  email: string,
+  progress: 'TODO' | 'IN_PROGRESS' | 'DONE',
+  description: string,
+  priority: 'LOW' | 'MEDIUM' | 'HIGH'
 ) => {
   try {
     const response = await axios.put(`${ApiUrl}Api/Task/UpdateTask`, {
-      id,
-      Email,
-      progressupdate,
+      id: taskId,
+      Email: email,
+      progress,
+      description,
+      priority,
     })
-    return response.data // Return the response data from the backend
+
+    return response.data // Returns the message and updated task
   } catch (error) {
-    console.error('Error creating task:', error)
-    throw error // Propagate the error to be handled by the caller
+    // Handle error
+    console.error('Error updating task:', error)
   }
 }
