@@ -1,32 +1,27 @@
+'use client'
+import { InputValues } from '@/utils/SignUpInterface'
 import React, { useState } from 'react'
 import { DialogFooter } from '../ui/dialog'
+import UpdateInputFields from './UpdateInputFields'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { useSelector } from 'react-redux'
-
 const UpdateFields = () => {
   const User = useSelector((state: RootState) => state.user)
-  const [Description, SetDescription] = useState(User.JobDescription)
+  const [inputVal, setInputVal] = useState<InputValues>({
+    Name: User.Name,
+    email: '',
+    password: '',
+    Salary: User.Salary.toString(), // Assuming you want to capture this
+    JobDescription: User.JobDescription, // Added JobDescription field
+    Image: null,
+    JobTitle: User.JobTitle,
+  })
   return (
-    <>
-      <div className="grid gap-4 py-4">
-        <div className="grid grid-cols-4 items-center gap-4">
-          <label
-            htmlFor="jobDescription"
-            className="text-right text-purple-500"
-          >
-            Description
-          </label>
-          <textarea
-            id="jobDescription"
-            name="Description"
-            onChange={(
-              e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-            ) => SetDescription(e.target.value)}
-            defaultValue={Description}
-            className="col-span-3 bg-gray-800 text-white border border-purple-500 rounded-md p-2 focus:outline-none focus:border-purple-600"
-          />
-        </div>
-      </div>
+    <div className="flex flex-col bg-black p-6 rounded-lg shadow-lg w-full max-w-md my-5">
+      <h2 className="text-2xl font-semibold text-purple-500 mb-6 text-center">
+        Update User Profile
+      </h2>
+      <UpdateInputFields inputVal={inputVal} setInputVal={setInputVal} />
       <DialogFooter>
         <button
           type="submit"
@@ -35,7 +30,7 @@ const UpdateFields = () => {
           Save changes
         </button>
       </DialogFooter>
-    </>
+    </div>
   )
 }
 export default UpdateFields
