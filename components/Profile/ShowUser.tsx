@@ -16,7 +16,7 @@ const ShowUser = () => {
         <div className="space-y-4">
           <UserField Attribute={User.Name} Name="User Name" />
           <UserField Attribute={User.Email} Name="User Email" />
-          <UserField Attribute={User.JobDescription} Name="Job Description" />
+          <UserField Attribute={User.JobTitle} Name="Job Title" />
           <UserField Attribute={User.Salary} Name="Salary" />
           <UserField Attribute={User.imageUrl} Name="User Image" />
         </div>

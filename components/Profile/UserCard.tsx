@@ -27,9 +27,7 @@ const UserCard = ({ User }: { User: UserFetched }) => {
         <div className="mt-4 sm:mt-0">
           <h2 className="text-xl font-bold text-purple-400">{User.Name}</h2>
           <p className="text-sm text-gray-400">Email: {User.Email}</p>
-          <p className="text-sm text-gray-400">
-            Job: {User.JobDescription || 'N/A'}
-          </p>
+          <p className="text-sm text-gray-400">Job: {User.JobTitle || 'N/A'}</p>
           <p className="text-sm text-gray-400">Salary: PKR {User.Salary}</p>
         </div>
       </div>
