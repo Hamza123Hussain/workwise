@@ -1,23 +1,12 @@
-import { TaskFetch } from '@/utils/TaskformInterface'
+import {
+  priorityColors,
+  progressColors,
+  TaskFetch,
+} from '@/utils/TaskformInterface'
+import { useRouter } from 'next/navigation'
 import React from 'react'
-
-interface TaskCard2Props {
-  TaskDetail: TaskFetch
-}
-
-const TaskCard2: React.FC<TaskCard2Props> = ({ TaskDetail }) => {
-  const priorityColors = {
-    LOW: 'bg-green-500',
-    MEDIUM: 'bg-yellow-500',
-    HIGH: 'bg-red-500',
-  }
-
-  const progressColors = {
-    TODO: 'bg-gray-500',
-    IN_PROGRESS: 'bg-blue-500',
-    DONE: 'bg-green-500',
-  }
-
+const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
+  const Router = useRouter()
   return (
     <div className="bg-purple-900 text-white rounded-lg shadow-lg p-6  mx-auto my-8 transition-transform duration-300 hover:scale-105">
       <div className="border-b border-gray-600 mb-2  ">
@@ -68,7 +57,10 @@ const TaskCard2: React.FC<TaskCard2Props> = ({ TaskDetail }) => {
         <p className="text-sm text-gray-300">{TaskDetail.description}</p>
       </div>
       <div className="flex justify-end">
-        <button className="bg-black text-purple-200 px-4 py-2 rounded-lg shadow hover:bg-purple-800 transition-all duration-200 ease-in-out">
+        <button
+          onClick={() => Router.push(`/edittask/${TaskDetail._id}`)}
+          className="bg-black text-purple-200 px-4 py-2 rounded-lg shadow hover:bg-purple-800 transition-all duration-200 ease-in-out"
+        >
           Edit Task
         </button>
       </div>
