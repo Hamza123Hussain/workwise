@@ -1,7 +1,7 @@
 'use client'
 
 import { registerUserWithImage } from '@/functions/AUTH/RegisterUser'
-import { InputValues } from '@/functions/AUTH/SignUpInterface'
+import { InputValues } from '@/utils/SignUpInterface'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
@@ -14,6 +14,7 @@ const SignUp = () => {
     Salary: '', // Assuming you want to capture this
     JobDescription: '', // Added JobDescription field
     Image: null,
+    JobTitle: '',
   })
 
   const handleChange = (

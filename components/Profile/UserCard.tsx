@@ -1,4 +1,4 @@
-import { UserFetched } from '@/functions/AUTH/SignUpInterface'
+import { UserFetched } from '@/utils/SignUpInterface'
 import Image from 'next/image'
 import React from 'react'
 const UserCard = ({ User }: { User: UserFetched }) => {

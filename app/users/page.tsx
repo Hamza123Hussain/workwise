@@ -2,8 +2,8 @@
 import Loader from '@/components/Loader'
 import UserCard from '@/components/Profile/UserCard'
 import { Allusers } from '@/functions/AUTH/Allusers'
-import { UserFetched } from '@/functions/AUTH/SignUpInterface'
 import { RootState } from '@/utils/Redux/Store/Store'
+import { UserFetched } from '@/utils/SignUpInterface'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 const AllUserData = () => {

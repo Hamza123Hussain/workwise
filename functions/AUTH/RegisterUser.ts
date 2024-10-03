@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { InputValues } from './SignUpInterface'
+import { InputValues } from '../../utils/SignUpInterface'
 import { ApiUrl } from '@/utils/AttendanceInterface'
 
 export const registerUserWithImage = async (

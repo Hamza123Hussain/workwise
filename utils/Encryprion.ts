@@ -1,5 +1,5 @@
-import { UserData } from '@/functions/AUTH/SignUpInterface'
 import CryptoJS from 'crypto-js'
+import { UserData } from './SignUpInterface'
 
 const SECRET_KEY = process.env.NEXT_PUBLIC_SECRET_KEY as string // Type assertion for the secret key
 

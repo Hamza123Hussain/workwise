@@ -5,6 +5,7 @@ export interface InputValues {
   Image: File | null
   Salary: string
   JobDescription: string
+  JobTitle: string
 }
 
 export interface UserData {

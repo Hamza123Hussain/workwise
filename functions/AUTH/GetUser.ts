@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { UserData } from './SignUpInterface'
+import { UserData } from '../../utils/SignUpInterface'
 import { ApiUrl } from '@/utils/AttendanceInterface'
 export const fetchUserData = async (
   email: string
