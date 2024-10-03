@@ -2,7 +2,6 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
 import React from 'react'
@@ -17,11 +16,7 @@ const UpdateModal = () => {
         </button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] bg-black text-white">
-        <DialogHeader>
-          <DialogTitle className="text-purple-500">
-            Update The Profile
-          </DialogTitle>
-        </DialogHeader>
+        <DialogHeader></DialogHeader>
         <UpdateFields />
       </DialogContent>
     </Dialog>
