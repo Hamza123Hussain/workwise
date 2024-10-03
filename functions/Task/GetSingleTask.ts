@@ -1,5 +1,5 @@
 import axios from 'axios'
-export const fetchTask = async (email: string, taskId: string) => {
+export const GetSingleTask = async (email: string, taskId: string) => {
   try {
     const response = await axios.get(
       `https://workwise-backend-puce.vercel.app/Api/Task/singleTask?`,
