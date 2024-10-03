@@ -17,7 +17,7 @@ export interface UserData {
 
 export interface UserFetched {
   Email: string
-  JobDescription: string
+  JobTitle: string
   Name: string
   Salary: string
   createdAt: string
