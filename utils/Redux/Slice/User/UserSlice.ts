@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-
 const initialState = {
   createdAt: '',
   Email: '',
@@ -8,8 +7,8 @@ const initialState = {
   _id: '',
   Salary: 0,
   JobDescription: '',
+  JobTitle: '',
 }
-
 export const UserSlice = createSlice({
   name: 'User',
   initialState,
@@ -22,6 +21,7 @@ export const UserSlice = createSlice({
       state.imageUrl = action.payload.imageUrl
       state.Salary = action.payload.Salary
       state.JobDescription = action.payload.JobDescription
+      state.JobTitle = action.payload.JobTitle
     },
     ClearUser: (state) => {
       // Resetting each property individually
@@ -32,10 +32,9 @@ export const UserSlice = createSlice({
       state.imageUrl = ''
       state.Salary = 0
       state.JobDescription = ''
+      state.JobTitle = ''
     },
   },
 })
-
 export const { GetUserData, ClearUser } = UserSlice.actions
-
 export default UserSlice.reducer
