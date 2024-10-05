@@ -83,7 +83,7 @@ const TimeBtn = () => {
     }
   }
   return (
-    <div className="bg-purple-black sm:w-4/12 p-6 rounded-lg shadow-md border-2 border-purple-600">
+    <div className="bg-purple-black sm:w-4/12 h-fit p-6 rounded-lg shadow-md border-2 border-purple-600">
       {loading ? (
         <div className=" flex justify-center items-center">
           <Loader />
