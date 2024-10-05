@@ -46,6 +46,16 @@ const SideBarLinks = () => {
       )}
       {User.Email == 'octtoppus1@gmail.com' ? (
         <Link
+          href="/All_Tasks"
+          className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
+        >
+          All Task Details
+        </Link>
+      ) : (
+        ''
+      )}{' '}
+      {User.Email == 'octtoppus1@gmail.com' ? (
+        <Link
           href="#"
           className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
         >
