@@ -6,18 +6,24 @@ import { AttendanceRecord } from '../../utils/AttendanceInterface'
 import Loader from '../Loader'
 import { groupByUserData } from '@/functions/Attendance/GroupEdAttendance'
 import MainTable from './MainTable'
+
 const AllAttendance: React.FC = () => {
   const user = useSelector((state: RootState) => state.user)
   const [groupedAttendance, setGroupedAttendance] = useState<{
     [key: string]: AttendanceRecord[]
-  }>({})
+  }>({}) // Fixed type to correctly represent groupedAttendance
+
   const [loading, setLoading] = useState(false)
+
   const getAttendance = async () => {
     setLoading(true)
     try {
       const data = await GetAllAttendance(user.Email)
       if (data) {
-        const groupedData = groupByUserData(data)
+        // Correct type for groupedData as an object with arrays of AttendanceRecord
+        const groupedData = groupByUserData(data) as {
+          [key: string]: AttendanceRecord[]
+        }
         setGroupedAttendance(groupedData)
       }
       setLoading(false)
@@ -26,6 +32,7 @@ const AllAttendance: React.FC = () => {
       setLoading(false)
     }
   }
+
   useEffect(() => {
     if (user.Email) {
       getAttendance()
@@ -39,6 +46,8 @@ const AllAttendance: React.FC = () => {
       </div>
     )
   }
+
   return <MainTable groupedAttendance={groupedAttendance} />
 }
+
 export default AllAttendance
