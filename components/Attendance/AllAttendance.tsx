@@ -47,7 +47,14 @@ const AllAttendance: React.FC = () => {
     )
   }
 
-  return <MainTable groupedAttendance={groupedAttendance} />
+  return (
+    <>
+      <h1 className=" text-3xl text-purpleGradientStart mt-10 text-center">
+        ALL ATTENDANCE RECORDS
+      </h1>
+      <MainTable groupedAttendance={groupedAttendance} />
+    </>
+  )
 }
 
 export default AllAttendance

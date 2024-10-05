@@ -42,8 +42,15 @@ const AllUserTasks = () => {
       </div>
     )
   }
+  return (
+    <>
+      <h1 className=" text-3xl text-purpleGradientStart mt-10 text-center">
+        ALL TASK DETAILS
+      </h1>
 
-  return <MainTable groupedAttendance={ALL_TASKS} />
+      <MainTable groupedAttendance={ALL_TASKS} />
+    </>
+  )
 }
 
 export default AllUserTasks
