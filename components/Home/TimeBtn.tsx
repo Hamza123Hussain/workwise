@@ -82,38 +82,43 @@ const TimeBtn = () => {
       }
     }
   }
-  return loading ? (
-    <div className=" flex justify-center items-center">
-      <Loader />
-    </div>
-  ) : (
+  return (
     <div className="bg-purple-black sm:w-4/12 p-6 rounded-lg shadow-md border-2 border-purple-600">
-      <p className="font-bold text-white">
-        Date:
-        <span className="text-lg text-white">
+      {loading ? (
+        <div className=" flex justify-center items-center">
+          <Loader />
+        </div>
+      ) : (
+        <>
           {' '}
-          {currentTime.toLocaleDateString()}
-        </span>
-      </p>
-      <p className="font-bold text-white">
-        Current Time:
-        <span className="text-lg text-white">
-          {' '}
-          {currentTime.toLocaleTimeString()}
-        </span>
-      </p>
-      <div className="flex gap-4 mt-2 justify-end">
-        <button
-          onClick={handleCheckInCheckOut}
-          className={`${
-            !checkinstatus ? 'bg-green-600' : 'bg-red-600'
-          } text-white p-3 rounded-lg shadow hover:${
-            !checkinstatus ? 'bg-green-800' : 'bg-red-900'
-          } transition duration-200`}
-        >
-          {!checkinstatus ? 'Check In' : 'Check Out'}
-        </button>
-      </div>
+          <p className="font-bold text-white">
+            Date:
+            <span className="text-lg text-white">
+              {' '}
+              {currentTime.toLocaleDateString()}
+            </span>
+          </p>
+          <p className="font-bold text-white">
+            Current Time:
+            <span className="text-lg text-white">
+              {' '}
+              {currentTime.toLocaleTimeString()}
+            </span>
+          </p>
+          <div className="flex gap-4 mt-2 justify-end">
+            <button
+              onClick={handleCheckInCheckOut}
+              className={`${
+                !checkinstatus ? 'bg-green-600' : 'bg-red-600'
+              } text-white p-3 rounded-lg shadow hover:${
+                !checkinstatus ? 'bg-green-800' : 'bg-red-900'
+              } transition duration-200`}
+            >
+              {!checkinstatus ? 'Check In' : 'Check Out'}
+            </button>
+          </div>
+        </>
+      )}{' '}
     </div>
   )
 }
