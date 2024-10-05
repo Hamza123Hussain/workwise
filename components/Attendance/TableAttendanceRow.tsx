@@ -27,10 +27,7 @@ const AttendanceTableRow = ({
         </tr>
       </thead>
       <tbody>
-        <tr
-          key={userData}
-          className="bg-black text-white hover:bg-purple-700 transition duration-300"
-        >
+        <tr key={userData} className="bg-black text-white ">
           <td className="border border-purple-600 w-56 px-6 py-4">
             {userData}
           </td>

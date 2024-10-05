@@ -43,10 +43,7 @@ const TaskTableRow = ({
         </tr>
       </thead>
       <tbody className="min-w-full">
-        <tr
-          key={userData}
-          className="bg-black text-white hover:bg-purple-700 transition duration-300"
-        >
+        <tr key={userData} className="bg-black text-white ">
           <td className="border border-purple-600 w-56 p-4">{userData}</td>
           <td className="border border-purple-600 p-4">{HighPirority}</td>
           <td className="border border-purple-600 p-4">{Medium_Pirotiy}</td>
