@@ -14,7 +14,7 @@ const RecentTasks = () => {
     try {
       const data = await GetAllTasks(user.Email)
       if (data) {
-        setTasks(data)
+        setTasks(data.slice(-3))
         SetLoading(false)
       }
     } catch (error) {
@@ -22,7 +22,6 @@ const RecentTasks = () => {
       console.error('Error fetching tasks:', error)
     }
   }
-
   useEffect(() => {
     fetchData()
   }, [user.Email])
