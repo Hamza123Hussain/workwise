@@ -29,7 +29,7 @@ const TaskStatus = () => {
   }, [user.Email])
 
   return (
-    <div className="bg-gray-800 border-2 border-gray-700 text-white flex-1 p-8 rounded-lg shadow-lg">
+    <div className=" border-2 border-purple-600 text-white flex-1 p-8 rounded-lg shadow-lg">
       {Loading ? (
         <div className="flex justify-center items-center">
           <Loader />
