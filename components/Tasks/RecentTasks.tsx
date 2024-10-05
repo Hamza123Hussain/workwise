@@ -1,10 +1,10 @@
-import { GetAllTasks } from '@/functions/Task/AllTasks'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { TaskFetch } from '@/utils/TaskformInterface'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import TaskCard from './TaskCard'
 import Loader from '../Loader'
+import { GetUserTasks } from '@/functions/Task/GetUserTasks'
 const RecentTasks = () => {
   const [Loading, SetLoading] = useState(false)
   const [allTasks, setTasks] = useState<TaskFetch[]>([])
@@ -12,7 +12,7 @@ const RecentTasks = () => {
   const fetchData = async () => {
     SetLoading(true)
     try {
-      const data = await GetAllTasks(user.Email)
+      const data = await GetUserTasks(user.Name, user.Email)
       if (data) {
         setTasks(data.slice(-3))
         SetLoading(false)
