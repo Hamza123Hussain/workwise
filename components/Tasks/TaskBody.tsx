@@ -1,9 +1,9 @@
 // TaskBody.tsx
 import { TaskFetch } from '@/utils/TaskformInterface'
+import { useRouter } from 'next/navigation'
 import React from 'react'
-
 const TaskBody = ({ task }: { task: TaskFetch }) => {
-  // Apply different background colors based on task priority
+  const Router = useRouter()
   const priorityClass =
     task.priority === 'HIGH'
       ? 'bg-red-600'
@@ -37,7 +37,10 @@ const TaskBody = ({ task }: { task: TaskFetch }) => {
         {task.priority}
       </td>
       <td className="border border-purple-500 p-4 flex justify-center">
-        <button className="bg-gradient-to-t from-black to-purple-600 hover:from-purple-700 hover:to-purple-800 text-white rounded-full p-4 transition-colors">
+        <button
+          onClick={() => Router.push(`/edittask/${task._id}`)}
+          className="bg-gradient-to-t from-black to-purple-600 hover:from-purple-700 hover:to-purple-800 text-white rounded-full p-4 transition-colors"
+        >
           Edit Me
         </button>
       </td>
