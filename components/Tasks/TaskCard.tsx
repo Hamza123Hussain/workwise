@@ -1,13 +1,15 @@
+// TaskCard.tsx
 import { TaskFetch } from '@/utils/TaskformInterface'
 import React from 'react'
 import TaskBody from './TaskBody'
+
 const TaskCard = ({ allTasks }: { allTasks: TaskFetch[] }) => {
   return (
     <table className="min-w-full border-collapse border border-purple-500">
       {allTasks.length > 0 ? (
         <>
           <thead>
-            <tr className="bg-purple-600">
+            <tr className="bg-gradient-to-r from-purple-600 via-purple-500 to-purple-700">
               <th className="border border-purple-500 p-2 text-left text-white">
                 Task
               </th>
@@ -41,7 +43,7 @@ const TaskCard = ({ allTasks }: { allTasks: TaskFetch[] }) => {
         <tbody>
           <tr>
             <td
-              colSpan={7} // Adjusted colSpan to cover all columns including 'Edit'
+              colSpan={7}
               className="border border-purple-500 p-2 text-center text-gray-400"
             >
               No tasks available.
@@ -52,4 +54,5 @@ const TaskCard = ({ allTasks }: { allTasks: TaskFetch[] }) => {
     </table>
   )
 }
+
 export default TaskCard
