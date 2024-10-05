@@ -3,10 +3,10 @@ import { RootState } from '@/utils/Redux/Store/Store'
 import { TaskFetch } from '@/utils/TaskformInterface'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import Loader2 from '../Loader2'
 import TaskCard from './TaskCard'
+import Loader from '../Loader'
 const RecentTasks = () => {
-  const [Loader, SetLoading] = useState(false)
+  const [Loading, SetLoading] = useState(false)
   const [allTasks, setTasks] = useState<TaskFetch[]>([])
   const user = useSelector((state: RootState) => state.user)
   const fetchData = async () => {
@@ -26,19 +26,24 @@ const RecentTasks = () => {
   useEffect(() => {
     fetchData()
   }, [user.Email])
-  if (Loader) {
-    return (
-      <div className=" flex items-center justify-center my-10">
-        <Loader2 />
-      </div>
-    )
-  }
+
   return (
     <div className=" p-6 rounded-lg shadow-md">
-      <h2 className="font-semibold text-2xl text-purple-500">Recent Tasks</h2>
-      <div className="mt-4 overflow-x-auto">
-        <TaskCard allTasks={allTasks} />
-      </div>
+      {Loading ? (
+        <div className=" flex items-center justify-center my-10">
+          <Loader />
+        </div>
+      ) : (
+        <>
+          {' '}
+          <h2 className="font-semibold text-2xl text-purple-500">
+            Recent Tasks
+          </h2>
+          <div className="mt-4 overflow-x-auto">
+            <TaskCard allTasks={allTasks} />
+          </div>
+        </>
+      )}
     </div>
   )
 }
