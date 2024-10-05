@@ -3,8 +3,9 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/navigation'
 import { loginUser } from '@/functions/AUTH/LoginUser'
-import { GetUserData } from '@/utils/Redux/Slice/User/UserSlice'
+import { ClearUser, GetUserData } from '@/utils/Redux/Slice/User/UserSlice'
 import { encryptData } from '@/utils/Encryprion'
+import { handleSignOut } from '@/functions/AUTH/SignOut'
 const SignIn = () => {
   const dispatch = useDispatch()
   const [inputVal, setInputVal] = useState({
@@ -18,13 +19,24 @@ const SignIn = () => {
   const handleLoginClick = async () => {
     const data = await loginUser(inputVal.email, inputVal.password)
     if (data) {
-      const encryptedData = encryptData(data) // Encrypt data before storing
+      const encryptedData = encryptData(data)
       localStorage.setItem('UserData', encryptedData)
       dispatch(GetUserData(data))
       Router.push('/')
+      scheduleSignout()
     } else {
       console.error('Login failed')
     }
+  }
+  const scheduleSignout = () => {
+    const signoutTimeout = 7 * 60 * 60 * 1000 // 7 hours in milliseconds
+    setTimeout(async () => {
+      const SignoutDone = await handleSignOut()
+      if (SignoutDone) {
+        dispatch(ClearUser())
+        localStorage.removeItem('UserData')
+      }
+    }, signoutTimeout)
   }
   return (
     <div className="flex flex-col bg-black p-6 rounded-lg shadow-lg w-full max-w-md">
@@ -70,5 +82,4 @@ const SignIn = () => {
     </div>
   )
 }
-
 export default SignIn
