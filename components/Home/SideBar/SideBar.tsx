@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import UserDetails from '../UserDetails'
 import SideBarLinks from './SidebarLinks'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const Router = useRouter()
   const toggleSidebar = () => {
     setIsOpen(!isOpen)
   }
@@ -22,13 +23,13 @@ const Sidebar = () => {
       >
         <div className="flex items-center">
           <Image
+            onClick={() => Router.push('/')}
             width={150}
             height={150}
             src="/Logo.png"
             alt="Logo"
-            className=" object-cover"
+            className=" cursor-pointer object-cover"
           />
-
           <button
             className="text-white md:hidden ml-auto"
             onClick={toggleSidebar}
@@ -38,9 +39,6 @@ const Sidebar = () => {
         </div>
         <div className="flex flex-col space-y-5 px-4 my-5 items-start ">
           <SideBarLinks />
-        </div>
-        <div className="text-white p-4 md:mt-auto md:mb-28 ">
-          <UserDetails />
         </div>
       </div>
     </div>
