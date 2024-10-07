@@ -9,8 +9,9 @@ import React from 'react'
 const TaskBody = ({ task }: { task: TaskFetch }) => {
   const Router = useRouter()
 
-  // Check if the due date is in the past
-  const isDueDatePast = new Date(task.dueDate) < new Date()
+  // Check if the due date is past
+  const isDueDatePast =
+    new Date(task.dueDate) < new Date(new Date().setHours(0, 0, 0, 0))
 
   return (
     <tr key={task.createdAt}>

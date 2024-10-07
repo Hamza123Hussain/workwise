@@ -40,8 +40,15 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
   const handleUpdateTask = async () => {
     if (!task) return // Prevent updating if the task is not loaded
 
-    // Check if the due date is in the past
-    if (new Date(task.dueDate) < new Date()) {
+    // Check if the due date is today or in the future
+    const currentDate = new Date()
+    const dueDateObj = new Date(task.dueDate)
+
+    // Resetting hours, minutes, seconds, and milliseconds for accurate comparison
+    currentDate.setHours(0, 0, 0, 0)
+    dueDateObj.setHours(0, 0, 0, 0)
+
+    if (dueDateObj < currentDate) {
       toast.error(
         'You cannot update this task because the due date has passed.'
       )

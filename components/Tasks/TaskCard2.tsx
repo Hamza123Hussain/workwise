@@ -9,8 +9,9 @@ import React from 'react'
 const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
   const Router = useRouter()
 
-  // Check if the due date is in the past
-  const isDueDatePast = new Date(TaskDetail.dueDate) < new Date()
+  // Check if the due date is past
+  const isDueDatePast =
+    new Date(TaskDetail.dueDate) < new Date(new Date().setHours(0, 0, 0, 0))
 
   return (
     <div className="bg-purple-900 text-white rounded-lg shadow-lg p-6 xs:w-full w-[60vw]  md:w-[30vw]  mx-auto my-8 transition-transform duration-300 hover:scale-105">

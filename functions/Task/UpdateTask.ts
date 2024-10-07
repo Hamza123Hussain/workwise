@@ -11,9 +11,16 @@ export const updateTask = async (
   dueDate: string // Expecting dueDate in a valid date format (e.g., 'YYYY-MM-DD')
 ) => {
   try {
-    // Check if the due date is in the past
     const currentDate = new Date()
     const dueDateObj = new Date(dueDate)
+
+    // Reset hours, minutes, seconds, and milliseconds for accurate comparison
+    currentDate.setHours(0, 0, 0, 0)
+    dueDateObj.setHours(0, 0, 0, 0)
+
+    if (dueDateObj < currentDate) {
+      throw new Error('Cannot update task: Due date is in the past.')
+    }
 
     if (dueDateObj < currentDate) {
       toast.error('Cannot update task: Due date is in the past.')
