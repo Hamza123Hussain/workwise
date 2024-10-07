@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { TaskFetch } from '@/utils/TaskformInterface'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { useSelector } from 'react-redux'
-import { GetAllTasks } from '@/functions/Task/AllTasks'
 import Loader from '../Loader'
 import TaskOverview from './TaskOverview'
+import { GetUserTasks } from '@/functions/Task/GetUserTasks'
 
 const TaskStatus = () => {
   const [Loading, SetLoading] = useState(false)
@@ -14,7 +14,7 @@ const TaskStatus = () => {
   const fetchData = async () => {
     SetLoading(true)
     try {
-      const data = await GetAllTasks(user.Email)
+      const data = await GetUserTasks(user.Name, user.Email)
       if (data) {
         setTasks(data)
         SetLoading(false)
