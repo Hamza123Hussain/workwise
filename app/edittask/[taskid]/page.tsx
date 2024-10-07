@@ -19,6 +19,7 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
   )
   const user = useSelector((state: RootState) => state.user)
   const Router = useRouter()
+
   const getASingleTask = async () => {
     setLoading(true)
     try {
@@ -37,17 +38,32 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
   }
 
   const handleUpdateTask = async () => {
-    const UpdateTask = await updateTask(
-      params.taskid,
-      user.Email,
-      progress,
-      description,
-      priority
-    )
-    if (UpdateTask) {
-      Router.push('/usertasks')
+    if (!task) return // Prevent updating if the task is not loaded
+
+    // Check if the due date is in the past
+    if (new Date(task.dueDate) < new Date()) {
+      toast.error(
+        'You cannot update this task because the due date has passed.'
+      )
+      return // Prevent update if due date is past
     }
-    toast.success('Task updated successfully!') // Replace with actual feedback after updating
+
+    try {
+      const UpdateTask = await updateTask(
+        params.taskid,
+        user.Email,
+        progress,
+        description,
+        priority,
+        task.dueDate
+      )
+      if (UpdateTask) {
+        toast.success('Task updated successfully!')
+        Router.push('/usertasks')
+      }
+    } catch (error) {
+      toast.error(`Error updating task: ${error}`)
+    }
   }
 
   useEffect(() => {

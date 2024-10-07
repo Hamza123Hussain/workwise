@@ -5,11 +5,16 @@ import {
 } from '@/utils/TaskformInterface'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+
 const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
   const Router = useRouter()
+
+  // Check if the due date is in the past
+  const isDueDatePast = new Date(TaskDetail.dueDate) < new Date()
+
   return (
     <div className="bg-purple-900 text-white rounded-lg shadow-lg p-6 xs:w-full w-[60vw]  md:w-[30vw]  mx-auto my-8 transition-transform duration-300 hover:scale-105">
-      <div className="border-b border-gray-600 mb-2  ">
+      <div className="border-b border-gray-600 mb-2">
         <h2 className="text-xl font-bold">{TaskDetail.name}</h2>
       </div>
 
@@ -32,8 +37,8 @@ const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
         </div>
       </div>
 
-      <div className="flex  flex-col  gap-4  justify-center items-center mb-4">
-        <div className="flex flex-col  items-center">
+      <div className="flex flex-col gap-4 justify-center items-center mb-4">
+        <div className="flex flex-col items-center">
           <span className="font-medium">Priority</span>
           <span className={`ml-2 font-bold ${priorityClass(TaskDetail)}`}>
             {TaskDetail.priority}
@@ -46,14 +51,22 @@ const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
           </span>
         </div>
       </div>
-      <div className=" my-2 flex flex-col ">
+      <div className="my-2 flex flex-col">
         <h1>Description</h1>
         <p className="text-sm text-gray-300">{TaskDetail.description}</p>
       </div>
       <div className="flex justify-end">
         <button
-          onClick={() => Router.push(`/edittask/${TaskDetail._id}`)}
-          className="bg-black text-purple-200 px-4 py-2 rounded-lg shadow hover:bg-purple-800 transition-all duration-200 ease-in-out"
+          onClick={() =>
+            !isDueDatePast && Router.push(`/edittask/${TaskDetail._id}`)
+          } // Only navigate if the due date is not past
+          className={`px-4 py-2 rounded-lg shadow transition-all duration-200 ease-in-out 
+                      ${
+                        isDueDatePast
+                          ? 'bg-gray-600 text-gray-300 cursor-not-allowed'
+                          : 'bg-black text-purple-200 hover:bg-purple-800'
+                      }`}
+          disabled={isDueDatePast} // Disable button if the due date is past
         >
           Edit Task
         </button>
