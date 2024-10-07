@@ -1,28 +1,22 @@
 // TaskBody.tsx
-import { TaskFetch } from '@/utils/TaskformInterface'
+import {
+  priorityClass,
+  progress_Class,
+  TaskFetch,
+} from '@/utils/TaskformInterface'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 const TaskBody = ({ task }: { task: TaskFetch }) => {
   const Router = useRouter()
-  const priorityClass =
-    task.priority === 'HIGH'
-      ? 'bg-red-600'
-      : task.priority === 'MEDIUM'
-      ? 'bg-yellow-600'
-      : 'bg-green-600'
-  const progress_Class =
-    task.progress === 'TODO'
-      ? 'bg-red-600'
-      : task.progress === 'IN_PROGRESS'
-      ? 'bg-yellow-600'
-      : 'bg-green-600'
 
   return (
     <tr key={task.createdAt}>
       <td className="border border-purple-500 p-2">{task.name}</td>
       <td className="border border-purple-500 p-2">{task.assignedTo}</td>
       <td
-        className={`border border-purple-500 p-2 text-center ${progress_Class}`}
+        className={`border border-purple-500 p-2 text-center ${progress_Class(
+          task
+        )}`}
       >
         {task.progress}
       </td>
@@ -32,7 +26,9 @@ const TaskBody = ({ task }: { task: TaskFetch }) => {
       </td>
       {/* Priority column with dynamic color based on priority */}
       <td
-        className={`border border-purple-500 p-2 text-center ${priorityClass}`}
+        className={`border border-purple-500 p-2 text-center ${priorityClass(
+          task
+        )}`}
       >
         {task.priority}
       </td>
