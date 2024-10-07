@@ -14,7 +14,7 @@ const MainTable = ({
   groupedAttendance: GroupedAttendanceProps
 }) => {
   return (
-    <div className="overflow-x-auto p-4 text-center w-[90vw] sm:w-auto">
+    <>
       {Object.entries(groupedAttendance).map(([userData, records]) => {
         if (Array.isArray(records)) {
           // Check if records are AttendanceRecord[]
@@ -40,7 +40,7 @@ const MainTable = ({
         }
         return null
       })}
-    </div>
+    </>
   )
 }
 

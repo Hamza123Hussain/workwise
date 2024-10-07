@@ -52,7 +52,24 @@ const AllAttendance: React.FC = () => {
       <h1 className=" text-3xl text-purpleGradientStart mt-10 text-center">
         ALL ATTENDANCE RECORDS
       </h1>
-      <MainTable groupedAttendance={groupedAttendance} />
+      <div className="overflow-x-auto p-4 text-center w-[90vw] sm:w-auto">
+        <table className="w-full text-center my-5">
+          <thead>
+            <tr className="bg-purple-900">
+              <th className="border border-purple-600 px-6 py-4 text-white">
+                User Name
+              </th>
+              <th className="border border-purple-600 px-6 py-4 text-white">
+                Attendance
+              </th>
+              <th className="border border-purple-600 px-6 py-4 text-white">
+                Attendance Percentage
+              </th>
+            </tr>
+          </thead>
+          <MainTable groupedAttendance={groupedAttendance} />
+        </table>
+      </div>
     </>
   )
 }
