@@ -34,16 +34,16 @@ export interface TaskFetch {
 }
 export const priorityClass = (task: TaskFetch) => {
   return task.priority === 'HIGH'
-    ? 'text-red-600'
+    ? 'bg-red-600'
     : task.priority === 'MEDIUM'
-    ? 'text-yellow-600'
-    : 'text-green-600'
+    ? 'bg-purple-500'
+    : 'bg-green-600'
 }
 
 export const progress_Class = (task: TaskFetch) => {
   return task.progress === 'TODO'
-    ? 'text-red-600'
+    ? 'bg-red-600'
     : task.progress === 'IN_PROGRESS'
-    ? 'text-yellow-600'
-    : 'text-green-600'
+    ? 'bg-purple-500'
+    : 'bg-green-600'
 }

@@ -39,15 +39,23 @@ const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
       </div>
 
       <div className="flex flex-col gap-4 justify-center items-center mb-4">
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center ">
           <span className="font-medium">Priority</span>
-          <span className={`ml-2 font-bold ${priorityClass(TaskDetail)}`}>
+          <span
+            className={`ml-2 font-bold ${priorityClass(
+              TaskDetail
+            )} text-transparent bg-clip-text`}
+          >
             {TaskDetail.priority}
           </span>
         </div>
         <div className="flex flex-col items-center">
           <span className="font-medium">Progress</span>
-          <span className={`ml-2 font-bold ${progress_Class(TaskDetail)}`}>
+          <span
+            className={`ml-2 font-bold ${progress_Class(
+              TaskDetail
+            )} text-transparent bg-<color> bg-clip-text`}
+          >
             {TaskDetail.progress}
           </span>
         </div>

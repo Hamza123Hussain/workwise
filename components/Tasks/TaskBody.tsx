@@ -20,7 +20,7 @@ const TaskBody = ({ task }: { task: TaskFetch }) => {
       <td
         className={`border border-purple-500 p-2 text-center ${progress_Class(
           task
-        )}`}
+        )} text-transparent bg-<color> bg-clip-text`}
       >
         {task.progress}
       </td>
@@ -32,7 +32,7 @@ const TaskBody = ({ task }: { task: TaskFetch }) => {
       <td
         className={`border border-purple-500 p-2 text-center ${priorityClass(
           task
-        )}`}
+        )} text-transparent bg-<color> bg-clip-text`}
       >
         {task.priority}
       </td>
@@ -40,7 +40,9 @@ const TaskBody = ({ task }: { task: TaskFetch }) => {
         <button
           onClick={() => !isDueDatePast && Router.push(`/edittask/${task._id}`)} // Navigate only if the due date is not past
           className={`bg-gradient-to-t from-black to-purple-600 hover:from-purple-700 hover:to-purple-800 text-white rounded-full p-4 transition-colors
-                      ${isDueDatePast ? 'bg-gray-600 cursor-not-allowed' : ''}`} // Change button style if due date is past
+                      ${
+                        isDueDatePast ? 'bg-gray-600 cursor-not-allowed ' : ''
+                      }`} // Change button style if due date is past
           disabled={isDueDatePast} // Disable button if due date is past
         >
           Edit Me
