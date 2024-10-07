@@ -17,7 +17,12 @@ const UserTasks = () => {
     try {
       const data = await GetUserTasks(User.Name, User.Email)
       if (data) {
-        setTasks(data)
+        // Sort tasks in descending order based on createdAt
+        const sortedTasks = data.sort(
+          (a: TaskFetch, b: TaskFetch) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        )
+        setTasks(sortedTasks)
       }
     } catch (error) {
       console.error('Error fetching tasks:', error)
