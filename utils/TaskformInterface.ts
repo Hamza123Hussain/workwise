@@ -32,15 +32,18 @@ export interface TaskFetch {
   priority: 'LOW' | 'MEDIUM' | 'HIGH' // Priority level of the task
   progress: 'TODO' | 'IN_PROGRESS' | 'DONE' // Progress status of the task
 }
-
-export const priorityColors = {
-  LOW: 'bg-green-500',
-  MEDIUM: 'bg-yellow-500',
-  HIGH: 'bg-red-500',
+export const priorityClass = (task: TaskFetch) => {
+  return task.priority === 'HIGH'
+    ? 'text-red-600'
+    : task.priority === 'MEDIUM'
+    ? 'text-yellow-600'
+    : 'text-green-600'
 }
 
-export const progressColors = {
-  TODO: 'bg-gray-500',
-  IN_PROGRESS: 'bg-blue-500',
-  DONE: 'bg-green-500',
+export const progress_Class = (task: TaskFetch) => {
+  return task.progress === 'TODO'
+    ? 'text-red-600'
+    : task.progress === 'IN_PROGRESS'
+    ? 'text-yellow-600'
+    : 'text-green-600'
 }
