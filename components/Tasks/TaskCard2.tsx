@@ -1,6 +1,6 @@
 import {
-  priorityColors,
-  progressColors,
+  priorityClass,
+  progress_Class,
   TaskFetch,
 } from '@/utils/TaskformInterface'
 import { useRouter } from 'next/navigation'
@@ -8,7 +8,7 @@ import React from 'react'
 const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
   const Router = useRouter()
   return (
-    <div className="bg-purple-900 text-white rounded-lg shadow-lg p-6  mx-auto my-8 transition-transform duration-300 hover:scale-105">
+    <div className="bg-purple-900 text-white rounded-lg shadow-lg p-6 xs:w-full w-[60vw]  md:w-[30vw]  mx-auto my-8 transition-transform duration-300 hover:scale-105">
       <div className="border-b border-gray-600 mb-2  ">
         <h2 className="text-xl font-bold">{TaskDetail.name}</h2>
       </div>
@@ -33,23 +33,17 @@ const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
       </div>
 
       <div className="flex  flex-col  gap-4  justify-center items-center mb-4">
-        <div className="flex items-center">
-          <span
-            className={`inline-block w-3 h-3 rounded-full mr-2 ${
-              priorityColors[TaskDetail.priority]
-            }`}
-          ></span>
-          <span className="font-medium">Priority:</span>
-          <span className="ml-2 font-bold">{TaskDetail.priority}</span>
+        <div className="flex flex-col  items-center">
+          <span className="font-medium">Priority</span>
+          <span className={`ml-2 font-bold ${priorityClass(TaskDetail)}`}>
+            {TaskDetail.priority}
+          </span>
         </div>
-        <div className="flex items-center">
-          <span
-            className={`inline-block w-3 h-3 rounded-full mr-2 ${
-              progressColors[TaskDetail.progress]
-            }`}
-          ></span>
-          <span className="font-medium">Progress:</span>
-          <span className="ml-2 font-bold">{TaskDetail.progress}</span>
+        <div className="flex flex-col items-center">
+          <span className="font-medium">Progress</span>
+          <span className={`ml-2 font-bold ${progress_Class(TaskDetail)}`}>
+            {TaskDetail.progress}
+          </span>
         </div>
       </div>
       <div className=" my-2 flex flex-col ">
