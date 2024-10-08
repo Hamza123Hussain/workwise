@@ -52,7 +52,7 @@ const SideBarLinks = () => {
       )}{' '}
       {User.Email == 'octtoppus1@gmail.com' ? (
         <Link
-          href="#"
+          href="/report"
           className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
         >
           Report
