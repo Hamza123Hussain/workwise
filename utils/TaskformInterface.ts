@@ -23,6 +23,7 @@ export interface TaskFieldProps {
   type: 'text' | 'date' // To dynamically set the input type (text, date, etc.)
 }
 export interface TaskFetch {
+  TaskCompletion: number
   _id: string
   assignedTo: string // User to whom the task is assigned
   createdAt: string // Date when the task was created (ISO string)
