@@ -15,37 +15,41 @@ const TaskBody = ({ task }: { task: TaskFetch }) => {
 
   return (
     <tr key={task.createdAt}>
-      <td className="border border-purple-500 p-2">{task.name}</td>
-      <td className="border border-purple-500 p-2">{task.assignedTo}</td>
+      <td className="border border-purple-500 p-2 text-xs  ">{task.name}</td>
+      {/* <td className="border border-purple-500 p-2 text-xs  ">
+        {task.assignedTo}
+      </td> */}
       <td
         className={`border border-purple-500 p-2 text-center ${progress_Class(
           task
-        )} text-transparent bg-<color> bg-clip-text`}
+        )} text-transparent bg-<color> bg-clip-text text-xs  `}
       >
         {task.progress}
       </td>
-      <td className="border border-purple-500 p-2">{task.description}</td>
-      <td className="border border-purple-500 p-2">
+      {/* <td className="border border-purple-500 p-2 text-xs  ">
+        {task.description}
+      </td> */}
+      <td className="border border-purple-500 p-2 text-xs  ">
         {new Date(task.dueDate).toLocaleDateString()}
       </td>
       {/* Priority column with dynamic color based on priority */}
       <td
         className={`border border-purple-500 p-2 text-center ${priorityClass(
           task
-        )} text-transparent bg-<color> bg-clip-text`}
+        )} text-transparent bg-<color> bg-clip-text text-xs  `}
       >
         {task.priority}
       </td>
       <td className="border border-purple-500 p-4 flex justify-center">
         <button
           onClick={() => !isDueDatePast && Router.push(`/edittask/${task._id}`)} // Navigate only if the due date is not past
-          className={`bg-gradient-to-t from-black to-purple-600 hover:from-purple-700 hover:to-purple-800 text-white rounded-full p-4 transition-colors
+          className={`bg-gradient-to-t from-black to-purple-600 hover:from-purple-700 hover:to-purple-800 text-white rounded-full p-4 transition-colors text-xs  
                       ${
                         isDueDatePast ? 'bg-gray-600 cursor-not-allowed ' : ''
                       }`} // Change button style if due date is past
           disabled={isDueDatePast} // Disable button if due date is past
         >
-          Edit Me
+          Edit
         </button>
       </td>
     </tr>

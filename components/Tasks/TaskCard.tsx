@@ -1,4 +1,3 @@
-// TaskCard.tsx
 import { TaskFetch } from '@/utils/TaskformInterface'
 import React from 'react'
 import TaskBody from './TaskBody'
@@ -10,17 +9,27 @@ const TaskCard = ({ allTasks }: { allTasks: TaskFetch[] }) => {
         <>
           <thead>
             <tr className="bg-gradient-to-r from-purple-600 via-purple-500 to-purple-700">
-              <th className="border border-black p-2  text-white">Task</th>
-              <th className="border border-black p-2  text-white">
+              <th className="border border-black p-2 text-white text-xs  ">
+                Task
+              </th>
+              {/* <th className="border border-black p-2 text-white text-xs  ">
                 Assigned To
+              </th> */}
+              <th className="border border-black p-2 text-white text-xs  ">
+                Status
               </th>
-              <th className="border border-black p-2  text-white">Status</th>
-              <th className="border border-black p-2  text-white">
+              {/* <th className="border border-black p-2 text-white text-xs  ">
                 Description
+              </th> */}
+              <th className="border border-black p-2 text-white text-xs  ">
+                Due Date
               </th>
-              <th className="border border-black p-2  text-white">Due Date</th>
-              <th className="border border-black p-2  text-white">Priority</th>
-              <th className="border border-black p-2  text-white">Edit</th>
+              <th className="border border-black p-2 text-white text-xs  ">
+                Priority
+              </th>
+              <th className="border border-black p-2 text-white text-xs  ">
+                Edit
+              </th>
             </tr>
           </thead>
           <tbody className="text-gray-300">
@@ -34,7 +43,7 @@ const TaskCard = ({ allTasks }: { allTasks: TaskFetch[] }) => {
           <tr>
             <td
               colSpan={7}
-              className="border border-black p-2 text-center text-gray-400"
+              className="border border-black p-2 text-center text-gray-400 text-xs  "
             >
               No tasks available.
             </td>
