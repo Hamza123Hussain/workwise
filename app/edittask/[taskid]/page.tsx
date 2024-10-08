@@ -14,9 +14,9 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
   const [task, setTask] = useState<TaskFetch | null>(null)
   const [description, setDescription] = useState<string>('')
   const [priority, setPriority] = useState<'LOW' | 'MEDIUM' | 'HIGH'>('LOW')
-  const [progress, setProgress] = useState<'TODO' | 'IN_PROGRESS' | 'DONE'>(
-    'TODO'
-  )
+  const [progress, setProgress] = useState<
+    'TODO' | 'IN_PROGRESS' | 'Minor_progress' | 'DONE'
+  >('TODO')
   const user = useSelector((state: RootState) => state.user)
   const Router = useRouter()
 
@@ -97,11 +97,18 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
           <select
             value={progress}
             onChange={(e) =>
-              setProgress(e.target.value as 'TODO' | 'IN_PROGRESS' | 'DONE')
+              setProgress(
+                e.target.value as
+                  | 'TODO'
+                  | 'IN_PROGRESS'
+                  | 'DONE'
+                  | 'Minor_progress'
+              )
             }
             className="bg-purple-700 text-white p-2 rounded w-full"
           >
-            <option value="TODO">TODO</option>
+            <option value="TODO">TODO</option>{' '}
+            <option value="Minor_progress">Minor_progress</option>
             <option value="IN_PROGRESS">IN PROGRESS</option>
             <option value="DONE">DONE</option>
           </select>

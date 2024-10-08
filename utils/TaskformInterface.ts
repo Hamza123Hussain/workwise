@@ -30,7 +30,7 @@ export interface TaskFetch {
   dueDate: string // Due date for the task (ISO string)
   name: string // Name of the task
   priority: 'LOW' | 'MEDIUM' | 'HIGH' // Priority level of the task
-  progress: 'TODO' | 'IN_PROGRESS' | 'DONE' // Progress status of the task
+  progress: 'TODO' | 'IN_PROGRESS' | 'DONE' | 'Minor_progress' // Progress status of the task
 }
 export const priorityClass = (task: TaskFetch) => {
   return task.priority === 'HIGH'

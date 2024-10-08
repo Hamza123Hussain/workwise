@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 export const updateTask = async (
   taskId: string,
   email: string,
-  progress: 'TODO' | 'IN_PROGRESS' | 'DONE',
+  progress: 'TODO' | 'IN_PROGRESS' | 'DONE' | 'Minor_progress',
   description: string,
   priority: 'LOW' | 'MEDIUM' | 'HIGH',
   dueDate: string // Expecting dueDate in a valid date format (e.g., 'YYYY-MM-DD')
