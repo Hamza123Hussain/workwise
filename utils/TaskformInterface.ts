@@ -46,5 +46,7 @@ export const progress_Class = (task: TaskFetch) => {
     ? 'bg-red-600'
     : task.progress === 'IN_PROGRESS'
     ? 'bg-purple-500'
+    : task.progress === 'Minor_progress'
+    ? 'bg-purple-800'
     : 'bg-green-600'
 }
