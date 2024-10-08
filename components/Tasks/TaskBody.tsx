@@ -43,7 +43,7 @@ const TaskBody = ({ task }: { task: TaskFetch }) => {
       <td className="border border-purple-500 p-4 flex justify-center">
         <button
           onClick={() => !isDueDatePast && Router.push(`/edittask/${task._id}`)} // Navigate only if the due date is not past
-          className={`bg-gradient-to-t from-black to-purple-600 hover:from-purple-700 hover:to-purple-800 text-white rounded-full p-4 transition-colors text-xs  
+          className={`bg-gradient-to-t from-black to-purple-600 hover:from-purple-700 hover:to-purple-800 text-white rounded-lg p-2 w-full transition-colors text-xs  
                       ${
                         isDueDatePast ? 'bg-gray-600 cursor-not-allowed ' : ''
                       }`} // Change button style if due date is past
