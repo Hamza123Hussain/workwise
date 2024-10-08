@@ -39,7 +39,7 @@ const UserAssign = ({
         required
       >
         <option value="">Select a user</option>
-        {User.Email === 'octtoppus1@gmail.com' ? (
+        {User.Email !== 'octtoppus1@gmail.com' ? (
           <option value={User.Name}>{User.Name}</option>
         ) : (
           UserFetched.map((element) => (

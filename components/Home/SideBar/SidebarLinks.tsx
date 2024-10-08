@@ -12,16 +12,12 @@ const SideBarLinks = () => {
       >
         Home
       </Link>
-      {User.Email == 'octtoppus1@gmail.com' ? (
-        <Link
-          href="/createtask"
-          className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
-        >
-          Create Task
-        </Link>
-      ) : (
-        ''
-      )}
+      <Link
+        href="/createtask"
+        className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
+      >
+        Create Task
+      </Link>
       <Link
         href="/usertasks"
         className="text-white hover:text-[#FF5733]  hover:rounded-lg hover:px-2"
