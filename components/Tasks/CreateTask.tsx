@@ -5,10 +5,11 @@ import { RootState } from '../../utils/Redux/Store/Store'
 import TaskForm from './TaskForm'
 import toast from 'react-hot-toast'
 import { TaskFormProps } from '@/utils/TaskformInterface'
+import { useRouter } from 'next/navigation'
 
 const CreateTaskForm = () => {
   const User = useSelector((state: RootState) => state.user)
-
+  const Router = useRouter()
   // State to manage task data
   const [taskData, setTaskData] = useState<TaskFormProps>({
     name: '',
@@ -26,6 +27,7 @@ const CreateTaskForm = () => {
       const Response = await createTask(taskData)
       if (Response) {
         toast.success('Task has been created successfully')
+        Router.push('/usertasks')
       }
     } catch (error) {
       console.log('Error in frontend', error)
