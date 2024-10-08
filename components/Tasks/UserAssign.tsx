@@ -4,6 +4,7 @@ import { UserFetched } from '@/utils/SignUpInterface'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 const UserAssign = ({
+  value,
   handleChange,
 }: {
   value: string
@@ -33,18 +34,20 @@ const UserAssign = ({
       <select
         name="assignedTo"
         className="w-full p-3 rounded-lg shadow-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-        value={User.Name}
+        value={value}
         onChange={handleChange}
         required
       >
         <option value="">Select a user</option>
-        {User.Email !== 'octtoppus1@gmail.com'
-          ? ''
-          : UserFetched.map((element) => (
-              <option key={element.Email} value={element.Name}>
-                {element.Name}
-              </option>
-            ))}
+        {User.Email === 'octtoppus1@gmail.com' ? (
+          <option value={User.Name}>{User.Name}</option>
+        ) : (
+          UserFetched.map((element) => (
+            <option key={element.Email} value={element.Name}>
+              {element.Name}
+            </option>
+          ))
+        )}
       </select>
     </div>
   )
