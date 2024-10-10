@@ -35,7 +35,7 @@ const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
     return null // or a loading spinner if preferred
   }
   return User.Email ? (
-    <div className=" flex bg-purple-black min-h-screen">
+    <div className=" flex bg-purple-black min-h-screen w-[100vw]">
       <Sidebar />
       <div className=" flex-1 ">{!isAuthPage ? children : <HomePage />}</div>
       <Toaster />
