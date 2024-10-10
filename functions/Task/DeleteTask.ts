@@ -4,7 +4,7 @@ import axios from 'axios'
 export const DeleteTask = async (Email: string, id: string) => {
   try {
     const Response = await axios.delete(
-      `${ApiUrl}DeleteTask?Email=${Email}&id=${id}`
+      `${ApiUrl}Api/Task/DeleteTask?Email=${Email}&id=${id}`
     )
     if (Response.status === 200) {
       console.log('DATA GONE')

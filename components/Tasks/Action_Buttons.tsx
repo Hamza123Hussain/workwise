@@ -1,7 +1,23 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
 import { TaskFetch } from '@/utils/TaskformInterface'
+import { DeleteTask } from '@/functions/Task/DeleteTask'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/utils/Redux/Store/Store'
+import toast from 'react-hot-toast'
 const Action_Buttons = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
+  const User = useSelector((state: RootState) => state.user)
+  const TaskDelete = async () => {
+    try {
+      const Delete_Task = await DeleteTask(User.Email, TaskDetail._id)
+      if (Delete_Task) {
+        toast.success('Task Has Been Deleted')
+        window.location.reload()
+      }
+    } catch (error) {
+      console.log(`Unable to Delete TaSK ${error}`)
+    }
+  }
   const Router = useRouter()
   const isDueDatePast =
     new Date(TaskDetail.dueDate) < new Date(new Date().setHours(0, 0, 0, 0))
@@ -23,9 +39,7 @@ const Action_Buttons = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
         Edit Task
       </button>{' '}
       <button
-        onClick={() =>
-          !isDueDatePast && Router.push(`/edittask/${TaskDetail._id}`)
-        } // Only navigate if the due date is not past
+        onClick={() => !isDueDatePast && TaskDelete()} // Only navigate if the due date is not past
         className={`px-4 py-2 rounded-lg shadow transition-all duration-200 ease-in-out 
                   ${
                     isDueDatePast
