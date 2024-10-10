@@ -3,16 +3,9 @@ import {
   progress_Class,
   TaskFetch,
 } from '@/utils/TaskformInterface'
-import { useRouter } from 'next/navigation'
 import React from 'react'
-
+import Action_Buttons from './Action_Buttons'
 const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
-  const Router = useRouter()
-
-  // Check if the due date is past
-  const isDueDatePast =
-    new Date(TaskDetail.dueDate) < new Date(new Date().setHours(0, 0, 0, 0))
-
   return (
     <div className="bg-purple-900 text-white rounded-lg shadow-lg p-6 xs:w-full w-[60vw]  md:w-[30vw]  mx-auto my-8 transition-transform duration-300 hover:scale-105">
       <div className="border-b border-gray-600 mb-2">
@@ -60,28 +53,12 @@ const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
           </span>
         </div>
       </div>
-      <div className="my-2 flex flex-col">
+      <div className="my-2 flex flex-col h-1/6">
         <h1>Description</h1>
         <p className="text-sm text-gray-300">{TaskDetail.description}</p>
       </div>
-      <div className="flex justify-end">
-        <button
-          onClick={() =>
-            !isDueDatePast && Router.push(`/edittask/${TaskDetail._id}`)
-          } // Only navigate if the due date is not past
-          className={`px-4 py-2 rounded-lg shadow transition-all duration-200 ease-in-out 
-                      ${
-                        isDueDatePast
-                          ? 'bg-gray-600 text-gray-300 cursor-not-allowed'
-                          : 'bg-black text-purple-200 hover:bg-purple-800'
-                      }`}
-          disabled={isDueDatePast} // Disable button if the due date is past
-        >
-          Edit Task
-        </button>
-      </div>
+      <Action_Buttons TaskDetail={TaskDetail} />
     </div>
   )
 }
-
 export default TaskCard2
