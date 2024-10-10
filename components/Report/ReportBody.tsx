@@ -1,7 +1,7 @@
 import { getUserSalary } from '@/functions/AUTH/GetSalary'
 import { AttendanceRecord } from '@/utils/AttendanceInterface'
 import { TaskFetch } from '@/utils/TaskformInterface'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 // Define interfaces for user data
 interface MergedUserData {
@@ -15,9 +15,23 @@ interface ReportBodyProps {
 }
 
 const ReportBody: React.FC<ReportBodyProps> = ({ mergedData }) => {
+  const [salaries, setSalaries] = useState<{ [key: string]: number }>({})
+
+  useEffect(() => {
+    const fetchSalaries = async () => {
+      const salaryData: { [key: string]: number } = {}
+      for (const userData of mergedData) {
+        const salary = await getUserSalary(userData.user)
+        salaryData[userData.user] = salary
+      }
+      setSalaries(salaryData)
+    }
+
+    fetchSalaries()
+  }, [mergedData])
+
   return (
     <tbody className="bg-gray-800 text-purple-200">
-      {' '}
       {/* Background dark gray with purple text */}
       {mergedData.map((userData, index) => {
         // Calculate high priority tasks using reduce
@@ -44,9 +58,10 @@ const ReportBody: React.FC<ReportBodyProps> = ({ mergedData }) => {
           (userData.attendance.length / 22) *
           100
         ).toFixed(2)
-        const GetSalary = async () => {
-          const Salary = await getUserSalary(userData.user)
-        }
+
+        // Get the salary for the current user
+        const salary = salaries[userData.user] || 0
+
         return (
           <React.Fragment key={index}>
             {/* Summary Row */}
@@ -70,7 +85,7 @@ const ReportBody: React.FC<ReportBodyProps> = ({ mergedData }) => {
                   ? (TaskCompletion / userData.tasks.length).toFixed(2)
                   : 0}
                 %
-              </td>{' '}
+              </td>
               <td className="border border-purple-400 p-2">
                 {/* Calculate Overall Average */}
                 {userData.tasks.length > 0
@@ -83,9 +98,9 @@ const ReportBody: React.FC<ReportBodyProps> = ({ mergedData }) => {
                     ).toFixed(2)
                   : 0}
                 %
-              </td>{' '}
+              </td>
               <td className="border border-purple-400 p-2">
-                {/* Calculate Overall Average */}
+                {/* Calculate Overall Salary based on averages */}
                 {userData.tasks.length > 0
                   ? (
                       ((parseFloat(attendancePercentage) +
@@ -94,13 +109,11 @@ const ReportBody: React.FC<ReportBodyProps> = ({ mergedData }) => {
                         )) /
                         2 /
                         100) *
-                      45000
+                      salary
                     ).toFixed(0)
                   : 0}
               </td>
             </tr>
-
-            {/* You can add a detailed data row here if needed */}
           </React.Fragment>
         )
       })}
