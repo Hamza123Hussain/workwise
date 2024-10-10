@@ -17,26 +17,29 @@ const TaskStatus = () => {
       const data = await GetUserTasks(user.Name, user.Email)
       if (data) {
         setTasks(data)
-        SetLoading(false)
       }
     } catch (error) {
-      SetLoading(false)
       console.error('Error fetching tasks:', error)
+    } finally {
+      SetLoading(false)
     }
   }
+
   useEffect(() => {
     fetchData()
   }, [user.Email])
 
   return (
-    <div className=" border-2 border-purple-600 text-white flex-1 p-8 rounded-lg shadow-lg">
+    <div className="border-2 border-purple-600 text-white flex-1 p-4 rounded-lg shadow-lg">
       {Loading ? (
         <div className="flex justify-center items-center">
           <Loader />
         </div>
       ) : (
         <div>
-          <h2 className="text-2xl font-bold mb-6">Task Progress Overview</h2>
+          <h2 className="text-xl sm:text-2xl font-bold mb-6">
+            Task Progress Overview
+          </h2>
           <TaskOverview allTasks={allTasks} />
         </div>
       )}

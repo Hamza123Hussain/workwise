@@ -48,7 +48,8 @@ const TimeBtn: React.FC = () => {
               {currentTime.toLocaleTimeString()}
             </span>
           </p>
-          <div className="flex gap-4 mt-2 justify-end">
+          <div className="flex flex-col gap-4 mt-2 lg:flex-row items-center justify-end">
+            <BreakMain attendanceId={attendanceId} />
             <CheckIn
               setLoading={setLoading}
               currentTime={currentTime}
@@ -56,9 +57,8 @@ const TimeBtn: React.FC = () => {
               attendanceId={attendanceId}
               setAttendanceId={setAttendanceId}
               setCheckinStatus={setCheckinStatus}
-            />
+            />{' '}
           </div>
-          <BreakMain attendanceId={attendanceId} />
         </>
       )}
     </div>

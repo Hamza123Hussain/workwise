@@ -13,12 +13,14 @@ const AttendanceTableRow = ({
 
   return (
     <tbody>
-      <tr key={userData} className="bg-black text-white ">
-        <td className="border border-purple-600 w-56 px-6 py-4">{userData}</td>
-        <td className="border border-purple-600 px-6 py-4">
+      <tr key={userData} className="bg-black text-white">
+        <td className="border border-purple-600 w-56 px-4 sm:px-6 py-4 text-xs sm:text-base md:text-lg">
+          {userData}
+        </td>
+        <td className="border border-purple-600 px-4 sm:px-6 py-4 text-xs sm:text-base md:text-lg">
           {attendanceCount}
         </td>
-        <td className="border border-purple-600 px-6 py-4">
+        <td className="border border-purple-600 px-4 sm:px-6 py-4 text-xs sm:text-base md:text-lg">
           {((attendanceCount / 22) * 100).toFixed(2)}%
         </td>
       </tr>

@@ -44,32 +44,32 @@ const AllUserTasks = () => {
   }
   return (
     <>
-      <h1 className=" text-3xl text-purpleGradientStart mt-10 text-center">
+      <h1 className="text-xl sm:text-3xl md:text-4xl text-purpleGradientStart mt-20 px-2 text-center">
         ALL TASK DETAILS
       </h1>
       <div className="overflow-x-auto p-4 text-center w-[90vw] sm:w-auto">
         <table className="w-full text-center my-5">
           <thead>
             <tr className="bg-purple-900">
-              <th className="border border-purple-600 text-xs w-56 text-white p-2">
+              <th className="border border-purple-600 text-xs w-56 text-white p-2 text-[10px] sm:text-base md:text-lg">
                 User Name
               </th>
-              <th className="border border-purple-600 text-xs text-white p-2">
+              <th className="border border-purple-600 text-xs text-white p-2 text-[10px] sm:text-base md:text-lg">
                 High Priority
               </th>
-              <th className="border border-purple-600 text-xs text-white p-2">
+              <th className="border border-purple-600 text-xs text-white p-2 text-[10px] sm:text-base md:text-lg">
                 Medium Priority
               </th>
-              <th className="border border-purple-600 text-xs text-white p-2">
+              <th className="border border-purple-600 text-xs text-white p-2 text-[10px] sm:text-base md:text-lg">
                 Low Priority
               </th>
-              <th className="border border-purple-600 text-xs text-white p-2">
+              <th className="border border-purple-600 text-xs text-white p-2 text-[10px] sm:text-base md:text-lg">
                 Task Assigned
               </th>
-              <th className="border border-purple-600 text-xs text-white p-2">
+              <th className="border border-purple-600 text-xs text-white p-2 text-[10px] sm:text-base md:text-lg">
                 Task Completed
               </th>
-              <th className="border border-purple-600 text-xs text-white p-2">
+              <th className="border border-purple-600 text-xs text-white p-2 text-[10px] sm:text-base md:text-lg">
                 Task Percentage
               </th>
             </tr>
