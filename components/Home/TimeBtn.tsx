@@ -58,7 +58,7 @@ const TimeBtn: React.FC = () => {
               setCheckinStatus={setCheckinStatus}
             />
           </div>
-          <BreakMain />
+          <BreakMain attendanceId={attendanceId} />
         </>
       )}
     </div>
