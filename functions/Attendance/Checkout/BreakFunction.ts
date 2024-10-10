@@ -1,6 +1,5 @@
 import toast from 'react-hot-toast'
 import { updateBreak } from './UpdateBreak'
-
 export const handleBreakStartEnd = async (
   Email: string,
   onBreak: boolean,
@@ -12,12 +11,13 @@ export const handleBreakStartEnd = async (
   attendanceId: string
 ) => {
   const currentTime = new Date()
+  setOnBreak(true)
   const Data = await updateBreak(Email, attendanceId, onBreak, currentTime)
 
   if (!onBreak && Data) {
     // Start Break
     setBreakStartTime(currentTime)
-    setOnBreak(true)
+
     toast.success('Break started')
   } else {
     // End Break
@@ -26,11 +26,11 @@ export const handleBreakStartEnd = async (
       const breakTime =
         (breakEndTime.getTime() - breakStartTime.getTime()) / 1000 // in seconds
       setBreakDuration(breakDuration + breakTime)
+      setOnBreak(false)
       const Data = await updateBreak(Email, attendanceId, onBreak, breakEndTime)
       if (Data) {
-        console.log('BREAK DURATION : ', breakDuration)
+        // console.log('BREAK DURATION : ', breakDuration)
         setBreakStartTime(null) // reset break start time after ending the break
-        setOnBreak(false)
       }
       toast.success('Break ended')
     } else {
