@@ -1,28 +1,22 @@
+import { handleBreakStartEnd } from '@/functions/Attendance/Checkout/BreakFunction'
 import React, { useState } from 'react'
-import toast from 'react-hot-toast'
 
-const BreakMain = () => {
+const BreakMain: React.FC = () => {
   const [onBreak, setOnBreak] = useState(false) // Break status
   const [breakStartTime, setBreakStartTime] = useState<Date | null>(null) // When break started
   const [breakDuration, setBreakDuration] = useState<number>(0) // Total break duration in seconds
-  // Break button handler
+
   const handleBreak = () => {
-    if (!onBreak) {
-      // Start break
-      setBreakStartTime(new Date())
-      toast.success('Break started')
-    } else {
-      // End break and calculate break duration
-      if (breakStartTime) {
-        const breakEndTime = new Date()
-        const breakTime =
-          (breakEndTime.getTime() - breakStartTime.getTime()) / 1000 // break duration in seconds
-        setBreakDuration(breakDuration + breakTime)
-        toast.success('Break ended')
-      }
-    }
-    setOnBreak(!onBreak)
+    handleBreakStartEnd(
+      onBreak,
+      breakStartTime,
+      setBreakStartTime,
+      setOnBreak,
+      breakDuration,
+      setBreakDuration
+    )
   }
+
   return (
     <>
       <button
@@ -35,7 +29,8 @@ const BreakMain = () => {
       >
         {onBreak ? 'End Break' : 'Start Break'}
       </button>
-      {onBreak && <p className="text-yellow-400 mt-2">On Break</p>}{' '}
+      {onBreak && <p className="text-yellow-400 mt-2">On Break</p>}
+      <p>Total Break Duration: {Math.floor(breakDuration)} seconds</p>
     </>
   )
 }
