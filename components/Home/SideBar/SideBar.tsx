@@ -22,7 +22,7 @@ const Sidebar = () => {
       </button>
       <div className="flex">
         <div
-          className={`fixed inset-0 bg-purple-black border-r-2 transition-transform transform md:relative md:flex md:flex-col min-h-screen p-5 w-64 ${
+          className={`fixed inset-0 bg-purple-black  border-r-2 transition-transform transform md:relative md:flex md:flex-col min-h-screen p-5 w-64 ${
             isOpen ? 'translate-x-0' : '-translate-x-full'
           } md:translate-x-0 md:block`}
         >
