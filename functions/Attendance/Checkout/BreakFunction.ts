@@ -12,8 +12,9 @@ export const handleBreakStartEnd = async (
   attendanceId: string
 ) => {
   const currentTime = new Date()
+  const Data = await updateBreak(Email, attendanceId, onBreak, currentTime)
 
-  if (!onBreak) {
+  if (!onBreak && Data) {
     // Start Break
     setBreakStartTime(currentTime)
     setOnBreak(true)
@@ -25,12 +26,7 @@ export const handleBreakStartEnd = async (
       const breakTime =
         (breakEndTime.getTime() - breakStartTime.getTime()) / 1000 // in seconds
       setBreakDuration(breakDuration + breakTime)
-      const Data = await updateBreak(
-        Email,
-        attendanceId,
-        breakDuration,
-        onBreak
-      )
+      const Data = await updateBreak(Email, attendanceId, onBreak, breakEndTime)
       if (Data) {
         console.log('BREAK DURATION : ', breakDuration)
         setBreakStartTime(null) // reset break start time after ending the break
