@@ -1,3 +1,4 @@
+import { getUserSalary } from '@/functions/AUTH/GetSalary'
 import { AttendanceRecord } from '@/utils/AttendanceInterface'
 import { TaskFetch } from '@/utils/TaskformInterface'
 import React from 'react'
@@ -43,7 +44,9 @@ const ReportBody: React.FC<ReportBodyProps> = ({ mergedData }) => {
           (userData.attendance.length / 22) *
           100
         ).toFixed(2)
-
+        const GetSalary = async () => {
+          const Salary = await getUserSalary(userData.user)
+        }
         return (
           <React.Fragment key={index}>
             {/* Summary Row */}
