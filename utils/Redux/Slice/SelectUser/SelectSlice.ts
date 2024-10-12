@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
-const initialState = ''
+const initialState = 'Hamza Hussain'
 
 export const SelectSlice = createSlice({
   name: 'Select',
   initialState,
   reducers: {
     GetUserName: (state, action) => {
-      state = action.payload
+      return action.payload
     },
   },
 })
