@@ -3,13 +3,18 @@ import { RootState } from '@/utils/Redux/Store/Store'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useSelector } from 'react-redux'
-
-const BreakMain = ({ attendanceId }: { attendanceId: string | null }) => {
-  const [onBreak, setOnBreak] = useState(false) // Break status
+const BreakMain = ({
+  attendanceId,
+  onBreak,
+  setOnBreak,
+}: {
+  attendanceId: string | null
+  onBreak: boolean
+  setOnBreak: (status: boolean) => void
+}) => {
   const [breakStartTime, setBreakStartTime] = useState<Date | null>(null) // When break started
   const [breakDuration, setBreakDuration] = useState<number>(0) // Total break duration in seconds
   const user = useSelector((state: RootState) => state.user) // Get user from redux store
-
   const handleBreak = async () => {
     if (!attendanceId) {
       toast.error('Attendance ID is missing') // Handle missing attendanceId
@@ -31,7 +36,6 @@ const BreakMain = ({ attendanceId }: { attendanceId: string | null }) => {
       console.error('Break handling error:', error)
     }
   }
-
   return (
     <button
       onClick={handleBreak}
@@ -45,5 +49,4 @@ const BreakMain = ({ attendanceId }: { attendanceId: string | null }) => {
     </button>
   )
 }
-
 export default BreakMain
