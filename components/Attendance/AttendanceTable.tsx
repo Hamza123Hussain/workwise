@@ -34,7 +34,7 @@ const AttendanceTable = ({
                 Exit Time
               </th>
               <th className="border border-purple-800 px-4 py-2  text-white">
-                Duration
+                Hour Worked
               </th>
               <th className="border border-purple-800 px-4 py-2  text-white">
                 Remaining Time
