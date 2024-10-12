@@ -2,6 +2,7 @@ import React from 'react'
 import AttendanceCard from './AttendanceCard'
 import { AttendanceRecord } from '../../utils/AttendanceInterface'
 import { countUniqueDates } from '../../functions/Attendance/UniqueDateFunction'
+import UserSelection from '../Layout/UserSelection'
 
 const AttendanceTable = ({
   Attendance,
@@ -14,10 +15,11 @@ const AttendanceTable = ({
   const attendancePercentage = ((totalDaysWorked / 22) * 100).toFixed(2)
 
   return (
-    <div className=" mx-auto px-4 py-6 w-[90vw] sm:w-auto">
+    <div className=" mx-auto px-4 py-6 w-[90vw] sm:w-auto my-10">
       <h2 className="text-2xl font-semibold mb-4 text-white text-center">
         All Attendance Records For {UserName}
       </h2>
+      <UserSelection />
       <div className="overflow-x-auto flex flex-col">
         <table className="min-w-full bg-blend-darken border-2 border-charcoal-gray shadow-md rounded-lg">
           <thead>

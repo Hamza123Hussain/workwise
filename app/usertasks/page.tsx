@@ -7,7 +7,6 @@ import { RootState } from '@/utils/Redux/Store/Store'
 import { TaskFetch } from '@/utils/TaskformInterface'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-
 const UserTasks = () => {
   const [Loading, SetLoading] = useState(false)
   const [allTasks, setTasks] = useState<TaskFetch[]>([])

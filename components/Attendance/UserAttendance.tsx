@@ -5,17 +5,15 @@ import { AttendanceRecord } from '../../utils/AttendanceInterface'
 import AttendanceTable from './AttendanceTable'
 import Loader from '../Loader'
 import { GetUserAttendance } from '@/functions/Attendance/UserAttendance'
-import UserSelection from '../Layout/UserSelection'
-
 const UserAttendance: React.FC = () => {
   const user = useSelector((state: RootState) => state.user)
   const [UserAttendance, setAttendance] = useState<AttendanceRecord[]>([])
   const [loading, setloading] = useState(false)
-
+  const SelectedUser = useSelector((state: RootState) => state.Select)
   const getAttendance = async () => {
     setloading(true)
     try {
-      const data = await GetUserAttendance(user.Email, user.Name)
+      const data = await GetUserAttendance(user.Email, SelectedUser)
       if (data) {
         setAttendance(data)
       }
@@ -25,12 +23,11 @@ const UserAttendance: React.FC = () => {
       setloading(false)
     }
   }
-
   useEffect(() => {
     if (user.Email) {
       getAttendance() // Fetch attendance for the logged-in user initially
     }
-  }, [user.Email])
+  }, [user.Email, SelectedUser])
 
   if (loading) {
     return (
@@ -39,12 +36,8 @@ const UserAttendance: React.FC = () => {
       </div>
     )
   }
-
   return (
     <div className="p-6">
-      {/* Add the UserSelection component here */}
-      <UserSelection />
-
       {UserAttendance.length > 0 ? (
         <AttendanceTable Attendance={UserAttendance} UserName={user.Name} />
       ) : (
@@ -64,5 +57,4 @@ const UserAttendance: React.FC = () => {
     </div>
   )
 }
-
 export default UserAttendance
