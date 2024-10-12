@@ -18,8 +18,8 @@ const AttendanceCard = ({ element }: { element: AttendanceRecord }) => {
       <td className="border border-purple-800 px-4 py-2 text-[8px] text-white  sm:text-base md:text-lg">
         {element.Hours_Worked
           ? element.Hours_Worked > 8
-            ? '0HR 0MINS 0SECS'
-            : (8 - element.Hours_Worked).toFixed(2)
+            ? '0hrs, 0mins, 0secs'
+            : convertHoursToString(8 - element.Hours_Worked)
           : ''}
       </td>
       <td className="border border-purple-800 px-4 py-2 text-[8px] text-white  sm:text-base md:text-lg">

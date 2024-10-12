@@ -8,5 +8,5 @@ export function convertHoursToString(hoursWorked: number) {
   const seconds = Math.floor(totalSeconds % 60)
 
   // Return the formatted string
-  return `${hours} hours, ${minutes} minutes, ${seconds} seconds`
+  return `${hours} hrs, ${minutes} mins, ${seconds} secs`
 }
