@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { UserSlice } from '../Slice/User/UserSlice' // Adjust the import path accordingly
+import { SelectSlice } from '../Slice/SelectUser/SelectSlice'
 
 const Store = configureStore({
   reducer: {
     user: UserSlice.reducer, // Add UserSlice reducer here
+    Select: SelectSlice.reducer,
   },
 })
 
