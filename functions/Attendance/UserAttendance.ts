@@ -1,10 +1,11 @@
 import { ApiUrl } from '@/utils/AttendanceInterface'
 import axios from 'axios'
 
-export const GetUserAttendance = async (email: string) => {
+export const GetUserAttendance = async (email: string, name: string) => {
   try {
     const Response = await axios.get(
-      `${ApiUrl}Api/Attendance/UserAttendance?Email=${email} `
+      `${ApiUrl}Api/Attendance/UserAttendance?Email=${email}&
+UserData=${name} `
     )
     if (Response.status === 200) {
       console.log('DATA IS HERE', Response.data)

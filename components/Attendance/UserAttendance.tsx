@@ -5,6 +5,7 @@ import { AttendanceRecord } from '../../utils/AttendanceInterface'
 import AttendanceTable from './AttendanceTable'
 import Loader from '../Loader'
 import { GetUserAttendance } from '@/functions/Attendance/UserAttendance'
+import UserSelection from '../Layout/UserSelection'
 
 const UserAttendance: React.FC = () => {
   const user = useSelector((state: RootState) => state.user)
@@ -14,20 +15,20 @@ const UserAttendance: React.FC = () => {
   const getAttendance = async () => {
     setloading(true)
     try {
-      const data = await GetUserAttendance(user.Email)
+      const data = await GetUserAttendance(user.Email, user.Name)
       if (data) {
         setAttendance(data)
-        setloading(false)
       }
     } catch (error) {
       console.error(error)
+    } finally {
       setloading(false)
     }
   }
 
   useEffect(() => {
     if (user.Email) {
-      getAttendance()
+      getAttendance() // Fetch attendance for the logged-in user initially
     }
   }, [user.Email])
 
@@ -39,20 +40,27 @@ const UserAttendance: React.FC = () => {
     )
   }
 
-  return UserAttendance.length > 0 ? (
-    <AttendanceTable Attendance={UserAttendance} UserName={user.Name} />
-  ) : (
-    <div className="min-h-screen flex flex-col justify-center items-center text-center p-4">
-      <h1 className="text-6xl text-white font-bold mb-4">
-        No Attendance Records Found
-      </h1>
-      <p className="text-lg text-gray-300 mb-6">
-        It seems you have not recorded any attendance yet. Please check back
-        later or reach out to your administrator.
-      </p>
-      <button className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded transition duration-300">
-        Go to Dashboard
-      </button>
+  return (
+    <div className="p-6">
+      {/* Add the UserSelection component here */}
+      <UserSelection />
+
+      {UserAttendance.length > 0 ? (
+        <AttendanceTable Attendance={UserAttendance} UserName={user.Name} />
+      ) : (
+        <div className="min-h-screen flex flex-col justify-center items-center text-center p-4">
+          <h1 className="text-6xl text-white font-bold mb-4">
+            No Attendance Records Found
+          </h1>
+          <p className="text-lg text-gray-300 mb-6">
+            It seems you have not recorded any attendance yet. Please check back
+            later or reach out to your administrator.
+          </p>
+          <button className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded transition duration-300">
+            Go to Dashboard
+          </button>
+        </div>
+      )}
     </div>
   )
 }
