@@ -19,9 +19,12 @@ const UserTasks = () => {
       const data = await GetUserTasks(userName, User.Email)
       if (data) {
         const sortedTasks = data.sort(
+          // Sort function to compare two tasks ('a' and 'b')
           (a: TaskFetch, b: TaskFetch) =>
+            // Convert the 'createdAt' field of both tasks to a date and get the time in milliseconds
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         )
+
         setTasks(sortedTasks)
       }
     } catch (error) {

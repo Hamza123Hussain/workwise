@@ -1,10 +1,8 @@
 'use client'
-
 import { registerUserWithImage } from '@/functions/AUTH/RegisterUser'
 import { InputValues } from '@/utils/SignUpInterface'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
-
 const SignUp = () => {
   const Router = useRouter()
   const [inputVal, setInputVal] = useState<InputValues>({
@@ -16,14 +14,12 @@ const SignUp = () => {
     Image: null,
     JobTitle: '',
   })
-
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target
     setInputVal((prev) => ({ ...prev, [name]: value }))
   }
-
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null // Get the first file or null
     setInputVal((prev: InputValues) => ({
@@ -31,7 +27,6 @@ const SignUp = () => {
       Image: file,
     }))
   }
-
   const handleSignUp = async () => {
     try {
       await registerUserWithImage(inputVal, inputVal.Image as File)
@@ -43,7 +38,6 @@ const SignUp = () => {
       // Handle error (e.g., show a notification)
     }
   }
-
   return (
     <div className="flex flex-col bg-black p-6 rounded-lg shadow-lg w-full max-w-md my-5">
       <h2 className="text-2xl font-semibold text-purple-500 mb-6 text-center">
@@ -119,5 +113,4 @@ const SignUp = () => {
     </div>
   )
 }
-
 export default SignUp
