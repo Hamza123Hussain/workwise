@@ -29,15 +29,25 @@ const SignIn = () => {
     }
   }
   const scheduleSignout = () => {
+    // Define the sign-out timeout as 7 hours (7 hours * 60 minutes * 60 seconds * 1000 milliseconds)
     const signoutTimeout = 7 * 60 * 60 * 1000 // 7 hours in milliseconds
+
+    // Set a timeout to trigger after 7 hours
     setTimeout(async () => {
+      // Call the async function 'handleSignOut' to sign the user out
       const SignoutDone = await handleSignOut()
+
+      // If signout was successful (SignoutDone is true)
       if (SignoutDone) {
+        // Dispatch an action to clear the user from the state (e.g., Redux or Context)
         dispatch(ClearUser())
+
+        // Remove the user's data from localStorage, so it no longer persists on page reload
         localStorage.removeItem('UserData')
       }
-    }, signoutTimeout)
+    }, signoutTimeout) // The timeout triggers after the 7-hour period
   }
+
   return (
     <div className="flex flex-col bg-black p-6 rounded-lg shadow-lg w-full max-w-md">
       <h2 className="text-2xl font-semibold text-purple-500 mb-6 text-center">
