@@ -22,10 +22,20 @@ export const GetCurrentAttendance = async (
     }
   } catch (error) {
     if (axios.isAxiosError(error) && error.response?.status === 404) {
+      // If the error is an Axios error and the server responds with a 404 (Not Found),
+
+      // Set 'attendanceId' to null (i.e., there's no attendance found)
       setAttendanceId(null)
+
+      // Set 'checkinStatus' to false (i.e., the user is not checked in)
       setCheckinStatus(false)
+
+      // Set 'onBreak' to false (i.e., the user is not on a break)
       setOnBreak(false)
     } else {
+      // If the error is something else or the status is not 404,
+
+      // Log the error to the console for debugging
       console.error('Error getting current attendance:', error)
     }
   } finally {
