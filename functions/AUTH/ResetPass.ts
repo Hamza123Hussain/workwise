@@ -1,10 +1,10 @@
 import { ApiUrl } from '@/utils/AttendanceInterface'
 import axios from 'axios'
 
-export const handlePasswordReset = async (email: string) => {
+export const handlePasswordReset = async (Email: string) => {
   try {
     const response = await axios.post(`${ApiUrl}Api/Auth/Reset`, {
-      email,
+      Email,
     })
     if (response.status === 200) {
       return true

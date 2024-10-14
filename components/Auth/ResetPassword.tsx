@@ -2,15 +2,17 @@
 import { useState } from 'react'
 import { handlePasswordReset } from '../../functions/AUTH/ResetPass'
 import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 
 const ResetPassword = () => {
   const Router = useRouter()
   const [email, setEmail] = useState('')
 
   const handlePasswordResetClick = async () => {
+    console.log(email) // Check if the email is captured correctly
     const data = await handlePasswordReset(email)
     if (data) {
-      console.log('USER DATA ', data)
+      toast.success('Reset Password Email Sent')
       Router.push('/Login')
     } else {
       console.error('Password reset failed')
