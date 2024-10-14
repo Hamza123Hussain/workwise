@@ -20,6 +20,7 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
   const user = useSelector((state: RootState) => state.user)
   const Router = useRouter()
 
+  // Function to fetch a single task based on the task ID
   const getASingleTask = async () => {
     setLoading(true)
     try {
@@ -37,6 +38,7 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
     }
   }
 
+  // Function to handle task update
   const handleUpdateTask = async () => {
     if (!task) return // Prevent updating if the task is not loaded
 
@@ -74,9 +76,10 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
   }
 
   useEffect(() => {
-    getASingleTask()
+    getASingleTask() // Fetch task details when the component mounts
   }, [])
 
+  // Loading state
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center">
@@ -107,7 +110,7 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
             }
             className="bg-purple-700 text-white p-2 rounded w-full"
           >
-            <option value="TODO">TODO</option>{' '}
+            <option value="TODO">TODO</option>
             <option value="Minor_progress">Minor_progress</option>
             <option value="IN_PROGRESS">IN PROGRESS</option>
             <option value="DONE">DONE</option>
@@ -117,8 +120,12 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
           <h2 className="text-lg font-semibold">Priority</h2>
           <select
             value={priority}
-            onChange={(e) =>
-              setPriority(e.target.value as 'LOW' | 'MEDIUM' | 'HIGH')
+            onChange={
+              (e) =>
+                // Allow changing priority only for the specific email
+                user.Email === 'octtoppus1@gmail.com'
+                  ? setPriority(e.target.value as 'LOW' | 'MEDIUM' | 'HIGH')
+                  : null // Prevent changes for other users
             }
             className="bg-purple-700 text-white p-2 rounded w-full"
           >
