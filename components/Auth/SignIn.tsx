@@ -6,6 +6,7 @@ import { loginUser } from '@/functions/AUTH/LoginUser'
 import { ClearUser, GetUserData } from '@/utils/Redux/Slice/User/UserSlice'
 import { encryptData } from '@/utils/Encryprion'
 import { handleSignOut } from '@/functions/AUTH/SignOut'
+
 const SignIn = () => {
   const dispatch = useDispatch()
   const [inputVal, setInputVal] = useState({
@@ -13,9 +14,11 @@ const SignIn = () => {
     password: '',
   })
   const Router = useRouter()
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputVal((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
+
   const handleLoginClick = async () => {
     const data = await loginUser(inputVal.email, inputVal.password)
     if (data) {
@@ -23,29 +26,24 @@ const SignIn = () => {
       localStorage.setItem('UserData', encryptedData)
       dispatch(GetUserData(data))
       Router.push('/')
+
       scheduleSignout()
     } else {
       console.error('Login failed')
     }
   }
+
   const scheduleSignout = () => {
-    // Define the sign-out timeout as 7 hours (7 hours * 60 minutes * 60 seconds * 1000 milliseconds)
     const signoutTimeout = 7 * 60 * 60 * 1000 // 7 hours in milliseconds
 
-    // Set a timeout to trigger after 7 hours
     setTimeout(async () => {
-      // Call the async function 'handleSignOut' to sign the user out
       const SignoutDone = await handleSignOut()
 
-      // If signout was successful (SignoutDone is true)
       if (SignoutDone) {
-        // Dispatch an action to clear the user from the state (e.g., Redux or Context)
         dispatch(ClearUser())
-
-        // Remove the user's data from localStorage, so it no longer persists on page reload
         localStorage.removeItem('UserData')
       }
-    }, signoutTimeout) // The timeout triggers after the 7-hour period
+    }, signoutTimeout)
   }
 
   return (
@@ -92,4 +90,5 @@ const SignIn = () => {
     </div>
   )
 }
+
 export default SignIn

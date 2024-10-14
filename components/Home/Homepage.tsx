@@ -1,9 +1,20 @@
+import React, { useEffect } from 'react'
 import TaskStatus from './TaskStatus'
 import TimeBtn from './TimeBtn'
 import RecentTasks from '../Tasks/RecentTasks'
 import UserDetails from './UserDetails'
-
+import { getAddressFromCoordinates } from '@/functions/Attendance/Checkout/GetExactLocation'
 const HomePage = () => {
+  useEffect(() => {
+    const fetchAddress = async () => {
+      const address = await getAddressFromCoordinates(31.4700291, 74.3961214)
+      // Call the function to get the address
+      console.log('Exact Address:', address) // Log the address to the console
+    }
+
+    fetchAddress() // Invoke the fetchAddress function
+  }, []) // Empty dependency array to run only on mount
+
   return (
     <div className="px-4 sm:px-6 w-full min-h-screen">
       {/* Welcome Message */}
