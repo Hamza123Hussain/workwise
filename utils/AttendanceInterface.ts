@@ -6,5 +6,7 @@ export interface AttendanceRecord {
   isAbsent: boolean // Indicates whether the user is absent (boolean)
   exit: Date // Date and time of exit (Date object)
   Hours_Worked: number
+
+  Break_Time: number
 }
 export const ApiUrl = 'https://workwise-backend-puce.vercel.app/'

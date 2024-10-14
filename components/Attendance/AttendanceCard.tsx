@@ -11,6 +11,9 @@ const AttendanceCard = ({ element }: { element: AttendanceRecord }) => {
       </td>
       <td className="border border-purple-800 px-4 py-2 text-[8px] text-white  sm:text-base md:text-lg">
         {element.exit ? new Date(element.exit).toLocaleTimeString() : '-'}
+      </td>{' '}
+      <td className="border border-purple-800 px-4 py-2 text-[8px] text-white  sm:text-base md:text-lg">
+        {element.Break_Time ? element.Break_Time : '-'}
       </td>
       <td className="border border-purple-800 px-4 py-2 text-[8px] text-white  sm:text-base md:text-lg">
         {element.Hours_Worked ? convertHoursToString(element.Hours_Worked) : ''}
