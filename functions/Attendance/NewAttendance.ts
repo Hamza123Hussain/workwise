@@ -1,16 +1,16 @@
+import { LocationCoords } from '@/utils/AttendanceInterface'
 import axios from 'axios'
 
-interface NewAttendanceData {
-  Email: string
-  EntryTime: string
-  CheckInStatus: boolean
-}
-
-export const createNewAttendance = async (data: NewAttendanceData) => {
+export const createNewAttendance = async (
+  Email: string,
+  EntryTime: string,
+  CheckInStatus: boolean,
+  location: LocationCoords
+) => {
   try {
     const response = await axios.post(
       `https://workwise-backend-puce.vercel.app/Api/Attendance/NewAttendace`,
-      data
+      { Email, EntryTime, CheckInStatus, location }
     )
     console.log('New Attendance Created Successfully:', response.data)
     return response.data
