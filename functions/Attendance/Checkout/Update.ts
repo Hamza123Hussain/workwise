@@ -1,7 +1,8 @@
-// functions/Attendance/attendanceActions.ts
 import { createNewAttendance } from '@/functions/Attendance/NewAttendance'
 import { updateAttendance } from '@/functions/Attendance/UpdateAttendance'
 import toast from 'react-hot-toast'
+import { getUserLocation } from './LocaitionGet'
+
 export const handleCheckInCheckOut = async (
   userEmail: string,
   currentTime: Date,
@@ -11,22 +12,29 @@ export const handleCheckInCheckOut = async (
   setCheckinStatus: (status: boolean) => void
 ) => {
   const time = currentTime.toISOString()
-  if (!checkinStatus) {
-    try {
-      const newAttendance = await createNewAttendance({
-        Email: userEmail,
-        EntryTime: time,
-        CheckInStatus: true,
-      })
+
+  try {
+    // Get and log the user's location during check-in/out
+    const location = await getUserLocation() // Await the promise
+    if (!location) {
+      toast.error('NO LOCATION FOUND')
+      return // Early exit if no location found
+    }
+
+    if (!checkinStatus) {
+      // Check-in process
+      const newAttendance = await createNewAttendance(
+        userEmail,
+        time,
+        true,
+        location
+      )
       setAttendanceId(newAttendance.attendance._id)
       toast.success('You have Checked In')
       setCheckinStatus(true)
-    } catch (error) {
-      console.error('Error during check-in:', error)
-    }
-  } else {
-    if (attendanceId) {
-      try {
+    } else {
+      // Check-out process
+      if (attendanceId) {
         await updateAttendance({
           Email: userEmail,
           id: attendanceId,
@@ -35,11 +43,12 @@ export const handleCheckInCheckOut = async (
         })
         toast.success('You have Checked OUT')
         setCheckinStatus(false)
-      } catch (error) {
-        console.error('Error during check-out:', error)
+      } else {
+        console.error('Attendance ID not found for check-out.')
       }
-    } else {
-      console.error('Attendance ID not found for check-out.')
     }
+  } catch (error) {
+    console.error('Error during check-in/out:', error)
+    toast.error('Failed to retrieve location or update attendance.')
   }
 }
