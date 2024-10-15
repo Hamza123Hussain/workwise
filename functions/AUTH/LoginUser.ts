@@ -1,12 +1,8 @@
 import { ApiUrl } from '@/utils/AttendanceInterface'
-import axios from 'axios' // Ensure axios is imported
+import axios from 'axios'
 import toast from 'react-hot-toast'
 
-// Main login function
-export const handleLogin = async (
-  email: string,
-  password: string
-): Promise<void> => {
+export const loginUser = async (email: string, password: string) => {
   try {
     const response = await axios.post(`${ApiUrl}Api/Auth/SignIn`, {
       Email: email,
@@ -20,6 +16,7 @@ export const handleLogin = async (
 
     // Show success message
     toast.success('Login successful!')
+    return response.data
   } catch (error) {
     const axiosError = error as { response?: { data: { message: string } } }
 
