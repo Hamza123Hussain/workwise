@@ -73,7 +73,11 @@ const TimeBtn: React.FC = () => {
               setCheckinStatus={setCheckinStatus}
             />{' '}
           </div>
-          <ShowAddress location={currentLocation} />
+          {User.Email === 'gptprompts87@gmail.com' ? (
+            <ShowAddress location={currentLocation} />
+          ) : (
+            ''
+          )}
         </>
       )}
     </div>
