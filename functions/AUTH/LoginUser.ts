@@ -1,32 +1,35 @@
 import { ApiUrl } from '@/utils/AttendanceInterface'
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios' // Ensure axios is imported
 import toast from 'react-hot-toast'
-export const loginUser = async (email: string, password: string) => {
-  try {
-    const response: AxiosResponse = await axios.post(
-      `${ApiUrl}Api/Auth/SignIn`,
-      {
-        Email: email,
-        Password: password,
-      }
-    )
-    return response.data // Return the expected response data
-  } catch (error) {
-    // Handle error
-    if (axios.isAxiosError(error) && error.response) {
-      if (error.response.status === 401) {
-        // 401 status code for unauthorized, assuming it's incorrect credentials
-        toast.error('Incorrect password or email!')
-      } else {
-        // Handle other specific errors if necessary
-        toast.error('An error occurred while logging in.')
-      }
-    } else {
-      // Handle non-Axios errors (network issues, etc.)
-      toast.error('An error occurred while logging in.')
-    }
 
-    console.error('Login failed:', error)
-    throw error // Re-throw the error to allow the caller to handle it further
+// Main login function
+export const handleLogin = async (
+  email: string,
+  password: string
+): Promise<void> => {
+  try {
+    const response = await axios.post(`${ApiUrl}Api/Auth/SignIn`, {
+      Email: email,
+      Password: password,
+    })
+
+    // Handle successful login
+    const userData = response.data
+    console.log('User logged in successfully:', userData)
+    // Optionally, redirect or set user state here
+
+    // Show success message
+    toast.success('Login successful!')
+  } catch (error) {
+    const axiosError = error as { response?: { data: { message: string } } }
+
+    // Show toast notification for login errors
+    if (axiosError.response) {
+      // Display the error message returned from the server
+      toast.error(axiosError.response.data.message)
+    } else {
+      // General error message for unexpected issues
+      toast.error('An unexpected error occurred while logging in.')
+    }
   }
 }
