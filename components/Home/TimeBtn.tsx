@@ -6,6 +6,7 @@ import BreakMain from '../Attendance/Break/Main'
 import { GetCurrentAttendance } from '@/functions/Attendance/Checkout/CurrentAttendance'
 import CheckIn from '../Attendance/Checkout/Main'
 import ShowTime from './ShowTime'
+import { LocationCoords } from '@/utils/AttendanceInterface'
 const TimeBtn: React.FC = () => {
   const User = useSelector((state: RootState) => state.user)
   const [onBreak, setOnBreak] = useState(false) // Break status
@@ -13,27 +14,29 @@ const TimeBtn: React.FC = () => {
   const [currentTime, setCurrentTime] = useState<Date>(new Date())
   const [checkinStatus, setCheckinStatus] = useState<boolean>(false)
   const [attendanceId, setAttendanceId] = useState<string | null>(null)
+  const [currentLocation, setLocation] = useState<LocationCoords>({
+    latitude: 0,
+    longitude: 0,
+  })
   useEffect(() => {
     // Function to update the current time
     const updateTime = () => {
       // Set the current time to the state variable 'currentTime'
       setCurrentTime(new Date())
     }
-
     // Start a timer that runs the 'updateTime' function every 1000 milliseconds (1 second)
     const timerId = setInterval(updateTime, 1000)
-
     // Cleanup function: stops the timer when the component is unmounted or re-rendered
     return () => clearInterval(timerId)
   }, []) // Empty dependency array means this useEffect runs only once after the component mounts
-
   useEffect(() => {
     GetCurrentAttendance(
       User.Email,
       setLoading,
       setAttendanceId,
       setCheckinStatus,
-      setOnBreak
+      setOnBreak,
+      setLocation
     )
   }, [User])
   return (
