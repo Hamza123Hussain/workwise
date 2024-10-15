@@ -11,8 +11,8 @@ export const loginUser = async (email: string, password: string) => {
     })
 
     // Handle successful login
-    // const userData = response.data
-    // console.log('User logged in successfully:', userData)
+    const userData = response.data
+    console.log('User logged in successfully:', userData)
     // Optionally, redirect or set user state here
 
     // Show success message
