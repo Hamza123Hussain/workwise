@@ -5,6 +5,7 @@ export interface TaskFormProps {
   assignedTo: string
   Email: string
   priority: string
+  TaskType: string
 }
 export interface TaskFormComponentProps {
   taskData: TaskFormProps
@@ -32,6 +33,7 @@ export interface TaskFetch {
   name: string // Name of the task
   priority: 'LOW' | 'MEDIUM' | 'HIGH' // Priority level of the task
   progress: 'TODO' | 'IN_PROGRESS' | 'DONE' | 'Minor_progress' // Progress status of the task
+  TaskType: 'Daliy' | 'Weekly' | 'Other'
 }
 export const priorityClass = (task: TaskFetch) => {
   return task.priority === 'HIGH'
