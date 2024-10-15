@@ -1,12 +1,14 @@
 // functions/Attendance/attendanceService.ts
 import axios from 'axios'
 import { CurrentAttendance } from '@/functions/Attendance/CurrentAttendance'
+import { LocationCoords } from '@/utils/AttendanceInterface'
 export const GetCurrentAttendance = async (
   email: string,
   setLoading: (loading: boolean) => void,
   setAttendanceId: (id: string | null) => void,
   setCheckinStatus: (status: boolean) => void,
-  setOnBreak: (status: boolean) => void
+  setOnBreak: (status: boolean) => void,
+  setLocation: (Location: LocationCoords) => void
 ) => {
   setLoading(true)
   try {
@@ -15,6 +17,10 @@ export const GetCurrentAttendance = async (
       setAttendanceId(Data[0]._id)
       setCheckinStatus(Data[0].CheckInStatus)
       setOnBreak(Data[0].onBreak)
+      setLocation({
+        latitude: Data[0].latitude,
+        longitude: Data[0].longitude,
+      })
     } else {
       setAttendanceId(null)
       setCheckinStatus(false)
