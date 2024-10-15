@@ -18,6 +18,7 @@ const CreateTaskForm = () => {
     assignedTo: '',
     Email: User.Email, // Populate from Redux state
     priority: 'LOW',
+    TaskType: 'Daliy',
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
