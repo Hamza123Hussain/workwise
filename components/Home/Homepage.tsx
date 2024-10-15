@@ -7,7 +7,7 @@ import { getAddressFromCoordinates } from '@/functions/Attendance/Checkout/GetEx
 const HomePage = () => {
   useEffect(() => {
     const fetchAddress = async () => {
-      const address = await getAddressFromCoordinates(31.4700291, 74.3961214)
+      const address = await getAddressFromCoordinates(31.4835132, 74.4094473)
       // Call the function to get the address
       console.log('Exact Address:', address) // Log the address to the console
     }
