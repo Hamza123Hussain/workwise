@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../utils/Redux/Store/Store'
 import Loader from '../Loader'
 import BreakMain from '../Attendance/Break/Main'
@@ -7,7 +7,10 @@ import { GetCurrentAttendance } from '@/functions/Attendance/Checkout/CurrentAtt
 import CheckIn from '../Attendance/Checkout/Main'
 import ShowTime from './ShowTime'
 import { LocationCoords } from '@/utils/AttendanceInterface'
+import { New_Location_Cords } from '@/utils/Redux/Slice/Location_Slice/Location_Slice'
+import ShowAddress from './ShowAddress'
 const TimeBtn: React.FC = () => {
+  const dispatch = useDispatch()
   const User = useSelector((state: RootState) => state.user)
   const [onBreak, setOnBreak] = useState(false) // Break status
   const [loading, setLoading] = useState<boolean>(false)
@@ -38,6 +41,9 @@ const TimeBtn: React.FC = () => {
       setOnBreak,
       setLocation
     )
+    if (currentLocation) {
+      dispatch(New_Location_Cords(currentLocation))
+    }
   }, [User])
   return (
     <div className="bg-purple-black sm:w-4/12 h-fit p-6 rounded-lg shadow-md border-2 border-purple-600">
@@ -67,6 +73,7 @@ const TimeBtn: React.FC = () => {
               setCheckinStatus={setCheckinStatus}
             />{' '}
           </div>
+          <ShowAddress location={currentLocation} />
         </>
       )}
     </div>
