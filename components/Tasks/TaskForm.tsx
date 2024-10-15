@@ -44,6 +44,13 @@ const TaskForm: React.FC<TaskFormComponentProps> = ({
         value={taskData.priority}
         type="text"
       />
+      <TaskField
+        Label="Task Type"
+        name="TaskType"
+        handleChange={handleChange}
+        value={taskData.TaskType}
+        type="text"
+      />
       <UserAssign value={taskData.assignedTo} handleChange={handleChange} />
     </div>
   )
