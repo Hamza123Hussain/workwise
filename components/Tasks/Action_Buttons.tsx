@@ -61,11 +61,11 @@ const ActionButtons = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
   }
 
   return (
-    <div className="flex justify-end flex-col sm:flex-row items-center sm:gap-5 gap-2 my-5">
+    <div className="flex justify-end flex-col sm:flex-row items-center  gap-2 my-5">
       {TaskDetail.TaskType !== 'Other' && (
         <button
           onClick={() => TaskRepeat()} // Repeat Task
-          className={`px-4 py-2 rounded-lg shadow transition-all duration-200 ease-in-out 
+          className={`p-2 rounded-lg shadow transition-all duration-200 text-xs ease-in-out 
             ${'bg-green-600 text-white hover:bg-green-700'}`}
         >
           Repeat Task
@@ -75,7 +75,7 @@ const ActionButtons = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
         onClick={() =>
           !isDueDatePast && Router.push(`/edittask/${TaskDetail._id}`)
         } // Edit Task
-        className={`px-4 py-2 rounded-lg shadow transition-all duration-200 ease-in-out 
+        className={`p-2 rounded-lg shadow transition-all duration-200 text-xs ease-in-out 
           ${
             isDueDatePast
               ? 'bg-blue-400 text-gray-300 cursor-not-allowed'
@@ -87,7 +87,7 @@ const ActionButtons = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
       </button>
       <button
         onClick={() => !isDueDatePast && TaskDelete()} // Delete Task
-        className={`px-4 py-2 rounded-lg shadow transition-all duration-200 ease-in-out 
+        className={`p-2 rounded-lg shadow transition-all duration-200 text-xs ease-in-out 
           ${
             isDueDatePast
               ? 'bg-red-400 text-gray-300 cursor-not-allowed'

@@ -62,6 +62,20 @@ const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
         <h1 className="text-lg font-semibold">Description</h1>
         <p className="text-sm text-gray-300">{TaskDetail.description}</p>
       </div>
+      <button
+        className={`font-semibold py-2 px-4 rounded transition-colors duration-300 
+    ${
+      new Date(TaskDetail.dueDate) < new Date(new Date().setHours(0, 0, 0, 0))
+        ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
+        : 'bg-green-500 text-white hover:bg-green-600'
+    }`}
+        disabled={
+          new Date(TaskDetail.dueDate) <
+          new Date(new Date().setHours(0, 0, 0, 0))
+        }
+      >
+        Mark As Done
+      </button>
 
       <Action_Buttons TaskDetail={TaskDetail} />
     </div>
