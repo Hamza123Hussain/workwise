@@ -13,8 +13,7 @@ export const loginUser = async (email: string, password: string) => {
   } catch (error) {
     // Handle error
     if (error) {
-      console.error('Login failed:', error)
-      toast.error('Incorrect Email or Password')
+      toast.error('IN CORRECT EMAIL OR PASSWORD')
     } else {
       console.error('An error occurred:', error)
     }
