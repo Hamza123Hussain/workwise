@@ -134,6 +134,7 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
             <option value="HIGH">HIGH</option>
           </select>
         </div>
+
         <div className="mb-4">
           <h2 className="text-lg font-semibold">Description</h2>
           <textarea
