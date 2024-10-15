@@ -9,6 +9,7 @@ interface TaskData {
   name: string
   Email: string
   priority: string
+  TaskType: string
 }
 
 // Function to create a task
