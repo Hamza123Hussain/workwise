@@ -1,6 +1,6 @@
 import { ApiUrl } from '@/utils/AttendanceInterface'
 import axios from 'axios'
-import { console } from 'inspector/promises'
+
 import toast from 'react-hot-toast'
 
 export const loginUser = async (email: string, password: string) => {
@@ -22,7 +22,15 @@ export const loginUser = async (email: string, password: string) => {
     // Show toast notification for login errors
 
     // Display the error message returned from the server
-    toast.error('In correct Email or Password')
+
+    toast.error('Incorrect Email or Password', {
+      // Customize toast style (optional)
+      style: {
+        borderRadius: '8px',
+        background: 'black',
+        color: 'white',
+      },
+    })
     console.log(error)
   }
 }

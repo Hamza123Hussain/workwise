@@ -3,6 +3,7 @@ import { registerUserWithImage } from '@/functions/AUTH/RegisterUser'
 import { InputValues } from '@/utils/SignUpInterface'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import toast from 'react-hot-toast'
 const SignUp = () => {
   const Router = useRouter()
   const [inputVal, setInputVal] = useState<InputValues>({
@@ -29,13 +30,29 @@ const SignUp = () => {
   }
   const handleSignUp = async () => {
     try {
-      await registerUserWithImage(inputVal, inputVal.Image as File)
-      // console.log('Api Has Responded', Data)
-      // You can redirect or show a success message here
-      Router.push('/signin')
+      const response = await registerUserWithImage(
+        inputVal,
+        inputVal.Image as File
+      )
+
+      // Check if response is successful (optional, depending on how your backend works)
+      if (response) {
+        // Show a success toast notification
+        toast.success('Registration successful! Redirecting to Sign In...')
+
+        // Redirect to the sign-in page after successful registration
+        Router.push('/signin')
+      }
     } catch (error) {
+      // Log the error in the console
       console.error('Registration error:', error)
-      // Handle error (e.g., show a notification)
+
+      // Show an error toast notification
+      toast.error(
+        'Registration failed. Please check your details and try again.'
+      )
+
+      // Do not redirect to /signin if there's an error
     }
   }
   return (

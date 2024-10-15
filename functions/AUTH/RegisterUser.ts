@@ -1,4 +1,5 @@
 import axios from 'axios'
+import toast from 'react-hot-toast' // Import toast
 import { InputValues } from '../../utils/SignUpInterface'
 import { ApiUrl } from '@/utils/AttendanceInterface'
 
@@ -31,11 +32,24 @@ export const registerUserWithImage = async (
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.error('Error registering user:', error.response?.data)
-      throw new Error(error.response?.data?.message || 'Registration failed')
+      const errorMessage =
+        error.response?.data?.message || 'Registration failed'
+      console.error('Error registering user:', errorMessage)
+
+      // Show appropriate toast notification
+
+      toast.error('User already exists', {
+        // Customize toast style (optional)
+        style: {
+          borderRadius: '8px',
+          background: 'black',
+          color: 'white',
+        },
+      })
     } else {
+      // Handle unexpected errors
       console.error('Unexpected error:', error)
-      throw new Error('Registration failed')
+      toast.error('An unexpected error occurred. Please try again.')
     }
   }
 }
