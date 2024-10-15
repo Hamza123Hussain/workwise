@@ -53,6 +53,7 @@ const ActionButtons = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
       if (Repeated_Task) {
         toast.success('Task has been repeated')
         // Optionally, you could redirect or update UI here
+        window.location.reload()
       }
     } catch (error) {
       console.error('Error repeating task:', error)
