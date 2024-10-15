@@ -5,7 +5,7 @@ const initialState = {
   longitude: 0,
 }
 
-const Location_Slice = createSlice({
+export const Location_Slice = createSlice({
   name: 'Location_Slice',
   initialState,
   reducers: {
