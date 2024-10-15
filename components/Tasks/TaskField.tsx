@@ -39,6 +39,23 @@ const TaskField: React.FC<TaskFieldProps> = ({
             <option value="HIGH">High</option>
           </select>
         </div>
+      ) : name == 'TaskType' ? (
+        <div className="mb-4">
+          <label className="block text-sm font-bold mb-2 text-purple-400">
+            {Label}
+          </label>
+          <select
+            name={name}
+            className="w-full p-3 rounded-lg shadow-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+            value={value}
+            onChange={handleChange}
+            required
+          >
+            <option value="Daliy">Daliy</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
       ) : (
         <div className="mb-4">
           <label className="block text-sm font-bold mb-2 text-purple-400">
