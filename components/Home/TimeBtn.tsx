@@ -41,9 +41,9 @@ const TimeBtn: React.FC = () => {
       setOnBreak,
       setLocation
     )
-    if (currentLocation) {
-      dispatch(New_Location_Cords(currentLocation))
-    }
+    // if (currentLocation) {
+    //   dispatch(New_Location_Cords(currentLocation))
+    // }
   }, [User])
   return (
     <div className="bg-purple-black sm:w-4/12 h-fit p-6 rounded-lg shadow-md border-2 border-purple-600">
@@ -73,11 +73,11 @@ const TimeBtn: React.FC = () => {
               setCheckinStatus={setCheckinStatus}
             />{' '}
           </div>
-          {User.Email === 'gptprompts87@gmail.com' ? (
+          {/* {User.Email === 'gptprompts87@gmail.com' ? (
             <ShowAddress location={currentLocation} />
           ) : (
             ''
-          )}
+          )} */}
         </>
       )}
     </div>
