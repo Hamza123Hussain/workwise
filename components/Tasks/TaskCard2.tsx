@@ -5,8 +5,12 @@ import {
 } from '@/utils/TaskformInterface'
 import React from 'react'
 import Action_Buttons from './Action_Buttons'
+import { markTaskAsDone } from '@/functions/Task/MarkDone'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/utils/Redux/Store/Store'
 
 const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
+  const user = useSelector((state: RootState) => state.user)
   return (
     <div className="bg-purple-900 text-white rounded-lg shadow-lg p-6 w-full md:w-[78%]  mx-auto my-4 transition-transform duration-300 hover:scale-105">
       <div className="border-b border-gray-600 mb-2">
@@ -63,9 +67,12 @@ const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
         <p className="text-sm text-gray-300">{TaskDetail.description}</p>
       </div>
       <button
+        onClick={() => markTaskAsDone(TaskDetail._id, user.Email, 'DONE')}
         className={`font-semibold py-2 px-4 rounded transition-colors duration-300 
     ${
-      new Date(TaskDetail.dueDate) < new Date(new Date().setHours(0, 0, 0, 0))
+      new Date(TaskDetail.dueDate) <
+        new Date(new Date().setHours(0, 0, 0, 0)) ||
+      TaskDetail.progress === 'DONE'
         ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
         : 'bg-green-500 text-white hover:bg-green-600'
     }`}
