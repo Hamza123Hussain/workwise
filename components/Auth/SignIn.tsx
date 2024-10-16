@@ -2,11 +2,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/navigation'
-import { loginUser } from '@/functions/AUTH/LoginUser'
-import { ClearUser, GetUserData } from '@/utils/Redux/Slice/User/UserSlice'
-import { encryptData } from '@/utils/Encryprion'
-import { handleSignOut } from '@/functions/AUTH/SignOut'
-
+import { handleLoginClick } from '@/functions/Frontend/HandleLogin'
 const SignIn = () => {
   const dispatch = useDispatch()
   const [inputVal, setInputVal] = useState({
@@ -14,38 +10,9 @@ const SignIn = () => {
     password: '',
   })
   const Router = useRouter()
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputVal((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
-
-  const handleLoginClick = async () => {
-    const data = await loginUser(inputVal.email, inputVal.password)
-    if (data) {
-      const encryptedData = encryptData(data)
-      localStorage.setItem('UserData', encryptedData)
-      dispatch(GetUserData(data))
-      Router.push('/')
-
-      scheduleSignout()
-    } else {
-      console.error('Login failed')
-    }
-  }
-
-  const scheduleSignout = () => {
-    const signoutTimeout = 7 * 60 * 60 * 1000 // 7 hours in milliseconds
-
-    setTimeout(async () => {
-      const SignoutDone = await handleSignOut()
-
-      if (SignoutDone) {
-        dispatch(ClearUser())
-        localStorage.removeItem('UserData')
-      }
-    }, signoutTimeout)
-  }
-
   return (
     <div className="flex flex-col bg-black p-6 rounded-lg shadow-lg w-full max-w-md">
       <h2 className="text-2xl font-semibold text-purple-500 mb-6 text-center">
@@ -68,7 +35,9 @@ const SignIn = () => {
         className="mb-4 p-3 w-full rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
       />
       <button
-        onClick={handleLoginClick}
+        onClick={() =>
+          handleLoginClick(inputVal.email, inputVal.password, dispatch, Router)
+        }
         className="bg-purple-500 hover:bg-purple-600 text-white font-semibold px-6 py-2 rounded transition-all w-full"
       >
         Sign In
@@ -90,5 +59,4 @@ const SignIn = () => {
     </div>
   )
 }
-
 export default SignIn

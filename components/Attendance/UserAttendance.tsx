@@ -4,31 +4,25 @@ import { RootState } from '../../utils/Redux/Store/Store'
 import { AttendanceRecord } from '../../utils/AttendanceInterface'
 import AttendanceTable from './AttendanceTable'
 import Loader from '../Loader'
-import { GetUserAttendance } from '@/functions/Attendance/UserAttendance'
+import { getAttendance } from '@/functions/Frontend/GetUserAttendance'
 const UserAttendance: React.FC = () => {
   const user = useSelector((state: RootState) => state.user)
-  const [UserAttendance, setAttendance] = useState<AttendanceRecord[]>([])
-  const [loading, setloading] = useState(false)
-  const SelectedUser = useSelector((state: RootState) => state.Select)
-  const getAttendance = async () => {
-    setloading(true)
-    try {
-      const data = await GetUserAttendance(user.Email, SelectedUser)
-      if (data) {
-        setAttendance(data)
-      }
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setloading(false)
-    }
-  }
+  const [userAttendance, setAttendance] = useState<AttendanceRecord[]>([])
+  const [loading, setLoading] = useState(false)
+  const selectedUser = useSelector((state: RootState) => state.Select)
   useEffect(() => {
-    if (user.Email) {
-      getAttendance() // Fetch attendance for the logged-in user initially
+    const fetchAttendance = async () => {
+      if (user.Email) {
+        const attendance = await getAttendance(
+          setLoading,
+          user.Email,
+          selectedUser
+        )
+        setAttendance(attendance) // Update the attendance state
+      }
     }
-  }, [user.Email, SelectedUser])
-
+    fetchAttendance() // Fetch attendance when user.Email or selectedUser changes
+  }, [user.Email, selectedUser])
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center">
@@ -38,8 +32,8 @@ const UserAttendance: React.FC = () => {
   }
   return (
     <div className="p-6">
-      {UserAttendance.length > 0 ? (
-        <AttendanceTable Attendance={UserAttendance} UserName={user.Name} />
+      {userAttendance.length > 0 ? (
+        <AttendanceTable Attendance={userAttendance} UserName={user.Name} />
       ) : (
         <div className="min-h-screen flex flex-col justify-center items-center text-center p-4">
           <h1 className="text-6xl text-white font-bold mb-4">

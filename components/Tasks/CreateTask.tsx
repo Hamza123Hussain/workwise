@@ -6,11 +6,9 @@ import TaskForm from './TaskForm'
 import toast from 'react-hot-toast'
 import { TaskFormProps } from '@/utils/TaskformInterface'
 import { useRouter } from 'next/navigation'
-
 const CreateTaskForm = () => {
   const User = useSelector((state: RootState) => state.user)
   const Router = useRouter()
-  // State to manage task data
   const [taskData, setTaskData] = useState<TaskFormProps>({
     name: '',
     description: '',
@@ -20,10 +18,8 @@ const CreateTaskForm = () => {
     priority: 'LOW',
     TaskType: 'Daliy',
   })
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
     try {
       const Response = await createTask(taskData)
       if (Response) {
@@ -35,7 +31,6 @@ const CreateTaskForm = () => {
       toast.error('Failed to create the task')
     }
   }
-
   return (
     <div className="bg-black p-8 rounded-lg shadow-lg max-w-md w-full mx-auto my-5">
       <h1 className="text-2xl font-bold mb-6 text-purple-400 text-center">
@@ -53,5 +48,4 @@ const CreateTaskForm = () => {
     </div>
   )
 }
-
 export default CreateTaskForm

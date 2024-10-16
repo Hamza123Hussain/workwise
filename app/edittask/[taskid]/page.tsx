@@ -1,85 +1,32 @@
 'use client'
 import Loader from '@/components/Loader'
-import { GetSingleTask } from '@/functions/Task/GetSingleTask'
-import { updateTask } from '@/functions/Task/UpdateTask'
+import EditTaskBody from '@/components/Tasks/EditTaskBody'
+import { getASingleTask } from '@/functions/Frontend/SingleTask'
+import { handleUpdateTask } from '@/functions/Frontend/UpdateTask'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { TaskFetch } from '@/utils/TaskformInterface'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
 import { useSelector } from 'react-redux'
-
 const TaskEdit = ({ params }: { params: { taskid: string } }) => {
   const [loading, setLoading] = useState(false)
-  const [task, setTask] = useState<TaskFetch | null>(null)
+  const [task, setTask] = useState<TaskFetch>()
   const [description, setDescription] = useState<string>('')
-  const [priority, setPriority] = useState<'LOW' | 'MEDIUM' | 'HIGH'>('LOW')
-  const [progress, setProgress] = useState<
-    'TODO' | 'IN_PROGRESS' | 'Minor_progress' | 'DONE'
-  >('TODO')
+  const [priority, setPriority] = useState<string>('LOW')
+  const [progress, setProgress] = useState<string>('TODO')
   const user = useSelector((state: RootState) => state.user)
   const Router = useRouter()
-
-  // Function to fetch a single task based on the task ID
-  const getASingleTask = async () => {
-    setLoading(true)
-    try {
-      const getTask = await GetSingleTask(user.Email, params.taskid)
-      if (getTask) {
-        setTask(getTask)
-        setDescription(getTask.description)
-        setPriority(getTask.priority)
-        setProgress(getTask.progress)
-      }
-    } catch (error) {
-      toast.error(`There is an error in getting task: ${error}`)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  // Function to handle task update
-  const handleUpdateTask = async () => {
-    if (!task) return // Prevent updating if the task is not loaded
-
-    // Check if the due date is today or in the future
-    const currentDate = new Date()
-    const dueDateObj = new Date(task.dueDate)
-
-    // Resetting hours, minutes, seconds, and milliseconds for accurate comparison
-    currentDate.setHours(0, 0, 0, 0)
-    dueDateObj.setHours(0, 0, 0, 0)
-
-    if (dueDateObj < currentDate) {
-      toast.error(
-        'You cannot update this task because the due date has passed.'
-      )
-      return // Prevent update if due date is past
-    }
-
-    try {
-      const UpdateTask = await updateTask(
-        params.taskid,
-        user.Email,
-        progress,
-        description,
-        priority,
-        task.dueDate
-      )
-      if (UpdateTask) {
-        toast.success('Task updated successfully!')
-        Router.push('/usertasks')
-      }
-    } catch (error) {
-      toast.error(`Error updating task: ${error}`)
-    }
-  }
-
   useEffect(() => {
-    getASingleTask() // Fetch task details when the component mounts
-  }, [])
-
-  // Loading state
+    getASingleTask(
+      setLoading,
+      user.Email,
+      params.taskid,
+      setTask,
+      setDescription,
+      setProgress,
+      setPriority
+    )
+  }, [params.taskid, user.Email])
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center">
@@ -87,64 +34,34 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
       </div>
     )
   }
-
   return (
     <div className="min-h-screen flex justify-center items-center p-6">
       <div className="bg-purple-800 text-white p-6 rounded-lg shadow-lg w-full max-w-md">
-        <div className="flex flex-col items-center mb-4">
-          <h1 className="text-2xl font-bold">Task Details</h1>
-          <h2 className="text-2xl font-bold">{task?.name}</h2>
-        </div>
-        <div className="mb-4">
-          <h2 className="text-lg font-semibold">Progress</h2>
-          <select
-            value={progress}
-            onChange={(e) =>
-              setProgress(
-                e.target.value as
-                  | 'TODO'
-                  | 'IN_PROGRESS'
-                  | 'DONE'
-                  | 'Minor_progress'
-              )
-            }
-            className="bg-purple-700 text-white p-2 rounded w-full"
-          >
-            <option value="TODO">TODO</option>
-            <option value="Minor_progress">Minor_progress</option>
-            <option value="IN_PROGRESS">IN PROGRESS</option>
-            <option value="DONE">DONE</option>
-          </select>
-        </div>
-        <div className="mb-4">
-          <h2 className="text-lg font-semibold">Priority</h2>
-          <select
-            value={priority}
-            onChange={
-              (e) =>
-                // Allow changing priority only for the specific email
-                user.Email === 'octtoppus1@gmail.com'
-                  ? setPriority(e.target.value as 'LOW' | 'MEDIUM' | 'HIGH')
-                  : null // Prevent changes for other users
-            }
-            className="bg-purple-700 text-white p-2 rounded w-full"
-          >
-            <option value="LOW">LOW</option>
-            <option value="MEDIUM">MEDIUM</option>
-            <option value="HIGH">HIGH</option>
-          </select>
-        </div>
-
-        <div className="mb-4">
-          <h2 className="text-lg font-semibold">Description</h2>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="bg-purple-700 text-white p-2 rounded w-full h-24"
+        {task && (
+          <EditTaskBody
+            task={task}
+            progress={progress}
+            setProgress={setProgress}
+            priority={priority}
+            setPriority={setPriority}
+            description={description}
+            setDescription={setDescription}
+            Email={user.Email}
           />
-        </div>
+        )}
         <button
-          onClick={handleUpdateTask}
+          onClick={() =>
+            task &&
+            handleUpdateTask(
+              task,
+              params.taskid,
+              user.Email,
+              progress,
+              description,
+              priority,
+              Router
+            )
+          }
           className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-200"
         >
           Update Task
@@ -153,5 +70,4 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
     </div>
   )
 }
-
 export default TaskEdit

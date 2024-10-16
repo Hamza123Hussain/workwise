@@ -34,25 +34,19 @@ const SignUp = () => {
         inputVal,
         inputVal.Image as File
       )
-
       // Check if response is successful (optional, depending on how your backend works)
       if (response) {
         // Show a success toast notification
         toast.success('Registration successful! Redirecting to Sign In...')
-
         // Redirect to the sign-in page after successful registration
         Router.push('/signin')
       }
     } catch (error) {
       // Log the error in the console
       console.error('Registration error:', error)
-
-      // Show an error toast notification
       toast.error(
         'Registration failed. Please check your details and try again.'
       )
-
-      // Do not redirect to /signin if there's an error
     }
   }
   return (
