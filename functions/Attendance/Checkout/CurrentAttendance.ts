@@ -17,10 +17,10 @@ export const GetCurrentAttendance = async (
       setAttendanceId(Data[0]._id)
       setCheckinStatus(Data[0].CheckInStatus)
       setOnBreak(Data[0].onBreak)
-      // setLocation({
-      //   latitude: Data[0].latitude,
-      //   longitude: Data[0].longitude,
-      // })
+      setLocation({
+        latitude: Data[0].latitude,
+        longitude: Data[0].longitude,
+      })
     } else {
       setAttendanceId(null)
       setCheckinStatus(false)
