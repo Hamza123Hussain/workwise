@@ -52,3 +52,13 @@ export const progress_Class = (task: TaskFetch) => {
     ? 'bg-purple-800'
     : 'bg-green-600'
 }
+export interface EditTask {
+  task: TaskFetch
+  progress: string
+  setProgress: (progress: string) => void
+  priority: string
+  setPriority: (priority: string) => void
+  Email: string
+  description: string
+  setDescription: (description: string) => void
+}
