@@ -40,6 +40,7 @@ export const handleCheckInCheckOut = async (
           id: attendanceId,
           ExitTime: time,
           CheckInStatus: false,
+          location,
         })
         toast.success('You have Checked OUT')
         setCheckinStatus(false)
