@@ -12,7 +12,7 @@ export const createNewAttendance = async (
       `https://workwise-backend-puce.vercel.app/Api/Attendance/NewAttendace`,
       { Email, EntryTime, CheckInStatus, location }
     )
-    console.log('New Attendance Created Successfully:', response.data)
+    // console.log('New Attendance Created Successfully:', response.data)
     return response.data
   } catch (error) {
     console.error('Error creating new attendance:', error)
