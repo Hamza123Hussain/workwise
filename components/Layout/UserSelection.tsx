@@ -5,8 +5,10 @@ import { UserFetched } from '@/utils/SignUpInterface'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '@/utils/Redux/Store/Store'
-const UserSelection = () => {
+import Loader3 from '../Loader3'
+const UserSelection = ({ type }: { type: String }) => {
   const [Users, SetUserFetched] = useState<UserFetched[]>([])
+  const [loading, setloading] = useState(true)
   const User = useSelector((state: RootState) => state.user)
   const Dispatch = useDispatch<AppDispatch>()
   const SelectedUser = useSelector((state: RootState) => state.Select)
@@ -17,6 +19,7 @@ const UserSelection = () => {
     const Data = await Allusers(User.Email)
     if (Data) {
       SetUserFetched(Data)
+      setloading(false)
     }
   }
   useEffect(() => {
@@ -24,22 +27,24 @@ const UserSelection = () => {
   }, [])
   return (
     <>
-      {User.Email === 'octtoppus1@gmail.com' && SelectedUser && (
+      {User.Email === 'octtoppus1@gmail.com' && Users.length > 0 && !loading ? ( // Check if there are users
         <div className="my-4">
-          {/* Dropdown for selecting a user if email is octtoppus1@gmail.com */}
-          {/* <label
+          <h2 className="text-2xl font-semibold mb-4 text-white text-center">
+            All {type} Records For {SelectedUser}
+          </h2>
+          <h2 className="text-2xl font-semibold mb-4 text-white text-center"></h2>
+          <label
             htmlFor="user-select"
             className="mr-3 font-medium text-purple-400"
           >
-            Select User:
-          </label> */}
+            Select User
+          </label>
           <select
             id="user-select"
             value={SelectedUser}
             onChange={handleUserChange}
             className="p-2 bg-black border border-purple-500 text-purple-400 rounded-md"
           >
-            <option value={User.Name}>Select A User Name</option>
             {Users.map((user) => (
               <option key={user.createdAt} value={user.Name}>
                 {user.Name}
@@ -47,6 +52,8 @@ const UserSelection = () => {
             ))}
           </select>
         </div>
+      ) : (
+        <Loader3 />
       )}
     </>
   )
