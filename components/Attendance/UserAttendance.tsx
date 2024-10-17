@@ -16,13 +16,13 @@ const UserAttendance: React.FC = () => {
         const attendance = await getAttendance(
           setLoading,
           user.Email,
-          selectedUser
+          user.Email === 'octtoppus1@gmail.com' ? selectedUser : user.Name
         )
         setAttendance(attendance) // Update the attendance state
       }
     }
     fetchAttendance() // Fetch attendance when user.Email or selectedUser changes
-  }, [user.Email, selectedUser])
+  }, [user, selectedUser])
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center">
