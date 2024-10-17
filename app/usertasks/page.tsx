@@ -32,11 +32,12 @@ const UserTasks = () => {
   }
   return (
     <div className="p-6 rounded-lg shadow-md my-10">
-      <h2 className="font-semibold text-2xl text-purple-500 mb-4">
-        Tasks of{' '}
-        {user.Email === 'octtoppus1@gmail.com' ? selectedUser : user.Name}
-      </h2>
-      <UserSelection />
+      {user.Email !== 'octtoppus1@gmail.com' && (
+        <h2 className="font-semibold text-2xl text-purple-500 mb-4">
+          Tasks of {user.Name}
+        </h2>
+      )}
+      <UserSelection type={'Task'} />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {allTasks.length > 0 ? (
           allTasks.map((task) => (
