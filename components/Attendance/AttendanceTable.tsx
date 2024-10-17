@@ -4,10 +4,8 @@ import { AttendanceRecord } from '../../utils/AttendanceInterface'
 import UserSelection from '../Layout/UserSelection'
 const AttendanceTable = ({
   Attendance,
-  UserName,
 }: {
   Attendance: AttendanceRecord[]
-  UserName: string
 }) => {
   const HoursWorked = Attendance.reduce((acc, element) => {
     // Sum the Hours_Worked values, which are assumed to be floating-point numbers
@@ -19,10 +17,7 @@ const AttendanceTable = ({
 
   return (
     <div className=" mx-auto px-4 py-6 w-[90vw] sm:w-auto my-10">
-      <h2 className="text-2xl font-semibold mb-4 text-white text-center">
-        All Attendance Records For {UserName}
-      </h2>
-      <UserSelection />
+      <UserSelection type="Attendance" />
       <div className="overflow-x-auto flex flex-col">
         <table className="min-w-full bg-blend-darken border-2 border-charcoal-gray shadow-md rounded-lg">
           <thead>
