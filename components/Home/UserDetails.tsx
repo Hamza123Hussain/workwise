@@ -13,7 +13,7 @@ const UserDetails = () => {
     if (SignoutDone) Dispatch(ClearUser())
   }
   return (
-    <div className=" flex items-center gap-2 justify-end">
+    <div className=" flex items-center flex-col gap-2 justify-center">
       <div className=" flex items-center gap-2 ">
         <Image
           src={user.imageUrl}
