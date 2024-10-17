@@ -2,13 +2,15 @@ import { createNewAttendance } from '@/functions/Attendance/NewAttendance'
 import { updateAttendance } from '@/functions/Attendance/UpdateAttendance'
 import toast from 'react-hot-toast'
 import { getUserLocation } from './LocaitionGet'
+import { LocationCoords } from '@/utils/AttendanceInterface'
 export const handleCheckInCheckOut = async (
   userEmail: string,
   currentTime: Date,
   checkinStatus: boolean,
   attendanceId: string | null,
   setAttendanceId: (id: string | null) => void,
-  setCheckinStatus: (status: boolean) => void
+  setCheckinStatus: (status: boolean) => void,
+  setLocation: (currentlocation: LocationCoords) => void
 ) => {
   const time = currentTime.toISOString()
   try {
@@ -27,6 +29,11 @@ export const handleCheckInCheckOut = async (
         location
       )
       setAttendanceId(newAttendance.attendance._id)
+      setLocation({
+        latitude: newAttendance.attendance.latitude,
+        longitude: newAttendance.attendance.longitude,
+        location: newAttendance.attendance.Location,
+      })
       toast.success('You have Checked In')
       setCheckinStatus(true)
     } else {
@@ -37,7 +44,7 @@ export const handleCheckInCheckOut = async (
           id: attendanceId,
           ExitTime: time,
           CheckInStatus: false,
-          // location,
+          location,
         })
         toast.success('You have Checked OUT')
         setCheckinStatus(false)
