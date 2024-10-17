@@ -8,7 +8,6 @@ import ShowTime from './ShowTime'
 import ShowAddress from './ShowAddress'
 import { GetCurrentAttendance } from '@/functions/Attendance/Checkout/CurrentAttendance'
 import { LocationCoords } from '@/utils/AttendanceInterface'
-
 const TimeBtn: React.FC = () => {
   const User = useSelector((state: RootState) => state.user)
   const [onBreak, setOnBreak] = useState<boolean>(false) // Break status
@@ -21,16 +20,13 @@ const TimeBtn: React.FC = () => {
     longitude: 0,
     location: '',
   })
-
   useEffect(() => {
     const updateTime = () => {
       setCurrentTime(new Date())
     }
-
     const timerId = setInterval(updateTime, 1000)
     return () => clearInterval(timerId)
   }, [])
-
   useEffect(() => {
     if (User?.Email) {
       GetCurrentAttendance(
@@ -43,7 +39,6 @@ const TimeBtn: React.FC = () => {
       )
     }
   }, [User])
-
   return (
     <div className="  sm:w-4/12 w-full h-fit p-6 rounded-lg shadow-md border-2 border-purple-600">
       {loading ? (
@@ -68,6 +63,7 @@ const TimeBtn: React.FC = () => {
               attendanceId={attendanceId}
               setAttendanceId={setAttendanceId}
               setCheckinStatus={setCheckinStatus}
+              setLocation={setLocation}
             />
             <ShowAddress location={currentLocation} />
           </div>
@@ -76,5 +72,4 @@ const TimeBtn: React.FC = () => {
     </div>
   )
 }
-
 export default TimeBtn
