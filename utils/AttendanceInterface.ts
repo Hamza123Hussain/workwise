@@ -13,4 +13,5 @@ export const ApiUrl = 'https://workwise-backend-puce.vercel.app/'
 export type LocationCoords = {
   latitude: number
   longitude: number
+  location: string
 }
