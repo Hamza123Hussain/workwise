@@ -10,7 +10,7 @@ const HomePage = () => {
       {/* Welcome Message */}
       <div className="my-8 flex items-center justify-center">
         <Image
-          width={400}
+          width={200}
           height={200}
           src="/Logo.png"
           alt="Logo"
