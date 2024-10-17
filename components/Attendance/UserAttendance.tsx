@@ -33,7 +33,7 @@ const UserAttendance: React.FC = () => {
   return (
     <div className="p-6">
       {userAttendance.length > 0 ? (
-        <AttendanceTable Attendance={userAttendance} UserName={user.Name} />
+        <AttendanceTable Attendance={userAttendance} />
       ) : (
         <div className="min-h-screen flex flex-col justify-center items-center text-center p-4">
           <h1 className="text-6xl text-white font-bold mb-4">
