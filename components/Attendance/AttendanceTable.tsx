@@ -1,7 +1,6 @@
 import React from 'react'
 import AttendanceCard from './AttendanceCard'
 import { AttendanceRecord } from '../../utils/AttendanceInterface'
-import UserSelection from '../Layout/UserSelection'
 const AttendanceTable = ({
   Attendance,
 }: {
@@ -17,7 +16,6 @@ const AttendanceTable = ({
 
   return (
     <div className=" mx-auto px-4 py-6 w-[90vw] sm:w-auto my-10">
-      <UserSelection type="Attendance" />
       <div className="overflow-x-auto flex flex-col">
         <table className="min-w-full bg-blend-darken border-2 border-charcoal-gray shadow-md rounded-lg">
           <thead>

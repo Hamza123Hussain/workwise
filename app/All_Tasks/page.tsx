@@ -12,13 +12,17 @@ const AllUserTasks = () => {
   const User = useSelector((state: RootState) => state.user)
   const [ALL_TASKS, setALL_TASKS] = useState<{
     [key: string]: TaskFetch[]
-  }>({}) // Fixed type to correctly represent ALL_TASKS
+  }>({})
   useEffect(() => {
     AllTasks(User.Email, setLoading, setALL_TASKS)
-  }, [])
+    return () => {
+      AllTasks(User.Email, setLoading, setALL_TASKS)
+    }
+  }, [User.Email]) // Added User.Email as a dependency
+
   if (loading) {
     return (
-      <div className=" min-h-screen justify-center items-center flex">
+      <div className="min-h-screen justify-center items-center flex">
         <Loader />
       </div>
     )
@@ -29,11 +33,25 @@ const AllUserTasks = () => {
         ALL TASK DETAILS
       </h1>
       <div className="overflow-x-auto p-4 text-center w-[90vw] sm:w-auto">
-        <table className="w-full text-center my-5">
-          {' '}
-          <TableHead />
-          <MainTable groupedAttendance={ALL_TASKS} />{' '}
-        </table>
+        {!loading ? (
+          <table className="w-full text-center my-5">
+            <TableHead />
+            <MainTable groupedAttendance={ALL_TASKS} />
+          </table>
+        ) : (
+          <div className="min-h-screen flex flex-col justify-center items-center text-center p-4">
+            <h2 className="text-2xl text-white font-bold mb-4">
+              No Tasks Found
+            </h2>
+            <p className="text-lg text-gray-300 mb-6">
+              It seems there are no tasks available. Please check back later or
+              reach out to your administrator.
+            </p>
+            <button className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded transition duration-300">
+              Go to Dashboard
+            </button>
+          </div>
+        )}
       </div>
     </>
   )

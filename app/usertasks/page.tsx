@@ -1,6 +1,5 @@
 'use client'
 import UserSelection from '@/components/Layout/UserSelection'
-import Loader from '@/components/Loader'
 import TaskCard2 from '@/components/Tasks/TaskCard2'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { TaskFetch } from '@/utils/TaskformInterface'
@@ -8,11 +7,22 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { fetchUserTasks } from '@/functions/Frontend/UserTasks' // Ensure correct import
 import Empty_Task_Test from '@/components/Tasks/Empty_Task_Test'
+import { UserFetched } from '@/utils/SignUpInterface'
+import { Allusers } from '@/functions/AUTH/Allusers'
+import Loader from '@/components/Loader'
 const UserTasks = () => {
-  const [loading, setLoading] = useState(false)
+  const [Users, SetUserFetched] = useState<UserFetched[]>([])
+  const [loading, setLoading] = useState(true)
   const [allTasks, setTasks] = useState<TaskFetch[]>([])
   const user = useSelector((state: RootState) => state.user)
   const selectedUser = useSelector((state: RootState) => state.Select)
+  const Getusers = async () => {
+    const Data = await Allusers(user.Email)
+    if (Data) {
+      SetUserFetched(Data)
+      setLoading(false)
+    }
+  }
   useEffect(() => {
     const fetchData = async () => {
       const userName =
@@ -21,6 +31,12 @@ const UserTasks = () => {
       setTasks(tasks) // Set the fetched tasks
     }
     fetchData() // Call the fetchData function
+    Getusers()
+
+    return () => {
+      fetchData()
+      Getusers()
+    }
   }, [selectedUser, user.Email, user.Name])
 
   if (loading) {
@@ -37,9 +53,9 @@ const UserTasks = () => {
           Tasks of {user.Name}
         </h2>
       )}
-      <UserSelection type={'Task'} />
+      <UserSelection type={'Task'} Users={Users} />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {allTasks.length > 0 ? (
+        {allTasks.length > 0 && !loading ? (
           allTasks.map((task) => (
             <TaskCard2 key={task.createdAt} TaskDetail={task} />
           ))

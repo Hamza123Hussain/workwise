@@ -20,6 +20,9 @@ const AllUserData = () => {
   }
   useEffect(() => {
     Getusers()
+    return () => {
+      Getusers()
+    }
   }, [])
   if (Loading) {
     return (
