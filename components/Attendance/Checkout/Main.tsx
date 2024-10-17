@@ -11,6 +11,7 @@ const CheckIn: React.FC<CheckInProps> = ({
   attendanceId,
   setAttendanceId,
   setCheckinStatus,
+  setLocation,
 }) => {
   const User = useSelector((state: RootState) => state.user)
 
@@ -22,7 +23,8 @@ const CheckIn: React.FC<CheckInProps> = ({
       checkinStatus,
       attendanceId,
       setAttendanceId,
-      setCheckinStatus
+      setCheckinStatus,
+      setLocation
     )
     setLoading(false) // Set loading state back to false
   }
