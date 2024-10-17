@@ -38,7 +38,6 @@ const UserAttendance: React.FC = () => {
     Getusers() // Fetch users
     return () => {
       fetchAttendance() // Fetch attendance
-      Getusers()
     } // Fetch users
   }, [user, selectedUser])
 

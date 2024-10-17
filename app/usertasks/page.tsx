@@ -35,7 +35,6 @@ const UserTasks = () => {
 
     return () => {
       fetchData()
-      Getusers()
     }
   }, [selectedUser, user.Email, user.Name])
 
