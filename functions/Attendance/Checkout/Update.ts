@@ -14,12 +14,12 @@ export const handleCheckInCheckOut = async (
   const time = currentTime.toISOString()
 
   try {
-    // Get and log the user's location during check-in/out
-    const location = await getUserLocation() // Await the promise
-    if (!location) {
-      toast.error('NO LOCATION FOUND')
-      return // Early exit if no location found
-    }
+    // // Get and log the user's location during check-in/out
+    // const location = await getUserLocation() // Await the promise
+    // if (!location) {
+    //   toast.error('NO LOCATION FOUND')
+    //   return // Early exit if no location found
+    // }
 
     if (!checkinStatus) {
       // Check-in process
@@ -35,7 +35,7 @@ export const handleCheckInCheckOut = async (
           id: attendanceId,
           ExitTime: time,
           CheckInStatus: false,
-          location,
+          // location,
         })
         toast.success('You have Checked OUT')
         setCheckinStatus(false)
@@ -45,6 +45,6 @@ export const handleCheckInCheckOut = async (
     }
   } catch (error) {
     console.error('Error during check-in/out:', error)
-    toast.error('Failed to retrieve location or update attendance.')
+    // toast.error('Failed to retrieve location or update attendance.')
   }
 }

@@ -6,7 +6,6 @@ interface UpdateAttendanceData {
   id: string
   ExitTime: string
   CheckInStatus: boolean
-  location: LocationCoords
 }
 
 export const updateAttendance = async (data: UpdateAttendanceData) => {
