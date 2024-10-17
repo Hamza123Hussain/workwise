@@ -1,28 +1,21 @@
-// showAddress.tsx
-import { getAddressFromCoordinates } from '@/functions/Attendance/Checkout/GetExactLocation'
 import { LocationCoords } from '@/utils/AttendanceInterface'
-import { useEffect, useState } from 'react'
+
+// showAddress.tsx
 const ShowAddress = ({ location }: { location: LocationCoords }) => {
-  const [address, setAddress] = useState<string>('')
-  useEffect(() => {
-    const fetchAddress = async () => {
-      try {
-        const fetchedAddress = await getAddressFromCoordinates(
-          location.latitude, // Latitude first
-          location.longitude
-        )
-        setAddress(fetchedAddress) // Update the address state
-      } catch (error) {
-        console.error('Failed to fetch address', error)
-      }
-    }
-    fetchAddress() // Invoke the fetchAddress function
-  }, [location]) // Add location to the dependency array
   return (
-    <div className="text-white">
-      <h1>Your Address</h1>
-      {<p>Address: {address}</p>} {/* Display the address */}
+    <div className="bg-gradient-to-r from-indigo-500 to-blue-600 p-6 rounded-lg mt-5 shadow-lg transition-transform transform hover:scale-105">
+      <h1 className="text-3xl font-bold text-white">Your Address</h1>
+      <p className="text-white text-lg mt-2">{location.location}</p>
+      <div className="mt-4">
+        <p className="text-gray-100 text-md">
+          <span className="font-semibold">Latitude:</span> {location.latitude}
+        </p>
+        <p className="text-gray-100 text-md">
+          <span className="font-semibold">Longitude:</span> {location.longitude}
+        </p>
+      </div>
     </div>
   )
 }
+
 export default ShowAddress
