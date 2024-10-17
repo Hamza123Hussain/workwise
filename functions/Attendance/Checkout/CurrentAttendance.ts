@@ -8,7 +8,7 @@ export const GetCurrentAttendance = async (
   setAttendanceId: (id: string | null) => void,
   setCheckinStatus: (status: boolean) => void,
   setOnBreak: (status: boolean) => void,
-  setLocation: (Location: LocationCoords) => void
+  setLocation: (currentLocation: LocationCoords) => void
 ) => {
   setLoading(true)
   try {
@@ -20,6 +20,7 @@ export const GetCurrentAttendance = async (
       setLocation({
         latitude: Data[0].latitude,
         longitude: Data[0].longitude,
+        location: Data[0].Location,
       })
     } else {
       setAttendanceId(null)
