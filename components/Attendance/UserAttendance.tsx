@@ -65,7 +65,13 @@ const UserAttendance: React.FC = () => {
         </div>
       ) : (
         <>
-          <UserSelection type="Attendance" Users={Users} />
+          {user.Email !== 'octtoppus1@gmail.com' ? (
+            <h2 className="text-2xl font-semibold mb-4 text-white text-center">
+              All Attendance Records For {user.Name}
+            </h2>
+          ) : (
+            <UserSelection type="Attendance" Users={Users} />
+          )}
           <AttendanceTable Attendance={userAttendance} />
         </>
       )}

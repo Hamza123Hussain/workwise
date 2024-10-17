@@ -31,13 +31,11 @@ const UserTasks = () => {
       setTasks(tasks) // Set the fetched tasks
     }
     fetchData() // Call the fetchData function
-    Getusers()
-
+    user.Email == 'octtoppus1@gmail.com' ? Getusers() : ''
     return () => {
       fetchData()
     }
   }, [selectedUser, user.Email, user.Name])
-
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -47,12 +45,13 @@ const UserTasks = () => {
   }
   return (
     <div className="p-6 rounded-lg shadow-md my-10">
-      {user.Email !== 'octtoppus1@gmail.com' && (
+      {user.Email !== 'octtoppus1@gmail.com' ? (
         <h2 className="font-semibold text-2xl text-purple-500 mb-4">
           Tasks of {user.Name}
         </h2>
+      ) : (
+        <UserSelection type={'Task'} Users={Users} />
       )}
-      <UserSelection type={'Task'} Users={Users} />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {allTasks.length > 0 && !loading ? (
           allTasks.map((task) => (

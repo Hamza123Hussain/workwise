@@ -9,22 +9,33 @@ import { MergedUserData } from '@/utils/Report_Interface'
 import { TaskFetch } from '@/utils/TaskformInterface'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+
 const Report: React.FC = () => {
   const user = useSelector((state: RootState) => state.user)
   const [groupedAttendance, setGroupedAttendance] = useState<{
     [key: string]: AttendanceRecord[]
   }>({})
-  const [ALL_TASKS, setALL_TASKS] = useState<{
-    [key: string]: TaskFetch[]
-  }>({})
-  const [loading, setLoading] = useState<boolean>(false)
+  const [ALL_TASKS, setALL_TASKS] = useState<{ [key: string]: TaskFetch[] }>({})
+  const [loadingAttendance, setLoadingAttendance] = useState<boolean>(true)
+  const [loadingTasks, setLoadingTasks] = useState<boolean>(true)
   const [mergedData, setMergedData] = useState<MergedUserData[]>([])
+
   useEffect(() => {
     if (user.Email) {
-      getAttendance(user.Email, setLoading, setGroupedAttendance)
-      AllTasks(user.Email, setLoading, setALL_TASKS)
+      // Fetch attendance
+      getAttendance(
+        user.Email,
+        setLoadingAttendance,
+        setGroupedAttendance
+      ).finally(() => setLoadingAttendance(false)) // Ensure loading state is updated
+
+      // Fetch tasks
+      AllTasks(user.Email, setLoadingTasks, setALL_TASKS).finally(() =>
+        setLoadingTasks(false)
+      ) // Ensure loading state is updated
     }
   }, [user.Email])
+
   // Merge groupedAttendance and ALL_TASKS into a single array
   useEffect(() => {
     const merged = Object.keys(groupedAttendance).map((userKey) => {
@@ -37,13 +48,10 @@ const Report: React.FC = () => {
     setMergedData(merged)
   }, [groupedAttendance, ALL_TASKS])
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex justify-center items-center">
-        <Loader />
-      </div>
-    )
-  }
-  return <ReportCard mergedData={mergedData} />
+  // Check if both data fetching is complete
+  const isLoading = loadingAttendance || loadingTasks
+
+  return <>{isLoading ? <Loader /> : <ReportCard mergedData={mergedData} />}</>
 }
+
 export default Report
