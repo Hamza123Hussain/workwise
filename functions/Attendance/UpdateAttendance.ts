@@ -1,4 +1,4 @@
-import { ApiUrl } from '@/utils/AttendanceInterface'
+import { ApiUrl, LocationCoords } from '@/utils/AttendanceInterface'
 import axios from 'axios'
 
 interface UpdateAttendanceData {
@@ -6,6 +6,7 @@ interface UpdateAttendanceData {
   id: string
   ExitTime: string
   CheckInStatus: boolean
+  location: LocationCoords
 }
 
 export const updateAttendance = async (data: UpdateAttendanceData) => {
