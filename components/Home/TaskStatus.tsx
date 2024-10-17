@@ -7,12 +7,12 @@ import TaskOverview from './TaskOverview'
 import { GetUserTasks } from '@/functions/Task/GetUserTasks'
 
 const TaskStatus = () => {
-  const [Loading, SetLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [allTasks, setTasks] = useState<TaskFetch[]>([])
   const user = useSelector((state: RootState) => state.user)
 
   const fetchData = async () => {
-    SetLoading(true)
+    setLoading(true)
     try {
       const data = await GetUserTasks(user.Name, user.Email)
       if (data) {
@@ -21,7 +21,7 @@ const TaskStatus = () => {
     } catch (error) {
       console.error('Error fetching tasks:', error)
     } finally {
-      SetLoading(false)
+      setLoading(false)
     }
   }
 
@@ -31,7 +31,7 @@ const TaskStatus = () => {
 
   return (
     <div className="border-2 border-purple-600 text-white flex-1 p-4 rounded-lg shadow-lg">
-      {Loading ? (
+      {loading ? (
         <div className="flex justify-center items-center">
           <Loader />
         </div>
@@ -40,6 +40,7 @@ const TaskStatus = () => {
           <h2 className="text-xl sm:text-2xl font-bold mb-6">
             Task Progress Overview
           </h2>
+
           <TaskOverview allTasks={allTasks} />
         </div>
       )}
