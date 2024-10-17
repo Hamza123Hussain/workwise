@@ -23,12 +23,7 @@ export const handleCheckInCheckOut = async (
 
     if (!checkinStatus) {
       // Check-in process
-      const newAttendance = await createNewAttendance(
-        userEmail,
-        time,
-        true,
-        location
-      )
+      const newAttendance = await createNewAttendance(userEmail, time, true)
       setAttendanceId(newAttendance.attendance._id)
       toast.success('You have Checked In')
       setCheckinStatus(true)
