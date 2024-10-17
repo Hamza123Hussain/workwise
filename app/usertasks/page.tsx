@@ -31,7 +31,7 @@ const UserTasks = () => {
       setTasks(tasks) // Set the fetched tasks
     }
     fetchData() // Call the fetchData function
-    user.Email == 'octtoppus1@gmail.com' ? Getusers() : ''
+    Getusers()
     return () => {
       fetchData()
     }
