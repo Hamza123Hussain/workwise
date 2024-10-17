@@ -1,4 +1,4 @@
-import { ApiUrl, LocationCoords } from '@/utils/AttendanceInterface'
+import { ApiUrl } from '@/utils/AttendanceInterface'
 import axios from 'axios'
 
 interface UpdateAttendanceData {

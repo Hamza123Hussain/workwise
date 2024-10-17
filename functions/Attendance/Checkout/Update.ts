@@ -2,7 +2,6 @@ import { createNewAttendance } from '@/functions/Attendance/NewAttendance'
 import { updateAttendance } from '@/functions/Attendance/UpdateAttendance'
 import toast from 'react-hot-toast'
 import { getUserLocation } from './LocaitionGet'
-
 export const handleCheckInCheckOut = async (
   userEmail: string,
   currentTime: Date,
@@ -12,18 +11,21 @@ export const handleCheckInCheckOut = async (
   setCheckinStatus: (status: boolean) => void
 ) => {
   const time = currentTime.toISOString()
-
   try {
     // // Get and log the user's location during check-in/out
-    // const location = await getUserLocation() // Await the promise
-    // if (!location) {
-    //   toast.error('NO LOCATION FOUND')
-    //   return // Early exit if no location found
-    // }
-
+    const location = await getUserLocation() // Await the promise
+    if (!location) {
+      toast.error('NO LOCATION FOUND')
+      return // Early exit if no location found
+    }
     if (!checkinStatus) {
       // Check-in process
-      const newAttendance = await createNewAttendance(userEmail, time, true)
+      const newAttendance = await createNewAttendance(
+        userEmail,
+        time,
+        true,
+        location
+      )
       setAttendanceId(newAttendance.attendance._id)
       toast.success('You have Checked In')
       setCheckinStatus(true)
