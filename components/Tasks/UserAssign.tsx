@@ -33,7 +33,7 @@ const UserAssign = ({
       </label>
       <select
         name="assignedTo"
-        className="w-full p-3 rounded-lg shadow-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+        className="w-full p-3 rounded-lg shadow-md bg-white text-[#a078ff] focus:outline-none focus:ring-2 focus:ring-purple-500"
         value={value}
         onChange={handleChange}
         required
