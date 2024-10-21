@@ -11,12 +11,12 @@ const TaskField: React.FC<TaskFieldProps> = ({
     <>
       {name === 'description' ? (
         <div className="mb-4">
-          <label className="block text-sm font-bold mb-2 text-purple-400">
+          <label className="block text-sm font-bold mb-2 text-purple-500">
             {Label}
           </label>
           <textarea
             name={name}
-            className="w-full p-3 rounded-lg shadow-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full p-3 rounded-lg shadow-md bg-white text-purpleGradientStart focus:outline-none focus:ring-2 focus:ring-purple-500"
             value={value}
             onChange={handleChange}
             required
@@ -24,12 +24,12 @@ const TaskField: React.FC<TaskFieldProps> = ({
         </div>
       ) : name == 'priority' ? (
         <div className="mb-4">
-          <label className="block text-sm font-bold mb-2 text-purple-400">
+          <label className="block text-sm font-bold mb-2 text-purple-500">
             {Label}
           </label>
           <select
             name={name}
-            className="w-full p-3 rounded-lg shadow-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full p-3 rounded-lg shadow-md bg-white text-purpleGradientStart focus:outline-none focus:ring-2 focus:ring-purple-500"
             value={value}
             onChange={handleChange}
             required
@@ -41,12 +41,12 @@ const TaskField: React.FC<TaskFieldProps> = ({
         </div>
       ) : name == 'TaskType' ? (
         <div className="mb-4">
-          <label className="block text-sm font-bold mb-2 text-purple-400">
+          <label className="block text-sm font-bold mb-2 text-purple-500">
             {Label}
           </label>
           <select
             name={name}
-            className="w-full p-3 rounded-lg shadow-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full p-3 rounded-lg shadow-md bg-white text-purpleGradientStart focus:outline-none focus:ring-2 focus:ring-purple-500"
             value={value}
             onChange={handleChange}
             required
@@ -58,13 +58,13 @@ const TaskField: React.FC<TaskFieldProps> = ({
         </div>
       ) : (
         <div className="mb-4">
-          <label className="block text-sm font-bold mb-2 text-purple-400">
+          <label className="block text-sm font-bold mb-2 text-purple-500">
             {Label}
           </label>
           <input
             type={type}
             name={name}
-            className="w-full p-3 rounded-lg shadow-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full p-3 rounded-lg shadow-md bg-white text-purpleGradientStart focus:outline-none focus:ring-2 focus:ring-purple-500"
             value={value}
             onChange={handleChange}
             required
