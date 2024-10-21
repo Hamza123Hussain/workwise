@@ -14,40 +14,34 @@ const TaskBody = ({ task }: { task: TaskFetch }) => {
     new Date(task.dueDate) < new Date(new Date().setHours(0, 0, 0, 0))
 
   return (
-    <tr key={task.createdAt}>
-      <td className="border border-purple-500 p-2 text-xs  ">{task.name}</td>
-      {/* <td className="border border-purple-500 p-2 text-xs  ">
-        {task.assignedTo}
-      </td> */}
+    <tr key={task.createdAt} className="bg-white hover:bg-gray-100">
+      <td className="border border-gray-300 p-2 text-xs text-gray-800">
+        {task.name}
+      </td>
       <td
-        className={`border border-purple-500 p-2 text-center ${progress_Class(
+        className={`border border-gray-300 p-2 text-center ${progress_Class(
           task
-        )} text-transparent bg-<color> bg-clip-text text-xs  `}
+        )} text-gray-950 font-bold`}
       >
         {task.progress}
       </td>
-      {/* <td className="border border-purple-500 p-2 text-xs  ">
-        {task.description}
-      </td> */}
-      <td className="border border-purple-500 p-2 text-xs  ">
+      <td className="border border-gray-300 p-2 text-xs text-gray-800">
         {new Date(task.dueDate).toLocaleDateString()}
       </td>
-      {/* Priority column with dynamic color based on priority */}
       <td
-        className={`border border-purple-500 p-2 text-center ${priorityClass(
+        className={`border border-gray-300 p-2 text-center ${priorityClass(
           task
-        )} text-transparent bg-<color> bg-clip-text text-xs  `}
+        )} text-xs text-gray-950 font-bold`}
       >
         {task.priority}
       </td>
-      <td className="border border-purple-500 p-4 flex justify-center">
+      <td className="border border-gray-300 p-4 flex justify-center">
         <button
-          onClick={() => !isDueDatePast && Router.push(`/edittask/${task._id}`)} // Navigate only if the due date is not past
-          className={`bg-gradient-to-t from-black to-purple-600 hover:from-purple-700 hover:to-purple-800 text-white rounded-lg p-2 w-full transition-colors text-xs  
-                      ${
-                        isDueDatePast ? 'bg-gray-600 cursor-not-allowed ' : ''
-                      }`} // Change button style if due date is past
-          disabled={isDueDatePast} // Disable button if due date is past
+          onClick={() => !isDueDatePast && Router.push(`/edittask/${task._id}`)}
+          className={`bg-gradient-to-t from-[#5B3F9D] to-[#6D5B9D] hover:from-purple-700 hover:to-purple-800 text-white rounded-lg p-2 w-full transition-colors text-xs ${
+            isDueDatePast ? 'bg-gray-300 cursor-not-allowed' : ''
+          }`}
+          disabled={isDueDatePast}
         >
           Edit
         </button>
