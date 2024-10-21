@@ -46,7 +46,7 @@ const UserTasks = () => {
   return (
     <div className="p-6 rounded-lg shadow-md my-10">
       {user.Email !== 'octtoppus1@gmail.com' ? (
-        <h2 className="font-semibold text-2xl text-purple-500 mb-4">
+        <h2 className="font-semibold text-2xl text-[#a078ff] mb-4">
           Tasks of {user.Name}
         </h2>
       ) : (

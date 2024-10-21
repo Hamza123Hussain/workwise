@@ -30,14 +30,14 @@ const RecentTasks = () => {
   }, [user.Email])
 
   return (
-    <div className="p-6 rounded-lg shadow-lg bg-white">
+    <div className="p-6 rounded-lg shadow-lg bg-white border-purple-300 border-2">
       {Loading ? (
         <div className="flex items-center justify-center my-10">
           <Loader />
         </div>
       ) : (
         <>
-          <h2 className="font-semibold text-2xl text-[#a078ff]">
+          <h2 className="font-semibold text-2xl text-[#a078ff] ">
             Recent Tasks
           </h2>
           <div className="mt-4 overflow-x-auto">

@@ -12,7 +12,7 @@ import { RootState } from '@/utils/Redux/Store/Store'
 const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
   const user = useSelector((state: RootState) => state.user)
   return (
-    <div className="bg-purple-900 text-white rounded-lg shadow-lg p-6 w-full md:w-[78%]  mx-auto my-4 transition-transform duration-300 hover:scale-105">
+    <div className="bg-[#a078ff] text-white rounded-2xl border-purple-900 hover:border-2  p-6 w-full md:w-[78%]  mx-auto my-4 transition-transform duration-300 hover:scale-105">
       <div className="border-b border-gray-600 mb-2">
         <h2 className="text-xl font-bold">{TaskDetail.name}</h2>
       </div>
