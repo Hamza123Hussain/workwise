@@ -8,8 +8,7 @@ import { decryptData } from '@/utils/Encryprion'
 import SignIn from '../Auth/SignIn'
 import Sidebar from '../Home/SideBar/SideBar'
 import HomePage from '../Home/Homepage'
-import Footer from './Footer'
-import Header from './Header'
+
 const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
   const User = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
@@ -34,19 +33,12 @@ const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
     return null // or a loading spinner if preferred
   }
   return User.Email ? (
-    <div className=" flex bg-purple-black min-h-screen w-[100vw]">
+    <div className=" flex bg-white  min-h-screen w-[100vw]">
       <Sidebar />
       <div className=" flex-1 ">{!isAuthPage ? children : <HomePage />}</div>
     </div>
   ) : (
-    <div className=" min-h-screen flex flex-col  bg-purple-black p-6 ">
-      {' '}
-      <Header />
-      <div className=" flex-1 flex justify-center items-center">
-        {isAuthPage ? children : <SignIn />}
-      </div>
-      <Footer />
-    </div>
+    <div>{isAuthPage ? children : <SignIn />}</div>
   )
 }
 export default ConditionalLayout
