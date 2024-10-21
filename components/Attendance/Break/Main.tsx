@@ -40,10 +40,10 @@ const BreakMain = ({
     <button
       onClick={handleBreak}
       className={`${
-        onBreak ? 'bg-orange-600' : 'bg-blue-600'
+        onBreak ? 'bg-[#FFB299]' : 'bg-[#FFEB3B]' // Coral for end break, Sunny Yellow for start break
       } text-white p-4 rounded-lg shadow hover:${
-        onBreak ? 'bg-orange-800' : 'bg-blue-800'
-      } transition duration-200  w-full  flex items-center justify-center`}
+        onBreak ? 'bg-[#FF6F61]' : 'bg-[#FFD700]' // Darker Coral on hover, Bright Gold for hover on Sunny Yellow
+      } transition duration-200 w-full flex items-center justify-center`}
     >
       {onBreak ? 'End Break' : 'Start Break'}
     </button>

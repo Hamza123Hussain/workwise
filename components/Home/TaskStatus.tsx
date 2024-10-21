@@ -36,8 +36,8 @@ const TaskStatus = () => {
           <Loader />
         </div>
       ) : (
-        <div>
-          <h2 className="text-xl sm:text-2xl font-bold mb-6">
+        <div className=" text-black">
+          <h2 className="text-xl sm:text-2xl font-bold mb-6 text-[#a078ff]">
             Task Progress Overview
           </h2>
 

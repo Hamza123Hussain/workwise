@@ -31,7 +31,7 @@ const TaskOverview = ({ allTasks }: { allTasks: TaskFetch[] }) => {
         <div className="mb-4">
           <p className="text-lg font-semibold">
             <strong>Overdue:</strong>
-            <span className="text-orange-500"> {overdueTasks.length}</span>
+            <span className="text-[#FF5722]"> {overdueTasks.length}</span>
           </p>
         </div>
       </div>
@@ -39,11 +39,11 @@ const TaskOverview = ({ allTasks }: { allTasks: TaskFetch[] }) => {
       <div className="mb-4">
         <p className="text-lg font-semibold">
           <strong>Tasks Done:</strong>
-          <span className="text-green-500"> {tasksDone.length}</span>
+          <span className="text-[#4CAF50]"> {tasksDone.length}</span>
         </p>
-        <div className="w-full bg-gray-600 rounded-full h-4 mt-2">
+        <div className="w-full bg-gray-300 rounded-full h-4 mt-2">
           <div
-            className="bg-green-500 h-4 rounded-full"
+            className="bg-[#4CAF50] h-4 rounded-full"
             style={{ width: `${tasksDonePercentage}%` }}
           ></div>
         </div>
@@ -55,11 +55,11 @@ const TaskOverview = ({ allTasks }: { allTasks: TaskFetch[] }) => {
       <div className="mb-4">
         <p className="text-lg font-semibold">
           <strong>Tasks Left:</strong>
-          <span className="text-red-500"> {tasksLeft}</span>
+          <span className="text-[#FF9800]"> {tasksLeft}</span>
         </p>
-        <div className="w-full bg-gray-600 rounded-full h-4 mt-2">
+        <div className="w-full bg-gray-300 rounded-full h-4 mt-2">
           <div
-            className="bg-red-500 h-4 rounded-full"
+            className="bg-[#FF9800] h-4 rounded-full"
             style={{ width: `${tasksLeftPercentage}%` }}
           ></div>
         </div>
@@ -71,21 +71,21 @@ const TaskOverview = ({ allTasks }: { allTasks: TaskFetch[] }) => {
       <div className="mb-4">
         <p className="text-lg font-semibold">
           <strong>High Priority Tasks:</strong>
-          <span className="text-red-600"> {highPriorityTasks.length}</span>
+          <span className="text-[#F44336]"> {highPriorityTasks.length}</span>
         </p>
       </div>
 
       <div className="mb-4">
         <p className="text-lg font-semibold">
           <strong>Medium Priority Tasks:</strong>
-          <span className="text-yellow-500"> {mediumPriorityTasks.length}</span>
+          <span className="text-[#FFEB3B]"> {mediumPriorityTasks.length}</span>
         </p>
       </div>
 
       <div className="mb-4">
         <p className="text-lg font-semibold">
           <strong>Low Priority Tasks:</strong>
-          <span className="text-green-400"> {lowPriorityTasks.length}</span>
+          <span className="text-[#8BC34A]"> {lowPriorityTasks.length}</span>
         </p>
       </div>
     </>

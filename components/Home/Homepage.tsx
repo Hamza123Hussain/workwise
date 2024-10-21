@@ -10,8 +10,8 @@ const HomePage = () => {
       {/* Welcome Message */}
       <div className="my-8 flex items-center justify-center">
         <Image
-          width={200}
-          height={200}
+          width={250}
+          height={250}
           src="/Logo.png"
           alt="Logo"
           className=" my-5"
@@ -22,7 +22,7 @@ const HomePage = () => {
       </div>
       {/* Main Content with Two Sections */}
       <div className="grid grid-cols-1 w-full gap-6 my-5">
-        <div className="flex flex-col sm:flex-row gap-5">
+        <div className="flex flex-col gap-5">
           <TimeBtn />
           <TaskStatus />
         </div>

@@ -20,25 +20,25 @@ const AttendanceTable = ({
         <table className="min-w-full bg-blend-darken border-2 border-charcoal-gray shadow-md rounded-lg">
           <thead>
             <tr className="bg-blend-darken">
-              <th className="border border-purple-800 px-4 py-2  text-white">
+              <th className="border border-purple-800 px-4 py-2  text-black">
                 User Data
               </th>
-              <th className="border border-purple-800 px-4 py-2  text-white">
+              <th className="border border-purple-800 px-4 py-2  text-black">
                 Entry Time
               </th>
-              <th className="border border-purple-800 px-4 py-2  text-white">
+              <th className="border border-purple-800 px-4 py-2  text-black">
                 Exit Time
               </th>
-              <th className="border border-purple-800 px-4 py-2  text-white">
+              <th className="border border-purple-800 px-4 py-2  text-black">
                 Break Time
               </th>
-              <th className="border border-purple-800 px-4 py-2  text-white">
+              <th className="border border-purple-800 px-4 py-2  text-black">
                 Hour Worked
               </th>
-              <th className="border border-purple-800 px-4 py-2  text-white">
+              <th className="border border-purple-800 px-4 py-2  text-black">
                 Remaining Time
               </th>
-              <th className="border border-purple-800 px-4 py-2  text-white">
+              <th className="border border-purple-800 px-4 py-2  text-black">
                 Current Date
               </th>
             </tr>
@@ -49,7 +49,7 @@ const AttendanceTable = ({
             ))}
           </tbody>
         </table>
-        <div className="flex flex-col  justify-center   gap-4 items-center text-white my-5 space-y-4 ">
+        <div className="flex flex-col  justify-center   gap-4 items-center text-black my-5 space-y-4 ">
           <div className="bg-purpleGradientStart p-4 flex flex-col items-center text-center rounded-lg shadow-md transition-transform duration-200 w-full sm:w-1/2">
             <h1 className="text-lg font-bold">Number Of Hours Worked</h1>
             <span className="text-2xl">{HoursWorked.toFixed(2)}</span>

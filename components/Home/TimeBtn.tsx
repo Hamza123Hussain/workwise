@@ -40,7 +40,7 @@ const TimeBtn: React.FC = () => {
     }
   }, [User])
   return (
-    <div className="  sm:w-4/12 w-full h-fit p-6 rounded-lg shadow-md border-2 border-purple-600">
+    <div className="   w-full h-fit p-6 rounded-lg shadow-md border-2 border-purple-600">
       {loading ? (
         <div className="flex justify-center items-center">
           <Loader />
@@ -49,23 +49,25 @@ const TimeBtn: React.FC = () => {
         <>
           <ShowTime currentTime={currentTime} />
           <div className="flex  gap-4 mt-4 flex-col items-center justify-end">
-            {checkinStatus && (
-              <BreakMain
+            <ShowAddress location={currentLocation} />{' '}
+            <div className="flex  gap-4 mt-4 items-center w-full">
+              {checkinStatus && (
+                <BreakMain
+                  attendanceId={attendanceId}
+                  onBreak={onBreak}
+                  setOnBreak={setOnBreak}
+                />
+              )}
+              <CheckIn
+                setLoading={setLoading}
+                currentTime={currentTime}
+                checkinStatus={checkinStatus}
                 attendanceId={attendanceId}
-                onBreak={onBreak}
-                setOnBreak={setOnBreak}
+                setAttendanceId={setAttendanceId}
+                setCheckinStatus={setCheckinStatus}
+                setLocation={setLocation}
               />
-            )}
-            <CheckIn
-              setLoading={setLoading}
-              currentTime={currentTime}
-              checkinStatus={checkinStatus}
-              attendanceId={attendanceId}
-              setAttendanceId={setAttendanceId}
-              setCheckinStatus={setCheckinStatus}
-              setLocation={setLocation}
-            />
-            <ShowAddress location={currentLocation} />
+            </div>
           </div>
         </>
       )}

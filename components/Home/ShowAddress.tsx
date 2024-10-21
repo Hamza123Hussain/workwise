@@ -3,7 +3,7 @@ import { LocationCoords } from '@/utils/AttendanceInterface'
 // showAddress.tsx
 const ShowAddress = ({ location }: { location: LocationCoords }) => {
   return (
-    <div className="bg-gradient-to-r from-indigo-500 to-blue-600 p-6 rounded-lg mt-5 shadow-lg transition-transform transform hover:scale-105">
+    <div className="bg-[#a078ff] p-6 rounded-lg mt-5 shadow-lg transition-transform transform hover:scale-105">
       <h1 className="text-3xl font-bold text-white">Your Address</h1>
       <p className="text-white text-lg mt-2">{location.location}</p>
       <div className="mt-4">

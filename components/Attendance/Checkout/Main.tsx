@@ -33,10 +33,10 @@ const CheckIn: React.FC<CheckInProps> = ({
     <button
       onClick={handleButtonClick}
       className={`${
-        !checkinStatus ? 'bg-green-600' : 'bg-red-600'
+        !checkinStatus ? 'bg-green-500' : 'bg-orange-600' // Lighter green for Check In, Orange for Check Out
       } text-white p-4 rounded-lg shadow hover:${
-        !checkinStatus ? 'bg-green-800' : 'bg-red-900'
-      } transition duration-200 w-full   flex items-center justify-center`}
+        !checkinStatus ? 'bg-green-600' : 'bg-orange-700' // Slightly darker for hover
+      } transition duration-200 w-full flex items-center justify-center`}
     >
       {!checkinStatus ? 'Check In' : 'Check Out'}
     </button>

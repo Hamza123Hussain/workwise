@@ -2,22 +2,23 @@ import React from 'react'
 
 const ShowTime = ({ currentTime }: { currentTime: Date }) => {
   return (
-    <>
-      <p className="font-bold text-white">
-        Date:
-        <span className="text-lg text-white">
-          {' '}
-          {currentTime.toLocaleDateString()}
-        </span>
-      </p>
-      <p className="font-bold text-white">
+    <div className=" flex justify-between">
+      {' '}
+      <p className="font-bold text-[#a078ff]">
         Current Time:
-        <span className="text-lg text-white">
+        <span className="text-lg text-[#a078ff]">
           {' '}
           {currentTime.toLocaleTimeString()}
         </span>
       </p>
-    </>
+      <p className="font-bold text-[#a078ff]">
+        Date:
+        <span className="text-lg text-[#a078ff]">
+          {' '}
+          {currentTime.toLocaleDateString()}
+        </span>
+      </p>
+    </div>
   )
 }
 
