@@ -4,35 +4,29 @@ import TaskBody from './TaskBody'
 
 const TaskCard = ({ allTasks }: { allTasks: TaskFetch[] }) => {
   return (
-    <table className="min-w-full border-collapse border border-black text-center">
+    <table className="min-w-full border-collapse border border-gray-300 text-center">
       {allTasks.length > 0 ? (
         <>
           <thead>
-            <tr className="bg-gradient-to-r from-purple-600 via-purple-500 to-purple-700">
-              <th className="border border-black p-2 text-white text-xs  ">
+            <tr className="bg-[#a078ff]">
+              <th className="border border-gray-300 p-2 text-white text-xs">
                 Task
               </th>
-              {/* <th className="border border-black p-2 text-white text-xs  ">
-                Assigned To
-              </th> */}
-              <th className="border border-black p-2 text-white text-xs  ">
+              <th className="border border-gray-300 p-2 text-white text-xs">
                 Status
               </th>
-              {/* <th className="border border-black p-2 text-white text-xs  ">
-                Description
-              </th> */}
-              <th className="border border-black p-2 text-white text-xs  ">
+              <th className="border border-gray-300 p-2 text-white text-xs">
                 Due Date
               </th>
-              <th className="border border-black p-2 text-white text-xs  ">
+              <th className="border border-gray-300 p-2 text-white text-xs">
                 Priority
               </th>
-              <th className="border border-black p-2 text-white text-xs  ">
+              <th className="border border-gray-300 p-2 text-white text-xs">
                 Edit
               </th>
             </tr>
           </thead>
-          <tbody className="text-gray-300">
+          <tbody className="text-gray-700">
             {allTasks.map((task) => (
               <TaskBody task={task} key={task.createdAt} />
             ))}
@@ -42,8 +36,8 @@ const TaskCard = ({ allTasks }: { allTasks: TaskFetch[] }) => {
         <tbody>
           <tr>
             <td
-              colSpan={7}
-              className="border border-black p-2 text-center text-gray-400 text-xs  "
+              colSpan={5}
+              className="border border-gray-300 p-2 text-center text-gray-400 text-xs"
             >
               No tasks available.
             </td>
