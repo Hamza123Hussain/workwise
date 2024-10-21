@@ -22,10 +22,10 @@ const UserSelection = ({
     <>
       {User.Email === 'octtoppus1@gmail.com' && Users.length > 0 ? ( // Check if there are users
         <div className="my-4">
-          <h2 className="text-2xl font-semibold mb-4 text-white text-center">
+          <h2 className="text-2xl font-semibold mb-4 text-black text-center">
             All {type} Records For {SelectedUser}
           </h2>
-          <h2 className="text-2xl font-semibold mb-4 text-white text-center"></h2>
+          <h2 className="text-2xl font-semibold mb-4 text-black text-center"></h2>
           <label
             htmlFor="user-select"
             className="mr-3 font-medium text-purple-400"
