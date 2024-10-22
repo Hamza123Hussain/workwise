@@ -2,13 +2,10 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../utils/Redux/Store/Store'
-import { AttendanceRecord } from '../../utils/AttendanceInterface'
-import { getAttendance } from '@/functions/Frontend/GetUserAttendance'
 import { UserFetched } from '@/utils/SignUpInterface'
 import { Allusers } from '@/functions/AUTH/Allusers'
 import Loader from '@/components/Loader'
 import UserSelection from '@/components/Layout/UserSelection'
-import AttendanceTable from '@/components/Attendance/AttendanceTable'
 const UserAttendance: React.FC = () => {
   const [Users, SetUserFetched] = useState<UserFetched[]>([])
   const user = useSelector((state: RootState) => state.user)
