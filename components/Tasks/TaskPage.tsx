@@ -4,36 +4,33 @@ import { RootState } from '@/utils/Redux/Store/Store'
 import { TaskFetch } from '@/utils/TaskformInterface'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { fetchUserTasks } from '@/functions/Frontend/UserTasks' // Ensure correct import
 import Empty_Task_Test from '@/components/Tasks/Empty_Task_Test'
 import Loader from '@/components/Loader'
-const UserTasks = () => {
+import { fetchUserTasks } from '@/functions/Frontend/UserTasks'
+const TaskPage = () => {
   const [loading, setLoading] = useState(true)
   const [allTasks, setTasks] = useState<TaskFetch[]>([])
   const user = useSelector((state: RootState) => state.user)
   const selectedUser = useSelector((state: RootState) => state.Select)
   useEffect(() => {
     const fetchData = async () => {
-      const tasks = await fetchUserTasks(user.Name, user.Email, setLoading)
+      const tasks = await fetchUserTasks(selectedUser, user.Email, setLoading)
       setTasks(tasks) // Set the fetched tasks
+      setLoading(false)
     }
     fetchData() // Call the fetchData function
     return () => {
       fetchData()
     }
-  }, [selectedUser, user.Email, user.Name])
-  if (loading) {
+  }, [selectedUser])
+  if (loading)
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className=" flex min-h-screen justify-center items-center">
         <Loader />
       </div>
     )
-  }
   return (
-    <div className="p-6 rounded-lg shadow-md my-10">
-      <h2 className="font-semibold text-2xl text-[#a078ff] mb-4">
-        Tasks of {user.Name}
-      </h2>
+    <div className=" my-5">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {allTasks.length > 0 && !loading ? (
           allTasks.map((task) => (
@@ -46,4 +43,4 @@ const UserTasks = () => {
     </div>
   )
 }
-export default UserTasks
+export default TaskPage

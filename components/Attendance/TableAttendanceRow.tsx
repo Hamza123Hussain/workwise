@@ -1,7 +1,5 @@
 import React from 'react'
 import { AttendanceRecord } from '@/utils/AttendanceInterface'
-import { countUniqueDates } from '@/functions/Attendance/UniqueDateFunction'
-
 const AttendanceTableRow = ({
   userData,
   records,
@@ -9,8 +7,10 @@ const AttendanceTableRow = ({
   userData: string
   records: AttendanceRecord[]
 }) => {
-  const attendanceCount = countUniqueDates(records)
-
+  const TotalHourWorked = records.reduce((acc, ele) => {
+    acc += ele.Hours_Worked
+    return acc
+  }, 0)
   return (
     <tbody>
       <tr key={userData} className="bg-black text-white">
@@ -18,10 +18,10 @@ const AttendanceTableRow = ({
           {userData}
         </td>
         <td className="border border-purple-600 px-4 sm:px-6 py-4 text-xs sm:text-base md:text-lg">
-          {attendanceCount}
+          {TotalHourWorked.toFixed(1)}
         </td>
         <td className="border border-purple-600 px-4 sm:px-6 py-4 text-xs sm:text-base md:text-lg">
-          {((attendanceCount / 22) * 100).toFixed(2)}%
+          {((TotalHourWorked / 176) * 100).toFixed(2)}%
         </td>
       </tr>
     </tbody>

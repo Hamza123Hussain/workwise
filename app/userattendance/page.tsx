@@ -1,5 +1,4 @@
 'use client'
-
 import UserAttendance from '@/components/Attendance/UserAttendance'
 import React from 'react'
 

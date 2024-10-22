@@ -15,7 +15,7 @@ const AttendanceTable = ({
   const attendancePercentage = ((HoursWorked / 176) * 100).toFixed(2)
 
   return (
-    <div className=" mx-auto px-4 py-6 w-[90vw] sm:w-auto my-10">
+    <div className=" mx-auto px-4 py-6 w-[90vw] sm:w-auto ">
       <div className="overflow-x-auto flex flex-col">
         <table className="min-w-full bg-blend-darken border-2 border-charcoal-gray shadow-md rounded-lg">
           <thead>
