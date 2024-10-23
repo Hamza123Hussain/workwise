@@ -2,6 +2,8 @@ import React from 'react'
 import { TaskFormComponentProps } from '@/utils/TaskformInterface'
 import TaskField from './TaskField'
 import UserAssign from './UserAssign'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/utils/Redux/Store/Store'
 const TaskForm: React.FC<TaskFormComponentProps> = ({
   taskData,
   setTaskData,
@@ -14,6 +16,7 @@ const TaskForm: React.FC<TaskFormComponentProps> = ({
     const { name, value } = e.target
     setTaskData((prev) => ({ ...prev, [name]: value }))
   }
+  const User = useSelector((state: RootState) => state.user)
   return (
     <div>
       <TaskField
@@ -30,13 +33,7 @@ const TaskForm: React.FC<TaskFormComponentProps> = ({
         handleChange={handleChange}
         type="text"
       />
-      <TaskField
-        Label="Due Date"
-        name="dueDate"
-        value={taskData.dueDate}
-        handleChange={handleChange}
-        type="date"
-      />
+
       <TaskField
         Label="Priority Level"
         name="priority"
@@ -51,7 +48,18 @@ const TaskForm: React.FC<TaskFormComponentProps> = ({
         value={taskData.TaskType}
         type="text"
       />
-      <UserAssign value={taskData.assignedTo} handleChange={handleChange} />
+      {taskData.TaskType === 'Other' && (
+        <TaskField
+          Label="Due Date"
+          name="dueDate"
+          value={taskData.dueDate}
+          handleChange={handleChange}
+          type="date"
+        />
+      )}
+      {User.Email === 'octtoppus1@gmail.com' && (
+        <UserAssign value={taskData.assignedTo} handleChange={handleChange} />
+      )}
     </div>
   )
 }
