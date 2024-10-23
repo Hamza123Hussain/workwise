@@ -29,7 +29,7 @@ const ActionButtons = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
     // Determine the new due date based on the TaskType
     let newDueDate: string
     const currentDate = new Date()
-    if (TaskDetail.TaskType === 'Daliy') {
+    if (TaskDetail.TaskType === 'Daily') {
       newDueDate = currentDate.toISOString().split('T')[0] // Set to current date
     } else if (TaskDetail.TaskType === 'Weekly') {
       currentDate.setDate(currentDate.getDate() + 7) // Add 7 days

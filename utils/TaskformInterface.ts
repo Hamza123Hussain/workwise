@@ -33,7 +33,7 @@ export interface TaskFetch {
   name: string // Name of the task
   priority: 'LOW' | 'MEDIUM' | 'HIGH' // Priority level of the task
   progress: 'TODO' | 'IN_PROGRESS' | 'DONE' | 'Minor_progress' // Progress status of the task
-  TaskType: 'Daliy' | 'Weekly' | 'Other'
+  TaskType: 'Daily' | 'Weekly' | 'Other'
 }
 export const priorityClass = (task: TaskFetch) => {
   return task.priority === 'HIGH'
