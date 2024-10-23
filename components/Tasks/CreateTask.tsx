@@ -14,7 +14,7 @@ const CreateTaskForm = () => {
     name: '',
     description: '',
     dueDate: '',
-    assignedTo: '',
+    assignedTo: User.Name,
     Email: User.Email,
     priority: 'LOW',
     TaskType: 'Daily',
