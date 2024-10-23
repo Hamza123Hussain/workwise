@@ -51,7 +51,7 @@ const TaskField: React.FC<TaskFieldProps> = ({
             onChange={handleChange}
             required
           >
-            <option value="Daliy">Daliy</option>
+            <option value="Daily">Daily</option>
             <option value="Weekly">Weekly</option>
             <option value="Other">Other</option>
           </select>
