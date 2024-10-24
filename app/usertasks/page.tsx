@@ -31,7 +31,7 @@ const UserTasks = () => {
   }
   return (
     <div className="p-6 rounded-lg shadow-md my-10">
-      <h2 className="font-semibold text-2xl text-[#a078ff] mb-4">
+      <h2 className="font-semibold text-2xl text-[#8c5bff] mb-4">
         Tasks of {user.Name}
       </h2>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

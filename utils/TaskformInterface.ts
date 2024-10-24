@@ -47,9 +47,9 @@ export const progress_Class = (task: TaskFetch) => {
   return task.progress === 'TODO'
     ? 'bg-red-600'
     : task.progress === 'IN_PROGRESS'
-    ? 'bg-purple-500'
+    ? 'bg-purple-900'
     : task.progress === 'Minor_progress'
-    ? 'bg-purple-800'
+    ? 'bg-yellow-500'
     : 'bg-green-600'
 }
 export interface EditTask {
