@@ -1,14 +1,18 @@
-import {
-  priorityClass,
-  progress_Class,
-  TaskFetch,
-} from '@/utils/TaskformInterface'
+import { priorityClass, TaskFetch } from '@/utils/TaskformInterface'
 import React from 'react'
 import Action_Buttons from './Action_Buttons'
 import { markTaskAsDone } from '@/functions/Task/MarkDone'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
-
+const progress_Class = (task: TaskFetch) => {
+  return task.progress === 'TODO'
+    ? 'bg-red-600'
+    : task.progress === 'IN_PROGRESS'
+    ? 'bg-purple-900'
+    : task.progress === 'Minor_progress'
+    ? 'bg-yellow-500'
+    : 'bg-green-600'
+}
 const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
   const user = useSelector((state: RootState) => state.user)
   return (
