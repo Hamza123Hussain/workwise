@@ -12,6 +12,7 @@ export const downloadPDF = async (
   // Capture the component with html2canvas
   const canvas = await html2canvas(report, {
     backgroundColor: '#ffffff', // Ensure the canvas captures a white background
+    scale: 2, // Increase resolution by scaling the canvas
   })
 
   const imgData = canvas.toDataURL('image/png')
@@ -20,24 +21,26 @@ export const downloadPDF = async (
   const pdf = new jsPDF('p', 'mm', 'a4')
   const imgWidth = 210 // A4 width in mm
   const pageHeight = 297 // A4 height in mm
-  const imgHeight = (canvas.height * imgWidth) / canvas.width
+  const marginTop = 10 // Add top margin to avoid logo cutoff
+
+  // Calculate image height proportionally
+  let imgHeight = (canvas.height * imgWidth) / canvas.width
   let heightLeft = imgHeight
-  let position = 0
+  let position = marginTop // Start after the margin
 
-  // Draw white background on each page
-  const whiteBackgroundColor = '#ffffff' // Set background color to white
-  pdf.setFillColor(whiteBackgroundColor)
-  pdf.rect(0, 0, imgWidth, pageHeight, 'F') // White background for the first page
+  // Ensure scaling fits the page, and avoid cutting the top
+  if (imgHeight > pageHeight) {
+    imgHeight = pageHeight - marginTop // Ensure the first page fits within the page height with margin
+  }
+
+  // Add the captured image to the PDF
   pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
-
   heightLeft -= pageHeight
 
-  // Handle multiple pages if the content is larger than one page
-  while (heightLeft >= 0) {
+  // Handle multiple pages if the content exceeds one page
+  while (heightLeft > 0) {
     position = heightLeft - imgHeight
     pdf.addPage()
-
-    pdf.rect(0, 0, imgWidth, pageHeight, 'F') // White background for subsequent pages
     pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
     heightLeft -= pageHeight
   }
