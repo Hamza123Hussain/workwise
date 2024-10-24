@@ -11,7 +11,7 @@ export const downloadPDF = async (
 
   // Capture the component with html2canvas
   const canvas = await html2canvas(report, {
-    backgroundColor: '#000', // Ensure the canvas captures the black background
+    backgroundColor: '#ffffff', // Ensure the canvas captures a white background
   })
 
   const imgData = canvas.toDataURL('image/png')
@@ -24,10 +24,10 @@ export const downloadPDF = async (
   let heightLeft = imgHeight
   let position = 0
 
-  // Draw black background on each page
-  const blackBackgroundColor = '#000'
-  pdf.setFillColor(blackBackgroundColor)
-  pdf.rect(0, 0, imgWidth, pageHeight, 'F') // Black background for the first page
+  // Draw white background on each page
+  const whiteBackgroundColor = '#ffffff' // Set background color to white
+  pdf.setFillColor(whiteBackgroundColor)
+  pdf.rect(0, 0, imgWidth, pageHeight, 'F') // White background for the first page
   pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
 
   heightLeft -= pageHeight
@@ -36,12 +36,12 @@ export const downloadPDF = async (
   while (heightLeft >= 0) {
     position = heightLeft - imgHeight
     pdf.addPage()
-    pdf.setFillColor(blackBackgroundColor) // Set background for new pages
-    pdf.rect(0, 0, imgWidth, pageHeight, 'F') // Black background for subsequent pages
+
+    pdf.rect(0, 0, imgWidth, pageHeight, 'F') // White background for subsequent pages
     pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
     heightLeft -= pageHeight
   }
 
   // Save the generated PDF
-  pdf.save('performance_report_black.pdf')
+  pdf.save(`performance_report_${new Date().toISOString().slice(0, 10)}.pdf`)
 }
