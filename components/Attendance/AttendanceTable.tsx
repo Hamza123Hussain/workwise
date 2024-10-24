@@ -18,7 +18,7 @@ const AttendanceTable = ({
     <div className=" mx-auto px-4 py-6 w-[90vw] sm:w-auto  ">
       <div className="overflow-x-auto flex flex-col">
         <table className="min-w-full bg-blend-darken border-2 bg-[#bd8bff]  border-charcoal-gray shadow-md rounded-lg">
-          <thead>
+          <thead className=" bg-black">
             <tr className="bg-blend-darken">
               <th className="border border-purple-800 px-4 py-2  text-white">
                 User Data

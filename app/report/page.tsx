@@ -51,7 +51,18 @@ const Report: React.FC = () => {
   // Check if both data fetching is complete
   const isLoading = loadingAttendance || loadingTasks
 
-  return <>{isLoading ? <Loader /> : <ReportCard mergedData={mergedData} />}</>
+  return (
+    <>
+      {isLoading ? (
+        <div className=" flex justify-center min-h-screen items-center">
+          {' '}
+          <Loader />
+        </div>
+      ) : (
+        <ReportCard mergedData={mergedData} />
+      )}
+    </>
+  )
 }
 
 export default Report
