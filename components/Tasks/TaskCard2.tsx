@@ -60,7 +60,7 @@ const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
           </span>
         </div>
       </div>
-      <div className="my-2 h-52 overflow-auto">
+      <div className="my-2 h-36 overflow-auto">
         <h1 className="text-lg font-semibold">Description</h1>
         <p className="text-sm text-gray-300">{TaskDetail.description}</p>
       </div>
