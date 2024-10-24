@@ -22,7 +22,7 @@ const TaskPage = () => {
     return () => {
       fetchData()
     }
-  }, [selectedUser])
+  }, [selectedUser, user.Email])
   if (loading)
     return (
       <div className=" flex min-h-screen justify-center items-center">
