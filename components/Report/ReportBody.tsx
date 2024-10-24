@@ -34,7 +34,7 @@ const ReportBody: React.FC<ReportBodyProps> = ({ mergedData }) => {
     )
   }
   return (
-    <tbody className="bg-gray-800 text-purple-200">
+    <tbody className="bg-white text-black">
       {mergedData.map((userData, index) => {
         const totalTaskCompletion = calculateTotalTaskCompletion(userData.tasks)
         const totalHoursWorked = calculateTotalHoursWorked(userData.attendance)
@@ -53,26 +53,30 @@ const ReportBody: React.FC<ReportBodyProps> = ({ mergedData }) => {
         return (
           <React.Fragment key={index}>
             <tr className="border-t border-purple-500">
-              <td className="border border-purple-400 p-2">{userData.user}</td>
-              <td className="border border-purple-400 p-2">
+              <td className="border border-purple-400 p-2 text-xs">
+                {userData.user}
+              </td>
+              <td className="border border-purple-400 p-2 text-xs">
                 {attendancePercentage}%
               </td>
-              <td className="border border-purple-400 p-2">
+              <td className="border border-purple-400 p-2 text-xs">
                 {countPriorityTasks(userData.tasks, 'HIGH')}
               </td>
-              <td className="border border-purple-400 p-2">
+              <td className="border border-purple-400 p-2 text-xs">
                 {countPriorityTasks(userData.tasks, 'MEDIUM')}
               </td>
-              <td className="border border-purple-400 p-2">
+              <td className="border border-purple-400 p-2 text-xs">
                 {countPriorityTasks(userData.tasks, 'LOW')}
               </td>
-              <td className="border border-purple-400 p-2">
+              <td className="border border-purple-400 p-2 text-xs">
                 {taskCompletionPercentage.toFixed(2)}%
               </td>
-              <td className="border border-purple-400 p-2">
+              <td className="border border-purple-400 p-2 text-xs">
                 {overallAverage.toFixed(2)}%
               </td>
-              <td className="border border-purple-400 p-2">{overallSalary}</td>
+              <td className="border border-purple-400 p-2 text-xs">
+                {overallSalary}
+              </td>
             </tr>
           </React.Fragment>
         )

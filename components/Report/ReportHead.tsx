@@ -10,7 +10,7 @@ const ReportHead = () => {
         alt="Logo"
         className="cursor-pointer object-cover mb-10"
       /> */}
-      <h1 className="text-4xl text-white">
+      <h1 className="text-4xl text-black">
         Performance Report{' '}
         {new Date().toLocaleString('default', { month: 'long' })}{' '}
         {new Date().getFullYear()}
