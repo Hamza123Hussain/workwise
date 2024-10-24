@@ -16,22 +16,22 @@ const ReportCard: React.FC<ReportCardProps> = ({ mergedData }) => {
           <thead>
             <tr className="bg-[#a67dff] text-white">
               <th className="border border-purple-500 p-2 text-xs">Username</th>
-              <th className="border border-purple-500 p-2 text-xs">
+              <th className="border border-purple-500 p-2 text-xs whitespace-nowrap">
                 High Priority Tasks
               </th>
-              <th className="border border-purple-500 p-2 text-xs">
+              <th className="border border-purple-500 p-2 text-xs whitespace-nowrap">
                 Medium Priority Tasks
               </th>
-              <th className="border border-purple-500 p-2 text-xs">
+              <th className="border border-purple-500 p-2 text-xs whitespace-nowrap">
                 Low Priority Tasks
               </th>{' '}
-              <th className="border border-purple-500 p-2 text-xs">
+              <th className="border border-purple-500 p-2 text-xs whitespace-nowrap">
                 Attendance Percentage
               </th>
-              <th className="border border-purple-500 p-2 text-xs">
-                Task Completion Percentage
+              <th className="border border-purple-500 p-2 text-xs whitespace-nowrap">
+                Task Percentage
               </th>
-              <th className="border border-purple-500 p-2 text-xs">
+              <th className="border border-purple-500 p-2 text-xs whitespace-nowrap">
                 Performance Percentage
               </th>
               <th className="border border-purple-500 p-2 text-xs">Salary</th>
