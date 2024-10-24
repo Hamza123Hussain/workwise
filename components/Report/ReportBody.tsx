@@ -53,28 +53,28 @@ const ReportBody: React.FC<ReportBodyProps> = ({ mergedData }) => {
         return (
           <React.Fragment key={index}>
             <tr className="border-t border-purple-500">
-              <td className="border border-purple-400 p-2 text-xs">
+              <td className="border border-purple-400 p-4 text-xs whitespace-nowrap">
                 {userData.user}
               </td>
-              <td className="border border-purple-400 p-2 text-xs">
-                {attendancePercentage}%
-              </td>
-              <td className="border border-purple-400 p-2 text-xs">
+              <td className="border border-purple-400 p-1 text-xs">
                 {countPriorityTasks(userData.tasks, 'HIGH')}
               </td>
-              <td className="border border-purple-400 p-2 text-xs">
+              <td className="border border-purple-400 p-1 text-xs">
                 {countPriorityTasks(userData.tasks, 'MEDIUM')}
               </td>
-              <td className="border border-purple-400 p-2 text-xs">
+              <td className="border border-purple-400 p-1 text-xs">
                 {countPriorityTasks(userData.tasks, 'LOW')}
+              </td>{' '}
+              <td className="border border-purple-400 p-1 text-xs">
+                {attendancePercentage}%
               </td>
-              <td className="border border-purple-400 p-2 text-xs">
+              <td className="border border-purple-400 p-1 text-xs">
                 {taskCompletionPercentage.toFixed(2)}%
               </td>
-              <td className="border border-purple-400 p-2 text-xs">
+              <td className="border border-purple-400 p-1 text-xs">
                 {overallAverage.toFixed(2)}%
               </td>
-              <td className="border border-purple-400 p-2 text-xs">
+              <td className="border border-purple-400 p-1 text-xs">
                 {overallSalary}
               </td>
             </tr>

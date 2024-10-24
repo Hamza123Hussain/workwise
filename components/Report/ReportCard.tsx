@@ -17,9 +17,6 @@ const ReportCard: React.FC<ReportCardProps> = ({ mergedData }) => {
             <tr className="bg-[#a67dff] text-white">
               <th className="border border-purple-500 p-2 text-xs">Username</th>
               <th className="border border-purple-500 p-2 text-xs">
-                Attendance Percentage
-              </th>
-              <th className="border border-purple-500 p-2 text-xs">
                 High Priority Tasks
               </th>
               <th className="border border-purple-500 p-2 text-xs">
@@ -29,10 +26,13 @@ const ReportCard: React.FC<ReportCardProps> = ({ mergedData }) => {
                 Low Priority Tasks
               </th>
               <th className="border border-purple-500 p-2 text-xs">
+                Attendance Percentage
+              </th>
+              <th className="border border-purple-500 p-2 text-xs">
                 Task Completion Percentage
               </th>
               <th className="border border-purple-500 p-2 text-xs">
-                Task & Attendance Percentage
+                Performance Percentage
               </th>
               <th className="border border-purple-500 p-2 text-xs">Salary</th>
             </tr>
