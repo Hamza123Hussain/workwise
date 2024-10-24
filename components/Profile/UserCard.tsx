@@ -48,7 +48,7 @@ const UserCard = ({ User }: { User: UserFetched }) => {
       </div>
       {/* Action Buttons */}
       <div className="mt-4 flex-col sm:flex-row  flex items-center gap-2 ">
-        <UpdateModal />
+        <UpdateModal User={User} />
         <button
           onClick={DeleteMe}
           className="w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-500 transition duration-300 sm:w-auto sm:self-end"

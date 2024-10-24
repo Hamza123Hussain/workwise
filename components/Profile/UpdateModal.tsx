@@ -7,8 +7,9 @@ import {
 } from '@/components/ui/dialog'
 import React from 'react'
 import UpdateFields from './UpdateFields'
+import { UserFetched } from '@/utils/SignUpInterface'
 
-const UpdateModal = () => {
+const UpdateModal = ({ User }: { User?: UserFetched }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -22,7 +23,7 @@ const UpdateModal = () => {
             Update The Profile
           </DialogTitle>
         </DialogHeader>
-        <UpdateFields />
+        <UpdateFields User={User} />
       </DialogContent>
     </Dialog>
   )

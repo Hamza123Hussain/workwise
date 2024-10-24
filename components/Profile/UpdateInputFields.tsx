@@ -1,6 +1,5 @@
 import { InputValues } from '@/utils/SignUpInterface'
 import React from 'react'
-import ImagePreview from './ImagePreview'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
 const UpdateInputFields = ({
@@ -16,13 +15,6 @@ const UpdateInputFields = ({
   ) => {
     const { name, value } = e.target
     setInputVal((prev) => ({ ...prev, [name]: value }))
-  }
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null // Get the first file or null
-    setInputVal((prev: InputValues) => ({
-      ...prev,
-      Image: file,
-    }))
   }
   return (
     <>
@@ -81,16 +73,6 @@ const UpdateInputFields = ({
       ) : (
         ''
       )}
-      <label htmlFor="imageUpload" className="block mb-1 text-white">
-        Upload Image
-      </label>
-      <input
-        type="file"
-        id="imageUpload"
-        onChange={handleImageChange}
-        className="mb-4 p-3 w-full rounded bg-gray-800 text-white focus:outline-none"
-      />
-      <ImagePreview />
     </>
   )
 }
