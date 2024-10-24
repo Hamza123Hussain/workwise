@@ -29,7 +29,7 @@ const SignIn = () => {
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
-      <div className="md:w-1/2 p-4 bg-[#8D6ED9] text-white flex flex-col items-center justify-center">
+      <div className="md:w-1/2 p-4 bg-[#a582ff] text-white flex flex-col items-center justify-center">
         <Header />
       </div>
       <div className="md:w-1/2 p-4 bg-white flex flex-col justify-center">
