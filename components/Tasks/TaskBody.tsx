@@ -1,14 +1,18 @@
-import {
-  priorityClass,
-  progress_Class,
-  TaskFetch,
-} from '@/utils/TaskformInterface'
+import { priorityClass, TaskFetch } from '@/utils/TaskformInterface'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const TaskBody = ({ task }: { task: TaskFetch }) => {
   const Router = useRouter()
-
+  const progress_Class = (task: TaskFetch) => {
+    return task.progress === 'TODO'
+      ? 'bg-red-600'
+      : task.progress === 'IN_PROGRESS'
+      ? 'bg-purple-900'
+      : task.progress === 'Minor_progress'
+      ? 'bg-yellow-500'
+      : 'bg-green-600'
+  }
   // Check if the due date is past
   const isDueDatePast =
     new Date(task.dueDate) < new Date(new Date().setHours(0, 0, 0, 0))
