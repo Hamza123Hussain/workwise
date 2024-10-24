@@ -30,7 +30,7 @@ const UserTasks = () => {
     )
   }
   return (
-    <div className="p-6 rounded-lg shadow-md my-10">
+    <div className="p-6 rounded-lg  my-10">
       <h2 className="font-semibold text-2xl text-[#8c5bff] mb-4">
         Tasks of {user.Name}
       </h2>

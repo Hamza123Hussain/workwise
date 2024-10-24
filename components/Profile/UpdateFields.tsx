@@ -40,13 +40,13 @@ const UpdateFields = () => {
     )
   }
   return (
-    <div className="flex flex-col bg-black p-6 rounded-lg shadow-lg w-full max-w-md my-5">
+    <div className="flex flex-col bg-black p-2 rounded-lg shadow-lg  ">
       <UpdateInputFields inputVal={inputVal} setInputVal={setInputVal} />
       <DialogFooter>
         <button
           onClick={() => UpdateMe()}
           type="submit"
-          className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-md"
+          className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 mb-5 rounded-md"
         >
           Save changes
         </button>

@@ -52,7 +52,7 @@ const UserAttendance: React.FC = () => {
         </div>
       ) : (
         <>
-          <h2 className="text-2xl font-semibold mb-4 text-black text-center">
+          <h2 className="text-2xl font-semibold mb-4 text-[#c27cff] text-center">
             All Attendance Records For {user.Name}
           </h2>
           <AttendanceTable Attendance={userAttendance} />

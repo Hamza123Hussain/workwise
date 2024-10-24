@@ -19,7 +19,7 @@ const UserCard = ({ User }: { User: UserFetched }) => {
     }
   }
   return (
-    <div className="bg-black text-white p-4 rounded-lg mx-auto shadow-lg flex flex-col w-64 sm:w-96 items-center border border-purple-700 ">
+    <div className="bg-[#ac7ff9] text-white p-4 rounded-lg mx-auto shadow-lg flex flex-col w-64 sm:w-96 items-center border border-purple-700 ">
       {/* User Info Section */}
       <div className="sm:flex sm:items-center sm:space-x-4">
         <div className="flex-shrink-0">
@@ -32,20 +32,18 @@ const UserCard = ({ User }: { User: UserFetched }) => {
               className=" rounded-full"
             />
           ) : (
-            <div className="w-20 h-20 rounded-full bg-gray-700 flex items-center justify-center">
-              <span className="text-2xl font-bold text-purple-400">
+            <div className="w-20 h-20 rounded-full  flex items-center justify-center">
+              <span className="text-2xl font-bold text-white">
                 {User.Name.charAt(0)}
               </span>
             </div>
           )}
         </div>
         <div className="mt-4 sm:mt-0">
-          <h2 className="text-xl font-bold text-purple-400">{User.Name}</h2>
-          <p className="text-sm text-gray-400">Email: {User.Email}</p>
-          <p className="text-sm text-gray-400">
-            Title: {User.JobTitle || 'N/A'}
-          </p>
-          <p className="text-sm text-gray-400">Salary: PKR {User.Salary}</p>
+          <h2 className="text-xl font-bold text-white">{User.Name}</h2>
+          <p className="text-sm text-white">Email: {User.Email}</p>
+          <p className="text-sm text-white">Title: {User.JobTitle || 'N/A'}</p>
+          <p className="text-sm text-white">Salary: PKR {User.Salary}</p>
         </div>
       </div>
       {/* Action Buttons */}

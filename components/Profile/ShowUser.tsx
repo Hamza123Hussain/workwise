@@ -11,7 +11,7 @@ const ShowUser = () => {
       <h1 className="text-7xl my-10 font-bold text-center text-purple-400">
         User Profile
       </h1>
-      <div className="w-full max-w-lg bg-gray-800 rounded-lg shadow-md p-6 space-y-6">
+      <div className="w-full max-w-lg bg-[#bd97ff] rounded-lg shadow-md p-6 space-y-6">
         {/* User Info Section */}
         <div className="space-y-4">
           <UserField Attribute={User.Name} Name="User Name" />
