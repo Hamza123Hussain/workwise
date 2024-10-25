@@ -29,7 +29,7 @@ const EditTaskBody: React.FC<EditTask> = ({
                 | 'Minor_progress'
             )
           }
-          className="bg-purple-700 text-white p-2 rounded w-full"
+          className="bg-[#ac59ff] text-white border-white border-2 p-2 rounded w-full"
         >
           <option value="TODO">TODO</option>
           <option value="Minor_progress">Minor_progress</option>
@@ -48,7 +48,7 @@ const EditTaskBody: React.FC<EditTask> = ({
                 ? setPriority(e.target.value as 'LOW' | 'MEDIUM' | 'HIGH')
                 : null // Prevent changes for other users
           }
-          className="bg-purple-700 text-white p-2 rounded w-full"
+          className="bg-[#ac59ff] text-white border-white border-2 p-2 rounded w-full"
         >
           <option value="LOW">LOW</option>
           <option value="MEDIUM">MEDIUM</option>
@@ -60,7 +60,7 @@ const EditTaskBody: React.FC<EditTask> = ({
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="bg-purple-700 text-white p-2 rounded w-full h-24"
+          className="bg-[#ac59ff] text-white border-white border-2 p-2 rounded w-full"
         />
       </div>
     </>

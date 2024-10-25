@@ -37,7 +37,7 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
 
   return (
     <div className="min-h-screen flex justify-center items-center p-6">
-      <div className="bg-purple-800 text-white p-6 rounded-lg shadow-lg w-full max-w-md">
+      <div className="bg-[#ac58ff] text-white p-6 rounded-lg shadow-lg w-full max-w-md">
         {task && (
           <EditTaskBody
             task={task}
@@ -63,7 +63,7 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
               Router
             )
           }
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-200"
+          className="w-full bg-white border-2 hover:border-black text-[#a56edd] font-bold py-2 px-4 rounded transition duration-200"
         >
           Update Task
         </button>
