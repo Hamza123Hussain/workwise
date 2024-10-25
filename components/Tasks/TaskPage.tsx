@@ -7,11 +7,13 @@ import { useSelector } from 'react-redux'
 import Empty_Task_Test from '@/components/Tasks/Empty_Task_Test'
 import Loader from '@/components/Loader'
 import { fetchUserTasks } from '@/functions/Frontend/UserTasks'
+import { filteredTasks } from '@/functions/Task/Filter_Task'
 const TaskPage = () => {
   const [loading, setLoading] = useState(true)
   const [allTasks, setTasks] = useState<TaskFetch[]>([])
   const user = useSelector((state: RootState) => state.user)
   const selectedUser = useSelector((state: RootState) => state.Select)
+  const SortTask = useSelector((state: RootState) => state.sort)
   useEffect(() => {
     const fetchData = async () => {
       const tasks = await fetchUserTasks(selectedUser, user.Email, setLoading)
@@ -32,10 +34,18 @@ const TaskPage = () => {
   return (
     <div className=" my-5">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {allTasks.length > 0 && !loading ? (
-          allTasks.map((task) => (
-            <TaskCard2 key={task.createdAt} TaskDetail={task} />
-          ))
+        {filteredTasks(
+          allTasks,
+          SortTask.Status,
+          SortTask.TimeFrame,
+          SortTask.Prirority
+        ).length > 0 && !loading ? (
+          filteredTasks(
+            allTasks,
+            SortTask.Status,
+            SortTask.TimeFrame,
+            SortTask.Prirority
+          ).map((task) => <TaskCard2 key={task.createdAt} TaskDetail={task} />)
         ) : (
           <Empty_Task_Test />
         )}
