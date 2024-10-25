@@ -37,6 +37,10 @@ const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
             {new Date(TaskDetail.dueDate).toLocaleDateString()}
           </span>
         </div>
+        <div className="flex flex-col items-center justify-between mt-2">
+          <span className="font-medium">Task Type</span>
+          <span className="font-bold">{TaskDetail.TaskType}</span>
+        </div>
       </div>
       <div className="flex flex-col gap-4 justify-center items-center mb-4">
         <div className="flex flex-col items-center ">
