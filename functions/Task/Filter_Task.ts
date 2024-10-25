@@ -2,13 +2,16 @@ import { TaskFetch } from '@/utils/TaskformInterface'
 
 export const filteredTasks = (
   allTasks: TaskFetch[],
+  statusFilter: string,
   timeFilter: string,
-  statusFilter: string
+  priorityFilter: string
 ) =>
   allTasks.filter((task) => {
     const matchesTimeFilter =
       timeFilter === 'All' || task.TaskType === timeFilter
     const matchesStatusFilter =
       statusFilter === 'All' || task.progress === statusFilter
-    return matchesTimeFilter && matchesStatusFilter
+    const matchesPriorityFilter =
+      priorityFilter === 'All' || task.priority === priorityFilter
+    return matchesTimeFilter && matchesStatusFilter && matchesPriorityFilter
   })
