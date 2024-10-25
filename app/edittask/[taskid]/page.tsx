@@ -37,7 +37,7 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
 
   return (
     <div className="min-h-screen flex justify-center items-center p-6">
-      <div className="bg-[#ac58ff] text-white p-6 rounded-lg shadow-lg w-full max-w-md">
+      <div className="bg-[#8D6ED9] text-white p-6 rounded-lg shadow-lg w-full max-w-md">
         {task && (
           <EditTaskBody
             task={task}
