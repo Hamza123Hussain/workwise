@@ -1,25 +1,27 @@
 'use client'
 import Loader from '@/components/Loader'
 import ReportCard from '@/components/Report/ReportCard'
+import { Allusers } from '@/functions/AUTH/Allusers'
 import { getAttendance } from '@/functions/Frontend/AllAttendance'
 import { AllTasks } from '@/functions/Frontend/Alltasks'
 import { AttendanceRecord } from '@/utils/AttendanceInterface'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { MergedUserData } from '@/utils/Report_Interface'
+import { UserFetched } from '@/utils/SignUpInterface'
 import { TaskFetch } from '@/utils/TaskformInterface'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-
 const Report: React.FC = () => {
   const user = useSelector((state: RootState) => state.user)
   const [groupedAttendance, setGroupedAttendance] = useState<{
     [key: string]: AttendanceRecord[]
   }>({})
   const [ALL_TASKS, setALL_TASKS] = useState<{ [key: string]: TaskFetch[] }>({})
+  const [users, setUsers] = useState<UserFetched[]>([]) // Adjust type as needed
   const [loadingAttendance, setLoadingAttendance] = useState<boolean>(true)
   const [loadingTasks, setLoadingTasks] = useState<boolean>(true)
+  const [loadingUsers, setLoadingUsers] = useState<boolean>(true)
   const [mergedData, setMergedData] = useState<MergedUserData[]>([])
-
   useEffect(() => {
     if (user.Email) {
       // Fetch attendance
@@ -27,35 +29,41 @@ const Report: React.FC = () => {
         user.Email,
         setLoadingAttendance,
         setGroupedAttendance
-      ).finally(() => setLoadingAttendance(false)) // Ensure loading state is updated
-
+      ).then(() => setLoadingAttendance(false))
       // Fetch tasks
-      AllTasks(user.Email, setLoadingTasks, setALL_TASKS).finally(() =>
+      AllTasks(user.Email, setLoadingTasks, setALL_TASKS).then(() =>
         setLoadingTasks(false)
-      ) // Ensure loading state is updated
+      )
+      // Fetch users
+      const fetchUsers = async () => {
+        setLoadingUsers(true)
+        const data = await Allusers(user.Email)
+        if (data) {
+          setUsers(data)
+          setLoadingUsers(false)
+        }
+      }
+      fetchUsers()
     }
   }, [user.Email])
-
-  // Merge groupedAttendance and ALL_TASKS into a single array
+  // Merge groupedAttendance, ALL_TASKS, and users data into a single array
   useEffect(() => {
-    const merged = Object.keys(groupedAttendance).map((userKey) => {
+    const merged = users.map((userItem) => {
+      const userEmail = userItem.Email
       return {
-        user: userKey,
-        attendance: groupedAttendance[userKey] || [],
-        tasks: ALL_TASKS[userKey] || [],
+        user: userEmail,
+        userData: userItem,
+        attendance: groupedAttendance[userEmail] || [],
+        tasks: ALL_TASKS[userEmail] || [],
       }
     })
     setMergedData(merged)
-  }, [groupedAttendance, ALL_TASKS])
-
-  // Check if both data fetching is complete
-  const isLoading = loadingAttendance || loadingTasks
-
+  }, [groupedAttendance, ALL_TASKS, users])
+  const isLoading = loadingAttendance || loadingTasks || loadingUsers
   return (
     <>
       {isLoading ? (
-        <div className=" flex justify-center min-h-screen items-center">
-          {' '}
+        <div className="flex justify-center min-h-screen items-center">
           <Loader />
         </div>
       ) : (
@@ -64,5 +72,4 @@ const Report: React.FC = () => {
     </>
   )
 }
-
 export default Report
