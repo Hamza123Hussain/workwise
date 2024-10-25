@@ -37,7 +37,7 @@ const DropDown = ({ type, Users }: { type: string; Users: UserFetched[] }) => {
             ))}
           </select>
         </div>
-        <Dropdowns />
+        {type !== 'Attendance' ? <Dropdowns /> : ''}
       </div>
     </div>
   )
