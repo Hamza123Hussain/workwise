@@ -12,8 +12,7 @@ import { filteredTasks } from '@/functions/Task/Filter_Task'
 const UserTasks = () => {
   const [loading, setLoading] = useState(true)
   const [allTasks, setTasks] = useState<TaskFetch[]>([])
-  const [timeFilter, setTimeFilter] = useState('All')
-  const [statusFilter, setStatusFilter] = useState('All')
+  const SortTask = useSelector((state: RootState) => state.sort)
   const user = useSelector((state: RootState) => state.user)
   const selectedUser = useSelector((state: RootState) => state.Select)
   useEffect(() => {
@@ -26,7 +25,6 @@ const UserTasks = () => {
       fetchData()
     }
   }, [selectedUser, user.Email, user.Name])
-
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -39,17 +37,20 @@ const UserTasks = () => {
       <h2 className="font-semibold text-2xl text-[#8c5bff] mb-4">
         Tasks of {user.Name}
       </h2>
-      <Dropdowns
-        setTimeFilter={setTimeFilter}
-        setStatusFilter={setStatusFilter}
-        timeFilter={timeFilter}
-        statusFilter={statusFilter}
-      />
+      <Dropdowns />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {filteredTasks(allTasks, timeFilter, statusFilter).length > 0 ? (
-          filteredTasks(allTasks, timeFilter, statusFilter).map((task) => (
-            <TaskCard2 key={task.createdAt} TaskDetail={task} />
-          ))
+        {filteredTasks(
+          allTasks,
+          SortTask.Status,
+          SortTask.TimeFrame,
+          SortTask.Prirority
+        ).length > 0 ? (
+          filteredTasks(
+            allTasks,
+            SortTask.Status,
+            SortTask.TimeFrame,
+            SortTask.Prirority
+          ).map((task) => <TaskCard2 key={task.createdAt} TaskDetail={task} />)
         ) : (
           <Empty_Task_Test />
         )}
