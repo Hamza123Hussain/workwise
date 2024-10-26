@@ -49,12 +49,11 @@ const Report: React.FC = () => {
   // Merge groupedAttendance, ALL_TASKS, and users data into a single array
   useEffect(() => {
     const merged = users.map((userItem) => {
-      const userEmail = userItem.Email
       return {
-        user: userEmail,
+        user: userItem.Name,
         salary: userItem.Salary,
-        attendance: groupedAttendance[userEmail] || [],
-        tasks: ALL_TASKS[userEmail] || [],
+        attendance: groupedAttendance[userItem.Name] || [],
+        tasks: ALL_TASKS[userItem.Name] || [],
       }
     })
     setMergedData(merged)
