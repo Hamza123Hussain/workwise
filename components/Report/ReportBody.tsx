@@ -75,7 +75,7 @@ const ReportBody: React.FC<ReportBodyProps> = ({ mergedData }) => {
                 {overallAverage.toFixed(2)}%
               </td>
               <td className="border border-purple-400 p-1 text-xs">
-                {overallSalary}
+                {taskCompletionPercentage > 10 ? overallSalary : 0}
               </td>
             </tr>
           </React.Fragment>
