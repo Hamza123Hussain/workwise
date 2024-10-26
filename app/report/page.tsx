@@ -52,7 +52,7 @@ const Report: React.FC = () => {
       const userEmail = userItem.Email
       return {
         user: userEmail,
-        userData: userItem,
+        salary: userItem.Salary,
         attendance: groupedAttendance[userEmail] || [],
         tasks: ALL_TASKS[userEmail] || [],
       }

@@ -5,34 +5,13 @@ import {
   calculateTotalHoursWorked,
   calculateTotalTaskCompletion,
   countPriorityTasks,
-  fetchSalaries,
 } from '@/functions/Frontend/ReportFucntions'
 import { MergedUserData } from '@/utils/Report_Interface'
-import React, { useEffect, useState } from 'react'
-import Loader3 from '../Loader3'
+import React from 'react'
 interface ReportBodyProps {
   mergedData: MergedUserData[] // Array of user data
 }
 const ReportBody: React.FC<ReportBodyProps> = ({ mergedData }) => {
-  const [salaries, setSalaries] = useState<{ [key: string]: number }>({})
-  const [loading, setLoading] = useState<boolean>(true) // Loading state
-  useEffect(() => {
-    const loadSalaries = async () => {
-      setLoading(true) // Set loading to true when fetching starts
-      const salaryData = await fetchSalaries(mergedData)
-      setSalaries(salaryData)
-      setLoading(false) // Set loading to false when fetching completes
-    }
-    loadSalaries()
-  }, [mergedData])
-  // Show loading indicator if salaries are being fetched
-  if (loading) {
-    return (
-      <div className=" flex justify-center items-center">
-        <Loader3 />
-      </div>
-    )
-  }
   return (
     <tbody className="bg-white text-black">
       {mergedData.map((userData, index) => {
@@ -40,7 +19,7 @@ const ReportBody: React.FC<ReportBodyProps> = ({ mergedData }) => {
         const totalHoursWorked = calculateTotalHoursWorked(userData.attendance)
         const attendancePercentage =
           calculateAttendancePercentage(totalHoursWorked)
-        const salary = salaries[userData.user] || 0
+        const salary = parseInt(userData.salary)
         const taskCompletionPercentage =
           userData.tasks.length > 0
             ? totalTaskCompletion / userData.tasks.length
