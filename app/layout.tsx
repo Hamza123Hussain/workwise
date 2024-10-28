@@ -1,19 +1,6 @@
 import type { Metadata } from 'next'
-import localFont from 'next/font/local'
 import './globals.css'
 import ReduxLayout from '@/components/Layout/ReduxLayout'
-
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-})
-
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
-})
 
 export const metadata: Metadata = {
   title: 'Octtoppus HRM System',
@@ -43,9 +30,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white`}
-      >
+      <body className={`$ antialiased bg-white`}>
         <ReduxLayout>{children}</ReduxLayout>
       </body>
     </html>
