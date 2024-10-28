@@ -12,8 +12,8 @@ const AttendanceTable = ({
     0
   )
   // Calculate remaining hours and attendance percentage
-  const remainingHours = 176 - HoursWorked
-  const attendancePercentage = ((HoursWorked / 176) * 100).toFixed(2)
+  const remainingHours = 184 - HoursWorked
+  const attendancePercentage = ((HoursWorked / 184) * 100).toFixed(2)
   return (
     <div className="mx-auto px-4 py-6 w-[90vw] sm:w-auto">
       <div className="overflow-x-auto flex flex-col">
