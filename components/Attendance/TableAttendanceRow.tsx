@@ -11,19 +11,24 @@ const AttendanceTableRow = ({
     acc += ele.Hours_Worked
     return acc
   }, 0)
+  const totalhours = 184
   return (
     <tbody>
-      <tr key={userData} className="bg-black text-white">
-        <td className="border border-purple-600 w-56 px-4 sm:px-6 py-4 text-xs sm:text-base md:text-lg">
-          {userData}
-        </td>
-        <td className="border border-purple-600 px-4 sm:px-6 py-4 text-xs sm:text-base md:text-lg">
-          {TotalHourWorked.toFixed(1)}
-        </td>
-        <td className="border border-purple-600 px-4 sm:px-6 py-4 text-xs sm:text-base md:text-lg">
-          {((TotalHourWorked / 176) * 100).toFixed(2)}%
-        </td>
-      </tr>
+      <th className="border border-purple-800 px-4 py-2 text-white">
+        {userData}
+      </th>
+      <th className="border border-purple-800 px-4 py-2 text-white">
+        {TotalHourWorked.toFixed(1)}
+      </th>
+      <th className="border border-purple-800 px-4 py-2 text-white">
+        {(TotalHourWorked > totalhours
+          ? 0
+          : totalhours - TotalHourWorked
+        ).toFixed(2)}
+      </th>
+      <th className="border border-purple-800 px-4 py-2 text-white">
+        {((TotalHourWorked / 184) * 100).toFixed(2)}%
+      </th>
     </tbody>
   )
 }
