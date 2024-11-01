@@ -2,6 +2,10 @@
 import React from 'react'
 
 const ReportHead = () => {
+  const currentDate = new Date()
+  const previousMonthDate = new Date(currentDate)
+  previousMonthDate.setMonth(currentDate.getMonth())
+
   return (
     <div className="flex flex-col justify-center items-center my-10">
       {/* <Image
@@ -13,8 +17,8 @@ const ReportHead = () => {
       /> */}
       <h1 className="text-4xl text-black">
         Performance Report{' '}
-        {new Date().toLocaleString('default', { month: 'long' })}{' '}
-        {new Date().getFullYear()}
+        {previousMonthDate.toLocaleString('default', { month: 'long' })}{' '}
+        {previousMonthDate.getFullYear()}
       </h1>
     </div>
   )
