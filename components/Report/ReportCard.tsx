@@ -50,7 +50,7 @@ const ReportCard: React.FC<ReportCardProps> = ({ mergedData }) => {
         </div>
       </div>
       <div className="mt-4">
-        <DownloadButton reportRef={reportRef} />
+        <DownloadButton text="Performance" reportRef={reportRef} />
       </div>
     </div>
   )
