@@ -4,7 +4,8 @@ import { RefObject } from 'react'
 
 // Function to download the PDF
 export const downloadPDF = async (
-  reportRef: RefObject<HTMLDivElement>
+  reportRef: RefObject<HTMLDivElement>,
+  text: string
 ): Promise<void> => {
   const report = reportRef.current
   if (!report) return
@@ -45,6 +46,27 @@ export const downloadPDF = async (
     heightLeft -= pageHeight
   }
 
-  // Save the generated PDF
-  pdf.save(`performance_report_${new Date().toISOString().slice(0, 10)}.pdf`)
+  // Get the previous month and current month date
+  const currentDate = new Date()
+  const previousMonthDate = new Date(currentDate)
+  previousMonthDate.setMonth(currentDate.getMonth() - 1)
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
+  const previousMonthName = monthNames[previousMonthDate.getMonth()] // Get previous month name
+  const currentDateFormatted = currentDate.toISOString().slice(0, 10) // Format: YYYY-MM-DD
+
+  // Save the generated PDF with the previous month name and the current date
+  pdf.save(`${previousMonthName}_${text}_report_${currentDateFormatted}.pdf`)
 }
