@@ -12,7 +12,7 @@ const UserAttendance: React.FC = () => {
   const [Users, SetUserFetched] = useState<UserFetched[]>([])
   const user = useSelector((state: RootState) => state.user)
   const [loading, setLoading] = useState(true) // Start loading as true
-  const [isTableView, setIsTableView] = useState(true) // State to track the current view
+  const [isTableView, setIsTableView] = useState(false) // State to track the current view
   // Function to fetch users
   const Getusers = async () => {
     const Data = await Allusers(user.Email)
