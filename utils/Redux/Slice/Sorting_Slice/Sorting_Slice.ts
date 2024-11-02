@@ -3,6 +3,7 @@ const initialState = {
   TimeFrame: 'All',
   Status: 'All',
   Prirority: 'All',
+  Month: new Date().getMonth(),
 }
 
 export const SortSlice = createSlice({
@@ -18,7 +19,11 @@ export const SortSlice = createSlice({
     setPriority: (state, action) => {
       state.Prirority = action.payload
     },
+
+    setMonth: (state, action) => {
+      state.Month = action.payload
+    },
   },
 })
-export const { setTime, setStatus, setPriority } = SortSlice.actions
+export const { setTime, setStatus, setPriority, setMonth } = SortSlice.actions
 export default SortSlice.reducer
