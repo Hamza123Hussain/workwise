@@ -16,7 +16,7 @@ const RecentTasks = () => {
     try {
       const data = await GetUserTasks(user.Name, user.Email)
       if (data) {
-        setTasks(data.slice(-3))
+        setTasks(data)
       }
     } catch (error) {
       console.error('Error fetching tasks:', error)
@@ -28,6 +28,18 @@ const RecentTasks = () => {
   useEffect(() => {
     fetchData()
   }, [user.Email])
+
+  // Get the current month (0 = January, 1 = February, ..., 11 = December)
+  const currentMonth = new Date().getMonth()
+
+  // Filter tasks for the current month
+  const currentMonthTasks = allTasks.filter((task) => {
+    const taskMonth = new Date(task.createdAt).getMonth()
+    return taskMonth === currentMonth
+  })
+
+  // Get the latest 3 tasks for the current month
+  const latestTasks = currentMonthTasks.slice(-3) // Get the last 3 tasks
 
   return (
     <div className="p-6 rounded-lg shadow-lg bg-white border-purple-300 border-2">
@@ -41,7 +53,7 @@ const RecentTasks = () => {
             Recent Tasks
           </h2>
           <div className="mt-4 overflow-x-auto">
-            <TaskCard allTasks={allTasks} />
+            <TaskCard allTasks={latestTasks} /> {/* Pass the latest 3 tasks */}
           </div>
         </>
       )}
