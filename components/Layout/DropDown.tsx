@@ -12,9 +12,6 @@ const DropDown = ({ type, Users }: { type: string; Users: UserFetched[] }) => {
   }
   return (
     <div>
-      <h2 className="text-2xl font-semibold mb-4 text-black text-center">
-        All {type} Records For {SelectedUser}
-      </h2>
       <div className=" flex items-center justify-between">
         <div className=" flex flex-col">
           <label
