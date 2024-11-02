@@ -1,27 +1,20 @@
-// import Image from 'next/image'
-import React from 'react'
+import { months } from '@/utils/MonthsArray'
+import { RootState } from '@/utils/Redux/Store/Store'
+import { useSelector } from 'react-redux'
 
+// ReportHead.tsx
 const ReportHead = () => {
   const currentDate = new Date()
-  const previousMonthDate = new Date(currentDate)
-  previousMonthDate.setMonth(currentDate.getMonth())
+  const monthIndex = useSelector((state: RootState) => state.sort.Month)
+  const monthName = months[monthIndex]
+  const year = currentDate.getFullYear()
 
   return (
     <div className="flex flex-col justify-center items-center my-10">
-      {/* <Image
-        width={200}
-        height={200}
-        src="/Logo.png"
-        alt="Logo"
-        className="cursor-pointer object-cover mb-10"
-      /> */}
-      <h1 className="text-4xl text-black">
-        Performance Report{' '}
-        {previousMonthDate.toLocaleString('default', { month: 'long' })}{' '}
-        {previousMonthDate.getFullYear()}
+      <h1 className="text-5xl font-semibold text-gray-800">
+        Performance Report for {monthName} {year}
       </h1>
     </div>
   )
 }
-
 export default ReportHead
