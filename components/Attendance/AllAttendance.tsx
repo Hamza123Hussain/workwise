@@ -11,14 +11,12 @@ import NoAttendance from './NoAttendance'
 import { filteredAttendance } from '@/functions/Attendance/FilteringAttendance'
 const AllAttendance: React.FC = () => {
   const user = useSelector((state: RootState) => state.user)
+  const Month = useSelector((state: RootState) => state.sort.Month)
   const reportRef = useRef(null)
   const [groupedAttendance, setGroupedAttendance] = useState<{
     [key: string]: AttendanceRecord[]
   }>({})
   const [loading, setLoading] = useState(false)
-  const [selectedMonth, setSelectedMonth] = useState<number>(
-    new Date().getMonth()
-  )
   useEffect(() => {
     if (user.Email) {
       setLoading(true)
@@ -34,10 +32,7 @@ const AllAttendance: React.FC = () => {
   }
   return (
     <>
-      <SelectedMonths
-        selectedMonth={selectedMonth}
-        setSelectedMonth={setSelectedMonth}
-      />
+      <SelectedMonths />
       <div
         ref={reportRef}
         className="overflow-x-auto p-4 text-center w-[80vw] sm:w-auto mx-auto"
@@ -46,8 +41,8 @@ const AllAttendance: React.FC = () => {
           ALL ATTENDANCE RECORDS
         </h1>
         {/* Conditionally render content based on attendance data */}
-        {Object.keys(filteredAttendance(groupedAttendance, selectedMonth))
-          .length > 0 ? (
+        {Object.keys(filteredAttendance(groupedAttendance, Month)).length >
+        0 ? (
           <table className="min-w-full bg-blend-darken border-2 bg-[#bd8bff] border-charcoal-gray shadow-md rounded-lg">
             <thead>
               <tr className="bg-black">
@@ -66,10 +61,7 @@ const AllAttendance: React.FC = () => {
               </tr>
             </thead>
             <MainTable
-              groupedAttendance={filteredAttendance(
-                groupedAttendance,
-                selectedMonth
-              )}
+              groupedAttendance={filteredAttendance(groupedAttendance, Month)}
             />
           </table>
         ) : (
