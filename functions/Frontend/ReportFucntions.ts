@@ -45,9 +45,10 @@ export const calculateOverallAverage = (
 export const calculateOverallSalary = (
   overallAverage: number,
   salary: number
-): string => {
-  return overallAverage > 0 ? ((overallAverage / 100) * salary).toFixed(0) : '0'
+): number => {
+  return overallAverage > 0 ? (overallAverage / 100) * salary : 0
 }
+
 export const fetchSalaries = async (mergedData: MergedUserData[]) => {
   const salaryData: { [key: string]: number } = {}
 
