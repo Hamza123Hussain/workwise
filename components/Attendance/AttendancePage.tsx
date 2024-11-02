@@ -8,13 +8,11 @@ import AttendanceTable from './AttendanceTable'
 import SelectedMonths from '../Layout/SelectedMonths'
 import { months } from '@/utils/MonthsArray'
 const AttendancePage = ({ type }: { type: string }) => {
-  const [selectedMonth, setSelectedMonth] = useState<number>(
-    new Date().getMonth()
-  )
   const [loading, setLoading] = useState(true)
   const [UserAttendance, setAttendance] = useState<AttendanceRecord[]>([])
   const User = useSelector((state: RootState) => state.user)
   const SelectedUser = useSelector((state: RootState) => state.Select)
+  const Month = useSelector((state: RootState) => state.sort.Month)
   const fetchAttendance = async () => {
     const attendance = await getAttendance(setLoading, User.Email, SelectedUser)
     setAttendance(attendance) // Update attendance state
@@ -35,15 +33,12 @@ const AttendancePage = ({ type }: { type: string }) => {
     <>
       {' '}
       <h2 className="text-2xl font-semibold mb-4 text-[#c27cff] text-center">
-        All {type} Records For {months[selectedMonth]} - {SelectedUser}
+        All {type} Records For {months[Month]} - {SelectedUser}
       </h2>
-      <SelectedMonths
-        setSelectedMonth={setSelectedMonth}
-        selectedMonth={selectedMonth}
-      />
+      <SelectedMonths />
       <AttendanceTable
         Attendance={UserAttendance.filter(
-          (record) => new Date(record.currentDate).getMonth() === selectedMonth
+          (record) => new Date(record.currentDate).getMonth() === Month
         )}
       />
     </>
