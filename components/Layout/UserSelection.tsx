@@ -14,7 +14,7 @@ const UserSelection = ({
     <>
       <div className="my-4">
         <DropDown type={type} Users={Users} />
-        {type === 'Attendance' ? <AttendancePage /> : <TaskPage />}
+        {type === 'Attendance' ? <AttendancePage type={type} /> : <TaskPage />}
       </div>
     </>
   )
