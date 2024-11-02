@@ -6,11 +6,13 @@ import {
 import { RootState } from '@/utils/Redux/Store/Store'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import SelectedMonths from '../Layout/SelectedMonths'
 const Dropdowns = () => {
   const SortTask = useSelector((state: RootState) => state.sort)
   const Disptach = useDispatch()
   return (
     <div className="flex gap-4 mb-4 justify-end mr-5">
+      <SelectedMonths />
       <div className="flex flex-col">
         <label htmlFor="timeFilter" className="text-[#ac58ff] mb-1 text-left">
           Timeframe
