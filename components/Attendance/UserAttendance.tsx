@@ -12,9 +12,7 @@ const UserAttendance: React.FC = () => {
   const user = useSelector((state: RootState) => state.user)
   const [userAttendance, setAttendance] = useState<AttendanceRecord[]>([])
   const [loading, setLoading] = useState(true)
-  const [selectedMonth, setSelectedMonth] = useState<number>(
-    new Date().getMonth()
-  )
+  const Month = useSelector((state: RootState) => state.sort.Month)
   useEffect(() => {
     const fetchAttendance = async () => {
       if (user.Email) {
@@ -40,20 +38,16 @@ const UserAttendance: React.FC = () => {
   return (
     <div className="p-6">
       <h2 className="text-2xl font-semibold mb-4 text-[#c27cff] text-center">
-        Attendance Records for {months[selectedMonth]} - {user.Name}
+        Attendance Records for {months[Month]} - {user.Name}
       </h2>
-      <SelectedMonths
-        selectedMonth={selectedMonth}
-        setSelectedMonth={setSelectedMonth}
-      />
+      <SelectedMonths />
       {!loading && userAttendance.length === 0 ? (
         <NoAttendance />
       ) : (
         <>
           <AttendanceTable
             Attendance={userAttendance.filter(
-              (record) =>
-                new Date(record.currentDate).getMonth() === selectedMonth
+              (record) => new Date(record.currentDate).getMonth() === Month
             )}
           />
         </>
