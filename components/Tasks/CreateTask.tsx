@@ -14,7 +14,7 @@ const CreateTaskForm = () => {
     name: '',
     description: '',
     dueDate: '',
-    assignedTo: User.Name,
+    assignedTo: [], // Initialize as an empty array for multiple selection
     Email: User.Email,
     priority: 'LOW',
     TaskType: 'Daily',
@@ -22,8 +22,16 @@ const CreateTaskForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    // Assign User.Name to assignedTo if the array is empty
+    const taskDataToSubmit = {
+      ...taskData,
+      assignedTo:
+        taskData.assignedTo.length > 0 ? taskData.assignedTo : [User.Name],
+    }
+
     try {
-      const Response = await createTask(taskData)
+      const Response = await createTask(taskDataToSubmit)
       if (Response) {
         toast.success('Task has been created successfully')
         Router.push('/usertasks')
