@@ -15,8 +15,8 @@ import { useSelector } from 'react-redux'
 
 const Report: React.FC = () => {
   const user = useSelector((state: RootState) => state.user)
-  const monthNumber = useSelector((state: RootState) => state.sort.Month) // Assuming this is a number representing the month (0-11)
-  const year = new Date().getFullYear() // Get the current year or use a specific year if you have that info.
+  const monthNumber = useSelector((state: RootState) => state.sort.Month)
+  const year = new Date().getFullYear()
   const [groupedAttendance, setGroupedAttendance] = useState<{
     [key: string]: AttendanceRecord[]
   }>({})
@@ -55,8 +55,8 @@ const Report: React.FC = () => {
   }, [user.Email])
 
   // Calculate the start and end date of the selected month
-  const startDate = new Date(year, monthNumber, 1) // First day of the month
-  const endDate = new Date(year, monthNumber + 1, 0) // Last day of the month
+  const startDate = new Date(year, monthNumber, 1)
+  const endDate = new Date(year, monthNumber + 1, 0)
 
   // Filter attendance data for the selected month
   const filteredAttendance = Object.keys(groupedAttendance).reduce(
@@ -87,6 +87,22 @@ const Report: React.FC = () => {
     return acc
   }, {} as { [key: string]: TaskFetch[] })
 
+  // Calculate total tasks and priority-specific tasks
+  const totalTasks = Object.values(filteredTasks).reduce(
+    (sum, tasks) => sum + tasks.length,
+    0
+  )
+  const highPriorityTasks = Object.values(filteredTasks).reduce(
+    (sum, tasks) =>
+      sum + tasks.filter((task) => task.priority === 'HIGH').length,
+    0
+  )
+  const lowPriorityTasks = Object.values(filteredTasks).reduce(
+    (sum, tasks) =>
+      sum + tasks.filter((task) => task.priority === 'LOW').length,
+    0
+  )
+
   // Merge filteredAttendance and filteredTasks data into a single array
   useEffect(() => {
     const merged = users.map((userItem) => {
@@ -111,7 +127,12 @@ const Report: React.FC = () => {
       ) : (
         <div>
           <SelectedMonths />
-          <ReportCard mergedData={mergedData} />
+          <ReportCard
+            mergedData={mergedData}
+            totalTasks={totalTasks}
+            highPriorityTasks={highPriorityTasks}
+            lowPriorityTasks={lowPriorityTasks}
+          />
         </div>
       )}
     </>
