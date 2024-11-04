@@ -63,9 +63,7 @@ const ReportBody: React.FC<ReportBodyProps> = ({ mergedData }) => {
             </td>
             <td className="p-4 text-base">{overallAverage.toFixed(2)}%</td>
             <td className="p-4 text-base">
-              {taskCompletionPercentage > 10
-                ? Math.floor(overallSalary).toLocaleString()
-                : 0}
+              {Math.floor(overallSalary).toLocaleString()}
             </td>
           </tr>
         )
