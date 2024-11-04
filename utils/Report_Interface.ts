@@ -10,4 +10,7 @@ export interface MergedUserData {
 }
 export interface ReportCardProps {
   mergedData: MergedUserData[]
+  totalTasks: number // Add this line
+  highPriorityTasks: number
+  lowPriorityTasks: number
 }
