@@ -29,7 +29,11 @@ const DropDown = ({ type, Users }: { type: string; Users: UserFetched[] }) => {
           >
             {Users.map((user) => (
               <option key={user.createdAt} value={user.Name}>
-                {user.Name}
+                {user.Name == 'Arooj'
+                  ? 'Arooj Yousaf'
+                  : user.Name == 'Salman'
+                  ? 'Salman Haider'
+                  : user.Name}
               </option>
             ))}
           </select>
