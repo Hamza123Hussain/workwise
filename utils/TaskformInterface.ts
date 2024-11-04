@@ -2,7 +2,7 @@ export interface TaskFormProps {
   name: string
   description: string
   dueDate: string
-  assignedTo: string
+  assignedTo: string[]
   Email: string
   priority: string
   TaskType: string
@@ -52,4 +52,14 @@ export interface EditTask {
   Email: string
   description: string
   setDescription: (description: string) => void
+}
+// Define types for the task data
+export interface TaskData {
+  description: string
+  dueDate: string
+  assignedTo: string[] // Updated to array of strings
+  name: string
+  Email: string
+  priority: string
+  TaskType: string
 }
