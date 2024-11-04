@@ -5,7 +5,7 @@ import axios from 'axios'
 interface TaskData {
   description: string
   dueDate: string
-  assignedTo: string
+  assignedTo: string[]
   name: string
   Email: string
   priority: string
