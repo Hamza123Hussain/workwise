@@ -1,13 +1,32 @@
 import React from 'react'
-import { TaskFormComponentProps } from '@/utils/TaskformInterface'
+import {
+  TaskFormComponentProps,
+  TaskFormProps,
+} from '@/utils/TaskformInterface'
 import TaskField from './TaskField'
 import UserAssign from './UserAssign'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
+
 const TaskForm: React.FC<TaskFormComponentProps> = ({
   taskData,
   setTaskData,
 }) => {
+  // Handle user selection changes
+  const handleUserChange = (selectedUser: string) => {
+    setTaskData((prev: TaskFormProps) => {
+      const assignedTo = Array.isArray(prev.assignedTo) ? prev.assignedTo : []
+      const isSelected = assignedTo.includes(selectedUser)
+
+      // Toggle user selection
+      const newAssignedTo = isSelected
+        ? assignedTo.filter((user) => user !== selectedUser)
+        : [...assignedTo, selectedUser]
+
+      return { ...prev, assignedTo: newAssignedTo }
+    })
+  }
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -16,7 +35,9 @@ const TaskForm: React.FC<TaskFormComponentProps> = ({
     const { name, value } = e.target
     setTaskData((prev) => ({ ...prev, [name]: value }))
   }
+
   const User = useSelector((state: RootState) => state.user)
+
   return (
     <div>
       <TaskField
@@ -33,7 +54,6 @@ const TaskForm: React.FC<TaskFormComponentProps> = ({
         handleChange={handleChange}
         type="text"
       />
-
       <TaskField
         Label="Priority Level"
         name="priority"
@@ -58,9 +78,13 @@ const TaskForm: React.FC<TaskFormComponentProps> = ({
         />
       )}
       {User.Email === 'octtoppus1@gmail.com' && (
-        <UserAssign value={taskData.assignedTo} handleChange={handleChange} />
+        <UserAssign
+          value={taskData.assignedTo}
+          handleChange={handleUserChange}
+        />
       )}
     </div>
   )
 }
+
 export default TaskForm
