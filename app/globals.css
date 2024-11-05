@@ -316,3 +316,22 @@ textarea {
     max-width: 240px; /* Keep original max-width */
   }
 }
+/* Add this CSS to your global styles (e.g., styles/globals.css) or as a styled component */
+::-webkit-scrollbar {
+  width: 3px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background of the scrollbar track */
+  border-radius: 3px; /* Rounded corners for the track */
+  margin-right: 4px; /* Add space between the scrollbar and content */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8c5bff; /* Color of the scrollbar thumb */
+  border-radius: 3px; /* Rounded corners for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7b4ae2; /* Color of the thumb on hover */
+}
