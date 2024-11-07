@@ -6,8 +6,10 @@ import { RootState } from '@/utils/Redux/Store/Store'
 import toast from 'react-hot-toast'
 import { createTask } from '@/functions/Task/CreateTask'
 import EditTaskModal from './EditTaskModal'
+import { useRouter } from 'next/navigation'
 
 const ActionButtons = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
+  const Router = useRouter()
   const User = useSelector((state: RootState) => state.user)
   const [isModalOpen, setIsModalOpen] = useState(false) // State to manage modal visibility
   const isDueDatePast =
@@ -73,7 +75,7 @@ const ActionButtons = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
       )}
       <button
         onClick={() => {
-          if (!isDueDatePast) setIsModalOpen(true)
+          Router.push(`/edittask/${TaskDetail._id}`)
         }} // Open Edit Task Modal
         className={`p-2 rounded-lg shadow transition-all duration-200 text-xs ease-in-out 
           ${
