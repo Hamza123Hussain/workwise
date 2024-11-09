@@ -25,7 +25,7 @@ export const calculateTotalHoursWorked = (
 export const calculateAttendancePercentage = (
   totalHoursWorked: number
 ): string => {
-  return ((totalHoursWorked / 184) * 100).toFixed(2)
+  return ((totalHoursWorked / 168) * 100).toFixed(2)
 }
 
 export const getSalary = (
