@@ -1,6 +1,34 @@
 import React from 'react'
 
-const Guide = () => {
+// Helper function to calculate deducted points based on status and priority
+const calculateDeductedPoints = (
+  status: 'Completed' | 'In Progress' | 'Minor Progress',
+  priority: 'HIGH' | 'MEDIUM' | 'LOW'
+): string => {
+  const pointsMap: Record<'HIGH' | 'MEDIUM' | 'LOW', number> = {
+    HIGH: 10,
+    MEDIUM: 5,
+    LOW: 2.5,
+  }
+
+  const totalPoints = pointsMap[priority]
+
+  const deductionMap: Record<
+    'Completed' | 'In Progress' | 'Minor Progress',
+    number
+  > = {
+    Completed: 0, // No deduction for completed tasks
+    'In Progress': 0.27, // Deduction percentage for in-progress tasks
+    'Minor Progress': 0.55, // Deduction percentage for minor progress tasks
+  }
+
+  const deductionPercentage = deductionMap[status] || 0
+  const deductedPoints = totalPoints - totalPoints * deductionPercentage
+
+  return deductedPoints.toFixed(2)
+}
+
+const Guide: React.FC = () => {
   return (
     <div className="bg-gray-50 py-10 px-6 lg:px-16 mt-5">
       <div className="max-w-7xl mx-auto space-y-12">
@@ -64,48 +92,10 @@ const Guide = () => {
             Task Deduction Criteria
           </h2>
           {/* Before Deduction Table */}
-          <div className="overflow-x-auto mb-12">
-            {' '}
-            <h3 className="text-xl font-semibold text-[#5925da] mb-4">
-              Task Deduction Percentage
-            </h3>
-            <table className="min-w-full text-left table-auto">
-              <thead className="bg-[#5925da] text-white">
-                <tr>
-                  <th className="px-4 py-2 text-nowrap">Status</th>
-                  <th className="px-4 py-2 text-nowrap">High</th>
-                  <th className="px-4 py-2 text-nowrap">Medium</th>
-                  <th className="px-4 py-2 text-nowrap">Low</th>
-                </tr>
-              </thead>
-              <tbody className="text-gray-700">
-                <tr>
-                  <td className="border px-4 py-2 text-nowrap">Completed</td>
-                  <td className="border px-4 py-2 text-nowrap">0.00%</td>
-                  <td className="border px-4 py-2 text-nowrap">0.00%</td>
-                  <td className="border px-4 py-2 text-nowrap">0.00%</td>
-                </tr>
-                <tr>
-                  <td className="border px-4 py-2 text-nowrap">In Progress</td>
-                  <td className="border px-4 py-2 text-nowrap">27.00%</td>
-                  <td className="border px-4 py-2 text-nowrap">19.00%</td>
-                  <td className="border px-4 py-2 text-nowrap">9.00%</td>
-                </tr>
-                <tr>
-                  <td className="border px-4 py-2 text-nowrap">
-                    Minor Progress
-                  </td>
-                  <td className="border px-4 py-2 text-nowrap">55.00%</td>
-                  <td className="border px-4 py-2 text-nowrap">31.00%</td>
-                  <td className="border px-4 py-2 text-nowrap">12.00%</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
           {/* After Deduction Table */}
           <div className="overflow-x-auto">
             <h3 className="text-xl font-semibold text-[#5925da] mb-4">
-              Task Percentage After Deduction
+              Task Deduction Percentage
             </h3>
             <table className="min-w-full text-left table-auto">
               <thead className="bg-[#5925da] text-white">
@@ -125,17 +115,78 @@ const Guide = () => {
                 </tr>
                 <tr>
                   <td className="border px-4 py-2 text-nowrap ">In Progress</td>
-                  <td className="border px-4 py-2 text-nowrap">73.00%</td>
-                  <td className="border px-4 py-2 text-nowrap">81.00%</td>
-                  <td className="border px-4 py-2 text-nowrap">91.00%</td>
+                  <td className="border px-4 py-2 text-nowrap">
+                    {(100 - 27).toFixed(2)}%
+                  </td>
+                  <td className="border px-4 py-2 text-nowrap">
+                    {(100 - 19).toFixed(2)}%
+                  </td>
+                  <td className="border px-4 py-2 text-nowrap">
+                    {(100 - 9).toFixed(2)}%
+                  </td>
                 </tr>
                 <tr>
                   <td className="border px-4 py-2 text-nowrap">
                     Minor Progress
                   </td>
-                  <td className="border px-4 py-2 text-nowrap">45.00%</td>
-                  <td className="border px-4 py-2 text-nowrap">69.00%</td>
-                  <td className="border px-4 py-2 text-nowrap">88.00%</td>
+                  <td className="border px-4 py-2 text-nowrap">
+                    {(100 - 55).toFixed(2)}%
+                  </td>
+                  <td className="border px-4 py-2 text-nowrap">
+                    {(100 - 31).toFixed(2)}%
+                  </td>
+                  <td className="border px-4 py-2 text-nowrap">
+                    {(100 - 12).toFixed(2)}%
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>{' '}
+          <div className="overflow-x-auto mt-12">
+            <h3 className="text-xl font-semibold text-[#5925da] mb-4">
+              Points After Deduction
+            </h3>
+            <table className="min-w-full text-left table-auto">
+              <thead className="bg-[#5925da] text-white">
+                <tr>
+                  <th className="px-4 py-2 text-nowrap">Status</th>
+                  <th className="px-4 py-2 text-nowrap">High</th>
+                  <th className="px-4 py-2 text-nowrap">Medium</th>
+                  <th className="px-4 py-2 text-nowrap">Low</th>
+                </tr>
+              </thead>
+              <tbody className="text-gray-700">
+                <tr>
+                  <td className="border px-4 py-2 text-nowrap">Completed</td>
+                  <td className="border px-4 py-2 text-nowrap">10</td>
+                  <td className="border px-4 py-2 text-nowrap">5</td>
+                  <td className="border px-4 py-2 text-nowrap">2.5</td>
+                </tr>
+                <tr>
+                  <td className="border px-4 py-2 text-nowrap">In Progress</td>
+                  <td className="border px-4 py-2 text-nowrap">
+                    {calculateDeductedPoints('In Progress', 'HIGH')}
+                  </td>
+                  <td className="border px-4 py-2 text-nowrap">
+                    {calculateDeductedPoints('In Progress', 'MEDIUM')}
+                  </td>
+                  <td className="border px-4 py-2 text-nowrap">
+                    {calculateDeductedPoints('In Progress', 'LOW')}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="border px-4 py-2 text-nowrap">
+                    Minor Progress
+                  </td>
+                  <td className="border px-4 py-2 text-nowrap">
+                    {calculateDeductedPoints('Minor Progress', 'HIGH')}
+                  </td>
+                  <td className="border px-4 py-2 text-nowrap">
+                    {calculateDeductedPoints('Minor Progress', 'MEDIUM')}
+                  </td>
+                  <td className="border px-4 py-2 text-nowrap">
+                    {calculateDeductedPoints('Minor Progress', 'LOW')}
+                  </td>
                 </tr>
               </tbody>
             </table>
