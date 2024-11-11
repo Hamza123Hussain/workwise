@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import ReportHead from './ReportHead'
 import ReportBody from './ReportBody'
 import DownloadButton from './DownloadButton'
+import SelectedMonths from '../Layout/SelectedMonths'
 
 // ReportCard.tsx
 const ReportCard: React.FC<ReportCardProps> = ({
@@ -18,11 +19,9 @@ const ReportCard: React.FC<ReportCardProps> = ({
   ).toLocaleString()
 
   return (
-    <div className="flex flex-col justify-center items-center bg-gray-50 min-h-screen">
-      <div
-        ref={reportRef}
-        className="shadow-lg rounded-lg overflow-hidden w-[90vw] sm:w-auto"
-      >
+    <div className="flex flex-col justify-center items-center my-5 bg-gray-50 min-h-screen">
+      <SelectedMonths /> {/* Show selected month filter */}
+      <div ref={reportRef} className=" rounded-lg overflow-hidden w-[90vw]">
         <ReportHead />
         <div className="overflow-x-auto p-4">
           <table className="min-w-full text-center border-separate border-spacing-y-2">
@@ -55,28 +54,28 @@ const ReportCard: React.FC<ReportCardProps> = ({
             <ReportBody mergedData={mergedData} />
           </table>
         </div>{' '}
-        <div className=" flex items-center justify-center">
+        <div className=" flex items-center justify-center sm:flex-row flex-col">
           {' '}
-          <div className="bg-[#b473ff] text-white mt-6 py-6 p-2 text-center rounded-md shadow-md mx-6">
+          <div className="bg-yellow-500 text-white mt-6 py-6 w-full md:w-64 p-2 text-center rounded-md shadow-md mx-6">
             <h2 className="text-xl font-bold">Low Priority Tasks</h2>
             <p className="text-3xl font-semibold">{lowPriorityTasks}</p>
           </div>
-          <div className="bg-[#b473ff] text-white mt-6 py-6 p-2 text-center rounded-md shadow-md mx-6">
+          <div className="bg-blue-500 text-white mt-6 py-6 w-full md:w-64 p-2 text-center rounded-md shadow-md mx-6">
             <h2 className="text-xl font-bold">Medium Priority Tasks</h2>
             <p className="text-3xl font-semibold">
               {totalTasks - (highPriorityTasks + lowPriorityTasks)}
             </p>
           </div>{' '}
-          <div className="bg-[#b473ff] text-white mt-6 py-6 p-2 text-center rounded-md shadow-md mx-6">
+          <div className="bg-red-500 text-white mt-6 py-6 w-full md:w-64 p-2 text-center rounded-md shadow-md mx-6">
             <h2 className="text-xl font-bold">High Priority Tasks</h2>
             <p className="text-3xl font-semibold">{highPriorityTasks}</p>
           </div>
         </div>
-        <div className="bg-[#b473ff] text-white mt-6 py-6 text-center rounded-md shadow-md mx-6">
+        <div className="bg-[#b473ff] text-white mt-6 py-6 w-full mx-auto md:w-64 text-center rounded-md shadow-md ">
           <h2 className="text-xl font-bold">Total Tasks</h2>
           <p className="text-3xl font-semibold">{totalTasks}</p>
         </div>
-        <div className="bg-[#b473ff] text-white mt-6 py-6 text-center rounded-md shadow-md mx-6">
+        <div className="bg-[#b473ff] text-white mt-6 py-6 w-full mx-auto md:w-64 text-center rounded-md shadow-md ">
           <h2 className="text-xl font-bold">Total Salaries To Be Paid</h2>
           <p className="text-3xl font-semibold">{formattedTotalSalary}</p>
         </div>
