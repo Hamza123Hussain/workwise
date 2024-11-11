@@ -29,9 +29,9 @@ const Sidebar = () => {
             &times;
           </button>
 
-          <div className="flex flex-col space-y-4 px-4 my-5  items-start">
+          <div className="flex flex-col space-y-4 px-4 my-5 items-start">
             <UserDetails />
-            <SideBarLinks />
+            <SideBarLinks closeSidebar={toggleSidebar} />
           </div>
         </div>
       </div>
