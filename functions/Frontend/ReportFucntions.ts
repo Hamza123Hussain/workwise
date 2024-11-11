@@ -39,7 +39,11 @@ export const calculateOverallAverage = (
   attendancePercentage: string,
   taskCompletionPercentage: number
 ): number => {
-  return (parseFloat(attendancePercentage) + taskCompletionPercentage) / 2
+  const attendance = parseFloat(attendancePercentage)
+  const taskCompletion = taskCompletionPercentage
+
+  // 80% task completion, 20% attendance
+  return taskCompletion * 0.8 + attendance * 0.2
 }
 
 export const calculateOverallSalary = (
