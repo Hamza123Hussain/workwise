@@ -14,3 +14,13 @@ export interface ReportCardProps {
   highPriorityTasks: number
   lowPriorityTasks: number
 }
+export interface User {
+  createdAt: string
+  Email: string
+  imageUrl: string
+  Name: string
+  _id: string
+  Salary: number
+  JobDescription: string
+  JobTitle: string
+}
