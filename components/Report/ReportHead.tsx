@@ -11,7 +11,7 @@ const ReportHead = () => {
 
   return (
     <div className="flex flex-col justify-center items-center my-10">
-      <h1 className="text-5xl font-semibold text-gray-800">
+      <h1 className=" text-base sm:text-5xl font-semibold text-gray-800">
         Performance Report for {monthName} {year}
       </h1>
     </div>
