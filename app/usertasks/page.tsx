@@ -1,9 +1,8 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import TaskCard2 from '@/components/Tasks/TaskCard2'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { TaskFetch } from '@/utils/TaskformInterface'
-import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { fetchUserTasks } from '@/functions/Frontend/UserTasks'
 import Empty_Task_Test from '@/components/Tasks/Empty_Task_Test'
@@ -24,13 +23,16 @@ const UserTasks = () => {
   const closeModal = () => setModalOpen(false)
 
   useEffect(() => {
-    const fetchData = async () => {
-      const tasks = await fetchUserTasks(user.Name, user.Email, setLoading)
-      setTasks(tasks)
-    }
-    fetchData()
-    return () => {
+    // Only run on the client side
+    if (typeof window !== 'undefined') {
+      const fetchData = async () => {
+        const tasks = await fetchUserTasks(user.Name, user.Email, setLoading)
+        setTasks(tasks)
+      }
       fetchData()
+      return () => {
+        fetchData()
+      }
     }
   }, [selectedUser, user.Email, user.Name])
 
