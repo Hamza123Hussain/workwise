@@ -12,33 +12,41 @@ import HomePage from '../Home/Homepage'
 const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
   const User = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
+
   useEffect(() => {
     const encryptedData = localStorage.getItem('UserData')
     if (encryptedData) {
-      const decryptedData = decryptData(encryptedData) // Decrypt the data
-      dispatch(GetUserData(decryptedData))
+      try {
+        const decryptedData = decryptData(encryptedData)
+        dispatch(GetUserData(decryptedData))
+      } catch (error) {
+        console.error('Error decrypting user data:', error)
+      }
     }
   }, [dispatch])
+
   const [isClient, setIsClient] = useState(false)
   const pathname = usePathname()
-  // Use useEffect to only set isClient on the client-side
+
   useEffect(() => {
     setIsClient(true)
   }, [])
-  // Check if the current route is login or signup
-  const isAuthPage =
-    pathname === '/login' || pathname === '/signup' || pathname === '/reset'
-  // Render the layout based on client-side state
+
+  const authPages = ['/login', '/signup', '/reset']
+  const isAuthPage = authPages.includes(pathname)
+
   if (!isClient) {
-    return null // or a loading spinner if preferred
+    return <div>Loading...</div> // Show a loading spinner or something
   }
+
   return User.Email ? (
-    <div className=" flex bg-white  min-h-screen w-[100vw]">
+    <div className="flex bg-white min-h-screen w-[100vw]">
       <Sidebar />
-      <div className=" flex-1 ">{!isAuthPage ? children : <HomePage />}</div>
+      <div className="flex-1">{!isAuthPage ? children : <HomePage />}</div>
     </div>
   ) : (
     <div>{isAuthPage ? children : <SignIn />}</div>
   )
 }
+
 export default ConditionalLayout
