@@ -3,6 +3,8 @@ import { handleCheckInCheckOut } from '@/functions/Attendance/Checkout/Update'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { CheckInProps } from '@/utils/Checkout_Interface'
+import { FaCheckCircle, FaSignOutAlt } from 'react-icons/fa'
+import clsx from 'clsx'
 
 const CheckIn: React.FC<CheckInProps> = ({
   setLoading,
@@ -16,7 +18,7 @@ const CheckIn: React.FC<CheckInProps> = ({
   const User = useSelector((state: RootState) => state.user)
 
   const handleButtonClick = async () => {
-    setLoading(true) // Set loading state to true
+    setLoading(true)
     await handleCheckInCheckOut(
       User.Email,
       currentTime,
@@ -26,19 +28,30 @@ const CheckIn: React.FC<CheckInProps> = ({
       setCheckinStatus,
       setLocation
     )
-    setLoading(false) // Set loading state back to false
+    setLoading(false)
   }
 
   return (
     <button
       onClick={handleButtonClick}
-      className={`${
-        !checkinStatus ? 'bg-green-500' : 'bg-orange-600' // Lighter green for Check In, Orange for Check Out
-      } text-white p-4 rounded-lg shadow hover:${
-        !checkinStatus ? 'bg-green-600' : 'bg-orange-700' // Slightly darker for hover
-      } transition duration-200 w-full flex items-center justify-center`}
+      className={clsx(
+        'p-4 rounded-lg shadow-lg w-full flex items-center justify-center transition duration-300 ease-in-out',
+        {
+          'bg-green-500 hover:bg-green-600': !checkinStatus, // Check In
+          'bg-orange-600 hover:bg-orange-700': checkinStatus, // Check Out
+        }
+      )}
     >
-      {!checkinStatus ? 'Check In' : 'Check Out'}
+      <span className="mr-3">
+        {!checkinStatus ? (
+          <FaCheckCircle className="text-white text-xl" />
+        ) : (
+          <FaSignOutAlt className="text-white text-xl" />
+        )}
+      </span>
+      <span className="font-semibold text-white text-lg">
+        {!checkinStatus ? 'Check In' : 'Check Out'}
+      </span>
     </button>
   )
 }
