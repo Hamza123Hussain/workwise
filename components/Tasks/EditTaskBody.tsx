@@ -60,7 +60,7 @@ const EditTaskBody: React.FC<EditTask> = ({
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="bg-[#b698ff] text-white border-white border-2 p-2 rounded w-full"
+          className="bg-[#b698ff] text-white border-white border-2 p-2 rounded w-full "
         />
       </div>
     </>
