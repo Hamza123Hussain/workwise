@@ -67,7 +67,7 @@ const ActionButtons = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
       {TaskDetail.TaskType !== 'Other' && (
         <button
           onClick={() => TaskRepeat()} // Repeat Task
-          className={`p-2 rounded-lg shadow transition-all duration-200 text-xs ease-in-out 
+          className={`p-2 rounded-lg shadow transition-all duration-200 text-[8px] ease-in-out 
             ${'bg-green-600 text-white hover:bg-green-700'}`}
         >
           Repeat Task
@@ -77,7 +77,7 @@ const ActionButtons = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
         onClick={() => {
           Router.push(`/edittask/${TaskDetail._id}`)
         }} // Open Edit Task Modal
-        className={`p-2 rounded-lg shadow transition-all duration-200 text-xs ease-in-out 
+        className={`p-2 rounded-lg shadow transition-all duration-200 text-[8px] ease-in-out 
           ${
             isDueDatePast
               ? 'bg-blue-400 text-gray-300 cursor-not-allowed'
@@ -89,7 +89,7 @@ const ActionButtons = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
       </button>
       <button
         onClick={() => !isDueDatePast && TaskDelete()} // Delete Task
-        className={`p-2 rounded-lg shadow transition-all duration-200 text-xs ease-in-out 
+        className={`p-2 rounded-lg shadow transition-all duration-200 text-[8px] ease-in-out 
           ${
             isDueDatePast
               ? 'bg-red-400 text-gray-300 cursor-not-allowed'
