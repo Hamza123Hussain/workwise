@@ -12,12 +12,27 @@ import HomePage from '../Home/Homepage'
 const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
   const User = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
+  const [isClient, setIsClient] = useState(false)
+  const pathname = usePathname()
+  // Debugging the state of `isClient`
+  useEffect(() => {
+    console.log('Checking if client-side:', isClient)
+  }, [isClient])
 
+  // Debugging the user data
+  useEffect(() => {
+    console.log('User Data:', User)
+  }, [User])
+
+  // Fetch and decrypt user data from localStorage
   useEffect(() => {
     const encryptedData = localStorage.getItem('UserData')
+    console.log('Encrypted Data from localStorage:', encryptedData)
+
     if (encryptedData) {
       try {
         const decryptedData = decryptData(encryptedData)
+        console.log('Decrypted Data:', decryptedData)
         dispatch(GetUserData(decryptedData))
       } catch (error) {
         console.error('Error decrypting user data:', error)
@@ -25,8 +40,8 @@ const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
     }
   }, [dispatch])
 
-  const [isClient, setIsClient] = useState(false)
-  const pathname = usePathname()
+  // Log pathname
+  console.log('Current Pathname:', pathname)
 
   useEffect(() => {
     setIsClient(true)
@@ -36,7 +51,7 @@ const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
   const isAuthPage = authPages.includes(pathname)
 
   if (!isClient) {
-    return <div>Loading...</div> // Show a loading spinner or something
+    return <div>Loading...</div> // Show loading state
   }
 
   return User.Email ? (
