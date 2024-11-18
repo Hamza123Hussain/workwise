@@ -3,8 +3,8 @@ import { TaskFetch } from '@/utils/TaskformInterface'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import TaskCard from './TaskCard'
-import Loader from '../Loader'
 import { GetUserTasks } from '@/functions/Task/GetUserTasks'
+import Skeleton from 'react-loading-skeleton'
 
 const RecentTasks = () => {
   const [Loading, SetLoading] = useState(false)
@@ -29,31 +29,27 @@ const RecentTasks = () => {
     fetchData()
   }, [user.Email])
 
-  // Get the current month (0 = January, 1 = February, ..., 11 = December)
-  const currentMonth = new Date().getMonth()
-
   // Filter tasks for the current month
+  const currentMonth = new Date().getMonth()
   const currentMonthTasks = allTasks.filter((task) => {
     const taskMonth = new Date(task.createdAt).getMonth()
     return taskMonth === currentMonth
   })
-
-  // Get the latest 3 tasks for the current month
   const latestTasks = currentMonthTasks.slice(-3) // Get the last 3 tasks
 
   return (
     <div className="p-6 rounded-lg shadow-lg bg-white border-purple-300 border-2">
       {Loading ? (
         <div className="flex items-center justify-center my-10">
-          <Loader />
+          <Skeleton count={3} height={40} />
         </div>
       ) : (
         <>
-          <h2 className="font-semibold text-2xl text-[#a078ff] ">
+          <h2 className="font-semibold text-2xl text-[#a078ff] mb-4">
             Recent Tasks
           </h2>
-          <div className="mt-4 overflow-x-auto">
-            <TaskCard allTasks={latestTasks} /> {/* Pass the latest 3 tasks */}
+          <div className="mt-4">
+            <TaskCard allTasks={latestTasks} />
           </div>
         </>
       )}
