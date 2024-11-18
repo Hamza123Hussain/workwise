@@ -3,6 +3,9 @@ import { RootState } from '@/utils/Redux/Store/Store'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useSelector } from 'react-redux'
+import { FaPause, FaPlay } from 'react-icons/fa'
+import clsx from 'clsx'
+
 const BreakMain = ({
   attendanceId,
   onBreak,
@@ -12,12 +15,13 @@ const BreakMain = ({
   onBreak: boolean
   setOnBreak: (status: boolean) => void
 }) => {
-  const [breakStartTime, setBreakStartTime] = useState<Date | null>(null) // When break started
-  const [breakDuration, setBreakDuration] = useState<number>(0) // Total break duration in seconds
-  const user = useSelector((state: RootState) => state.user) // Get user from redux store
+  const [breakStartTime, setBreakStartTime] = useState<Date | null>(null)
+  const [breakDuration, setBreakDuration] = useState<number>(0)
+  const user = useSelector((state: RootState) => state.user)
+
   const handleBreak = async () => {
     if (!attendanceId) {
-      toast.error('Attendance ID is missing') // Handle missing attendanceId
+      toast.error('Attendance ID is missing')
       return
     }
     try {
@@ -32,20 +36,34 @@ const BreakMain = ({
         attendanceId
       )
     } catch (error) {
-      toast.error('An error occurred during break handling') // Error handling
+      toast.error('An error occurred during break handling')
       console.error('Break handling error:', error)
     }
   }
+
   return (
     <button
       onClick={handleBreak}
-      className={`${
-        onBreak ? 'bg-[#5b3e8c]' : 'bg-[#8c5bff]' // Coral for end break, Sunny Yellow for start break
-      } text-white p-4 rounded-lg hover:brightness-150' // Darker Coral on hover, Bright Gold for hover on Sunny Yellow
-      } transition duration-200 w-full flex items-center justify-center`}
+      className={clsx(
+        'p-4 rounded-lg text-white flex items-center justify-center w-full transition duration-300 ease-in-out transform hover:scale-105',
+        {
+          'bg-[#8c5bff] hover:bg-[#6a3ff1]': !onBreak, // Start Break
+          'bg-[#5b3e8c] hover:bg-[#402a64]': onBreak, // End Break
+        }
+      )}
     >
-      {onBreak ? 'End Break' : 'Start Break'}
+      <span className="mr-3">
+        {!onBreak ? (
+          <FaPlay className="text-white text-xl" />
+        ) : (
+          <FaPause className="text-white text-xl" />
+        )}
+      </span>
+      <span className="font-semibold text-lg">
+        {!onBreak ? 'Start Break' : 'End Break'}
+      </span>
     </button>
   )
 }
+
 export default BreakMain
