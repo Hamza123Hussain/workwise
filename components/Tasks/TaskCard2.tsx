@@ -1,62 +1,76 @@
 import { priorityClass, TaskFetch } from '@/utils/TaskformInterface'
 import React from 'react'
-import Action_Buttons from './Action_Buttons'
 import { markTaskAsDone } from '@/functions/Task/MarkDone'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
+import ActionButtons from './Action_Buttons'
+
 const progress_Class = (task: TaskFetch) => {
-  return task.progress === 'TODO'
-    ? 'bg-red-600'
-    : task.progress === 'IN_PROGRESS'
-    ? 'bg-purple-900'
-    : task.progress === 'Minor_progress'
-    ? 'bg-yellow-500'
-    : 'bg-green-600'
+  switch (task.progress) {
+    case 'TODO':
+      return 'bg-red-500'
+    case 'IN_PROGRESS':
+      return 'bg-blue-600'
+    case 'Minor_progress':
+      return 'bg-yellow-400'
+    default:
+      return 'bg-green-500'
+  }
 }
+
 const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
   const user = useSelector((state: RootState) => state.user)
+
   return (
-    <div className="bg-[#a57eff] text-white rounded-2xl border-purple-900 hover:border-2  p-6 w-full md:w-[78%]  mx-auto my-4 transition-transform duration-300 hover:scale-105">
-      <div className="border-b border-gray-600 mb-2">
-        <h2 className="text-xl font-bold">{TaskDetail.name}</h2>
+    <div className="bg-[#a57eff]  rounded-lg shadow-lg border border-gray-300 hover:shadow-2xl p-6 w-full md:w-3/4 mx-auto my-2  transition-transform duration-300 hover:scale-105">
+      <div className="flex flex-col ">
+        <h2
+          className="text-lg font-semibold border-b-4 border-gray-100 w-full text-white truncate mb-3"
+          title={TaskDetail.name} // Show full name on hover
+        >
+          {TaskDetail.name}
+        </h2>
       </div>
+
       <div className="mb-4">
-        <div className="flex flex-col items-center justify-between">
-          <span className="font-medium">Assigned to</span>
-          <span className="font-bold">{TaskDetail.assignedTo}</span>
+        <div className="flex flex-col justify-between text-white">
+          <span className="text-sm">Assigned to</span>
+          <span className="font-medium">{TaskDetail.assignedTo}</span>
         </div>
-        <div className="flex flex-col items-center justify-between mt-2">
-          <span className="font-medium">Created at</span>
-          <span className="font-bold">
+        <div className="flex justify-between flex-col text-white mt-2">
+          <span className="text-sm">Created on</span>
+          <span className="font-medium">
             {new Date(TaskDetail.createdAt).toLocaleDateString()}
           </span>
         </div>
-        <div className="flex flex-col items-center justify-between mt-2">
-          <span className="font-medium">Due date</span>
-          <span className="font-bold">
+
+        <div className="flex flex-col justify-between text-white mt-2">
+          <span className="text-sm">Task Type</span>
+          <span className="font-medium">{TaskDetail.TaskType}</span>
+        </div>
+        <div className="flex flex-col justify-between text-white mt-2">
+          <span className="text-sm">Due date</span>
+          <span className="font-medium">
             {new Date(TaskDetail.dueDate).toLocaleDateString()}
           </span>
         </div>
-        <div className="flex flex-col items-center justify-between mt-2">
-          <span className="font-medium">Task Type</span>
-          <span className="font-bold">{TaskDetail.TaskType}</span>
-        </div>
       </div>
-      <div className="flex flex-col gap-4 justify-center items-center mb-4">
-        <div className="flex flex-col items-center ">
-          <span className="font-medium">Priority</span>
+
+      <div className="mb-4  flex justify-between">
+        <div className="flex items-center text-sm text-white flex-col">
+          <span className="font-medium mr-2">Priority</span>
           <span
-            className={`ml-2 font-bold ${priorityClass(
+            className={`font-bold ${priorityClass(
               TaskDetail
             )} text-transparent bg-clip-text`}
           >
             {TaskDetail.priority}
           </span>
         </div>
-        <div className="flex flex-col items-center">
-          <span className="font-medium">Progress</span>
+        <div className="flex items-center text-sm text-white flex-col">
+          <span className="font-medium mr-2">Progress</span>
           <span
-            className={`ml-2 font-bold ${progress_Class(
+            className={`font-bold text-xs ${progress_Class(
               TaskDetail
             )} text-transparent bg-clip-text`}
           >
@@ -64,29 +78,38 @@ const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
           </span>
         </div>
       </div>
-      <div className="my-2 h-36 overflow-auto">
-        <h1 className="text-lg font-semibold">Description</h1>
-        <p className="text-sm text-gray-300">{TaskDetail.description}</p>
+
+      <div className=" text-sm text-white">
+        <h3 className="font-medium text-white">Description</h3>
+        <p
+          className="text-xs font-semibold text-white truncate mb-3"
+          title={TaskDetail.description} // Show full name on hover
+        >
+          {TaskDetail.description}
+        </p>
       </div>
-      <button
-        onClick={() => markTaskAsDone(TaskDetail._id, user.Email, 'DONE')}
-        className={`font-semibold py-2 px-4 rounded transition-colors duration-300 
-    ${
-      new Date(TaskDetail.dueDate) <
-        new Date(new Date().setHours(0, 0, 0, 0)) ||
-      TaskDetail.progress === 'DONE'
-        ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
-        : 'bg-green-500 text-white hover:bg-green-600'
-    }`}
-        disabled={
-          new Date(TaskDetail.dueDate) <
-          new Date(new Date().setHours(0, 0, 0, 0))
-        }
-      >
-        Mark As Done
-      </button>
-      <Action_Buttons TaskDetail={TaskDetail} />
+      <div className="flex flex-wrap items-center justify-start">
+        <ActionButtons TaskDetail={TaskDetail} />
+        <button
+          onClick={() => markTaskAsDone(TaskDetail._id, user.Email, 'DONE')}
+          className={`py-2 px-4 rounded-md text-white text-[8px] font-semibold transition-all duration-300 
+      ${
+        new Date(TaskDetail.dueDate) <
+          new Date(new Date().setHours(0, 0, 0, 0)) ||
+        TaskDetail.progress === 'DONE'
+          ? 'bg-gray-400 cursor-not-allowed'
+          : 'bg-green-500 hover:bg-green-600'
+      }`}
+          disabled={
+            new Date(TaskDetail.dueDate) <
+            new Date(new Date().setHours(0, 0, 0, 0))
+          }
+        >
+          Mark as Done
+        </button>
+      </div>
     </div>
   )
 }
+
 export default TaskCard2
