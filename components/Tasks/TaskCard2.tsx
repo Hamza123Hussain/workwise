@@ -4,7 +4,6 @@ import { markTaskAsDone } from '@/functions/Task/MarkDone'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
 import ActionButtons from './Action_Buttons'
-
 const progress_Class = (task: TaskFetch) => {
   switch (task.progress) {
     case 'TODO':
@@ -17,10 +16,8 @@ const progress_Class = (task: TaskFetch) => {
       return 'bg-green-500'
   }
 }
-
 const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
   const user = useSelector((state: RootState) => state.user)
-
   return (
     <div className="bg-[#a57eff]  rounded-lg shadow-lg border border-gray-300 hover:shadow-2xl p-6 w-full md:w-3/4 mx-auto my-2  transition-transform duration-300 hover:scale-105">
       <div className="flex flex-col ">
@@ -31,7 +28,6 @@ const TaskCard2 = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
           {TaskDetail.name}
         </h2>
       </div>
-
       <div className="mb-4">
         <div className="flex flex-col justify-between text-white">
           <span className="text-sm">Assigned to</span>

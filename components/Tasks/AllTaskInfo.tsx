@@ -38,7 +38,7 @@ const AllTasksTable = () => {
         </h1>
         <div className="overflow-x-auto p-4 text-center w-[90vw] sm:w-auto">
           {!loading ? (
-            <table className="min-w-full bg-blend-darken border-2 bg-[#bd8bff] text-white border-charcoal-gray shadow-md rounded-lg">
+            <table className="min-w-full bg-blend-darken border-2 bg-white text-white border-charcoal-gray shadow-md rounded-lg">
               <TableHead />
               <MainTable groupedAttendance={ALL_TASKS} />
             </table>
