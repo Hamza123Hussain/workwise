@@ -11,35 +11,30 @@ const DropDown = ({ type, Users }: { type: string; Users: UserFetched[] }) => {
     Dispatch(GetUserName(event.target.value)) // Update selected user when dropdown changes
   }
   return (
-    <div>
-      <div className=" flex items-center justify-between">
-        <div className=" flex flex-col">
-          <label
-            htmlFor="User-select"
-            className="mr-3 font-medium text-[#ac58ff]"
-          >
-            Select User
-          </label>
-          <select
-            id="User-select"
-            value={SelectedUser}
-            onChange={handleUserChange}
-            className="border-2 border-white text-white p-2 rounded-lg 
+    <div className=" flex gap-2 mb-5 items-center justify-between">
+      <div className=" flex flex-col">
+        <label htmlFor="User-select" className=" font-medium text-[#ac58ff]">
+          Select User
+        </label>
+        <select
+          id="User-select"
+          value={SelectedUser}
+          onChange={handleUserChange}
+          className="border-2 border-white text-white p-2 rounded-lg 
            focus:outline-none focus:ring focus:ring-white bg-[#a56edd] transition ease-in-out"
-          >
-            {Users.map((user) => (
-              <option key={user.createdAt} value={user.Name}>
-                {user.Name == 'Arooj'
-                  ? 'Arooj Yousaf'
-                  : user.Name == 'Salman'
-                  ? 'Salman Haider'
-                  : user.Name}
-              </option>
-            ))}
-          </select>
-        </div>
-        {type !== 'Attendance' ? <Dropdowns /> : ''}
+        >
+          {Users.map((user) => (
+            <option key={user.createdAt} value={user.Name}>
+              {user.Name == 'Arooj'
+                ? 'Arooj Yousaf'
+                : user.Name == 'Salman'
+                ? 'Salman Haider'
+                : user.Name}
+            </option>
+          ))}
+        </select>
       </div>
+      {type !== 'Attendance' ? <Dropdowns /> : ''}
     </div>
   )
 }

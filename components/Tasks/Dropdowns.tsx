@@ -12,12 +12,9 @@ const Dropdowns = () => {
   const SortTask = useSelector((state: RootState) => state.sort)
   const Disptach = useDispatch()
   return (
-    <div className="flex gap-4 mb-4 justify-end mr-5 items-center">
+    <div className="flex gap-4  justify-end  items-center">
       <div className="flex flex-col">
-        <label
-          htmlFor="User-select"
-          className="mr-3 font-medium text-[#ac58ff]"
-        >
+        <label htmlFor="User-select" className=" font-medium text-[#ac58ff]">
           Select Month
         </label>
         <select

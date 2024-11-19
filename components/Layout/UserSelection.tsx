@@ -12,10 +12,9 @@ const UserSelection = ({
 }) => {
   return (
     <>
-      <div className="my-4">
-        <DropDown type={type} Users={Users} />
-        {type === 'Attendance' ? <AttendancePage type={type} /> : <TaskPage />}
-      </div>
+      <DropDown type={type} Users={Users} />
+
+      {type === 'Attendance' ? <AttendancePage type={type} /> : <TaskPage />}
     </>
   )
 }

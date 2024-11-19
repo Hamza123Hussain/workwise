@@ -63,7 +63,7 @@ const ActionButtons = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
     // Optionally refresh the task list or handle the updated task in your state
   }
   return (
-    <div className="flex justify-end flex-col sm:flex-row items-center gap-2 my-5">
+    <div className="flex justify-end flex-row items-center gap-2 my-5">
       {TaskDetail.TaskType !== 'Other' && (
         <button
           onClick={() => TaskRepeat()} // Repeat Task
