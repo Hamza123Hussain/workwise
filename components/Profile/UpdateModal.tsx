@@ -13,14 +13,14 @@ const UpdateModal = ({ User }: { User?: UserFetched }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="bg-white hover:bg-purple-700 text-[#b383ff] font-semibold py-2 px-4 rounded-md">
+        <button className="bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300">
           Edit Profile
         </button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] h-fit bg-black text-white">
+      <DialogContent className="sm:max-w-[425px] max-h-[90vh] bg-gray-50 text-gray-900 rounded-lg p-6 sm:p-4 overflow-auto space-y-6">
         <DialogHeader>
-          <DialogTitle className="text-purple-500">
-            Update The Profile
+          <DialogTitle className="text-xl font-semibold text-indigo-600">
+            Update Profile
           </DialogTitle>
         </DialogHeader>
         <UpdateFields User={User} />
@@ -28,4 +28,5 @@ const UpdateModal = ({ User }: { User?: UserFetched }) => {
     </Dialog>
   )
 }
+
 export default UpdateModal

@@ -11,7 +11,7 @@ const UserField = ({
     <div className="flex flex-col items-center justify-between border-b border-gray-700 pb-3">
       <h1 className="text-lg font-semibold text-purple-900">{Name}</h1>
       {Name !== 'User Image' ? (
-        <h1 className="text-lg font-medium text-gray-100">{Attribute}</h1>
+        <h1 className="text-lg font-medium text-black">{Attribute}</h1>
       ) : (
         typeof Attribute === 'string' && (
           <Image

@@ -18,7 +18,7 @@ const UpdateFields = ({ User }: { User?: UserFetched }) => {
     SetLoading(true)
     const Data = await updateUser(inputVal)
     if (Data) {
-      const encryptedData = encryptData(Data) // Encrypt data before storing
+      const encryptedData = encryptData(Data)
       localStorage.setItem('UserData', encryptedData)
       Dispatch(GetUserData(Data))
       SetLoading(false)
@@ -28,45 +28,44 @@ const UpdateFields = ({ User }: { User?: UserFetched }) => {
     Name: User ? User.Name : user.Name,
     email: User ? User.Email : user.Email,
     password: '',
-    Salary: User ? User.Salary.toString() : user.Salary.toString(), // Assuming you want to capture this
-    JobDescription: User ? User.Salary : user.JobDescription, // Added JobDescription field
+    Salary: User ? User.Salary.toString() : user.Salary.toString(),
+    JobDescription: user.JobDescription,
     Image: null,
     JobTitle: User ? User.JobTitle : user.JobTitle,
   })
-  if (Loading) {
-    return (
-      <div className=" flex justify-center items-center">
-        <Loader />
-      </div>
-    )
-  }
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null // Get the first file or null
+    const file = e.target.files?.[0] || null
     setInputVal((prev: InputValues) => ({
       ...prev,
       Image: file,
     }))
   }
+  if (Loading) {
+    return (
+      <div className="flex justify-center items-center">
+        <Loader />
+      </div>
+    )
+  }
   return (
-    <div className="flex flex-col bg-black p-2 rounded-lg shadow-lg  ">
+    <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-auto space-y-6">
       <UpdateInputFields inputVal={inputVal} setInputVal={setInputVal} />
-      <label htmlFor="imageUpload" className="block mb-1 text-white">
+      <label htmlFor="imageUpload" className="block text-gray-700 mb-2">
         Upload Image
       </label>
       <input
         type="file"
         id="imageUpload"
         onChange={handleImageChange}
-        className="mb-4 p-3 w-full rounded bg-gray-800 text-white focus:outline-none"
+        className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500"
       />
       <ImagePreview User={User} />
       <DialogFooter>
         <button
-          onClick={() => UpdateMe()}
-          type="submit"
-          className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 mb-5 rounded-md"
+          onClick={UpdateMe}
+          className="w-full sm:w-auto bg-indigo-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-indigo-700 transition duration-300"
         >
-          Save changes
+          Save Changes
         </button>
       </DialogFooter>
     </div>

@@ -5,8 +5,10 @@ import UpdateModal from './UpdateModal'
 import toast from 'react-hot-toast'
 import deleteUser from '@/functions/AUTH/DeleteUser'
 import { useRouter } from 'next/navigation'
+
 const UserCard = ({ User }: { User: UserFetched }) => {
   const Router = useRouter()
+
   const DeleteMe = async () => {
     try {
       const Data = await deleteUser(User.Email)
@@ -15,43 +17,41 @@ const UserCard = ({ User }: { User: UserFetched }) => {
         Router.push('/')
       }
     } catch (error) {
-      toast.error(`user is not being deleted : ${error}`)
+      toast.error(`User is not being deleted: ${error}`)
     }
   }
+
   return (
-    <div className="bg-[#ac7ff9] text-white p-4 rounded-lg mx-auto shadow-lg flex flex-col w-64 sm:w-96 items-center border border-purple-700 ">
+    <div className="relative bg-[#bd8bff] text-white rounded-lg shadow-lg p-6 w-72 mx-auto transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
       {/* User Info Section */}
-      <div className="sm:flex sm:items-center sm:space-x-4">
-        <div className="flex-shrink-0">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gray-200 overflow-hidden flex items-center justify-center">
           {User.imageUrl ? (
             <Image
               src={User.imageUrl}
               alt={User.Name}
-              width={60}
-              height={60}
-              className=" rounded-full"
+              width={80}
+              height={80}
+              className="rounded-full"
             />
           ) : (
-            <div className="w-20 h-20 rounded-full  flex items-center justify-center">
-              <span className="text-2xl font-bold text-white">
-                {User.Name.charAt(0)}
-              </span>
-            </div>
+            <span className="text-xl font-bold text-white">
+              {User.Name.charAt(0)}
+            </span>
           )}
         </div>
-        <div className="mt-4 sm:mt-0">
-          <h2 className="text-xl font-bold text-white">{User.Name}</h2>
-          <p className="text-sm text-white">Email: {User.Email}</p>
-          <p className="text-sm text-white">Title: {User.JobTitle || 'N/A'}</p>
-          <p className="text-sm text-white">Salary: PKR {User.Salary}</p>
+        <div className="ml-4 flex-grow">
+          <h2 className="text-lg font-bold">{User.Name}</h2>
+          <p className="text-sm text-white">{User.JobTitle || 'N/A'}</p>
         </div>
       </div>
+
       {/* Action Buttons */}
-      <div className="mt-4 flex-col sm:flex-row  flex items-center gap-2 ">
+      <div className="flex justify-between items-center">
         <UpdateModal User={User} />
         <button
           onClick={DeleteMe}
-          className="w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-500 transition duration-300 sm:w-auto sm:self-end"
+          className="bg-red-600 px-4 py-2 rounded-md hover:bg-red-700 transition-colors duration-200"
         >
           Delete
         </button>
@@ -59,4 +59,5 @@ const UserCard = ({ User }: { User: UserFetched }) => {
     </div>
   )
 }
+
 export default UserCard

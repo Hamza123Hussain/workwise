@@ -7,12 +7,11 @@ const ShowUser = () => {
   const User = useSelector((state: RootState) => state.user)
   console.log(User)
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center w-[90vw] sm:w-auto  p-6 text-white">
-      <h1 className="text-7xl my-10 font-bold text-center text-purple-400">
+    <div className="min-h-screen flex flex-col justify-center items-center p-6 bg-gray-100">
+      <h1 className="text-4xl my-8 font-semibold text-center text-gray-900">
         User Profile
       </h1>
-      <div className="w-full max-w-lg bg-[#bd97ff] rounded-lg shadow-md p-6 space-y-6">
-        {/* User Info Section */}
+      <div className="w-full max-w-lg bg-white rounded-lg shadow-md p-6 space-y-6">
         <div className="space-y-4">
           <UserField Attribute={User.Name} Name="User Name" />
           <UserField Attribute={User.Email} Name="User Email" />

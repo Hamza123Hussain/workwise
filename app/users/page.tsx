@@ -6,10 +6,12 @@ import { RootState } from '@/utils/Redux/Store/Store'
 import { UserFetched } from '@/utils/SignUpInterface'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+
 const AllUserData = () => {
   const [Loading, SetLoading] = useState(false)
   const [UserFetched, SetUserFetched] = useState<UserFetched[]>([])
   const User = useSelector((state: RootState) => state.user)
+
   const Getusers = async () => {
     SetLoading(true)
     const Data = await Allusers(User.Email)
@@ -18,12 +20,14 @@ const AllUserData = () => {
       SetLoading(false)
     }
   }
+
   useEffect(() => {
     Getusers()
     return () => {
       Getusers()
     }
   }, [])
+
   if (Loading) {
     return (
       <div className="min-h-screen flex justify-center items-center">
@@ -31,8 +35,9 @@ const AllUserData = () => {
       </div>
     )
   }
+
   return (
-    <div className=" grid sm:grid-cols-2 grid-cols-1 gap-5 my-10  ">
+    <div className="grid sm:grid-cols-2  gap-6 px-4 py-10">
       {UserFetched.map((element) => (
         <UserCard User={element} key={element.Email} />
       ))}
