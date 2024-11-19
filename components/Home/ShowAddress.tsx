@@ -1,10 +1,10 @@
-import { FC } from 'react'
+import { LocationCoords } from '@/utils/AttendanceInterface'
+import { FaCompass, FaMapMarkedAlt } from 'react-icons/fa'
 import dynamic from 'next/dynamic'
 import { Icon } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { LocationCoords } from '@/utils/AttendanceInterface'
 
-// Dynamically import the MapContainer and other React-Leaflet components to avoid SSR issues
+// Dynamically import Leaflet components to avoid SSR issues
 const MapContainer = dynamic(
   () => import('react-leaflet').then((mod) => mod.MapContainer),
   { ssr: false }
@@ -21,11 +21,7 @@ const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), {
   ssr: false,
 })
 
-interface MapComponentProps {
-  location: LocationCoords
-}
-
-const MapComponent: FC<MapComponentProps> = ({ location }) => {
+const ShowAddress = ({ location }: { location: LocationCoords }) => {
   const position: [number, number] = [location.latitude, location.longitude]
 
   const customIcon = new Icon({
@@ -44,11 +40,13 @@ const MapComponent: FC<MapComponentProps> = ({ location }) => {
 
       <div className="mt-6">
         <div className="flex items-center space-x-2 text-gray-100 text-md">
+          <FaCompass className="text-yellow-300" />
           <p>
             <span className="font-semibold">Latitude:</span> {location.latitude}
           </p>
         </div>
         <div className="flex items-center space-x-2 text-gray-100 text-md mt-3">
+          <FaMapMarkedAlt className="text-blue-300" />
           <p>
             <span className="font-semibold">Longitude:</span>{' '}
             {location.longitude}
@@ -57,7 +55,7 @@ const MapComponent: FC<MapComponentProps> = ({ location }) => {
       </div>
 
       <div className="mt-6 h-64">
-        {/* MapContainer with Leaflet */}
+        {/* Render map only on the client */}
         <MapContainer
           center={position}
           zoom={13}
@@ -77,4 +75,4 @@ const MapComponent: FC<MapComponentProps> = ({ location }) => {
   )
 }
 
-export default MapComponent
+export default ShowAddress
