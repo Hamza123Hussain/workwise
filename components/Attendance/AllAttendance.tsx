@@ -43,9 +43,9 @@ const AllAttendance: React.FC = () => {
         {/* Conditionally render content based on attendance data */}
         {Object.keys(filteredAttendance(groupedAttendance, Month)).length >
         0 ? (
-          <table className="min-w-full bg-blend-darken border-2 bg-[#bd8bff] border-charcoal-gray shadow-md rounded-lg">
+          <table className="min-w-full bg-blend-darken border-2 bg-white  shadow-md rounded-lg">
             <thead>
-              <tr className="bg-black">
+              <tr className="bg-[#bd8bff]">
                 <th className="border border-purple-800 px-4 py-2 text-white">
                   User Name
                 </th>

@@ -8,12 +8,13 @@ import Loader from '@/components/Loader'
 import UserSelection from '@/components/Layout/UserSelection'
 import AllAttendance from '@/components/Attendance/AllAttendance'
 import Usertableview from '@/components/Layout/Usertableview'
+
 const UserAttendance: React.FC = () => {
   const [Users, SetUserFetched] = useState<UserFetched[]>([])
   const user = useSelector((state: RootState) => state.user)
-  const [loading, setLoading] = useState(true) // Start loading as true
-  const [isTableView, setIsTableView] = useState(false) // State to track the current view
-  // Function to fetch users
+  const [loading, setLoading] = useState(true)
+  const [isTableView, setIsTableView] = useState(false)
+
   const Getusers = async () => {
     const Data = await Allusers(user.Email)
     if (Data) {
@@ -21,10 +22,11 @@ const UserAttendance: React.FC = () => {
       setLoading(false)
     }
   }
-  // Fetch attendance and users
+
   useEffect(() => {
-    Getusers() // Fetch users
+    Getusers()
   }, [user])
+
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center">
@@ -32,9 +34,9 @@ const UserAttendance: React.FC = () => {
       </div>
     )
   }
+
   return (
     <div className="p-6">
-      {/* Conditionally render components based on the view */}
       <Usertableview
         setIsTableView={setIsTableView}
         isTableView={isTableView}
@@ -47,4 +49,5 @@ const UserAttendance: React.FC = () => {
     </div>
   )
 }
+
 export default UserAttendance

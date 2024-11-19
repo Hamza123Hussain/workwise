@@ -3,7 +3,7 @@ import React from 'react'
 const TableHead = () => {
   return (
     <thead>
-      <tr className="bg-black">
+      <tr className="bg-[#bd8bff]">
         <th className="border border-purple-600 text-xs w-56 text-white p-2 py-4 text-[14px]  ">
           User Name
         </th>
