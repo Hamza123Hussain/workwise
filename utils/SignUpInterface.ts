@@ -23,4 +23,5 @@ export interface UserFetched {
   Salary: string
   createdAt: string
   imageUrl: string
+  JobDescription: string
 }
