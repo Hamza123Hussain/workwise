@@ -45,7 +45,6 @@ const UserAttendance: React.FC = () => {
         Attendance Records for {months[Month]} - {user.Name}
       </h2>
       <SelectedMonths />
-
       {/* Show the latest attendance record if it exists */}
       {filteredAttendance.length > 1 ? (
         <AttendanceTable Attendance={filteredAttendance} />
@@ -55,5 +54,4 @@ const UserAttendance: React.FC = () => {
     </div>
   )
 }
-
 export default UserAttendance
