@@ -7,7 +7,11 @@ import toast from 'react-hot-toast'
 import { createTask } from '@/functions/Task/CreateTask'
 import EditTaskModal from './EditTaskModal'
 import { useRouter } from 'next/navigation'
-
+import { GoPencil } from 'react-icons/go'
+import { TbTrashX } from 'react-icons/tb'
+import { FaRepeat } from 'react-icons/fa6'
+import { MdDoneOutline } from 'react-icons/md'
+import { markTaskAsDone } from '@/functions/Task/MarkDone'
 const ActionButtons = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
   const Router = useRouter()
   const User = useSelector((state: RootState) => state.user)
@@ -63,43 +67,64 @@ const ActionButtons = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
     // Optionally refresh the task list or handle the updated task in your state
   }
   return (
-    <div className="flex justify-end flex-row items-center gap-2 my-5">
+    <div className="flex items-center justify-evenly rounded-lg bg-white w-full">
       {TaskDetail.TaskType !== 'Other' && (
         <button
           onClick={() => TaskRepeat()} // Repeat Task
-          className={`p-2 rounded-lg shadow transition-all duration-200 text-[8px] ease-in-out 
-            ${'bg-green-600 text-white hover:bg-green-700'}`}
+          className={`p-2 rounded-lg  transition-all duration-200 text-[8px] ease-in-out 
+            ${'text-white'}`}
         >
-          Repeat Task
+          <FaRepeat size={20} className="text-green-500" fill="green" />
         </button>
       )}
       <button
         onClick={() => {
           Router.push(`/edittask/${TaskDetail._id}`)
         }} // Open Edit Task Modal
-        className={`p-2 rounded-lg shadow transition-all duration-200 text-[8px] ease-in-out 
+        className={`p-2 rounded-lg transition-all duration-200 text-[8px] ease-in-out 
           ${
-            isDueDatePast
-              ? 'bg-blue-400 text-gray-300 cursor-not-allowed'
-              : 'bg-blue-600 text-white hover:bg-blue-700'
+            isDueDatePast ? ' text-gray-300 cursor-not-allowed' : ' text-white'
           }`}
         disabled={isDueDatePast}
       >
-        Edit Task
+        <GoPencil size={20} className="text-blue-500" fill="blue" />
       </button>
       <button
         onClick={() => !isDueDatePast && TaskDelete()} // Delete Task
-        className={`p-2 rounded-lg shadow transition-all duration-200 text-[8px] ease-in-out 
+        className={`p-2 rounded-lg  transition-all duration-200 text-[8px] ease-in-out 
           ${
-            isDueDatePast
-              ? 'bg-red-400 text-gray-300 cursor-not-allowed'
-              : 'bg-red-600 text-white hover:bg-red-700'
+            isDueDatePast ? ' text-gray-300 cursor-not-allowed' : 'text-white'
           }`}
         disabled={isDueDatePast}
       >
-        Delete Task
+        <TbTrashX size={20} className=" text-red-600" fill="red" />
       </button>
-
+      <button
+        onClick={() => markTaskAsDone(TaskDetail._id, User.Email, 'DONE')}
+        className={`py-2 px-4 rounded-md text-white text-xs font-semibold transition-all duration-300 
+            ${
+              new Date(TaskDetail.dueDate) <
+                new Date(new Date().setHours(0, 0, 0, 0)) ||
+              TaskDetail.progress === 'DONE'
+                ? '  text-green-600 cursor-not-allowed'
+                : 'text-gray-100'
+            }`}
+        disabled={
+          new Date(TaskDetail.dueDate) <
+          new Date(new Date().setHours(0, 0, 0, 0))
+        }
+      >
+        <MdDoneOutline
+          size={20}
+          fill={
+            new Date(TaskDetail.dueDate) <
+              new Date(new Date().setHours(0, 0, 0, 0)) ||
+            TaskDetail.progress === 'DONE'
+              ? 'black'
+              : 'green'
+          }
+        />
+      </button>
       {/* Edit Task Modal */}
       <EditTaskModal
         isOpen={isModalOpen}
