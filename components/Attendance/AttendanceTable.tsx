@@ -22,8 +22,11 @@ const AttendanceTable = ({
   // Define how many cards per page (3 cards per page)
   const cardsPerPage = 3
 
+  // Reverse attendance data to show the latest card first
+  const reversedAttendance = [...Attendance].reverse()
+
   // Slice the attendance data to show only the cards for the current page
-  const currentCards = Attendance.slice(
+  const currentCards = reversedAttendance.slice(
     currentPage * cardsPerPage,
     (currentPage + 1) * cardsPerPage
   )
