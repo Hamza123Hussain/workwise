@@ -1,7 +1,5 @@
-import { RootState } from '@/utils/Redux/Store/Store'
 import { EditTask } from '@/utils/TaskformInterface'
 import React from 'react'
-import { useSelector } from 'react-redux'
 const EditTaskBody: React.FC<EditTask> = ({
   task,
   progress,
@@ -12,7 +10,6 @@ const EditTaskBody: React.FC<EditTask> = ({
   description,
   setDescription,
 }) => {
-  const user = useSelector((state: RootState) => state.user)
   return (
     <>
       <div className="flex flex-col items-center mb-4">
@@ -40,28 +37,24 @@ const EditTaskBody: React.FC<EditTask> = ({
           <option value="DONE">DONE</option>
         </select>
       </div>
-      {user.Email === 'octtoppus1@gmail.com' ? (
-        <div className="mb-4">
-          <h2 className="text-lg font-semibold">Priority</h2>
-          <select
-            value={priority}
-            onChange={
-              (e) =>
-                // Allow changing priority only for the specific email
-                Email === 'octtoppus1@gmail.com'
-                  ? setPriority(e.target.value as 'LOW' | 'MEDIUM' | 'HIGH')
-                  : null // Prevent changes for other users
-            }
-            className="bg-[#b698ff] text-white border-white border-2 p-2 rounded w-full"
-          >
-            <option value="LOW">LOW</option>
-            <option value="MEDIUM">MEDIUM</option>
-            <option value="HIGH">HIGH</option>
-          </select>
-        </div>
-      ) : (
-        ''
-      )}
+      <div className="mb-4">
+        <h2 className="text-lg font-semibold">Priority</h2>
+        <select
+          value={priority}
+          onChange={
+            (e) =>
+              // Allow changing priority only for the specific email
+              Email === 'octtoppus1@gmail.com'
+                ? setPriority(e.target.value as 'LOW' | 'MEDIUM' | 'HIGH')
+                : null // Prevent changes for other users
+          }
+          className="bg-[#b698ff] text-white border-white border-2 p-2 rounded w-full"
+        >
+          <option value="LOW">LOW</option>
+          <option value="MEDIUM">MEDIUM</option>
+          <option value="HIGH">HIGH</option>
+        </select>
+      </div>
       <div className="mb-4">
         <h2 className="text-lg font-semibold">Description</h2>
         <textarea

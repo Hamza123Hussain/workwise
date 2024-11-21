@@ -34,6 +34,7 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
       </div>
     )
   }
+
   return (
     <div className="min-h-screen flex justify-center items-center p-6">
       <div className="bg-[#8D6ED9] text-white p-6 rounded-lg shadow-lg w-full max-w-md">
