@@ -83,7 +83,9 @@ const AttendanceCard = ({ element }: { element: AttendanceRecord }) => {
             {element.Hours_Worked
               ? element.Hours_Worked > 8
                 ? '0 hrs'
-                : convertHoursToString(8 - element.Hours_Worked)
+                : convertHoursToString(
+                    8 + element.Break_Time - element.Hours_Worked
+                  )
               : '8 hrs'}
           </span>
         </div>
