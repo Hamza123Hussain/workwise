@@ -35,7 +35,7 @@ const CreateTaskForm = () => {
   }
 
   return (
-    <div className="bg-gradient-to-r from-indigo-100 to-purple-100 p-8 rounded-2xl shadow-xl max-w-lg w-full mx-auto my-8 border-2 border-[#be8bff]">
+    <div className="bg-gradient-to-r from-indigo-100 to-purple-100 p-8 rounded-2xl shadow-xl max-w-lg w-full mx-auto my-14 sm:my-8 border-2 border-[#be8bff]">
       <h1 className="text-3xl font-extrabold text-center text-purple-500 mb-8">
         Create a New Task
       </h1>
