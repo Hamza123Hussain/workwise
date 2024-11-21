@@ -5,7 +5,6 @@ import { RootState } from '@/utils/Redux/Store/Store'
 import toast from 'react-hot-toast'
 import { TaskFetch } from '@/utils/TaskformInterface'
 import { FaEdit } from 'react-icons/fa' // Import the icon (or any other icon from react-icons)
-
 const progress_Class = (task: string) => {
   switch (task) {
     case 'TODO':
@@ -18,19 +17,16 @@ const progress_Class = (task: string) => {
       return 'bg-green-500'
   }
 }
-
 const progressOptions = [
   { label: 'TODO', color: 'text-red-500' },
   { label: 'IN_PROGRESS', color: 'text-blue-600' },
   { label: 'Minor_progress', color: 'text-yellow-400' },
   { label: 'DONE', color: 'text-green-500' },
 ]
-
 const TaskProgress = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
   const User = useSelector((state: RootState) => state.user)
   const [isDropdownVisible, setIsDropdownVisible] = useState(false)
   const [selectedProgress, setSelectedProgress] = useState(TaskDetail.progress)
-
   const handleProgressChange = async (newProgress: string) => {
     setSelectedProgress(newProgress)
     const Updated = await updateTaskProgress(
@@ -45,13 +41,10 @@ const TaskProgress = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
       // You can add logic here to update the progress in your backend or state
     }
   }
-
   const toggleDropdown = () => {
     setIsDropdownVisible((prev) => !prev) // Toggle dropdown visibility
   }
-
   const dropdownRef = useRef<HTMLDivElement | null>(null)
-
   // Close dropdown if clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -67,7 +60,6 @@ const TaskProgress = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [])
-
   return (
     <div className="flex items-center flex-col justify-center text-sm text-white mb-2 sm:mb-0 relative cursor-pointer">
       <span className="font-medium mr-2">Progress</span>
@@ -86,7 +78,6 @@ const TaskProgress = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
           className="ml-2 text-white cursor-pointer hover:text-gray-300"
         />
       </div>
-
       {/* Dropdown */}
       {isDropdownVisible && (
         <div
