@@ -29,7 +29,7 @@ const SideBarLinks = ({ closeSidebar }: { closeSidebar: () => void }) => {
               } hover:bg-white hover:text-[#5925da] hover:rounded-lg hover:px-2`}
             >
               <link.icon size={18} />
-              <h5>{link.label}</h5>
+              <h5 className=" text-[11px]">{link.label}</h5>
             </Link>
           )
       )}
@@ -38,7 +38,7 @@ const SideBarLinks = ({ closeSidebar }: { closeSidebar: () => void }) => {
         className="text-white gap-3 flex w-full items-center hover:bg-white hover:text-[#5925da] hover:rounded-lg hover:px-2"
       >
         <User2 size={18} />
-        <h5>Profile</h5>
+        <h5 className=" text-[11px]">Profile</h5>
       </Link>
     </>
   )
