@@ -393,3 +393,15 @@ textarea {
   left: 50%;
   transform-origin: center;
 }
+/* Add this to your global CSS */
+@layer utilities {
+  .clip-path-wave {
+    clip-path: polygon(0 100%, 100% 100%, 100% 70%, 50% 80%, 0 70%);
+  }
+}
+/* Add this to your global CSS */
+@layer utilities {
+  .clip-path-triangle {
+    clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  }
+}
