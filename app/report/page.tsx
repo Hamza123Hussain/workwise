@@ -1,6 +1,7 @@
 'use client'
 import Loader from '@/components/Loader'
-import ReportCard from '@/components/Report/ReportCard'
+
+import ReportCardtwo from '@/components/Report/ReportCard2'
 import { Allusers } from '@/functions/AUTH/Allusers'
 import { getAttendance } from '@/functions/Frontend/AllAttendance'
 import { AllTasks } from '@/functions/Frontend/Alltasks'
@@ -135,7 +136,13 @@ const Report: React.FC = () => {
         </div>
       ) : (
         <div>
-          <ReportCard
+          {/* <ReportCard
+            mergedData={mergedData}
+            totalTasks={totalTasks}
+            highPriorityTasks={highPriorityTasks}
+            lowPriorityTasks={lowPriorityTasks} // Pass merged data and task counts to the ReportCard component
+          /> */}
+          <ReportCardtwo
             mergedData={mergedData}
             totalTasks={totalTasks}
             highPriorityTasks={highPriorityTasks}
