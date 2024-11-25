@@ -63,7 +63,7 @@ const TaskProgress = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
   return (
     <div className="flex items-center flex-col justify-center text-sm text-white mb-2 sm:mb-0 relative cursor-pointer">
       <span className="font-medium mr-2">Progress</span>
-      <div className=" flex">
+      <div className="flex items-center">
         <span
           className={`font-bold text-xs ${progress_Class(
             selectedProgress
@@ -78,11 +78,13 @@ const TaskProgress = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
           className="ml-2 text-white cursor-pointer hover:text-gray-300"
         />
       </div>
+
       {/* Dropdown */}
       {isDropdownVisible && (
         <div
           ref={dropdownRef} // Reference to close dropdown when clicking outside
-          className="absolute top-full mt-2 right-0 bg-white text-black shadow-lg rounded-lg p-4 w-40"
+          className="absolute z-10 bg-white text-black shadow-lg rounded-lg p-2 w-40 mt-2"
+          style={{ top: '100%', left: '50%', transform: 'translateX(-50%)' }}
         >
           <ul>
             {progressOptions.map((option) => (
