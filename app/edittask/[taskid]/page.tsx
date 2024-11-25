@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux'
 const TaskEdit = ({ params }: { params: { taskid: string } }) => {
   const [loading, setLoading] = useState(false)
   const [task, setTask] = useState<TaskFetch>()
+  const [taskname, setTaskName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [priority, setPriority] = useState<string>('LOW')
   const [progress, setProgress] = useState<string>('TODO')
@@ -24,7 +25,8 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
       setTask,
       setDescription,
       setProgress,
-      setPriority
+      setPriority,
+      setTaskName
     )
   }, [params.taskid, user.Email])
   if (loading) {
@@ -42,6 +44,8 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
           <EditTaskBody
             task={task}
             progress={progress}
+            taskname={taskname}
+            setTaskName={setTaskName}
             setProgress={setProgress}
             priority={priority}
             setPriority={setPriority}
@@ -60,7 +64,8 @@ const TaskEdit = ({ params }: { params: { taskid: string } }) => {
               progress,
               description,
               priority,
-              Router
+              Router,
+              taskname
             )
           }
           className="w-full bg-white border-2 hover:border-black text-[#a56edd] font-bold py-2 px-4 rounded transition duration-200"
