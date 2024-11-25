@@ -1,67 +1,110 @@
 'use client'
+import React, { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { AllTasks } from '@/functions/Frontend/Alltasks'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { TaskFetch } from '@/utils/TaskformInterface'
-import React, { useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
 import Loader from '../Loader'
-import TableHead from '../Layout/TableHead'
-import MainTable from '../Attendance/MainTable'
+import MainTable from '../Attendance/MainTable' // Replace with your tasks table component
 import DownloadButton from '../Report/DownloadButton'
-const AllTasksTable = () => {
+import SelectedMonths from '../Layout/SelectedMonths'
+
+// Utility function to filter tasks by selected month
+const filterTasksByMonth = (
+  groupedTasks: { [key: string]: TaskFetch[] },
+  selectedMonth: number
+) => {
+  return Object.keys(groupedTasks).reduce((acc, key) => {
+    const tasksForMonth = groupedTasks[key].filter(
+      (task) => new Date(task.createdAt).getMonth() === selectedMonth
+    )
+    if (tasksForMonth.length > 0) {
+      acc[key] = tasksForMonth
+    }
+    return acc
+  }, {} as { [key: string]: TaskFetch[] })
+}
+
+const AllTasksTable: React.FC = () => {
   const reportRef = useRef(null)
-  const [loading, setLoading] = useState(false)
+  const Month = useSelector((state: RootState) => state.sort.Month)
   const User = useSelector((state: RootState) => state.user)
+
+  const [loading, setLoading] = useState(false)
   const [ALL_TASKS, setALL_TASKS] = useState<{
     [key: string]: TaskFetch[]
   }>({})
+
+  // Fetch tasks for the user
   useEffect(() => {
-    AllTasks(User.Email, setLoading, setALL_TASKS)
-    return () => {
+    if (User.Email) {
+      setLoading(true)
       AllTasks(User.Email, setLoading, setALL_TASKS)
     }
-  }, [User.Email]) // Added User.Email as a dependency
+  }, [User.Email])
 
   if (loading) {
     return (
-      <div className="min-h-screen justify-center items-center flex">
+      <div className="min-h-screen flex justify-center items-center">
         <Loader />
       </div>
     )
   }
+
+  // Filter tasks by the selected month
+  const filteredTasks = filterTasksByMonth(ALL_TASKS, Month)
+
   return (
     <>
-      {' '}
-      <div ref={reportRef}>
-        <h1 className="text-xl sm:text-3xl md:text-4xl text-purpleGradientStart px-2 text-center mb-5">
-          ALL TASK DETAILS
+      <SelectedMonths />
+      <div
+        ref={reportRef}
+        className="overflow-x-auto p-4 text-center w-[80vw] sm:w-auto mx-auto"
+      >
+        <h1 className="text-xl sm:text-3xl md:text-4xl text-purpleGradientStart mb-4 px-2 text-center">
+          TASKS COMPLETED PER MONTH
         </h1>
-        <div className="overflow-x-auto p-4 text-center w-[90vw] sm:w-auto">
-          {!loading ? (
-            <table className="min-w-full bg-blend-darken border-2 bg-white text-white border-charcoal-gray shadow-md rounded-lg">
-              <TableHead />
-              <MainTable groupedAttendance={ALL_TASKS} />
-            </table>
-          ) : (
-            <div className="min-h-screen flex flex-col justify-center items-center text-center p-4">
-              <h2 className="text-2xl text-white font-bold mb-4">
-                No Tasks Found
-              </h2>
-              <p className="text-lg text-gray-300 mb-6">
-                It seems there are no tasks available. Please check back later
-                or reach out to your administrator.
-              </p>
-              <button className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded transition duration-300">
-                Go to Dashboard
-              </button>
-            </div>
-          )}
-        </div>
-      </div>{' '}
+        {/* Conditionally render content based on filtered tasks */}
+        {Object.keys(filteredTasks).length > 0 ? (
+          <table className="min-w-full bg-blend-darken border-2 bg-white shadow-md rounded-lg">
+            <thead>
+              <tr className="bg-[#bd8bff]">
+                <th className="border border-purple-800 px-4 py-2 text-white">
+                  Employee Name
+                </th>
+                <th className="border border-purple-800 px-4 py-2 text-white">
+                  High Priority
+                </th>
+                <th className="border border-purple-800 px-4 py-2 text-white">
+                  Medium Priority
+                </th>
+                <th className="border border-purple-800 px-4 py-2 text-white">
+                  Low Priority
+                </th>
+                <th className="border border-purple-800 px-4 py-2 text-white">
+                  Task Assigned
+                </th>
+                <th className="border border-purple-800 px-4 py-2 text-white">
+                  Task Completed
+                </th>
+                <th className="border border-purple-800 px-4 py-2 text-white">
+                  Completion Percentage
+                </th>
+              </tr>
+            </thead>
+            <MainTable groupedAttendance={filteredTasks} />
+          </table>
+        ) : (
+          <div className="text-center mt-4 text-lg font-medium">
+            No tasks found for the selected month.
+          </div>
+        )}
+      </div>
       <div className="mt-4 mx-auto flex justify-center items-center">
-        <DownloadButton text="Task" reportRef={reportRef} />
+        <DownloadButton text="Tasks" reportRef={reportRef} />
       </div>
     </>
   )
 }
+
 export default AllTasksTable
