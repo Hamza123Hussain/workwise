@@ -51,8 +51,8 @@ const SalaryDoughnutChart: React.FC<SalaryChartProps> = ({ totalSalary }) => {
   }
 
   return (
-    <div className="rounded-lg w-full md:w-96 mx-auto">
-      <h2 className="text-xl font-bold text-center mb-4">
+    <div className="rounded-lg w-full max-w-[320px] sm:max-w-[400px] mx-auto">
+      <h2 className="text-lg sm:text-xl font-bold text-center mb-4">
         Total Salary Distribution
       </h2>
       <Doughnut data={chartData} options={chartOptions} />
@@ -64,14 +64,15 @@ const SalaryReport: React.FC<{ formattedTotalSalary: number }> = ({
   formattedTotalSalary,
 }) => {
   return (
-    <div>
+    <div className="flex flex-col items-center space-y-6">
       <SalaryDoughnutChart totalSalary={formattedTotalSalary} />
 
-      <div className="bg-[#b473ff] text-white py-4 px-8 mt-4 mx-10 rounded-md shadow-md w-full md:w-96 text-center">
-        {/* Icon size and color */}
-        <h2 className="text-xl font-bold">Salary To Be Paid</h2>
-        <div className="flex items-center justify-center ">
-          <p className="text-3xl font-semibold">{formattedTotalSalary}</p>
+      <div className="bg-[#b473ff] text-white py-4 px-6 mt-4 rounded-md shadow-md w-full max-w-[320px] sm:max-w-[400px] text-center">
+        <h2 className="text-lg sm:text-xl font-bold">Salary To Be Paid</h2>
+        <div className="flex items-center justify-center mt-2">
+          <p className="text-2xl sm:text-3xl font-semibold">
+            {formattedTotalSalary}
+          </p>
         </div>
       </div>
     </div>
