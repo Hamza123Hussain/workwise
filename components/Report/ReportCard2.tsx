@@ -136,7 +136,7 @@ const ReportCardtwo: React.FC<ReportCardProps> = ({
               )
             })}
         </div>
-        <div className=" flex items-center justify-between">
+        <div className=" flex flex-col lg:flex-row gap-5 lg:gap-0 items-center justify-between">
           <div className="flex items-center justify-center space-y-6">
             <TaskPriorityChart
               lowPriorityTasks={lowPriorityTasks}
@@ -171,7 +171,7 @@ const ReportCardtwo: React.FC<ReportCardProps> = ({
           <SalaryReport formattedTotalSalary={formattedTotalSalary} />
         </div>
       </div>
-      <div className="mt-6">
+      <div className="mt-6 hidden lg:block">
         <DownloadButton text="Performance" reportRef={reportRef} />
       </div>
     </div>
