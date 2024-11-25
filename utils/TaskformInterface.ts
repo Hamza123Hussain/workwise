@@ -51,5 +51,7 @@ export interface EditTask {
   setPriority: (priority: string) => void
   Email: string
   description: string
+  setTaskName: (description: string) => void
   setDescription: (description: string) => void
+  taskname: string
 }
