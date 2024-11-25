@@ -8,6 +8,7 @@ export const updateTask = async (
   progress: string,
   description: string,
   priority: string,
+  name: string,
   dueDate: string // Expecting dueDate in a valid date format (e.g., 'YYYY-MM-DD')
 ) => {
   try {
@@ -33,6 +34,7 @@ export const updateTask = async (
       progress,
       description,
       priority,
+      name,
     })
 
     return response.data // Returns the message and updated task
