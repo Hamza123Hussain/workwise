@@ -11,7 +11,9 @@ export const handleUpdateTask = async (
   progress: string,
   description: string,
   priority: string,
-  Router: ReturnType<typeof useRouter> // Add Router as a parameter
+
+  Router: ReturnType<typeof useRouter>, // Add Router as a parameter
+  taskname: string
 ) => {
   if (!task) return // Prevent updating if the task is not loaded
 
@@ -35,6 +37,7 @@ export const handleUpdateTask = async (
       progress,
       description,
       priority,
+      taskname,
       task.dueDate
     )
     if (UpdateTask) {
