@@ -1,7 +1,8 @@
 import { EditTask } from '@/utils/TaskformInterface'
 import React from 'react'
+
 const EditTaskBody: React.FC<EditTask> = ({
-  task,
+  setTaskName, // Add this prop to handle task name changes
   progress,
   setProgress,
   priority,
@@ -9,12 +10,22 @@ const EditTaskBody: React.FC<EditTask> = ({
   Email,
   description,
   setDescription,
+  taskname,
 }) => {
   return (
     <>
       <div className="flex flex-col items-center mb-4">
         <h1 className="text-2xl font-bold">Task Details</h1>
-        <h2 className="text-2xl font-bold">{task?.name}</h2>
+        {/* Editable Task Name */}
+        <div className="w-full">
+          <h2 className="text-lg font-semibold">Task Name</h2>
+          <input
+            type="text"
+            value={taskname}
+            onChange={(e) => setTaskName(e.target.value)}
+            className="bg-[#b698ff] text-white border-white border-2 p-2 rounded w-full"
+          />
+        </div>
       </div>
       <div className="mb-4">
         <h2 className="text-lg font-semibold">Progress</h2>
