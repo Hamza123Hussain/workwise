@@ -9,7 +9,8 @@ export const getASingleTask = async (
   setTask: (task: TaskFetch) => void,
   setDescription: (description: string) => void,
   setProgress: (progress: string) => void,
-  setPriority: (prirority: string) => void
+  setPriority: (prirority: string) => void,
+  setTaskName: (description: string) => void
 ) => {
   setLoading(true)
   try {
@@ -19,6 +20,7 @@ export const getASingleTask = async (
       setDescription(getTask.description)
       setPriority(getTask.priority)
       setProgress(getTask.progress)
+      setTaskName(getTask.name)
     }
   } catch (error) {
     toast.error(`There is an error in getting task: ${error}`)
