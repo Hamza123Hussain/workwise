@@ -97,12 +97,6 @@ const TaskProgress = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
               </li>
             ))}
           </ul>
-          <button
-            onClick={() => handleProgressChange(selectedProgress)}
-            className="mt-2 w-full py-1 bg-blue-500 text-white rounded-md"
-          >
-            Update
-          </button>
         </div>
       )}
     </div>
