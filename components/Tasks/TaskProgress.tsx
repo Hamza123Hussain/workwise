@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { updateTaskProgress } from '@/functions/Task/UpdateProgress'
+
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
 import toast from 'react-hot-toast'
 import { TaskFetch } from '@/utils/TaskformInterface'
 import { FaEdit } from 'react-icons/fa' // Import the icon (or any other icon from react-icons)
+import { updateTask } from '@/functions/Task/UpdateTask'
 const progress_Class = (task: string) => {
   switch (task) {
     case 'TODO':
@@ -29,10 +30,13 @@ const TaskProgress = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
   const [selectedProgress, setSelectedProgress] = useState(TaskDetail.progress)
   const handleProgressChange = async (newProgress: string) => {
     setSelectedProgress(newProgress)
-    const Updated = await updateTaskProgress(
+    const Updated = await updateTask(
       TaskDetail._id,
       User.Email,
       newProgress,
+      TaskDetail.description,
+      TaskDetail.priority,
+      TaskDetail.name,
       TaskDetail.dueDate
     )
     if (Updated) {
