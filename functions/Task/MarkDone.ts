@@ -1,37 +1,46 @@
 import { ApiUrl } from '@/utils/AttendanceInterface'
 import axios from 'axios'
-import { toast } from 'react-hot-toast' // Assuming you use React Hot Toast for notifications
+import toast from 'react-hot-toast'
 
-export const markTaskAsDone = async (
+export const MarkAsDone = async (
   taskId: string,
-  userEmail: string,
-  progress: string
+  email: string,
+  progress: string,
+  description: string,
+  priority: string,
+  name: string,
+  dueDate: string // Expecting dueDate in a valid date format (e.g., 'YYYY-MM-DD')
 ) => {
   try {
-    // Sending a POST request to mark the task as done
-    const response = await axios.put(`${ApiUrl}Api/Task/MarkDone`, {
-      id: taskId,
-      Email: userEmail,
-      progress, // e.g., updated progress percentage (0-100)
-    })
+    const currentDate = new Date()
+    const dueDateObj = new Date(dueDate)
 
-    // Handle success response
-    if (response.status === 200) {
-      toast.success('Task progress updated successfully')
-      //   console.log('Updated Task:', response.data.task) // Do something with the updated task if needed
-      window.location.reload()
+    // Reset hours, minutes, seconds, and milliseconds for accurate comparison
+    currentDate.setHours(0, 0, 0, 0)
+    dueDateObj.setHours(0, 0, 0, 0)
+
+    if (dueDateObj < currentDate) {
+      throw new Error('Cannot update task: Due date is in the past.')
     }
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error) && error.response) {
-      // Check if the error is an Axios error and has a response
-      if (error.response.status === 404) {
-        toast.error(error.response.data.message as string) // User or Task not found
-      } else {
-        toast.error('An error occurred while updating the task progress')
-      }
-    } else {
-      toast.error('An unexpected error occurred')
+
+    if (dueDateObj < currentDate) {
+      toast.error('Cannot update task: Due date is in the past.')
+      throw new Error('Cannot update task: Due date is in the past.')
     }
-    // console.error('Error:', error)
+
+    await axios.put(`${ApiUrl}Api/Task/UpdateTask`, {
+      id: taskId,
+      Email: email,
+      progress,
+      description,
+      priority,
+      name,
+    })
+    window.location.reload()
+    toast.success('Task Has Been Updated')
+  } catch (error) {
+    // Handle error
+    console.error('Error updating task:', error)
+    throw error // Optional: re-throw the error for further handling
   }
 }
