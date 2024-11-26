@@ -11,7 +11,7 @@ import { GoPencil } from 'react-icons/go'
 import { TbTrashX } from 'react-icons/tb'
 import { FaRepeat } from 'react-icons/fa6'
 import { MdDoneOutline } from 'react-icons/md'
-import { markTaskAsDone } from '@/functions/Task/MarkDone'
+import { MarkAsDone } from '@/functions/Task/MarkDone'
 const ActionButtons = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
   const Router = useRouter()
   const User = useSelector((state: RootState) => state.user)
@@ -100,7 +100,17 @@ const ActionButtons = ({ TaskDetail }: { TaskDetail: TaskFetch }) => {
         <TbTrashX size={20} className=" text-red-600" fill="red" />
       </button>
       <button
-        onClick={() => markTaskAsDone(TaskDetail._id, User.Email, 'DONE')}
+        onClick={() =>
+          MarkAsDone(
+            TaskDetail._id,
+            User.Email,
+            'DONE',
+            TaskDetail.description,
+            TaskDetail.priority,
+            TaskDetail.name,
+            TaskDetail.dueDate
+          )
+        }
         className={`py-2 px-4 rounded-md text-white text-xs font-semibold transition-all duration-300 
             ${
               new Date(TaskDetail.dueDate) <
