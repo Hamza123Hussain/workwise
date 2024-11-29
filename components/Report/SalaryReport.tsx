@@ -63,6 +63,12 @@ const SalaryDoughnutChart: React.FC<SalaryChartProps> = ({ totalSalary }) => {
 const SalaryReport: React.FC<{ formattedTotalSalary: number }> = ({
   formattedTotalSalary,
 }) => {
+  // Format the salary with commas
+  const formattedSalary = new Intl.NumberFormat('en-US', {
+    style: 'decimal',
+    minimumFractionDigits: 0,
+  }).format(formattedTotalSalary)
+
   return (
     <div className="flex flex-col items-center space-y-6">
       <SalaryDoughnutChart totalSalary={formattedTotalSalary} />
@@ -71,7 +77,7 @@ const SalaryReport: React.FC<{ formattedTotalSalary: number }> = ({
         <h2 className="text-lg sm:text-xl font-bold">Salary To Be Paid</h2>
         <div className="flex items-center justify-center mt-2">
           <p className="text-2xl sm:text-3xl font-semibold">
-            {formattedTotalSalary}
+            {formattedSalary}
           </p>
         </div>
       </div>
