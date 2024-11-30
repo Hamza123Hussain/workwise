@@ -36,12 +36,12 @@ const ReportCardtwo: React.FC<ReportCardProps> = ({
 
   return (
     <div className="flex flex-col justify-center items-center my-5 bg-gray-50 min-h-screen">
-      <SelectedMonths /> {/* Show selected month filter */}
+      <SelectedMonths />
       <div ref={reportRef} className=" rounded-lg overflow-hidden w-[90vw]">
         <ReportHead />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 p-2">
           {mergedData &&
-            mergedData.map((userData, index) => {
+            mergedData.slice(0, 5).map((userData, index) => {
               const totalTaskCompletion = calculateTotalTaskCompletion(
                 userData.tasks
               )
@@ -67,10 +67,10 @@ const ReportCardtwo: React.FC<ReportCardProps> = ({
               return (
                 <div
                   key={index}
-                  className="bg-purple-600 shadow-lg rounded-lg p-6 border border-gray-200 hover:shadow-xl transition-shadow duration-300"
+                  className="bg-[#b570e4] shadow-lg rounded-lg p-6 border border-gray-200 hover:shadow-xl transition-shadow duration-300"
                 >
-                  <h3 className="text-2xl font-semibold text-white flex items-center space-x-2">
-                    <FaCheckCircle className="text-green-500" />
+                  <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                    {/* <FaCheckCircle className="text-green-500" /> */}
                     <span>
                       {userData.user === 'Arooj'
                         ? 'Arooj Yousaf'
@@ -82,22 +82,22 @@ const ReportCardtwo: React.FC<ReportCardProps> = ({
 
                   <div className="mt-5 space-y-4 text-white">
                     {/* Task Priority */}
-                    <div className="flex items-center space-x-2">
-                      <FaTasks className="text-blue-500" />
+                    <div className="flex items-center space-x-2 text-[14px]">
+                      {/* <FaTasks className="text-blue-500" /> */}
                       <p>
                         High Priority Tasks:{' '}
                         {countPriorityTasks(userData.tasks, 'HIGH')}
                       </p>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <FaTasks className="text-yellow-500" />
+                    <div className="flex items-center space-x-2 text-[14px]">
+                      {/* <FaTasks className="text-yellow-500" /> */}
                       <p>
                         Medium Priority Tasks:{' '}
                         {countPriorityTasks(userData.tasks, 'MEDIUM')}
                       </p>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <FaExclamationTriangle className="text-red-500" />
+                    <div className="flex items-center space-x-2 text-[14px]">
+                      {/* <FaExclamationTriangle className="text-red-500" /> */}
                       <p>
                         Low Priority Tasks:{' '}
                         {countPriorityTasks(userData.tasks, 'LOW')}
@@ -105,28 +105,28 @@ const ReportCardtwo: React.FC<ReportCardProps> = ({
                     </div>
 
                     {/* Attendance */}
-                    <div className="flex items-center space-x-2">
-                      <FaRegClock className="text-purple-500" />
+                    <div className="flex items-center space-x-2 text-[14px]">
+                      {/* <FaRegClock className="text-purple-500" /> */}
                       <p>Attendance: {attendancePercentage}%</p>
                     </div>
 
                     {/* Task Completion */}
-                    <div className="flex items-center space-x-2">
-                      <FaCheckCircle className="text-teal-500" />
+                    <div className="flex items-center space-x-2 text-[14px]">
+                      {/* <FaCheckCircle className="text-teal-500" /> */}
                       <p>
                         Task Completion: {taskCompletionPercentage.toFixed(2)}%
                       </p>
                     </div>
 
                     {/* Performance */}
-                    <div className="flex items-center space-x-2">
-                      <FaCheckCircle className="text-green-600" />
+                    <div className="flex items-center space-x-2 text-[14px]">
+                      {/* <FaCheckCircle className="text-green-600" /> */}
                       <p>Performance: {overallAverage.toFixed(2)}%</p>
                     </div>
 
                     {/* Salary */}
-                    <div className="flex items-center space-x-2">
-                      <FaDollarSign className="text-yellow-600" />
+                    <div className="flex items-center space-x-2 text-[14px]">
+                      {/* <FaDollarSign className="text-yellow-600" /> */}
                       <p>
                         Salary: {Math.floor(overallSalary).toLocaleString()}
                       </p>
@@ -136,16 +136,9 @@ const ReportCardtwo: React.FC<ReportCardProps> = ({
               )
             })}
         </div>
-        <div className=" flex flex-col lg:flex-row gap-5 lg:gap-0 items-center justify-between">
-          <div className="flex items-center justify-center space-y-6">
-            <TaskPriorityChart
-              lowPriorityTasks={lowPriorityTasks}
-              highPriorityTasks={highPriorityTasks}
-              totalTasks={totalTasks}
-            />
-          </div>
+        <div className=" flex flex-col gap-5 lg:gap-0 items-center justify-between">
           <div
-            className=" mx-auto self-center"
+            className=" mx-auto self-center my-5"
             style={{
               background:
                 'linear-gradient(to right, #7b5dff, #b473ff, #e25fff)', // Gradient
@@ -166,6 +159,13 @@ const ReportCardtwo: React.FC<ReportCardProps> = ({
               Total Tasks
             </h2>
             <p style={{ fontSize: '28px', fontWeight: '600' }}>{totalTasks}</p>
+          </div>
+          <div className="flex items-center justify-center ">
+            <TaskPriorityChart
+              lowPriorityTasks={lowPriorityTasks}
+              highPriorityTasks={highPriorityTasks}
+              totalTasks={totalTasks}
+            />
           </div>
 
           <SalaryReport formattedTotalSalary={formattedTotalSalary} />
