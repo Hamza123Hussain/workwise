@@ -61,7 +61,7 @@ export const TaskPriorityChart: React.FC<ReportCardProps> = ({
   }
 
   return (
-    <div className=" p-6 rounded-lg w-full md:w-96 mx-auto">
+    <div className=" p-4 rounded-lg w-full md:w-96 mx-auto">
       <h2 className="text-xl font-bold text-center mb-4">
         Task Priority Distribution
       </h2>
@@ -69,7 +69,7 @@ export const TaskPriorityChart: React.FC<ReportCardProps> = ({
       {/* Doughnut Chart */}
       <Doughnut data={chartData} options={chartOptions} />
 
-      <div className="mt-6 text-center ">
+      <div className="mt-6 text-center flex gap-2 ">
         <div className="flex items-center justify-center bg-amber-100 p-4 rounded-lg shadow-md">
           <span className="text-amber-500 font-bold">Low</span>{' '}
           <span className="text-xl ml-4">{lowPriorityTasks}</span>
