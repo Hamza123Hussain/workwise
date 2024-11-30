@@ -4,13 +4,13 @@ import { useRef } from 'react'
 import ReportHead from './ReportHead'
 import DownloadButton from './DownloadButton'
 import SelectedMonths from '../Layout/SelectedMonths'
-import {
-  FaCheckCircle,
-  FaDollarSign,
-  FaExclamationTriangle,
-  FaRegClock,
-  FaTasks,
-} from 'react-icons/fa'
+// import {
+//   FaCheckCircle,
+//   FaDollarSign,
+//   FaExclamationTriangle,
+//   FaRegClock,
+//   FaTasks,
+// } from 'react-icons/fa'
 import {
   calculateAttendancePercentage,
   calculateOverallAverage,
