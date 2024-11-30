@@ -10,7 +10,7 @@ const ReportHead = () => {
   const year = currentDate.getFullYear()
 
   return (
-    <div className="flex flex-col justify-center items-center my-10">
+    <div className="flex flex-col justify-center items-center mb-5">
       <h1 className=" text-base sm:text-5xl font-semibold text-gray-800">
         Performance Report for {monthName} {year}
       </h1>
