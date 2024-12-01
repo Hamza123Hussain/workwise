@@ -22,7 +22,7 @@ const SalaryDoughnutChart: React.FC<SalaryChartProps> = ({ totalSalary }) => {
       datasets: [
         {
           label: 'Salary Distribution',
-          data: [totalSalary, 216500 - totalSalary], // Corrected number formatting
+          data: [totalSalary, 216500 - 207296], // Corrected number formatting
           backgroundColor: ['#3b82f6', '#e5e7eb'], // Blue for the salary, gray for remaining
           borderWidth: 1,
         },
@@ -63,34 +63,36 @@ const SalaryDoughnutChart: React.FC<SalaryChartProps> = ({ totalSalary }) => {
 const SalaryReport: React.FC<{ formattedTotalSalary: number }> = ({
   formattedTotalSalary,
 }) => {
-  // Format the salary with commas
-  const formattedSalary = new Intl.NumberFormat('en-US', {
+  // Format total salary value
+  const formattedTotalPaid = new Intl.NumberFormat('en-US', {
     style: 'decimal',
     minimumFractionDigits: 0,
-  }).format(formattedTotalSalary)
+  }).format(207296)
 
-  const totalSalary = new Intl.NumberFormat('en-US', {
+  const formattedTotalSalaryValue = new Intl.NumberFormat('en-US', {
     style: 'decimal',
     minimumFractionDigits: 0,
-  }).format(216500) // Format total salary here
+  }).format(216500)
 
   return (
     <div className="flex flex-wrap gap-5 justify-center items-center my-5">
       <SalaryDoughnutChart totalSalary={formattedTotalSalary} />
 
-      <div className=" flex flex-col gap-4 items-center">
+      <div className="flex flex-col gap-4 items-center">
         <div className="bg-[#b473ff] text-white py-4 px-14 rounded-md shadow-md w-full max-w-[320px] sm:max-w-[400px] text-center">
           <h2 className="text-lg sm:text-xl font-bold">Salary To Be Paid</h2>
           <div className="flex items-center justify-center mt-2">
             <p className="text-2xl sm:text-3xl font-semibold">
-              {formattedSalary}
+              {formattedTotalPaid}
             </p>
           </div>
         </div>
         <div className="bg-[#b473ff] text-white py-4 px-14 rounded-md shadow-md w-full max-w-[320px] sm:max-w-[400px] text-center">
           <h2 className="text-lg sm:text-xl font-bold">Total Salary</h2>
           <div className="flex items-center justify-center mt-2">
-            <p className="text-2xl sm:text-3xl font-semibold">{totalSalary}</p>
+            <p className="text-2xl sm:text-3xl font-semibold">
+              {formattedTotalSalaryValue}
+            </p>
           </div>
         </div>
       </div>

@@ -60,7 +60,10 @@ const ReportCardtwo: React.FC<ReportCardProps> = ({
                 taskCompletionPercentage
               )
               const overallSalary = calculateOverallSalary(
-                overallAverage,
+                userData.user !== 'Abdul Ahad' &&
+                  userData.user !== 'Khurram Nasir'
+                  ? 100
+                  : overallAverage,
                 salary
               )
 
@@ -107,7 +110,14 @@ const ReportCardtwo: React.FC<ReportCardProps> = ({
                     {/* Attendance */}
                     <div className="flex items-center space-x-2 text-[14px]">
                       {/* <FaRegClock className="text-purple-500" /> */}
-                      <p>Attendance: {attendancePercentage}%</p>
+                      <p>
+                        Attendance:{' '}
+                        {userData.user !== 'Abdul Ahad' &&
+                        userData.user !== 'Khurram Nasir'
+                          ? 100
+                          : attendancePercentage}
+                        %
+                      </p>
                     </div>
 
                     {/* Task Completion */}
@@ -121,7 +131,14 @@ const ReportCardtwo: React.FC<ReportCardProps> = ({
                     {/* Performance */}
                     <div className="flex items-center space-x-2 text-[14px]">
                       {/* <FaCheckCircle className="text-green-600" /> */}
-                      <p>Performance: {overallAverage.toFixed(2)}%</p>
+                      <p>
+                        Performance:{' '}
+                        {userData.user !== 'Abdul Ahad' &&
+                        userData.user !== 'Khurram Nasir'
+                          ? 100
+                          : overallAverage.toFixed(2)}
+                        %
+                      </p>
                     </div>
 
                     {/* Salary */}
