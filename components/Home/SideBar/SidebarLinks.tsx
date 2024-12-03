@@ -1,17 +1,14 @@
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
-
 import { User2 } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { links } from '@/utils/LinkArray'
-
 const SideBarLinks = ({ closeSidebar }: { closeSidebar: () => void }) => {
   const User = useSelector((state: RootState) => state.user) // Get the user from the state
   const pathname = usePathname()
   // Function to determine if a link is active
   const isActive = (path: string) => pathname === path
-
   return (
     <>
       {links.map(
@@ -43,5 +40,4 @@ const SideBarLinks = ({ closeSidebar }: { closeSidebar: () => void }) => {
     </>
   )
 }
-
 export default SideBarLinks
