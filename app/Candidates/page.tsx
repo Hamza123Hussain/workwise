@@ -6,20 +6,16 @@ import { CandidateData } from '@/utils/CandidateInterface'
 import { RootState } from '@/utils/Redux/Store/Store'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-
 const Candidates = () => {
   const [Candidates, SetCandidates] = useState<CandidateData[]>()
   const User = useSelector((state: RootState) => state.user)
-
   const fetchAllCandidates = async () => {
     const data = await GetCandidates(User.Email)
     SetCandidates(data)
   }
-
   useEffect(() => {
     fetchAllCandidates()
   }, [])
-
   return (
     <div className="mt-10">
       <h1 className="text-4xl font-semibold text-center text-gradient bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text my-5">
