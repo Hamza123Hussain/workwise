@@ -26,7 +26,7 @@ const Candidates = () => {
         Candidates
       </h1>
       <Dropdowns />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6 my-2">
         {Candidates?.map((candidate: CandidateData) => (
           <CandidateCard key={candidate._id} candidate={candidate} />
         ))}
