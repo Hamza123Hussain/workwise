@@ -6,14 +6,15 @@ import RatingCard from './RatingCard'
 import ProgressCard from './ProgressCard'
 import InterviewShow from './InterviewDate'
 import Links from './Links'
+import Buttons from './Buttons'
 const CandidateCard = ({ candidate }: { candidate: CandidateData }) => {
   return (
     <div
       key={candidate._id}
-      className="bg-gradient-to-br cursor-pointer from-blue-50 to-purple-50 shadow-lg rounded-xl overflow-hidden p-6 transition transform hover:scale-105 hover:shadow-2xl"
+      className="bg-gradient-to-br cursor-pointer from-blue-200 to-purple-200 shadow-lg rounded-xl overflow-hidden p-6 transition transform hover:scale-105 hover:shadow-2xl"
     >
       {/* Candidate Image */}
-      <div className="flex justify-center mb-4 ">
+      <div className="flex justify-center mb-4">
         <Image
           src={candidate.ImageUrl}
           alt={candidate.Name}
@@ -73,6 +74,10 @@ const CandidateCard = ({ candidate }: { candidate: CandidateData }) => {
           </span>
         ))}
       </div>
+      {/* Action Button */}
+      {candidate.InterviewDate && (
+        <Buttons InterviewDate={candidate.InterviewDate} />
+      )}
     </div>
   )
 }
