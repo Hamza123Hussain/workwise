@@ -11,6 +11,7 @@ import {
   BookOpen,
 } from 'lucide-react'
 import { BsPeopleFill } from 'react-icons/bs'
+import { FaRegCalendarAlt } from 'react-icons/fa'
 export const links = [
   { href: '/', label: 'Home', icon: House, adminOnly: false, email: '' },
   {
@@ -71,9 +72,16 @@ export const links = [
     email: '',
   },
   {
-    href: '/Candidates',
-    label: 'Candidates',
+    href: '/Candidates ',
+    label: 'Candidates  (under development)',
     icon: BsPeopleFill,
+    adminOnly: true,
+    email: 'octtoppus1@gmail.com',
+  },
+  {
+    href: '/Meetings',
+    label: 'Meetings  (under development)',
+    icon: FaRegCalendarAlt,
     adminOnly: true,
     email: 'octtoppus1@gmail.com',
   },
