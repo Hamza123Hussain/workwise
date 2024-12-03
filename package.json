@@ -17,6 +17,7 @@
     "@reduxjs/toolkit": "^2.2.7",
     "@types/html2canvas": "^1.0.0",
     "@types/jspdf": "^2.0.0",
+    "@zegocloud/zego-uikit-prebuilt": "^2.13.1",
     "axios": "^1.7.7",
     "chart.js": "^4.4.6",
     "class-variance-authority": "^0.7.0",
@@ -45,6 +46,7 @@
     "react-simple-maps": "^3.0.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
+    "uuid": "^11.0.3",
     "yup": "^1.4.0"
   },
   "devDependencies": {
