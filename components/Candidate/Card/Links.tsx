@@ -1,7 +1,6 @@
 import React from 'react'
 import { FaLinkedin } from 'react-icons/fa'
 import { FcBriefcase } from 'react-icons/fc'
-
 const Links = ({
   LinkedInProfile,
   Portfolio,
@@ -40,5 +39,4 @@ const Links = ({
     </div>
   )
 }
-
 export default Links
