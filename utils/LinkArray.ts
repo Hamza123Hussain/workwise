@@ -10,7 +10,7 @@ import {
   Rows3,
   BookOpen,
 } from 'lucide-react'
-
+import { BsPeopleFill } from 'react-icons/bs'
 export const links = [
   { href: '/', label: 'Home', icon: House, adminOnly: false, email: '' },
   {
@@ -46,8 +46,8 @@ export const links = [
     href: '/All_Tasks',
     label: 'All Task Details',
     icon: Rows3,
-    adminOnly: true,
-    email: 'octtoppus1@gmail.com',
+    adminOnly: false,
+    email: '',
   },
   {
     href: '/report',
@@ -69,5 +69,12 @@ export const links = [
     icon: BookOpen,
     adminOnly: false,
     email: '',
+  },
+  {
+    href: '/Candidates',
+    label: 'Candidates',
+    icon: BsPeopleFill,
+    adminOnly: true,
+    email: 'octtoppus1@gmail.com',
   },
 ]
