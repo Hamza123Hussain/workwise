@@ -11,7 +11,7 @@ const AttendanceTableRow = ({
     acc += ele.Hours_Worked
     return acc
   }, 0)
-  const totalhours = 168
+  const totalhours = 172
   return (
     <tbody>
       <th className="border border-purple-800 px-4 py-2 text-[#bd8bff]">
