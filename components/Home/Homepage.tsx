@@ -3,7 +3,6 @@ import TaskStatus from './TaskStatus'
 import TimeBtn from './TimeBtn'
 import RecentTasks from '../Tasks/RecentTasks'
 import Image from 'next/image'
-
 const HomePage = () => {
   return (
     <div className="px-4 sm:px-6 w-full min-h-screen">
