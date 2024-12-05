@@ -1,3 +1,4 @@
+import { createNotice } from '@/functions/Notice/CreateNotice'
 import React, { useState } from 'react'
 const CreateBody = () => {
   const [newNotice, setNewNotice] = useState({
@@ -48,7 +49,7 @@ const CreateBody = () => {
       </div>
       <button
         className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700"
-        onClick={createNotice}
+        onClick={() => createNotice(newNotice)}
       >
         Create Notice
       </button>
