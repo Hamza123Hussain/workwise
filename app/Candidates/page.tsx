@@ -30,5 +30,4 @@ const Candidates = () => {
     </div>
   )
 }
-
 export default Candidates

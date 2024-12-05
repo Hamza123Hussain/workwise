@@ -1,7 +1,4 @@
 import React from 'react'
-
-// Helper function to calculate deducted points based on status and priority
-
 const Guide: React.FC = () => {
   return (
     <div className="bg-gray-50 py-10 px-6 lg:px-16 mt-5">
@@ -65,8 +62,6 @@ const Guide: React.FC = () => {
           <h2 className="text-2xl font-bold text-[#5925da] mb-6 text-center">
             Task Deduction Criteria
           </h2>
-          {/* Before Deduction Table */}
-          {/* After Deduction Table */}
           <div className="overflow-x-auto">
             <h3 className="text-xl font-semibold text-[#5925da] mb-4">
               Task Deduction Percentage
@@ -158,5 +153,4 @@ const Guide: React.FC = () => {
     </div>
   )
 }
-
 export default Guide

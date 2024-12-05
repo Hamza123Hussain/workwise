@@ -39,9 +39,7 @@ const JoinMeeting = () => {
         console.error('Error joining room:', error)
       }
     }
-
     joinMeeting()
-
     return () => {
       // Cleanup if necessary
       if (meetingContainerRef.current) {
@@ -49,8 +47,6 @@ const JoinMeeting = () => {
       }
     }
   }, [roomID])
-
   return <div className="w-full h-screen" ref={meetingContainerRef}></div>
 }
-
 export default JoinMeeting
