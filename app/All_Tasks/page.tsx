@@ -6,8 +6,8 @@ import { UserFetched } from '@/utils/SignUpInterface'
 import { Allusers } from '@/functions/AUTH/Allusers'
 import Loader from '@/components/Loader'
 import UserSelection from '@/components/Layout/UserSelection'
-import AllTasksTable from '@/components/Tasks/AllTaskInfo'
 import Usertableview from '@/components/Layout/Usertableview'
+import AllTasksTable from '@/components/Tasks/AllTaskInfo'
 const AllTasks: React.FC = () => {
   const [Users, SetUserFetched] = useState<UserFetched[]>([])
   const user = useSelector((state: RootState) => state.user)

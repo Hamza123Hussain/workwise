@@ -8,6 +8,7 @@ import ShowTime from './ShowTime'
 import ShowAddress from './ShowAddress'
 import { GetCurrentAttendance } from '@/functions/Attendance/Checkout/CurrentAttendance'
 import { LocationCoords } from '@/utils/AttendanceInterface'
+import NoticeSlider from '../Notice/NoticeSlider'
 
 const TimeBtn: React.FC = () => {
   const User = useSelector((state: RootState) => state.user)
@@ -51,9 +52,12 @@ const TimeBtn: React.FC = () => {
         </div>
       ) : (
         <>
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
-            <ShowTime />
-            <ShowAddress location={currentLocation} />
+          <div className="flex flex-col  gap-4 sm:gap-8">
+            <NoticeSlider />
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
+              <ShowTime />
+              <ShowAddress location={currentLocation} />
+            </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
             <div className="w-full flex justify-center sm:justify-start">
