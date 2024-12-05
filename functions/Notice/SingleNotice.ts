@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const fetchSingleNotice = async (id: string) => {
   try {
-    const response = await axios.get(`${ApiUrl}Api/Notice/GetAllNotices`)
+    const response = await axios.get(`${ApiUrl}Api/Notice/GetAllNotices ${id}`)
     return response.data
   } catch (error) {
     console.error('Error fetching notice:', error)
