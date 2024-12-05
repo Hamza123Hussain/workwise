@@ -9,6 +9,7 @@ import {
   ListTodo,
   Rows3,
   BookOpen,
+  StickyNote,
 } from 'lucide-react'
 import { BsPeopleFill } from 'react-icons/bs'
 import { FaRegCalendarAlt } from 'react-icons/fa'
@@ -75,6 +76,13 @@ export const links = [
     href: '/Candidates ',
     label: 'Candidates  (under development)',
     icon: BsPeopleFill,
+    adminOnly: true,
+    email: 'octtoppus1@gmail.com',
+  },
+  {
+    href: '/Notice',
+    label: 'Notice',
+    icon: StickyNote,
     adminOnly: true,
     email: 'octtoppus1@gmail.com',
   },
