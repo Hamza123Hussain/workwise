@@ -1,10 +1,6 @@
-import React, { useState } from 'react'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTrigger,
-} from '@/components/ui/dialog'
+import React from 'react'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import CreateBody from './CreateBody'
 const NoticeCreate = () => {
   return (
     <Dialog>
@@ -12,7 +8,7 @@ const NoticeCreate = () => {
         Create Notice
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader></DialogHeader>
+        <CreateBody />
       </DialogContent>
     </Dialog>
   )
