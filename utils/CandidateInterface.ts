@@ -24,6 +24,10 @@ export interface CandidateData {
   Source: string
   UpdatedBy: string
   IsActive: boolean
+  ReferralDetails: ReferralDetails | null // Added
+  LastContacted: string // Added
+  ApplicationDate: Date | null // Added
+  StatusHistory: StatusHistory[] // Added
 }
 
 export interface OfferDetails {
@@ -41,4 +45,15 @@ export interface Note {
 export interface AddedBy {
   Name: string
   Email: string
+}
+
+export interface ReferralDetails {
+  ReferrerName: string
+  ReferrerEmail: string
+}
+
+export interface StatusHistory {
+  Status: string
+  UpdatedAt: Date
+  UpdatedBy: string
 }
