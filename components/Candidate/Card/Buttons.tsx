@@ -1,8 +1,9 @@
 import React from 'react'
-import { FaCalendarAlt, FaInfoCircle, FaUserEdit } from 'react-icons/fa'
+import { FaCalendarAlt, FaInfoCircle } from 'react-icons/fa'
+import UpdateModal from './UpdateCandidate/UpdateModal'
 const Buttons = ({ InterviewDate }: { InterviewDate: Date }) => {
   return (
-    <div className="mt-6 flex sm:flex-row flex-col justify-center items-center gap-4">
+    <div className="flex mt-6 flex-col justify-center items-center gap-4">
       {/* Schedule Interview Button */}
       <button
         className="flex items-center text-xs text-nowrap gap-2 px-2 py-2 bg-blue-500 text-white font-semibold rounded-full shadow-lg hover:bg-blue-600 transition transform hover:scale-105"
@@ -22,12 +23,7 @@ const Buttons = ({ InterviewDate }: { InterviewDate: Date }) => {
         <FaInfoCircle /> Show All Details
       </button>
       {/* Update Candidate Button */}
-      <button
-        className="flex items-center text-xs text-nowrap gap-2 px-2 py-2 bg-purple-500 text-white font-semibold rounded-full shadow-lg hover:bg-purple-600 transition transform hover:scale-105"
-        onClick={() => console.log('Updating candidate details')}
-      >
-        <FaUserEdit /> Update Candidate
-      </button>
+      <UpdateModal />
     </div>
   )
 }
