@@ -7,6 +7,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { CandidateData } from '@/utils/CandidateInterface'
+import { FaEdit } from 'react-icons/fa'
 
 const UpdateModal = () => {
   // Mock candidate data
@@ -66,7 +67,10 @@ const UpdateModal = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="btn-primary">Edit Candidate</button>
+        <button className="btn-primary flex items-center gap-2 bg-white rounded-lg my-1 p-2">
+          <FaEdit size={20} />
+          <h1>Edit Candidate</h1>
+        </button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] h-[90vh] overflow-auto rounded-md shadow-lg">
         <DialogHeader>
