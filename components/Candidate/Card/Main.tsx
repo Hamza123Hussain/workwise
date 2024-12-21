@@ -16,7 +16,11 @@ const CandidateCard = ({ candidate }: { candidate: CandidateData }) => {
       {/* Candidate Image */}
       <div className="flex justify-center mb-4">
         <Image
-          src={candidate.ImageUrl}
+          src={
+            candidate.ImageUrl
+              ? candidate.ImageUrl
+              : '/https://dummy.xtemos.com/woodmart-elementor/demos/wp-content/uploads/sites/2/2017/06/wood-blog-placeholder.jpg'
+          }
           alt={candidate.Name}
           className="rounded-lg border-4 border-teal-500 h-1/3 w-full"
           width={100}
