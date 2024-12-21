@@ -1,4 +1,4 @@
-import { createCandidate } from '@/functions/Candidates/createcandidate'
+import { createCandidate } from '@/functions/Candidates/Candidate_Creation'
 import { CreateCandidateData } from '@/utils/CandidateInterface'
 import React, { useState } from 'react'
 import PersonalDetailsSection from './PersonalDetails'
