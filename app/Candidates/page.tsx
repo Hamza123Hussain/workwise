@@ -1,5 +1,6 @@
 'use client'
 import CandidateCard from '@/components/Candidate/Card/Main'
+import { CandidateModal } from '@/components/Candidate/CreateCandidate/CandidateModal'
 import Dropdowns from '@/components/Tasks/Dropdowns'
 import { GetCandidates } from '@/functions/Candidates/GetAllCandidates'
 import { CandidateData } from '@/utils/CandidateInterface'
@@ -21,6 +22,7 @@ const Candidates = () => {
       <h1 className="text-4xl font-semibold text-center text-gradient bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text my-5">
         Candidates
       </h1>
+      <CandidateModal />
       <Dropdowns />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mx-5  my-2">
         {Candidates?.map((candidate: CandidateData) => (
