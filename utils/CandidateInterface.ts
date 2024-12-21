@@ -1,3 +1,20 @@
+export interface CreateCandidateData {
+  Resume: string
+  Age: number
+  Name: string
+  Email: string
+  Phone: string
+  LinkedInProfile: string
+  ImageUrl: string
+  Portfolio: string
+  Position: string
+  Qualification: string
+  ExpectedSalary: number
+  CurrentSalary: number
+  Address: string
+  ReferralDetails: ReferralDetails
+}
+
 export interface CandidateData {
   _id: string
   Name: string
