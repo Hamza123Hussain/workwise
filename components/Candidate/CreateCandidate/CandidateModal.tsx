@@ -4,7 +4,9 @@ export function CandidateModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button>Edit Profile</button>
+        <button className="bg-green-500 rounded-lg p-2 mx-3 my-3 text-white">
+          Create A Candidate
+        </button>
       </DialogTrigger>
       <DialogContent>
         <Main />
