@@ -7,12 +7,14 @@ interface PersonalDetailsSectionProps {
   Email: string
   Phone: string
   HandleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  Address: string
 }
 const PersonalDetailsSection: React.FC<PersonalDetailsSectionProps> = ({
   Name,
   Age,
   Email,
   Phone,
+  Address,
   HandleChange,
 }) => {
   return (
@@ -53,6 +55,15 @@ const PersonalDetailsSection: React.FC<PersonalDetailsSectionProps> = ({
         onChange={HandleChange}
         type="tel"
         placeholder="Enter phone number"
+      />
+      <InputField
+        label="Address"
+        id="Address"
+        name="Address"
+        value={Address}
+        onChange={HandleChange}
+        type="tel"
+        placeholder="Enter The Address Of The Candidate"
       />
     </div>
   )
