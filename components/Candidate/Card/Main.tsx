@@ -7,82 +7,98 @@ import ProgressCard from './ProgressCard'
 import InterviewShow from './InterviewDate'
 import Links from './Links'
 import Buttons from './Buttons'
+
 const CandidateCard = ({ candidate }: { candidate: CandidateData }) => {
   return (
-    <div
-      key={candidate._id}
-      className="bg-gradient-to-br cursor-pointer from-blue-200 to-purple-200 shadow-lg rounded-xl overflow-hidden p-6 transition transform hover:scale-105 hover:shadow-2xl"
-    >
-      {/* Candidate Image */}
-      <div className="flex justify-center mb-4">
-        <Image
-          src={
-            candidate.ImageUrl
-              ? candidate.ImageUrl
-              : '/https://dummy.xtemos.com/woodmart-elementor/demos/wp-content/uploads/sites/2/2017/06/wood-blog-placeholder.jpg'
-          }
-          alt={candidate.Name}
-          className="rounded-lg border-4 border-teal-500 h-1/3 w-full"
-          width={100}
-          height={100}
-        />
+    <div className="bg-white shadow-lg rounded-xl overflow-hidden transition transform hover:scale-105 hover:shadow-2xl p-6">
+      {/* Candidate Header */}
+      <div className="flex flex-col sm:flex-row items-center gap-6">
+        {/* Candidate Image */}
+        <div className="w-24 h-24 sm:w-32 sm:h-32 relative">
+          <Image
+            src={
+              candidate.ImageUrl
+                ? candidate.ImageUrl
+                : 'https://dummy.xtemos.com/woodmart-elementor/demos/wp-content/uploads/sites/2/2017/06/wood-blog-placeholder.jpg'
+            }
+            alt={candidate.Name}
+            className="rounded-full object-cover border-4 border-blue-500"
+            layout="fill"
+          />
+        </div>
+        {/* Candidate Details */}
+        <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+          <h2 className="text-2xl font-semibold text-gray-800">
+            {candidate.Name}
+          </h2>
+          <p className="text-sm text-gray-600">{candidate.Position}</p>
+          <div className="mt-3 flex gap-4">
+            <p className="flex items-center text-gray-700 gap-1">
+              <FaUserTie className="text-indigo-600" /> Age: {candidate.Age}
+            </p>
+            <p className="flex items-center text-gray-700 gap-1">
+              <FaDollarSign className="text-yellow-600" /> Expected:{' '}
+              {candidate.ExpectedSalary}
+            </p>
+          </div>
+        </div>
       </div>
-      {/* Candidate Details */}
-      <h2 className="text-xl font-semibold text-center text-gray-800 mb-1">
-        {candidate.Name}
-      </h2>
-      <p className="text-center text-sm text-gray-600 mb-4">
-        {candidate.Position}
-      </p>
-      {/* Key Details */}
-      <div className="text-gray-700 space-y-2">
-        <p className="flex items-center gap-2">
-          <FaEnvelope className="text-blue-600" /> {candidate.Email}
-        </p>
-        <p className="flex items-center gap-2">
-          <FaPhone className="text-green-600" /> {candidate.Phone}
-        </p>
-        <p className="flex items-center gap-2">
-          <FaUserTie className="text-indigo-600" /> Age: {candidate.Age}
-        </p>
-        <p className="flex items-center gap-2">
-          <FaDollarSign className="text-yellow-600" /> Expected Salary:{' '}
-          {candidate.ExpectedSalary}
-        </p>
-        <p className="flex items-center gap-2">
-          <FaDollarSign className="text-yellow-600" /> Current Salary:{' '}
-          {candidate.CurrentSalary}
-        </p>
-        {/* Interview Date */}
+
+      {/* Contact Details */}
+      <div className="mt-6  flex flex-col gap-4">
+        <div className="flex items-center gap-2 text-gray-700">
+          <FaEnvelope className="text-blue-600" />
+          <span>{candidate.Email}</span>
+        </div>
+        <div className="flex items-center gap-2 text-gray-700">
+          <FaPhone className="text-green-600" />
+          <span>{candidate.Phone}</span>
+        </div>
+        <div className="flex items-center gap-2 text-gray-700">
+          <FaDollarSign className="text-yellow-600" />
+          <span>Current Salary: {candidate.CurrentSalary}</span>
+        </div>
+      </div>
+
+      {/* Optional Sections */}
+      <div className="mt-6 space-y-4">
         {candidate.InterviewDate && (
           <InterviewShow InterviewDate={candidate.InterviewDate} />
         )}
+        {candidate.Rating && candidate.Rating >= 1 && (
+          <RatingCard Rating={candidate.Rating} />
+        )}
+        <ProgressCard Progress={candidate.Progress} />
       </div>
-      {/* Rating card */}
-      {candidate.Rating && <RatingCard Rating={candidate.Rating} />}
-      {/* Progress Status */}
-      <ProgressCard Progress={candidate.Progress} />
-      {/* Links */}
-      <Links
-        Portfolio={candidate.Portfolio}
-        LinkedInProfile={candidate.LinkedInProfile}
-      />
+
+      {/* Portfolio Links */}
+      <div className="mt-6">
+        <Links
+          Portfolio={candidate.Portfolio}
+          LinkedInProfile={candidate.LinkedInProfile}
+        />
+      </div>
+
       {/* Tags */}
-      <div className="mt-4 flex flex-wrap gap-2">
-        {candidate.Tags.map((tag) => (
-          <span
-            key={tag}
-            className="bg-blue-100 text-blue-500 text-sm px-2 py-1 rounded-full shadow"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-      {/* Action Button */}
-      {candidate.InterviewDate && (
-        <Buttons InterviewDate={candidate.InterviewDate} />
+      {candidate.Tags && candidate.Tags.length > 0 && (
+        <div className="mt-6 flex flex-wrap gap-2">
+          {candidate.Tags.map((tag) => (
+            <span
+              key={tag}
+              className="bg-blue-100 text-blue-500 text-sm px-2 py-1 rounded-full shadow-sm"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       )}
+
+      {/* Action Buttons */}
+      <div className="mt-6">
+        <Buttons candidate={candidate} />
+      </div>
     </div>
   )
 }
+
 export default CandidateCard
