@@ -50,12 +50,14 @@ const Main = () => {
         Age={CandidateData.Age}
         Email={CandidateData.Email}
         Phone={CandidateData.Phone}
+        Address={CandidateData.Address}
         HandleChange={HandleChange}
       />
       {/* Professional Details Section */}
       <ProfessionalDetailsSection
         Position={CandidateData.Position}
         Portfolio={CandidateData.Portfolio}
+        linkedInProfile={CandidateData.LinkedInProfile}
         ExpectedSalary={CandidateData.ExpectedSalary}
         CurrentSalary={CandidateData.CurrentSalary}
         Qualification={CandidateData.Qualification}
