@@ -11,6 +11,7 @@ const Buttons = ({ candidate }: { candidate: CandidateData }) => {
       <UpdateModal candidate={candidate} />
       {/* Update Interview Date Button */}
       <UpdateInterviewDateModal
+        candidateId={candidate._id}
         Interviewdate={candidate.InterviewDate ? candidate.InterviewDate : ''}
       />
       {/* View Details Button */}

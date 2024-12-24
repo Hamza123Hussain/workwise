@@ -8,9 +8,16 @@ import {
 } from '@/components/ui/dialog'
 import { FaEdit } from 'react-icons/fa'
 import { CandidateData } from '@/utils/CandidateInterface'
+import axios from 'axios'
+import { ApiUrl } from '@/utils/AttendanceInterface'
+import { RootState } from '@/utils/Redux/Store/Store'
+import { useSelector } from 'react-redux'
 
 const UpdateModal = ({ candidate }: { candidate: CandidateData }) => {
+  const User = useSelector((state: RootState) => state.user)
   const [formData, setFormData] = useState(candidate)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleInputChange = (
     e: React.ChangeEvent<
@@ -37,6 +44,31 @@ const UpdateModal = ({ candidate }: { candidate: CandidateData }) => {
     }))
   }
 
+  const handleSubmit = async () => {
+    setLoading(true)
+    setError(null)
+
+    try {
+      const response = await axios.put(
+        `${ApiUrl}Api/Candidate/UpdateACandidate`,
+        {
+          _id: candidate._id,
+          UserData: formData,
+          Email: User.Email,
+        }
+      )
+
+      if (response.status === 200) {
+        // Handle successful response (e.g., show success message, close modal)
+        alert('Candidate updated successfully!')
+      }
+    } catch (err) {
+      setError(`Error updating candidate. Please try again later. ${err}`)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -47,6 +79,7 @@ const UpdateModal = ({ candidate }: { candidate: CandidateData }) => {
           </span>
         </button>
       </DialogTrigger>
+
       <DialogContent className="sm:max-w-[500px] w-full mx-auto h-[90vh] overflow-auto p-6 bg-white rounded-lg shadow-lg">
         <DialogHeader>
           <DialogTitle className="text-xl font-semibold text-gray-800">
@@ -67,7 +100,7 @@ const UpdateModal = ({ candidate }: { candidate: CandidateData }) => {
               type="date"
               id="LastContacted"
               name="LastContacted"
-              value={formData.LastContacted}
+              value={formData.LastContacted?.toString().split('T')[0] || ''}
               onChange={handleInputChange}
               className="mt-2 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
@@ -109,7 +142,7 @@ const UpdateModal = ({ candidate }: { candidate: CandidateData }) => {
               type="number"
               id="OfferedSalary"
               name="OfferedSalary"
-              value={formData.OfferDetails.OfferedSalary}
+              value={formData.OfferDetails?.OfferedSalary || ''}
               onChange={handleOfferDetailsChange}
               className="mt-2 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
@@ -128,11 +161,9 @@ const UpdateModal = ({ candidate }: { candidate: CandidateData }) => {
               id="JoiningDate"
               name="JoiningDate"
               value={
-                formData.OfferDetails.JoiningDate
-                  ? formData.OfferDetails.JoiningDate.toISOString().split(
-                      'T'
-                    )[0]
-                  : '' // Provide a fallback if JoiningDate is null or undefined
+                formData.OfferDetails?.JoiningDate
+                  ? formData.OfferDetails.JoiningDate.toString().split('T')[0]
+                  : ''
               }
               onChange={handleOfferDetailsChange}
               className="mt-2 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -150,7 +181,7 @@ const UpdateModal = ({ candidate }: { candidate: CandidateData }) => {
             <select
               id="Status"
               name="Status"
-              value={formData.OfferDetails.Status}
+              value={formData.OfferDetails?.Status}
               onChange={handleOfferDetailsChange}
               className="mt-2 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
@@ -179,9 +210,15 @@ const UpdateModal = ({ candidate }: { candidate: CandidateData }) => {
           </div>
         </div>
 
+        {error && <p className="text-red-500 mt-4">{error}</p>}
+
         <div className="flex justify-end mt-6">
-          <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
-            Save Changes
+          <button
+            onClick={handleSubmit}
+            disabled={loading}
+            className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          >
+            {loading ? 'Saving...' : 'Save Changes'}
           </button>
         </div>
       </DialogContent>

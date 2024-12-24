@@ -7,22 +7,61 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { FaCalendarAlt } from 'react-icons/fa'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/utils/Redux/Store/Store'
+import { ApiUrl } from '@/utils/AttendanceInterface'
 
 const UpdateInterviewDateModal = ({
   Interviewdate,
+  candidateId, // Add candidateId to uniquely identify the candidate
 }: {
   Interviewdate: Date | string
+  candidateId: string
 }) => {
   // Initialize the InterviewDate state, or set it to an empty string if not available
   const [InterviewDate, setInterviewDate] = useState<string>(
     Interviewdate ? Interviewdate.toString() : ''
   )
-
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const User = useSelector((state: RootState) => state.user)
   // Handle the change of InterviewDate
   const handleInterviewDateChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setInterviewDate(e.target.value)
+  }
+
+  const handleSubmit = async () => {
+    setLoading(true)
+    setError(null)
+
+    try {
+      // Prepare the updated user data
+      const UserData = {
+        InterviewDate, // Include InterviewDate in UserData
+      }
+
+      // Send the request to the backend to update the candidate
+      const response = await axios.put(
+        `${ApiUrl}Api/Candidate/UpdateACandidate`,
+        {
+          _id: candidateId, // Include candidateId in the request
+          UserData,
+          Email: User.Email,
+        }
+      )
+
+      if (response.status === 200) {
+        // Handle successful response
+        alert('Interview Date updated successfully!')
+      }
+    } catch (err) {
+      setError(`Error updating interview date. Please try again later.${err}`)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -62,9 +101,15 @@ const UpdateInterviewDateModal = ({
           </div>
         </div>
 
+        {error && <p className="text-red-500 mt-4">{error}</p>}
+
         <div className="flex justify-end mt-6">
-          <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
-            Save Changes
+          <button
+            onClick={handleSubmit}
+            disabled={loading}
+            className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          >
+            {loading ? 'Saving...' : 'Save Changes'}
           </button>
         </div>
       </DialogContent>
