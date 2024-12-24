@@ -6,94 +6,87 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { CandidateData } from '@/utils/CandidateInterface'
 import { FaEdit } from 'react-icons/fa'
+import { CandidateData } from '@/utils/CandidateInterface'
 
-const UpdateModal = () => {
-  // Mock candidate data
-  const [candidateData, setCandidateData] = useState<CandidateData>({
-    _id: '12345', // Unique ID (could be fetched from DB or generated)
-    Name: 'John Doe',
-    Age: 30, // Example age
-    Email: 'john.doe@example.com',
-    Phone: '123-456-7890',
-    LinkedInProfile: 'https://www.linkedin.com/in/johndoe',
-    ImageUrl: 'https://www.example.com/johndoe.jpg', // URL to profile image
-    Portfolio: 'https://www.johndoeportfolio.com', // Portfolio URL
-    Position: 'Software Engineer',
-    Qualification: 'BSc Computer Science', // Example qualification
-    ExpectedSalary: 85000,
-    CurrentSalary: 75000,
-    Address: '123 Main St, City, Country',
-    Progress: 'Interviewed',
-    RejectionReason: null, // Set null for no rejection reason
-    OfferDetails: {
-      OfferedSalary: 75000,
-      JoiningDate: new Date(),
-      Status: 'Pending',
-    },
-    Tags: ['JavaScript', 'React', 'Node.js'], // Example tags
-    InterviewDate: new Date('2024-12-20'),
-    InterviewFeedback: 'Strong technical skills.',
-    Rating: 4,
-    Notes: [
-      {
-        Comment: 'Excellent communication skills.',
-        AddedBy: {
-          Name: 'Jane Smith',
-          Email: 'jane.smith@example.com',
-        },
-        AddedAt: new Date(),
+const UpdateModal = ({ candidate }: { candidate: CandidateData }) => {
+  const [formData, setFormData] = useState(candidate)
+
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
+  const handleOfferDetailsChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      OfferDetails: {
+        ...prev.OfferDetails,
+        [name]: value,
       },
-    ],
-    Resume: 'https://www.example.com/johndoe-resume.pdf', // URL to resume
-    Source: 'LinkedIn',
-    UpdatedBy: 'Admin',
-    IsActive: true,
-    ReferralDetails: {
-      ReferrerName: 'Hamza',
-      ReferrerEmail: 'hamza@example.com',
-    },
-    LastContacted: '2024-01-15',
-    ApplicationDate: new Date('2024-01-01'),
-    StatusHistory: [
-      {
-        Status: 'Applied',
-        UpdatedAt: new Date(),
-        UpdatedBy: '',
-      },
-    ],
-  })
+    }))
+  }
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="btn-primary flex items-center gap-2 bg-white rounded-lg my-1 p-2">
+        <button className="flex items-center text-xs gap-2 px-4 py-2 bg-blue-300 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition transform hover:scale-105 w-full sm:w-auto group">
           <FaEdit size={20} />
-          <h1>Edit Candidate</h1>
+          <span className="hidden group-hover:inline-block text-sm ml-2">
+            Edit Candidate
+          </span>
         </button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] h-[90vh] overflow-auto rounded-md shadow-lg">
+      <DialogContent className="sm:max-w-[500px] w-full mx-auto h-[90vh] overflow-auto p-6 bg-white rounded-lg shadow-lg">
         <DialogHeader>
-          <DialogTitle>Edit Candidate</DialogTitle>
+          <DialogTitle className="text-xl font-semibold text-gray-800">
+            Edit Candidate
+          </DialogTitle>
         </DialogHeader>
-        <div className="p-4 space-y-4">
-          <div className="form-group">
-            <label>Last Contacted</label>
+
+        <div className="space-y-6 mt-4">
+          {/* Last Contacted */}
+          <div>
+            <label
+              htmlFor="LastContacted"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Last Contacted
+            </label>
             <input
               type="date"
-              value={candidateData.LastContacted} // Expecting a string in YYYY-MM-DD format
-              className="form-control"
+              id="LastContacted"
+              name="LastContacted"
+              value={formData.LastContacted}
+              onChange={handleInputChange}
+              className="mt-2 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
+
           {/* Progress */}
           <div>
-            <label className="block text-sm font-medium">Progress</label>
+            <label
+              htmlFor="Progress"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Progress
+            </label>
             <select
-              className="w-full p-2 border rounded"
-              value={candidateData.Progress}
-              onChange={(e) =>
-                setCandidateData({ ...candidateData, Progress: e.target.value })
-              }
+              id="Progress"
+              name="Progress"
+              value={formData.Progress}
+              onChange={handleInputChange}
+              className="mt-2 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="NotNeeded">Not Needed</option>
               <option value="Interviewed">Interviewed</option>
@@ -103,114 +96,97 @@ const UpdateModal = () => {
               <option value="New">New</option>
             </select>
           </div>
-          <div className="form-group">
-            {candidateData.ReferralDetails && (
-              <>
-                <label>Referrer Name</label>
-                <input
-                  type="text"
-                  value={candidateData.ReferralDetails.ReferrerName}
-                  onChange={(e) =>
-                    setCandidateData({
-                      ...candidateData,
-                      ReferralDetails: {
-                        ReferrerName: e.target.value,
-                        ReferrerEmail: candidateData.ReferralDetails
-                          ?.ReferrerEmail
-                          ? candidateData.ReferralDetails.ReferrerEmail
-                          : '',
-                      },
-                    })
-                  }
-                  className="form-control"
-                />
-              </>
-            )}
-          </div>
-          <div className="form-group">
-            {candidateData.ReferralDetails && (
-              <>
-                <label>Referrer Email</label>
-                <input
-                  type="email"
-                  value={candidateData.ReferralDetails.ReferrerEmail}
-                  onChange={(e) =>
-                    setCandidateData({
-                      ...candidateData,
-                      ReferralDetails: {
-                        ReferrerName: candidateData.ReferralDetails
-                          ?.ReferrerName
-                          ? candidateData.ReferralDetails.ReferrerName
-                          : '',
-                        ReferrerEmail: e.target.value,
-                      },
-                    })
-                  }
-                  className="form-control"
-                />
-              </>
-            )}
-          </div>
-          {/* Offer Details */}
+
+          {/* Offered Salary */}
           <div>
-            <label className="block text-sm font-medium">Offered Salary</label>
+            <label
+              htmlFor="OfferedSalary"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Offered Salary
+            </label>
             <input
               type="number"
-              className="w-full p-2 border rounded"
-              value={candidateData.OfferDetails.OfferedSalary}
-              onChange={(e) =>
-                setCandidateData({
-                  ...candidateData,
-                  OfferDetails: {
-                    ...candidateData.OfferDetails,
-                    OfferedSalary: +e.target.value,
-                  },
-                })
-              }
+              id="OfferedSalary"
+              name="OfferedSalary"
+              value={formData.OfferDetails.OfferedSalary}
+              onChange={handleOfferDetailsChange}
+              className="mt-2 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
+
+          {/* Joining Date */}
+          <div>
+            <label
+              htmlFor="JoiningDate"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Joining Date
+            </label>
+            <input
+              type="date"
+              id="JoiningDate"
+              name="JoiningDate"
+              value={
+                formData.OfferDetails.JoiningDate
+                  ? formData.OfferDetails.JoiningDate.toISOString().split(
+                      'T'
+                    )[0]
+                  : '' // Provide a fallback if JoiningDate is null or undefined
+              }
+              onChange={handleOfferDetailsChange}
+              className="mt-2 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+
+          {/* Status */}
+          <div>
+            <label
+              htmlFor="Status"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Status
+            </label>
+            <select
+              id="Status"
+              name="Status"
+              value={formData.OfferDetails.Status}
+              onChange={handleOfferDetailsChange}
+              className="mt-2 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="Pending">Pending</option>
+              <option value="Accepted">Accepted</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+          </div>
+
           {/* Interview Feedback */}
           <div>
-            <label className="block text-sm font-medium">
+            <label
+              htmlFor="InterviewFeedback"
+              className="block text-sm font-medium text-gray-700"
+            >
               Interview Feedback
             </label>
             <textarea
-              className="w-full p-2 border rounded"
-              value={
-                candidateData.InterviewFeedback
-                  ? candidateData.InterviewFeedback
-                  : ''
-              }
-              onChange={(e) =>
-                setCandidateData({
-                  ...candidateData,
-                  InterviewFeedback: e.target.value,
-                })
-              }
+              id="InterviewFeedback"
+              name="InterviewFeedback"
+              value={formData.InterviewFeedback || ''}
+              onChange={handleInputChange}
+              rows={4}
+              className="mt-2 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
-          {/* Notes */}
-          <div>
-            <label className="block text-sm font-medium">Notes</label>
-            {candidateData.Notes.map((note, index) => (
-              <div key={index} className="p-2 border rounded mb-2">
-                <p>
-                  <strong>Comment:</strong> {note.Comment}
-                </p>
-                <p>
-                  <strong>Added By:</strong> {note.AddedBy.Name} (
-                  {note.AddedBy.Email})
-                </p>
-                <p>
-                  <strong>Added At:</strong>{' '}
-                  {new Date(note.AddedAt).toLocaleDateString()}
-                </p>
-              </div>
-            ))}
-          </div>
+        </div>
+
+        <div className="flex justify-end mt-6">
+          <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
+            Save Changes
+          </button>
         </div>
       </DialogContent>
     </Dialog>
   )
 }
+
 export default UpdateModal
