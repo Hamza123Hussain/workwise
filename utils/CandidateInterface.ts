@@ -44,7 +44,7 @@ export interface CandidateData {
   ReferralDetails: ReferralDetails | null // Added
   LastContacted: string // Added
   ApplicationDate: Date | null // Added
-  StatusHistory: StatusHistory[] // Added
+
 }
 
 export interface OfferDetails {
@@ -69,8 +69,3 @@ export interface ReferralDetails {
   ReferrerEmail: string
 }
 
-export interface StatusHistory {
-  Status: string
-  UpdatedAt: Date
-  UpdatedBy: string
-}
