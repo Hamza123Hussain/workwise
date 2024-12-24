@@ -8,6 +8,7 @@ interface ProfessionalDetailsSectionProps {
   Portfolio: string
   ExpectedSalary: number
   CurrentSalary: number
+  linkedInProfile: string
 }
 
 const ProfessionalDetailsSection: React.FC<ProfessionalDetailsSectionProps> = ({
@@ -17,6 +18,7 @@ const ProfessionalDetailsSection: React.FC<ProfessionalDetailsSectionProps> = ({
   ExpectedSalary,
   CurrentSalary,
   HandleChange,
+  linkedInProfile,
 }) => {
   return (
     <div>
@@ -47,6 +49,15 @@ const ProfessionalDetailsSection: React.FC<ProfessionalDetailsSectionProps> = ({
         onChange={HandleChange}
         type="text"
         placeholder="Enter portfolio URL"
+      />
+      <InputField
+        label="linkedInProfile"
+        id="linkedInProfile"
+        name="linkedInProfile"
+        value={linkedInProfile}
+        onChange={HandleChange}
+        type="text"
+        placeholder="Enter linkedInProfile URL"
       />
       <InputField
         label="Expected Salary"
