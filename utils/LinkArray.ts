@@ -87,8 +87,8 @@ export const links = [
     email: 'octtoppus1@gmail.com',
   },
   {
-    href: '/Meetings',
-    label: 'Meetings  (under development)',
+    href: '/Chats',
+    label: 'Chats (under development)',
     icon: FaRegCalendarAlt,
     adminOnly: true,
     email: 'octtoppus1@gmail.com',
