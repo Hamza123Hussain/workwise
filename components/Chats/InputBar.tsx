@@ -1,12 +1,15 @@
+import { SendMessage } from '@/functions/Chats/SendMesage'
+import { RootState } from '@/utils/Redux/Store/Store'
 import React, { useState } from 'react'
 import { IoMdSend } from 'react-icons/io'
+import { useSelector } from 'react-redux'
 
 const InputBar = () => {
   const [messageText, setMessageText] = useState('')
-
-  const handleSendMessage = () => {
+  const User = useSelector((state: RootState) => state.user)
+  const handleSendMessage = async () => {
     if (messageText.trim()) {
-      console.log('Message Sent:', messageText)
+      await SendMessage(messageText, User.Name, 'user1', 'user1-hamza')
       setMessageText('')
     }
   }
