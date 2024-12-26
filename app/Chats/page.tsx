@@ -8,7 +8,7 @@ const Chats = () => {
   return (
     <div className="flex flex-col lg:flex-row mt-20 mb-5  px-4">
       {/* Sidebar for Users */}
-      <div className="lg:w-1/4 w-full bg-gray-800 shadow-md p-4">
+      <div className="lg:w-1/4 w-full bg-gray-800 shadow-md p-4 z-30">
         <h2 className="text-lg font-semibold text-white mb-4">Users</h2>
         <Users />
       </div>
