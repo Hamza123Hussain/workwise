@@ -21,9 +21,10 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-40 bg-[#8D6ED9] border-r-2 transition-transform transform min-h-screen px-5  ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`fixed inset-y-0 left-0 z-40 bg-[#8D6ED9] h-[90vh] pb-4
+           overflow-y-auto border-r-2 transition-transform transform min-h-screen px-5  ${
+             isOpen ? 'translate-x-0' : '-translate-x-full'
+           }`}
       >
         {/* Close Button */}
         <button
@@ -33,7 +34,7 @@ const Sidebar = () => {
           &times;
         </button>
 
-        <div className="flex flex-col space-y-4 px-4 my-5 items-start">
+        <div className="flex flex-col space-y-4 px-4 my-5 items-start ">
           <UserDetails />
           <SideBarLinks closeSidebar={toggleSidebar} />
         </div>
