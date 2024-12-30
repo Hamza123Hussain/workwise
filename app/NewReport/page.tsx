@@ -23,6 +23,26 @@ const AdminReports: React.FC = () => {
       setLoading
     )
   }, [])
+  const TotalSalary = filteredReports.reduce((salary, element) => {
+    salary += element.Salary
+    return salary
+  }, 0)
+  const HighPriorityTasks = filteredReports.reduce((HighPriority, element) => {
+    HighPriority += element.HighPriorityTask
+    return HighPriority
+  }, 0)
+  const LowPriorityTasks = filteredReports.reduce((Low, element) => {
+    Low += element.lowPriorityTask
+    return Low
+  }, 0)
+  const MediumPriorityTasks = filteredReports.reduce((Medium, element) => {
+    Medium += element.mediumPriorityTask
+    return Medium
+  }, 0)
+  const TotalTasks = filteredReports.reduce((Tasks, element) => {
+    Tasks += element.TotalTasks
+    return Tasks
+  }, 0)
   return (
     <div className="p-5 mt-10 z-20">
       <h1 className="text-2xl font-bold mb-5">Admin - All Reports</h1>
@@ -43,6 +63,11 @@ const AdminReports: React.FC = () => {
           <p>No reports available</p>
         )}
       </div>
+      {TotalSalary}
+      {HighPriorityTasks}
+      {MediumPriorityTasks}
+      {LowPriorityTasks}
+      {TotalTasks}
     </div>
   )
 }
