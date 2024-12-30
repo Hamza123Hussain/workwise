@@ -93,4 +93,11 @@ export const links = [
     adminOnly: true,
     email: 'octtoppus1@gmail.com',
   },
+  {
+    href: '/NewReport',
+    label: 'NewReport (under development)',
+    icon: FaRegCalendarAlt,
+    adminOnly: true,
+    email: 'octtoppus1@gmail.com',
+  },
 ]
