@@ -51,13 +51,13 @@ export const links = [
     adminOnly: false,
     email: '',
   },
-  {
-    href: '/report',
-    label: 'Report',
-    icon: FileText,
-    adminOnly: true,
-    email: 'octtoppus1@gmail.com',
-  },
+  // {
+  //   href: '/report',
+  //   label: 'Report',
+  //   icon: FileText,
+  //   adminOnly: true,
+  //   email: 'octtoppus1@gmail.com',
+  // },
   {
     href: '/users',
     label: 'All Users',
@@ -95,8 +95,8 @@ export const links = [
   },
   {
     href: '/NewReport',
-    label: 'NewReport (under development)',
-    icon: FaRegCalendarAlt,
+    label: 'Report',
+    icon: FileText,
     adminOnly: true,
     email: 'octtoppus1@gmail.com',
   },
