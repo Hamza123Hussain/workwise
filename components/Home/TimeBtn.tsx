@@ -9,7 +9,6 @@ import ShowAddress from './ShowAddress'
 import { GetCurrentAttendance } from '@/functions/Attendance/Checkout/CurrentAttendance'
 import { LocationCoords } from '@/utils/AttendanceInterface'
 // import NoticeSlider from '../Notice/NoticeSlider'
-
 const TimeBtn: React.FC = () => {
   const User = useSelector((state: RootState) => state.user)
   const [onBreak, setOnBreak] = useState<boolean>(false)
