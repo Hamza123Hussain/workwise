@@ -1,15 +1,19 @@
 import { months } from '@/utils/MonthsArray'
 import { NewReport } from '@/utils/NewReportInterface'
-import React, { useState } from 'react'
+import React from 'react'
 
 const MonthFilter = ({
   reports,
   setFilteredReports,
+  selectedMonth,
+  setSelectedMonth,
 }: {
   reports: NewReport[]
   setFilteredReports: (report: NewReport[]) => void
+  selectedMonth: string
+  setSelectedMonth: (month: string) => void
 }) => {
-  const [selectedMonth, setSelectedMonth] = useState<string>('') // Month filter state
+  const month = new Date().toLocaleString('default', { month: 'long' })
   // Filter reports based on selected month
   const handleMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const month = e.target.value
@@ -32,7 +36,7 @@ const MonthFilter = ({
         onChange={handleMonthChange}
         className="border p-2"
       >
-        <option value="">All</option>
+        <option value="">{month}</option>
         {months.map((month) => (
           <option key={month} value={month}>
             {month}

@@ -15,12 +15,12 @@ const AdminReports: React.FC = () => {
   const [reports, setReports] = useState<NewReport[]>([])
   const [filteredReports, setFilteredReports] = useState<NewReport[]>([])
   const [error, setError] = useState('')
+  const [selectedMonth, setSelectedMonth] = useState<string>('') // Month filter state
   const [loading, setLoading] = useState(true)
   const User = useSelector((state: RootState) => state.user)
   const reportRef = useRef<HTMLDivElement>(null)
   // Get current month and year
   const currentDate = new Date()
-  const month = currentDate.toLocaleString('default', { month: 'long' })
   const year = currentDate.getFullYear()
   // UseEffect to call the fetchReports function when the component is mounted
   useEffect(() => {
@@ -56,7 +56,7 @@ const AdminReports: React.FC = () => {
     const pdfWidth = pdf.internal.pageSize.getWidth()
     const pdfHeight = (canvas.height * pdfWidth) / canvas.width
     pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight)
-    pdf.save(`Performance_Report_${month}_${year}.pdf`)
+    pdf.save(`Performance_Report_${selectedMonth}_${year}.pdf`)
   }
   return (
     <div className="p-5 mt-10 z-20">
@@ -70,6 +70,8 @@ const AdminReports: React.FC = () => {
         <MonthFilter
           reports={reports}
           setFilteredReports={setFilteredReports}
+          selectedMonth={selectedMonth}
+          setSelectedMonth={setSelectedMonth}
         />
         <button
           onClick={downloadPDF}
@@ -80,7 +82,7 @@ const AdminReports: React.FC = () => {
       </div>
       <div ref={reportRef} className="space-y-2">
         <h1 className="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-5">
-          Performance Report - {month} {year}
+          Performance Report - {selectedMonth} {year}
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {filteredReports.length > 0 ? (
