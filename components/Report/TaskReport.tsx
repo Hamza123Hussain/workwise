@@ -61,28 +61,34 @@ export const TaskPriorityChart: React.FC<ReportCardProps> = ({
   }
 
   return (
-    <div className=" p-4 rounded-lg w-full md:w-96 mx-auto">
-      <h2 className="text-xl font-bold text-center mb-4">
+    <div className="bg-white shadow-lg rounded-lg p-6 w-full md:w-96 mx-auto border mt-2 border-gray-200">
+      <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
         Task Priority Distribution
       </h2>
 
       {/* Doughnut Chart */}
       <Doughnut data={chartData} options={chartOptions} />
 
-      <div className="mt-6 text-center flex gap-2 ">
-        <div className="flex items-center justify-center bg-amber-100 p-4 rounded-lg shadow-md">
-          <span className="text-amber-500 font-bold">Low</span>{' '}
-          <span className="text-xl ml-4">{lowPriorityTasks}</span>
+      <div className="mt-8 grid grid-cols-3 gap-4 text-center">
+        <div className="flex flex-col items-center bg-amber-100 p-4 rounded-lg shadow-md">
+          <span className="text-amber-600 font-bold text-lg">Low</span>
+          <span className="text-2xl font-semibold text-gray-700">
+            {lowPriorityTasks}
+          </span>
         </div>
 
-        <div className="flex items-center justify-center bg-blue-100 p-4 rounded-lg shadow-md">
-          <span className="text-blue-500 font-bold">Medium </span>{' '}
-          <span className="text-xl ml-4">{mediumPriorityTasks}</span>
+        <div className="flex flex-col items-center bg-blue-100 p-4 rounded-lg shadow-md">
+          <span className="text-blue-600 font-bold text-lg">Medium</span>
+          <span className="text-2xl font-semibold text-gray-700">
+            {mediumPriorityTasks}
+          </span>
         </div>
 
-        <div className="flex items-center justify-center bg-red-100 p-4 rounded-lg shadow-md">
-          <span className="text-red-500 font-bold">High </span>{' '}
-          <span className="text-xl ml-4">{highPriorityTasks}</span>
+        <div className="flex flex-col items-center bg-red-100 p-4 rounded-lg shadow-md">
+          <span className="text-red-600 font-bold text-lg">High</span>
+          <span className="text-2xl font-semibold text-gray-700">
+            {highPriorityTasks}
+          </span>
         </div>
       </div>
     </div>
