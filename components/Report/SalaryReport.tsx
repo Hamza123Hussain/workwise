@@ -67,31 +67,40 @@ const SalaryReport: React.FC<{ formattedTotalSalary: number }> = ({
   const formattedTotalPaid = new Intl.NumberFormat('en-US', {
     style: 'decimal',
     minimumFractionDigits: 0,
-  }).format(207296)
+  }).format(formattedTotalSalary)
 
   const formattedTotalSalaryValue = new Intl.NumberFormat('en-US', {
     style: 'decimal',
     minimumFractionDigits: 0,
-  }).format(216500)
+  }).format(215000)
 
   return (
-    <div className="flex flex-wrap gap-5 justify-center items-center my-5">
-      <SalaryDoughnutChart totalSalary={formattedTotalSalary} />
+    <div className="flex flex-wrap gap-2 justify-center items-center my-1">
+      {/* Doughnut Chart Component */}
+      <div className="flex justify-center items-center w-full max-w-sm">
+        <SalaryDoughnutChart totalSalary={formattedTotalSalary} />
+      </div>
 
-      <div className="flex flex-col gap-4 items-center">
-        <div className="bg-[#b473ff] text-white py-4 px-14 rounded-md shadow-md w-full max-w-[320px] sm:max-w-[400px] text-center">
-          <h2 className="text-lg sm:text-xl font-bold">Salary To Be Paid</h2>
-          <div className="flex items-center justify-center mt-2">
-            <p className="text-2xl sm:text-3xl font-semibold">
-              {formattedTotalPaid}
+      {/* Salary Details Section */}
+      <div className="flex flex-col gap-6 items-center">
+        <div className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-6 px-10 rounded-lg shadow-lg w-full max-w-md text-center">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-wide">
+            Salary To Be Paid
+          </h2>
+          <div className="flex items-center justify-center mt-4">
+            <p className="text-3xl sm:text-4xl font-semibold">
+              PKR {formattedTotalPaid.toLocaleString()}
             </p>
           </div>
         </div>
-        <div className="bg-[#b473ff] text-white py-4 px-14 rounded-md shadow-md w-full max-w-[320px] sm:max-w-[400px] text-center">
-          <h2 className="text-lg sm:text-xl font-bold">Total Salary</h2>
-          <div className="flex items-center justify-center mt-2">
-            <p className="text-2xl sm:text-3xl font-semibold">
-              {formattedTotalSalaryValue}
+
+        <div className="bg-gradient-to-r from-green-400 to-teal-500 text-white py-6 px-10 rounded-lg shadow-lg w-full max-w-md text-center">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-wide">
+            Total Salary
+          </h2>
+          <div className="flex items-center justify-center mt-4">
+            <p className="text-3xl sm:text-4xl font-semibold">
+              PKR {formattedTotalSalaryValue.toLocaleString()}
             </p>
           </div>
         </div>
