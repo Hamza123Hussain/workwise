@@ -3,9 +3,11 @@ import { RootState } from '@/utils/Redux/Store/Store'
 import { UserFetched } from '@/utils/SignUpInterface'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import ChatLoader from './ChatLoader'
+import { SetRecipentID } from '@/utils/Redux/Slice/chatslice/chatslice'
 const Users = () => {
+  const Dispatch = useDispatch()
   const [AllUsers, SetAllUsers] = useState<UserFetched[]>([])
   const User = useSelector((state: RootState) => state.user)
   const [loading, setloading] = useState(false)
@@ -20,7 +22,14 @@ const Users = () => {
     GetAllUsers()
     setloading(false)
   }, [User.Email])
-
+  const SetRecipentData = (Name: string, Email: string) => {
+    Dispatch(
+      SetRecipentID({
+        Name,
+        Email,
+      })
+    )
+  }
   return (
     <div className="flex flex-col gap-3 h-[70vh] overflow-y-auto">
       {loading ? (
@@ -31,8 +40,9 @@ const Users = () => {
         Allusers.length > 0 &&
         AllUsers.map((element) => (
           <div
+            onClick={() => SetRecipentData(element.Name, element.Email)}
             key={element.Email}
-            className="flex items-center gap-3 p-2 hover:bg-gray-700 rounded-lg transition-colors"
+            className="flex items-center cursor-pointer gap-3 p-2 hover:bg-gray-700 rounded-lg transition-colors"
           >
             <Image
               src={element.imageUrl}
