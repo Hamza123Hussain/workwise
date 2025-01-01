@@ -6,13 +6,14 @@ export const SendMessage = async (
   recipientId: string,
   chatId: string
 ) => {
+  const sanitizedChatId = chatId.replace(/@/g, '-at-').replace(/\./g, '-dot-')
   const response = await axios.post(
     'https://workwise-backend-puce.vercel.app/Api/Message/SendMessage',
     {
       text,
       userId,
       recipientId,
-      chatId,
+      chatId: sanitizedChatId,
     }
   )
   if (response.status === 201) toast.success(response.data.message)
