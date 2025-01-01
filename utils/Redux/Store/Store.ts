@@ -4,6 +4,7 @@ import { SelectSlice } from '../Slice/SelectUser/SelectSlice'
 import { Location_Slice } from '../Slice/Location_Slice/Location_Slice'
 import { SortSlice } from '../Slice/Sorting_Slice/Sorting_Slice'
 import { Flag_Slice } from '../Slice/Flag_Slice/Flag_Slice'
+import { ChatSlice } from '../Slice/chatslice/chatslice'
 const Store = configureStore({
   reducer: {
     user: UserSlice.reducer, // Add UserSlice reducer here
@@ -11,6 +12,7 @@ const Store = configureStore({
     location: Location_Slice.reducer,
     sort: SortSlice.reducer,
     Flag: Flag_Slice.reducer,
+    Chat: ChatSlice.reducer,
   },
 })
 
