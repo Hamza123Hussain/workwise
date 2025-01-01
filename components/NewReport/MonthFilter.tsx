@@ -36,12 +36,14 @@ const MonthFilter = ({
         onChange={handleMonthChange}
         className="border p-2"
       >
-        <option value="">{month}</option>
-        {months.map((month) => (
-          <option key={month} value={month}>
-            {month}
-          </option>
-        ))}
+        <option value="month">{month}</option>
+        {months.map((newmonth) =>
+          newmonth === month ? null : (
+            <option key={newmonth} value={newmonth}>
+              {newmonth}
+            </option>
+          )
+        )}
       </select>
     </div>
   )
