@@ -18,10 +18,6 @@ const UserTasks = () => {
   const SortTask = useSelector((state: RootState) => state.sort)
   const user = useSelector((state: RootState) => state.user)
   const selectedUser = useSelector((state: RootState) => state.Select)
-  const [isModalOpen, setModalOpen] = useState(false)
-
-  const openModal = () => setModalOpen(true)
-  const closeModal = () => setModalOpen(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,12 +46,7 @@ const UserTasks = () => {
 
       {/* Create New Task Button */}
       <div className="mb-4 flex justify-end">
-        <button
-          onClick={openModal}
-          className="px-4 py-2 bg-[#8c5bff] text-white rounded-lg hover:bg-[#7b4ae2]"
-        >
-          Create New Task
-        </button>
+        <CreateTaskModal />
       </div>
 
       <Dropdowns />
@@ -79,9 +70,6 @@ const UserTasks = () => {
           <Empty_Task_Test />
         )}
       </div>
-
-      {/* Create Task Modal */}
-      <CreateTaskModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   )
 }
