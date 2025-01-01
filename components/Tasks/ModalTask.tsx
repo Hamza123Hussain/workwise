@@ -6,10 +6,12 @@ import TaskForm from './TaskForm'
 import toast from 'react-hot-toast'
 import { TaskFormProps } from '@/utils/TaskformInterface'
 import { useRouter } from 'next/navigation'
+
 interface CreateTaskModalProps {
   isOpen: boolean
   onClose: () => void
 }
+
 const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
   isOpen,
   onClose,
@@ -25,6 +27,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
     priority: 'LOW',
     TaskType: 'Daily',
   })
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
@@ -40,7 +43,9 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
       toast.error('Failed to create the task')
     }
   }
+
   if (!isOpen) return null
+
   return (
     <div className="fixed inset-0 flex items-center justify-center h-[90vh] overflow-y-auto z-50">
       <div
@@ -58,21 +63,20 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
         <h1 className="text-2xl font-bold mb-4 text-purple-500 text-center">
           Create a New Task
         </h1>
-        <form
-          onSubmit={handleSubmit}
-          className="max-h-[60vh] overflow-y-auto pr-4"
-        >
-          {/* Added pr-4 for padding */}
+        <form onSubmit={handleSubmit} className="overflow-auto pr-4">
           <TaskForm taskData={taskData} setTaskData={setTaskData} />
-          <button
-            type="submit"
-            className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-2 rounded-lg shadow hover:from-purple-500 hover:to-indigo-500 transition duration-300 mt-4"
-          >
-            Create Task
-          </button>
+          <div className="mt-4 flex justify-center">
+            <button
+              type="submit"
+              className="w-full max-w-xs bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-2 rounded-lg shadow hover:from-purple-500 hover:to-indigo-500 transition duration-300"
+            >
+              Create Task
+            </button>
+          </div>
         </form>
       </div>
     </div>
   )
 }
+
 export default CreateTaskModal
