@@ -24,6 +24,7 @@ const Chats = () => {
         {/* <h2 className="text-lg font-semibold bg-white text-gray-800 mb-4">
           Chat Messages
         </h2> */}
+
         <ChatMessages />
         <InputBar />
       </div>
