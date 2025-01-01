@@ -2,6 +2,10 @@ import { NewReport } from '@/utils/NewReportInterface'
 import React from 'react'
 
 const ReportCard = ({ report }: { report: NewReport }) => {
+  const formattedTotalPaid = new Intl.NumberFormat('en-US', {
+    style: 'decimal',
+    minimumFractionDigits: 0,
+  }).format(report.Salary)
   return (
     <div
       key={report._id}
@@ -74,7 +78,9 @@ const ReportCard = ({ report }: { report: NewReport }) => {
       {/* Salary Details */}
       <div className="flex items-center justify-between w-full">
         <p className="text-2xl font-bold text-gray-900">Salary:</p>
-        <p className="text-2xl font-bold text-green-700">PKR {report.Salary}</p>
+        <p className="text-2xl font-bold text-green-700">
+          PKR {formattedTotalPaid}
+        </p>
       </div>
     </div>
   )
