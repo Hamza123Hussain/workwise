@@ -17,6 +17,7 @@ export interface UserData {
 }
 
 export interface UserFetched {
+  _id: string
   Email: string
   JobTitle: string
   Name: string
