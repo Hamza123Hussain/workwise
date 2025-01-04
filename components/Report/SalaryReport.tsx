@@ -13,16 +13,20 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 
 interface SalaryChartProps {
   totalSalary: number
+  tobePaid: number
 }
 
-const SalaryDoughnutChart: React.FC<SalaryChartProps> = ({ totalSalary }) => {
+const SalaryDoughnutChart: React.FC<SalaryChartProps> = ({
+  totalSalary,
+  tobePaid,
+}) => {
   const chartData = useMemo(() => {
     return {
       labels: ['Total Salary', 'Remaining'],
       datasets: [
         {
           label: 'Salary Distribution',
-          data: [totalSalary, 215000 - 215010], // Corrected number formatting
+          data: [totalSalary, totalSalary - tobePaid], // Corrected number formatting
           backgroundColor: ['#3b82f6', '#e5e7eb'], // Blue for the salary, gray for remaining
           borderWidth: 1,
         },
@@ -78,7 +82,10 @@ const SalaryReport: React.FC<{ formattedTotalSalary: number }> = ({
     <div className="flex flex-wrap gap-2 justify-center items-center my-1">
       {/* Doughnut Chart Component */}
       <div className="flex justify-center items-center w-full max-w-sm">
-        <SalaryDoughnutChart totalSalary={formattedTotalSalary} />
+        <SalaryDoughnutChart
+          tobePaid={formattedTotalSalary}
+          totalSalary={215000}
+        />
       </div>
 
       {/* Salary Details Section */}
