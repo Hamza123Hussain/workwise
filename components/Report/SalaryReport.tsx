@@ -22,7 +22,7 @@ const SalaryDoughnutChart: React.FC<SalaryChartProps> = ({ totalSalary }) => {
       datasets: [
         {
           label: 'Salary Distribution',
-          data: [totalSalary, 215000 - 214310], // Corrected number formatting
+          data: [totalSalary, 215000 - 215010], // Corrected number formatting
           backgroundColor: ['#3b82f6', '#e5e7eb'], // Blue for the salary, gray for remaining
           borderWidth: 1,
         },
