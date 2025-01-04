@@ -40,9 +40,6 @@ export const handleCheckInCheckOut = async (
       // Check-out process
       if (attendanceId) {
         const exitTime = new Date(currentTime)
-        if (userEmail === 'aroojyousaf017@gmail.com') {
-          exitTime.setHours(exitTime.getHours() + 1) // Increment by 1 hour
-        }
         await updateAttendance({
           Email: userEmail,
           id: attendanceId,
