@@ -6,7 +6,7 @@ export interface InputValues {
   Salary: string
   JobDescription: string
   JobTitle: string
-  Role: string
+  Role?: string
 }
 
 export interface UserData {
