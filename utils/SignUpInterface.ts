@@ -6,6 +6,7 @@ export interface InputValues {
   Salary: string
   JobDescription: string
   JobTitle: string
+  Role: string
 }
 
 export interface UserData {
@@ -25,4 +26,5 @@ export interface UserFetched {
   createdAt: string
   imageUrl: string
   JobDescription: string
+  Role: string
 }
