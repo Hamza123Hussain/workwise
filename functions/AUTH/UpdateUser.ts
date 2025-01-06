@@ -9,7 +9,7 @@ export const updateUser = async (userData: InputValues) => {
     formData.append('Email', userData.email)
     formData.append('JobTitle', userData.JobTitle)
     formData.append('Name', userData.Name)
-
+    formData.append('Role', userData.Role)
     // Append the image if provided
     if (userData.Image) {
       formData.append('Image', userData.Image) // 'Image' is the field name for the image file
