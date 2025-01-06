@@ -4,6 +4,7 @@ import { handleSignOut } from '../AUTH/SignOut'
 import { AppDispatch } from '@/utils/Redux/Store/Store'
 import { ClearUser, GetUserData } from '@/utils/Redux/Slice/User/UserSlice'
 import { useRouter } from 'next/navigation'
+import { SendOtp } from './OTP/SendOtp'
 export const handleLoginClick = async (
   email: string,
   password: string,
@@ -16,8 +17,10 @@ export const handleLoginClick = async (
       const encryptedData = encryptData(data)
       localStorage.setItem('UserData', encryptedData)
       dispatch(GetUserData(data))
-      router.push('/') // Use router parameter
-
+      const OtpSent = await SendOtp(email)
+      if (OtpSent) {
+        router.push('/otp') // Use router parameter
+      }
       scheduleSignout(dispatch) // Pass dispatch to scheduleSignout
     } else {
       console.error('Login failed')

@@ -32,6 +32,7 @@ const UpdateFields = ({ User }: { User?: UserFetched }) => {
     JobDescription: user.JobDescription,
     Image: null,
     JobTitle: User ? User.JobTitle : user.JobTitle,
+    Role: User ? User.Role : user.Role,
   })
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null

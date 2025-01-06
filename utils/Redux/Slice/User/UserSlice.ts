@@ -8,6 +8,7 @@ const initialState = {
   Salary: 0,
   JobDescription: '',
   JobTitle: '',
+  Role: '',
 }
 export const UserSlice = createSlice({
   name: 'User',
@@ -22,6 +23,7 @@ export const UserSlice = createSlice({
       state.Salary = action.payload.Salary
       state.JobDescription = action.payload.JobDescription
       state.JobTitle = action.payload.JobTitle
+      state.Role = action.payload.Role
     },
     ClearUser: (state) => {
       // Resetting each property individually
@@ -33,6 +35,7 @@ export const UserSlice = createSlice({
       state.Salary = 0
       state.JobDescription = ''
       state.JobTitle = ''
+      state.Role = ''
     },
   },
 })

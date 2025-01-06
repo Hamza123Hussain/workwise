@@ -94,6 +94,23 @@ const UpdateInputFields = ({
                 className="mt-1 p-3 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
               />
             </div>
+            <div>
+              <label
+                htmlFor="Role"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Role
+              </label>
+              <input
+                type="text"
+                id="Role"
+                placeholder="Enter Salary"
+                name="Role"
+                value={inputVal.Role}
+                onChange={handleChange}
+                className="mt-1 p-3 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+              />
+            </div>
           </>
         )}
       </div>
