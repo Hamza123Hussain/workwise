@@ -42,7 +42,7 @@ const KPIData = () => {
           />
         </motion.div>
         <motion.div
-          className="bg-white rounded-lg shadow-md p-6 overflow-y-auto max-h-60"
+          className="bg-white rounded-lg shadow-md p-6 overflow-y-auto max-h-[55vh]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
