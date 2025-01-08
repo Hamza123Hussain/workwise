@@ -18,7 +18,7 @@ const MonthlyHoursWorked = () => {
   const percentage = (HoursWorked / TotalHours) * 100
   const RemainingHours = TotalHours - HoursWorked
   return (
-    <div className="flex flex-col items-center p-6 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg shadow-lg text-white">
+    <div className="flex flex-col items-center justify-between p-6 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg shadow-lg text-white">
       <h1 className="text-2xl font-bold mb-4">Monthly Hours Tracker</h1>
       <div className="w-48 h-48">
         <CircularProgressbar
