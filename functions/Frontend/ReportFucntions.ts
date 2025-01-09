@@ -1,4 +1,4 @@
-import { MergedUserData } from '@/utils/Report_Interface'
+import { MergedUserData } from '@/utils/Interfaces/Report_Interface'
 import { getUserSalary } from '../AUTH/GetSalary'
 
 export const countPriorityTasks = (

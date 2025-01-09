@@ -1,5 +1,5 @@
-import { months } from '@/utils/MonthsArray'
-import { NewReport } from '@/utils/NewReportInterface'
+import { months } from '@/utils/Arrays/MonthsArray'
+import { NewReport } from '@/utils/Interfaces/NewReportInterface'
 import React from 'react'
 
 const MonthFilter = ({

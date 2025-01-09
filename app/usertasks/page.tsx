@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import TaskCard2 from '@/components/Tasks/TaskCard2'
 import { RootState } from '@/utils/Redux/Store/Store'
-import { TaskFetch } from '@/utils/TaskformInterface'
+import { TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { fetchUserTasks } from '@/functions/Frontend/UserTasks'

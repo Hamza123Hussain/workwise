@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { TaskFetch } from '@/utils/TaskformInterface'
+import { TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 
 interface EditTaskModalProps {
   isOpen: boolean

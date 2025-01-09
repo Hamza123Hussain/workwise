@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../utils/Redux/Store/Store'
 import TaskForm from './TaskForm'
 import toast from 'react-hot-toast'
-import { TaskFormProps } from '@/utils/TaskformInterface'
+import { TaskFormProps } from '@/utils/Interfaces/TaskformInterface'
 import { useRouter } from 'next/navigation'
 import {
   Dialog,

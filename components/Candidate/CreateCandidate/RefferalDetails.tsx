@@ -1,6 +1,6 @@
 import React from 'react'
 import ReferralDetailsInput from './RefferalInput'
-import { ReferralDetails } from '@/utils/CandidateInterface'
+import { ReferralDetails } from '@/utils/Interfaces/CandidateInterface'
 
 interface ReferralSectionProps {
   ReferralDetails: ReferralDetails

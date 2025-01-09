@@ -1,4 +1,4 @@
-import { TaskFetch } from '@/utils/TaskformInterface'
+import { TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 import { GetUserTasks } from '../Task/GetUserTasks'
 
 export const fetchUserTasks = async (

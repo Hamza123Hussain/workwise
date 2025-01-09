@@ -1,5 +1,5 @@
 import React from 'react'
-import { TaskFormComponentProps } from '@/utils/TaskformInterface'
+import { TaskFormComponentProps } from '@/utils/Interfaces/TaskformInterface'
 import TaskField from './TaskField'
 import UserAssign from './UserAssign'
 import { useSelector } from 'react-redux'

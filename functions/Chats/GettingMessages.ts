@@ -1,4 +1,4 @@
-import { Message } from '@/utils/MessageInterface'
+import { Message } from '@/utils/Interfaces/MessageInterface'
 import axios from 'axios'
 // Define the fetchMessages function with TypeScript compatibility
 export const fetchMessages = async (

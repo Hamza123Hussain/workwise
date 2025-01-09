@@ -1,5 +1,5 @@
 import { AttendanceRecord } from '@/utils/AttendanceInterface'
-import { TaskFetch } from '@/utils/TaskformInterface'
+import { TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 
 export const groupByUserData = (Data: AttendanceRecord[] | TaskFetch[]) => {
   return Data.reduce((acc, record) => {

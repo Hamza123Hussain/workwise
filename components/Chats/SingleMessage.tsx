@@ -1,4 +1,4 @@
-import { Message } from '@/utils/MessageInterface'
+import { Message } from '@/utils/Interfaces/MessageInterface'
 import React from 'react'
 
 const SingleMessage = ({ message }: { message: Message }) => {

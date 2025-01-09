@@ -1,5 +1,5 @@
 import { ApiUrl } from '@/utils/AttendanceInterface'
-import { NewReport } from '@/utils/NewReportInterface'
+import { NewReport } from '@/utils/Interfaces/NewReportInterface'
 import axios from 'axios'
 
 // Function to fetch all reports

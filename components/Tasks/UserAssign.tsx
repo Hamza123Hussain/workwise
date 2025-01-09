@@ -1,6 +1,6 @@
 import { Allusers } from '@/functions/AUTH/Allusers'
 import { RootState } from '@/utils/Redux/Store/Store'
-import { UserFetched } from '@/utils/SignUpInterface'
+import { UserFetched } from '@/utils/Interfaces/SignUpInterface'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 const UserAssign = ({

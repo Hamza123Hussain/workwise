@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast'
 import { GetSingleTask } from '../Task/GetSingleTask'
-import { TaskFetch } from '@/utils/TaskformInterface'
+import { TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 // Function to fetch a single task based on the task ID
 export const getASingleTask = async (
   setLoading: (loading: boolean) => void,

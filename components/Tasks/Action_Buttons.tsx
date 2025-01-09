@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TaskFetch } from '@/utils/TaskformInterface'
+import { TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 import { DeleteTask } from '@/functions/Task/DeleteTask'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'

@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { AllTasks } from '@/functions/Frontend/Alltasks'
 import { RootState } from '@/utils/Redux/Store/Store'
-import { TaskFetch } from '@/utils/TaskformInterface'
+import { TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 import Loader from '../Loader'
 import MainTable from '../Attendance/MainTable' // Replace with your tasks table component
 import DownloadButton from '../Report/DownloadButton'

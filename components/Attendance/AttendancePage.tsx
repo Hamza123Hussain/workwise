@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import Loader from '../Loader'
 import AttendanceTable from './AttendanceTable'
 import SelectedMonths from '../Layout/SelectedMonths'
-import { months } from '@/utils/MonthsArray'
+import { months } from '@/utils/Arrays/MonthsArray'
 const AttendancePage = ({ type }: { type: string }) => {
   const [loading, setLoading] = useState(true)
   const [UserAttendance, setAttendance] = useState<AttendanceRecord[]>([])

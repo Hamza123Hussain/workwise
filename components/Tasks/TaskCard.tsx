@@ -1,4 +1,4 @@
-import { TaskFetch } from '@/utils/TaskformInterface'
+import { TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { FaCheckCircle, FaExclamationTriangle, FaCircle } from 'react-icons/fa'

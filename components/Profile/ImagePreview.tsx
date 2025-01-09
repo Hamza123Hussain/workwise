@@ -1,5 +1,5 @@
 import { RootState } from '@/utils/Redux/Store/Store'
-import { UserFetched } from '@/utils/SignUpInterface'
+import { UserFetched } from '@/utils/Interfaces/SignUpInterface'
 import Image from 'next/image'
 import React from 'react'
 import { useSelector } from 'react-redux'

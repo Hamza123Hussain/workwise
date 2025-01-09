@@ -1,6 +1,6 @@
 import { GetUserName } from '@/utils/Redux/Slice/SelectUser/SelectSlice'
 import { AppDispatch, RootState } from '@/utils/Redux/Store/Store'
-import { UserFetched } from '@/utils/SignUpInterface'
+import { UserFetched } from '@/utils/Interfaces/SignUpInterface'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Dropdowns from '../Tasks/Dropdowns'

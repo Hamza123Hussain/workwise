@@ -1,5 +1,5 @@
 import { calculateTotalSalary } from '@/functions/Frontend/SalaryTotal'
-import { ReportCardProps } from '@/utils/Report_Interface'
+import { ReportCardProps } from '@/utils/Interfaces/Report_Interface'
 import { useRef } from 'react'
 import ReportHead from './ReportHead'
 import ReportBody from './ReportBody'

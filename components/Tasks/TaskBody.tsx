@@ -1,4 +1,4 @@
-import { priorityClass, TaskFetch } from '@/utils/TaskformInterface'
+import { priorityClass, TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 

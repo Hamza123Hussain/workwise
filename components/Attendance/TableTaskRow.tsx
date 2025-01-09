@@ -1,4 +1,4 @@
-import { TaskFetch } from '@/utils/TaskformInterface'
+import { TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 import React from 'react'
 const TaskTableRow = ({
   userData,

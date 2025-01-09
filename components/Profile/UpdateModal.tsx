@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/dialog'
 import React from 'react'
 import UpdateFields from './UpdateFields'
-import { UserFetched } from '@/utils/SignUpInterface'
+import { UserFetched } from '@/utils/Interfaces/SignUpInterface'
 
 const UpdateModal = ({ User }: { User?: UserFetched }) => {
   return (

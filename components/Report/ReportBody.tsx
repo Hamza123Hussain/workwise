@@ -6,7 +6,7 @@ import {
   calculateTotalTaskCompletion,
   countPriorityTasks,
 } from '@/functions/Frontend/ReportFucntions'
-import { MergedUserData } from '@/utils/Report_Interface'
+import { MergedUserData } from '@/utils/Interfaces/Report_Interface'
 import React from 'react'
 
 interface ReportBodyProps {

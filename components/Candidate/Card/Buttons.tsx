@@ -1,7 +1,7 @@
 import React from 'react'
 import { BiDetail } from 'react-icons/bi'
 import UpdateModal from './UpdateCandidate/UpdateModal'
-import { CandidateData } from '@/utils/CandidateInterface'
+import { CandidateData } from '@/utils/Interfaces/CandidateInterface'
 import UpdateInterviewDateModal from './UpdateCandidate/UpdateInterviewDate'
 import { useRouter } from 'next/navigation'
 const Buttons = ({ candidate }: { candidate: CandidateData }) => {

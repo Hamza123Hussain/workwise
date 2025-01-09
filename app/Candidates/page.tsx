@@ -2,7 +2,7 @@
 import CandidateCard from '@/components/Candidate/Card/Main'
 import { CandidateModal } from '@/components/Candidate/CreateCandidate/CandidateModal'
 import { GetCandidates } from '@/functions/Candidates/GetAllCandidates'
-import { CandidateData } from '@/utils/CandidateInterface'
+import { CandidateData } from '@/utils/Interfaces/CandidateInterface'
 import { RootState } from '@/utils/Redux/Store/Store'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'

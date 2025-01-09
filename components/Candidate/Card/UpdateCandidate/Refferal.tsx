@@ -1,4 +1,7 @@
-import { CandidateData, ReferralDetails } from '@/utils/CandidateInterface'
+import {
+  CandidateData,
+  ReferralDetails,
+} from '@/utils/Interfaces/CandidateInterface'
 
 interface ReferralDetailsProps {
   refDetails: ReferralDetails

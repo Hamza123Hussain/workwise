@@ -1,5 +1,5 @@
 import React from 'react'
-import { UserFetched } from '@/utils/SignUpInterface'
+import { UserFetched } from '@/utils/Interfaces/SignUpInterface'
 import DropDown from './DropDown'
 import TaskPage from '../Tasks/TaskPage'
 import AttendancePage from '../Attendance/AttendancePage'

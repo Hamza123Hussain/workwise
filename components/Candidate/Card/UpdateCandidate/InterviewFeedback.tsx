@@ -1,4 +1,4 @@
-import { CandidateData } from '@/utils/CandidateInterface'
+import { CandidateData } from '@/utils/Interfaces/CandidateInterface'
 
 interface InterviewFeedbackProps {
   interviewFeedback: string

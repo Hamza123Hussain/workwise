@@ -1,6 +1,6 @@
 // utils/calculateTotalSalary.ts (or .js if you're not using TypeScript)
 
-import { MergedUserData } from '@/utils/Report_Interface'
+import { MergedUserData } from '@/utils/Interfaces/Report_Interface'
 
 export const calculateTotalSalary = (mergedData: MergedUserData[]) => {
   return mergedData.reduce((acc, item) => {

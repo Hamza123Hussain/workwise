@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
 import toast from 'react-hot-toast'
-import { TaskFetch } from '@/utils/TaskformInterface'
+import { TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 import { FaEdit } from 'react-icons/fa' // Import the icon (or any other icon from react-icons)
 import { updateTask } from '@/functions/Task/UpdateTask'
 const progress_Class = (task: string) => {

@@ -1,4 +1,4 @@
-import { UserFetched } from '@/utils/SignUpInterface'
+import { UserFetched } from '@/utils/Interfaces/SignUpInterface'
 import Image from 'next/image'
 import React from 'react'
 import UpdateModal from './UpdateModal'

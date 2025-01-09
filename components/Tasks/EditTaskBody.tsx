@@ -1,4 +1,4 @@
-import { EditTask } from '@/utils/TaskformInterface'
+import { EditTask } from '@/utils/Interfaces/TaskformInterface'
 import React from 'react'
 
 const EditTaskBody: React.FC<EditTask> = ({

@@ -1,4 +1,4 @@
-import { TaskFetch } from '@/utils/TaskformInterface'
+import { TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 import { GetAllTasks } from '../Task/AllTasks'
 import { groupByUserData } from '../Attendance/GroupEdAttendance'
 

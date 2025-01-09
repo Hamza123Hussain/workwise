@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { database } from '@/utils/FireBaseConfig'
 import { onChildAdded, ref } from '@firebase/database'
-import { Message } from '@/utils/MessageInterface'
+import { Message } from '@/utils/Interfaces/MessageInterface'
 import { fetchMessages } from '@/functions/Chats/GettingMessages'
 import SingleMessage from './SingleMessage'
 import ChatLoader from './ChatLoader'

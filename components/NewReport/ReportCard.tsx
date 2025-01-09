@@ -1,4 +1,4 @@
-import { NewReport } from '@/utils/NewReportInterface'
+import { NewReport } from '@/utils/Interfaces/NewReportInterface'
 import React from 'react'
 
 const ReportCard = ({ report }: { report: NewReport }) => {

@@ -1,4 +1,4 @@
-import { InputValues } from '@/utils/SignUpInterface'
+import { InputValues } from '@/utils/Interfaces/SignUpInterface'
 import axios from 'axios'
 
 export const updateUser = async (userData: InputValues) => {

@@ -8,7 +8,7 @@ import {
   TooltipItem,
 } from 'chart.js'
 import { useMemo } from 'react'
-import { ReportCardProps } from '@/utils/Report_Interface'
+import { ReportCardProps } from '@/utils/Interfaces/Report_Interface'
 
 // Register necessary chart components
 ChartJS.register(ArcElement, CategoryScale, Tooltip, Legend)

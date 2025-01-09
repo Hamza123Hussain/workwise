@@ -1,5 +1,5 @@
 import { createCandidate } from '@/functions/Candidates/Candidate_Creation'
-import { CreateCandidateData } from '@/utils/CandidateInterface'
+import { CreateCandidateData } from '@/utils/Interfaces/CandidateInterface'
 import React, { useState } from 'react'
 import PersonalDetailsSection from './PersonalDetails'
 import ProfessionalDetailsSection from './ProfessionalDetails'

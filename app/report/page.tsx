@@ -7,8 +7,8 @@ import { getAttendance } from '@/functions/Frontend/AllAttendance'
 import { AllTasks } from '@/functions/Frontend/Alltasks'
 import { AttendanceRecord } from '@/utils/AttendanceInterface'
 import { RootState } from '@/utils/Redux/Store/Store'
-import { UserFetched } from '@/utils/SignUpInterface'
-import { TaskFetch } from '@/utils/TaskformInterface'
+import { UserFetched } from '@/utils/Interfaces/SignUpInterface'
+import { TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 import React, { useEffect, useState, useMemo } from 'react' // Importing useMemo to optimize performance
 import { useSelector } from 'react-redux'
 

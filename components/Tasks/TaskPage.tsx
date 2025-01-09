@@ -1,7 +1,7 @@
 'use client'
 import TaskCard2 from '@/components/Tasks/TaskCard2'
 import { RootState } from '@/utils/Redux/Store/Store'
-import { TaskFetch } from '@/utils/TaskformInterface'
+import { TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Empty_Task_Test from '@/components/Tasks/Empty_Task_Test'

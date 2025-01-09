@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast'
 import { updateTask } from '../Task/UpdateTask'
-import { TaskFetch } from '@/utils/TaskformInterface'
+import { TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 import { useRouter } from 'next/navigation'
 
 // Function to handle task update

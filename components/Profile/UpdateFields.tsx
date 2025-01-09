@@ -1,5 +1,5 @@
 'use client'
-import { InputValues, UserFetched } from '@/utils/SignUpInterface'
+import { InputValues, UserFetched } from '@/utils/Interfaces/SignUpInterface'
 import React, { useState } from 'react'
 import { DialogFooter } from '../ui/dialog'
 import UpdateInputFields from './UpdateInputFields'

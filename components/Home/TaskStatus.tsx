@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { TaskFetch } from '@/utils/TaskformInterface'
+import { TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { useSelector } from 'react-redux'
 import Loader from '../Loader'

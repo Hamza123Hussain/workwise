@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect, useRef } from 'react'
-import { NewReport } from '@/utils/NewReportInterface'
+import { NewReport } from '@/utils/Interfaces/NewReportInterface'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
 import MonthFilter from '@/components/NewReport/MonthFilter'

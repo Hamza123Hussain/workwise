@@ -1,6 +1,6 @@
 'use client'
 import { registerUserWithImage } from '@/functions/AUTH/RegisterUser'
-import { InputValues } from '@/utils/SignUpInterface'
+import { InputValues } from '@/utils/Interfaces/SignUpInterface'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'

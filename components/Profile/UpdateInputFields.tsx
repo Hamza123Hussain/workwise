@@ -1,4 +1,4 @@
-import { InputValues } from '@/utils/SignUpInterface'
+import { InputValues } from '@/utils/Interfaces/SignUpInterface'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'

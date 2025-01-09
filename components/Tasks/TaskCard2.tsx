@@ -1,4 +1,4 @@
-import { priorityClass, TaskFetch } from '@/utils/TaskformInterface'
+import { priorityClass, TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 import React from 'react'
 import ActionButtons from './Action_Buttons'
 import TaskProgress from './TaskProgress'

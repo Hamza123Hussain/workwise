@@ -1,4 +1,4 @@
-import { CandidateData } from '@/utils/CandidateInterface'
+import { CandidateData } from '@/utils/Interfaces/CandidateInterface'
 import Image from 'next/image'
 import React from 'react'
 import { FaEnvelope, FaPhone, FaDollarSign, FaUserTie } from 'react-icons/fa'

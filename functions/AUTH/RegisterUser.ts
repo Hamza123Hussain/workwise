@@ -1,6 +1,6 @@
 import axios from 'axios'
 import toast from 'react-hot-toast' // Import toast
-import { InputValues } from '../../utils/SignUpInterface'
+import { InputValues } from '../../utils/Interfaces/SignUpInterface'
 import { ApiUrl } from '@/utils/AttendanceInterface'
 
 export const registerUserWithImage = async (

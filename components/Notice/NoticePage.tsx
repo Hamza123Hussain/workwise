@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import NoticeCard from './NoticeCard'
 import { fetchAllNotices } from '@/functions/Notice/GetNotices'
-import { Notice } from '@/utils/NoticeInterface'
+import { Notice } from '@/utils/Interfaces/NoticeInterface'
 import Loader from '../Loader'
 import NoticeCreate from './NoticeCreate'
 const NoticesPage: React.FC = () => {
