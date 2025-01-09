@@ -6,7 +6,7 @@ import { RootState } from '@/utils/Redux/Store/Store'
 import { setKpis } from '@/utils/Redux/Slice/kpi/KpiListSlice'
 import { GetAllKpi } from '@/functions/Kpi/GetAllKpis'
 import KpiCard from '@/components/Home/KPI/Card/KpiCard'
-import CreateKPIButton from '@/components/Home/KPI/CreateKpi/CreateButton'
+import { KpiModal } from '@/components/Home/KPI/CreateKpi/CreateModal'
 const KpiList = () => {
   const user = useSelector((state: RootState) => state.user)
   const kpis = useSelector((state: RootState) => state.KpiList)
@@ -32,7 +32,7 @@ const KpiList = () => {
         All KPIs
       </h2>
       <div className=" flex justify-end">
-        <CreateKPIButton />
+        <KpiModal />
       </div>
       {loading ? (
         <div className="flex justify-center items-center h-full">
