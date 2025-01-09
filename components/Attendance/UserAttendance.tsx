@@ -7,7 +7,7 @@ import Loader from '../Loader'
 import { getAttendance } from '@/functions/Frontend/GetUserAttendance'
 import SelectedMonths from '../Layout/SelectedMonths'
 import NoAttendance from './NoAttendance'
-import { months } from '@/utils/MonthsArray'
+import { months } from '@/utils/Array/MonthsArray'
 const UserAttendance: React.FC = () => {
   const user = useSelector((state: RootState) => state.user)
   const [userAttendance, setAttendance] = useState<AttendanceRecord[]>([])
