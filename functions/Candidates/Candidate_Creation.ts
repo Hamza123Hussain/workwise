@@ -1,5 +1,5 @@
-import { ApiUrl } from '@/utils/AttendanceInterface'
-import { CreateCandidateData } from '@/utils/CandidateInterface'
+import { ApiUrl } from '@/utils/Interfaces/AttendanceInterface'
+import { CreateCandidateData } from '@/utils/Interfaces/CandidateInterface'
 import axios from 'axios'
 
 export const createCandidate = async (CandidateData: CreateCandidateData) => {

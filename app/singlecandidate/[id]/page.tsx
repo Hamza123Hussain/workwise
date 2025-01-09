@@ -9,9 +9,9 @@ import {
   FaLocationArrow,
   FaTag,
 } from 'react-icons/fa'
-import { CandidateData } from '@/utils/CandidateInterface'
+import { CandidateData } from '@/utils/Interfaces/CandidateInterface'
 import { useParams } from 'next/navigation'
-import { ApiUrl } from '@/utils/AttendanceInterface'
+import { ApiUrl } from '@/utils/Interfaces/AttendanceInterface'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
 
