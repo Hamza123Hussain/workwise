@@ -7,9 +7,9 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { FaEdit } from 'react-icons/fa'
-import { CandidateData } from '@/utils/CandidateInterface'
+import { CandidateData } from '@/utils/Interfaces/CandidateInterface'
 import axios from 'axios'
-import { ApiUrl } from '@/utils/AttendanceInterface'
+import { ApiUrl } from '@/utils/Interfaces/AttendanceInterface'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { useSelector } from 'react-redux'
 
