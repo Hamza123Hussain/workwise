@@ -1,39 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { motion } from 'framer-motion'
 import { FaBullseye } from 'react-icons/fa'
-import { GetSingleKpi } from '@/functions/Kpi/GetSingleKpi'
-import { Kpi } from '@/utils/Interfaces/KPIInterface'
 import { RootState } from '@/utils/Redux/Store/Store'
 import TargetsComponent from './TargetsComponent'
 import PerformanceComponent from './Performance'
 import KpiHeader from './KpiHeader'
-import Loader from './Loader'
 const KPIData = () => {
-  const [loading, setLoading] = useState(false)
-  const [userKpi, setKpi] = useState<Kpi>()
-  const user = useSelector((state: RootState) => state.user)
-  useEffect(() => {
-    const fetchSingleKpi = async () => {
-      try {
-        setLoading(true)
-        const data = await GetSingleKpi(user._id)
-        if (data) setKpi(data)
-      } catch (error) {
-        console.error('Error fetching KPI data:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-    if (user._id) fetchSingleKpi()
-  }, [user._id])
+  const userKpi = useSelector((state: RootState) => state.Kpi)
   return (
     <div className="p-4">
-      {loading ? (
-        <div className="flex justify-center items-center min-h-[50vh]">
-          <Loader />
-        </div>
-      ) : userKpi ? (
+      {userKpi ? (
         <motion.div
           className="bg-white shadow-lg border-2 border-purple-400 shadow-purple-500 rounded-lg p-6"
           initial={{ opacity: 0, y: 50 }}
