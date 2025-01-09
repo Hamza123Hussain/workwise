@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { User2 } from 'lucide-react'
 import { usePathname } from 'next/navigation'
-import { links } from '@/utils/LinkArray'
+import { links } from '@/utils/Array/LinkArray'
 const SideBarLinks = ({ closeSidebar }: { closeSidebar: () => void }) => {
   const User = useSelector((state: RootState) => state.user) // Get the user from the state
   const pathname = usePathname()
