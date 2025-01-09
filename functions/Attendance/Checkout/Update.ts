@@ -1,4 +1,4 @@
-import { LocationCoords } from '@/utils/AttendanceInterface'
+import { LocationCoords } from '@/utils/Interfaces/AttendanceInterface'
 import { getUserLocation } from './LocaitionGet'
 import toast from 'react-hot-toast'
 import { createNewAttendance } from '../NewAttendance'

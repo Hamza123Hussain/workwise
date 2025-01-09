@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { UserData } from '../../utils/Interfaces/SignUpInterface'
-import { ApiUrl } from '@/utils/AttendanceInterface'
+import { ApiUrl } from '@/utils/Interfaces/AttendanceInterface'
 export const fetchUserData = async (
   email: string
 ): Promise<UserData | null> => {

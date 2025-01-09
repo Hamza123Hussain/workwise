@@ -1,4 +1,4 @@
-import { months } from '@/utils/Arrays/MonthsArray'
+import { months } from '@/utils/MonthsArray'
 import { setMonth } from '@/utils/Redux/Slice/Sorting_Slice/Sorting_Slice'
 import { RootState } from '@/utils/Redux/Store/Store'
 import React from 'react'

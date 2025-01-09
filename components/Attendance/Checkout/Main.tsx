@@ -2,7 +2,7 @@ import React from 'react'
 import { handleCheckInCheckOut } from '@/functions/Attendance/Checkout/Update'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
-import { CheckInProps } from '@/utils/Checkout_Interface'
+import { CheckInProps } from '@/utils/Interfaces/Checkout_Interface'
 import { FaCheckCircle, FaSignOutAlt } from 'react-icons/fa'
 import clsx from 'clsx'
 

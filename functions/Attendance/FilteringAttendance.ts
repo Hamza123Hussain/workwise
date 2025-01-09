@@ -1,4 +1,4 @@
-import { AttendanceRecord } from '@/utils/AttendanceInterface'
+import { AttendanceRecord } from '@/utils/Interfaces/AttendanceInterface'
 
 // Filter attendance records based on selected month
 export const filteredAttendance = (

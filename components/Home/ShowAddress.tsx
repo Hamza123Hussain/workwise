@@ -1,4 +1,4 @@
-import { LocationCoords } from '@/utils/AttendanceInterface'
+import { LocationCoords } from '@/utils/Interfaces/AttendanceInterface'
 import { FaCompass, FaMapMarkedAlt } from 'react-icons/fa'
 
 const ShowAddress = ({ location }: { location: LocationCoords }) => {

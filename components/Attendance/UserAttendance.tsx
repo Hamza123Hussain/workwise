@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../utils/Redux/Store/Store'
-import { AttendanceRecord } from '../../utils/AttendanceInterface'
+import { AttendanceRecord } from '../../utils/Interfaces/AttendanceInterface'
 import AttendanceTable from './AttendanceTable'
 import Loader from '../Loader'
 import { getAttendance } from '@/functions/Frontend/GetUserAttendance'
 import SelectedMonths from '../Layout/SelectedMonths'
 import NoAttendance from './NoAttendance'
-import { months } from '@/utils/Arrays/MonthsArray'
+import { months } from '@/utils/MonthsArray'
 const UserAttendance: React.FC = () => {
   const user = useSelector((state: RootState) => state.user)
   const [userAttendance, setAttendance] = useState<AttendanceRecord[]>([])

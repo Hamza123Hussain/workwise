@@ -1,5 +1,5 @@
 // import { LocationCoords } from '@/utils/AttendanceInterface'
-import { LocationCoords } from '@/utils/AttendanceInterface'
+import { LocationCoords } from '@/utils/Interfaces/AttendanceInterface'
 import axios from 'axios'
 
 export const createNewAttendance = async (

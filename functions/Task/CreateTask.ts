@@ -1,4 +1,4 @@
-import { ApiUrl } from '@/utils/AttendanceInterface'
+import { ApiUrl } from '@/utils/Interfaces/AttendanceInterface'
 import axios from 'axios'
 
 // Define types for the task data

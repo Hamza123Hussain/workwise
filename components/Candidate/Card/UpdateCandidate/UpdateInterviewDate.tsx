@@ -10,7 +10,7 @@ import { FaCalendarAlt } from 'react-icons/fa'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
-import { ApiUrl } from '@/utils/AttendanceInterface'
+import { ApiUrl } from '@/utils/Interfaces/AttendanceInterface'
 
 const UpdateInterviewDateModal = ({
   Interviewdate,

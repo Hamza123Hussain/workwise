@@ -1,12 +1,12 @@
 import { getAttendance } from '@/functions/Frontend/GetUserAttendance'
-import { AttendanceRecord } from '@/utils/AttendanceInterface'
+import { AttendanceRecord } from '@/utils/Interfaces/AttendanceInterface'
 import { RootState } from '@/utils/Redux/Store/Store'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Loader from '../Loader'
 import AttendanceTable from './AttendanceTable'
 import SelectedMonths from '../Layout/SelectedMonths'
-import { months } from '@/utils/Arrays/MonthsArray'
+import { months } from '@/utils/MonthsArray'
 const AttendancePage = ({ type }: { type: string }) => {
   const [loading, setLoading] = useState(true)
   const [UserAttendance, setAttendance] = useState<AttendanceRecord[]>([])

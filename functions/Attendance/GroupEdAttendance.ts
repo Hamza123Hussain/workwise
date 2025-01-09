@@ -1,4 +1,4 @@
-import { AttendanceRecord } from '@/utils/AttendanceInterface'
+import { AttendanceRecord } from '@/utils/Interfaces/AttendanceInterface'
 import { TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 
 export const groupByUserData = (Data: AttendanceRecord[] | TaskFetch[]) => {

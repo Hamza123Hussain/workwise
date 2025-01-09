@@ -1,5 +1,5 @@
 import { convertHoursToString } from '@/functions/Attendance/TimeFunctions'
-import { AttendanceRecord } from '../../utils/AttendanceInterface'
+import { AttendanceRecord } from '../../utils/Interfaces/AttendanceInterface'
 import { motion } from 'framer-motion'
 import { FaSignInAlt, FaSignOutAlt, FaRegClock } from 'react-icons/fa'
 import { GiPauseButton } from 'react-icons/gi'

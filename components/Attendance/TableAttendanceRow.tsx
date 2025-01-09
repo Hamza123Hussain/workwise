@@ -1,5 +1,5 @@
 import React from 'react'
-import { AttendanceRecord } from '@/utils/AttendanceInterface'
+import { AttendanceRecord } from '@/utils/Interfaces/AttendanceInterface'
 const AttendanceTableRow = ({
   userData,
   records,

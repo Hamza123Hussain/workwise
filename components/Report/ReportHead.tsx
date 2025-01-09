@@ -1,4 +1,4 @@
-import { months } from '@/utils/Arrays/MonthsArray'
+import { months } from '@/utils/MonthsArray'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { useSelector } from 'react-redux'
 

@@ -1,4 +1,4 @@
-import { ApiUrl } from '@/utils/AttendanceInterface'
+import { ApiUrl } from '@/utils/Interfaces/AttendanceInterface'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 export const updateBreak = async (

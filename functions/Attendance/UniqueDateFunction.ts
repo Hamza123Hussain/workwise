@@ -1,4 +1,4 @@
-import { AttendanceRecord } from '../../utils/AttendanceInterface'
+import { AttendanceRecord } from '../../utils/Interfaces/AttendanceInterface'
 
 export const countUniqueDates = (attendanceRecords: AttendanceRecord[]) => {
   const uniqueDates = new Set<string>()

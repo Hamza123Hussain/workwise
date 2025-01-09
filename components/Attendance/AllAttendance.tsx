@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../utils/Redux/Store/Store'
-import { AttendanceRecord } from '../../utils/AttendanceInterface'
+import { AttendanceRecord } from '../../utils/Interfaces/AttendanceInterface'
 import Loader from '../Loader'
 import MainTable from './MainTable'
 import { getAttendance } from '@/functions/Frontend/AllAttendance'

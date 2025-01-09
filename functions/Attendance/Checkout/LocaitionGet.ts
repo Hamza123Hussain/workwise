@@ -1,4 +1,4 @@
-import { LocationCoords } from '@/utils/AttendanceInterface'
+import { LocationCoords } from '@/utils/Interfaces/AttendanceInterface'
 
 // Function to get the user's location
 export const getUserLocation = (): Promise<LocationCoords | null> => {

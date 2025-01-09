@@ -1,4 +1,4 @@
-import { AttendanceRecord } from '@/utils/AttendanceInterface'
+import { AttendanceRecord } from '@/utils/Interfaces/AttendanceInterface'
 import { GetAllAttendance } from '../Attendance/AllAttendance'
 import { groupByUserData } from '../Attendance/GroupEdAttendance'
 

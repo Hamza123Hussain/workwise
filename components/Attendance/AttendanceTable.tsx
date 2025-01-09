@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import AttendanceCard from './AttendanceCard'
-import { AttendanceRecord } from '../../utils/AttendanceInterface'
+import { AttendanceRecord } from '../../utils/Interfaces/AttendanceInterface'
 
 const AttendanceTable = ({
   Attendance,

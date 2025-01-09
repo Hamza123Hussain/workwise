@@ -1,4 +1,4 @@
-import { ApiUrl } from '@/utils/AttendanceInterface'
+import { ApiUrl } from '@/utils/Interfaces/AttendanceInterface'
 import axios from 'axios'
 export const GetCandidates = async (Email: string) => {
   try {

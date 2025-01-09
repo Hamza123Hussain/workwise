@@ -1,7 +1,7 @@
 // functions/Attendance/attendanceService.ts
 import axios from 'axios'
 import { CurrentAttendance } from '@/functions/Attendance/CurrentAttendance'
-import { LocationCoords } from '@/utils/AttendanceInterface'
+import { LocationCoords } from '@/utils/Interfaces/AttendanceInterface'
 export const GetCurrentAttendance = async (
   email: string,
   setLoading: (loading: boolean) => void,

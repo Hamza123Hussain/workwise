@@ -1,5 +1,5 @@
 import React from 'react'
-import { AttendanceRecord } from '@/utils/AttendanceInterface'
+import { AttendanceRecord } from '@/utils/Interfaces/AttendanceInterface'
 import { TaskFetch } from '@/utils/Interfaces/TaskformInterface'
 import AttendanceTableRow from './TableAttendanceRow'
 import TaskTableRow from './TableTaskRow'

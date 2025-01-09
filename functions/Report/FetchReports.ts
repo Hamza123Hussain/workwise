@@ -1,4 +1,4 @@
-import { ApiUrl } from '@/utils/AttendanceInterface'
+import { ApiUrl } from '@/utils/Interfaces/AttendanceInterface'
 import { NewReport } from '@/utils/Interfaces/NewReportInterface'
 import axios from 'axios'
 

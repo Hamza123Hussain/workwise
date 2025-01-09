@@ -1,4 +1,4 @@
-import { AttendanceRecord } from '@/utils/AttendanceInterface'
+import { AttendanceRecord } from '@/utils/Interfaces/AttendanceInterface'
 import { GetUserAttendance } from '../Attendance/UserAttendance'
 
 export const getAttendance = async (

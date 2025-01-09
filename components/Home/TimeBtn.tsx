@@ -7,7 +7,7 @@ import CheckIn from '../Attendance/Checkout/Main'
 import ShowTime from './ShowTime'
 import ShowAddress from './ShowAddress'
 import { GetCurrentAttendance } from '@/functions/Attendance/Checkout/CurrentAttendance'
-import { LocationCoords } from '@/utils/AttendanceInterface'
+import { LocationCoords } from '@/utils/Interfaces/AttendanceInterface'
 // import NoticeSlider from '../Notice/NoticeSlider'
 const TimeBtn: React.FC = () => {
   const User = useSelector((state: RootState) => state.user)

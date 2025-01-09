@@ -7,7 +7,7 @@ import {
 import { RootState } from '@/utils/Redux/Store/Store'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { months } from '@/utils/Arrays/MonthsArray'
+import { months } from '@/utils/MonthsArray'
 const Dropdowns = () => {
   const SortTask = useSelector((state: RootState) => state.sort)
   const Disptach = useDispatch()
