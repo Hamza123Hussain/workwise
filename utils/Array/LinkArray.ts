@@ -13,6 +13,7 @@ import {
 } from 'lucide-react'
 import { BsPeopleFill } from 'react-icons/bs'
 import { FaRegCalendarAlt } from 'react-icons/fa'
+import { GrDocumentPerformance } from 'react-icons/gr'
 export const links = [
   { href: '/', label: 'Home', icon: House, adminOnly: false, email: '' },
   {
@@ -76,6 +77,13 @@ export const links = [
     href: '/Candidates ',
     label: 'Candidates  (under development)',
     icon: BsPeopleFill,
+    adminOnly: true,
+    email: 'octtoppus1@gmail.com',
+  },
+  {
+    href: '/Kpis',
+    label: 'Kpis',
+    icon: GrDocumentPerformance,
     adminOnly: true,
     email: 'octtoppus1@gmail.com',
   },
