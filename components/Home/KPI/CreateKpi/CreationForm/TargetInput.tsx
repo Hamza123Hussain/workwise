@@ -12,14 +12,12 @@ interface TargetProps {
     Priority: string
     PointsGained: number
     TotalPoints: number
-    AssignedTo: string
   }
   handleTargetChange: (
     index: number,
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void
   handleRemoveTarget: (index: number) => void
-  users: string[]
 }
 
 const TargetInput: React.FC<TargetProps> = ({
@@ -27,7 +25,6 @@ const TargetInput: React.FC<TargetProps> = ({
   target,
   handleTargetChange,
   handleRemoveTarget,
-  users,
 }) => {
   return (
     <div className="mb-6 space-y-4">
@@ -119,12 +116,7 @@ const TargetInput: React.FC<TargetProps> = ({
       </motion.div>
 
       {/* Assigned User */}
-      <AssignedUserSelect
-        index={index}
-        target={target}
-        handleTargetChange={handleTargetChange}
-        users={users}
-      />
+      <AssignedUserSelect />
     </div>
   )
 }
