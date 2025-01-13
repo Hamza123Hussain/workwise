@@ -2,7 +2,8 @@ import React from 'react'
 import TaskStatus from './TaskStatus'
 import TimeBtn from './TimeBtn'
 import Image from 'next/image'
-import RecentTasks from '../Tasks/RecentTasks'
+import ShowingKpi from './KPI/ShowingKpi'
+// import RecentTasks from '../Tasks/RecentTasks'
 const HomePage = () => {
   return (
     <div className="px-4 sm:px-6 w-full min-h-screen">
@@ -22,10 +23,11 @@ const HomePage = () => {
       {/* Main Content with Two Sections */}
       <div className="grid grid-cols-1 w-full gap-6 my-5">
         <div className="flex flex-col gap-5">
+          <ShowingKpi />
           <TimeBtn />
           <TaskStatus />
         </div>
-        <RecentTasks />
+        {/* <RecentTasks /> */}
       </div>
     </div>
   )
