@@ -7,7 +7,7 @@ export const GetSingleKpi = async (UserID: string) => {
     console.log(user)
     // Make the API call to fetch the KPI
     const response = await axios.get(
-      `${ApiUrl}Api/KPI/SingleKpi?UserID=qdyyLorl9WR27GcAxkBbxHO4sWu1`
+      `${ApiUrl}Api/KPI/SingleKpi?UserID=${UserID}`
     )
 
     // Check for successful response
