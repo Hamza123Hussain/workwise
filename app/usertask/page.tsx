@@ -10,10 +10,14 @@ import {
 import Layout from '@/components/Task/Card/Layout'
 import ModalForTaskCreation from '@/components/Task/Create/Modal'
 import TaskLoader from '@/components/Task/TaskLoader'
+
 const UserTasks = () => {
   const User = useSelector((state: RootState) => state.user)
+  const tasks = useSelector((state: RootState) => state.userTaskSlice.tasks) // Access tasks from Redux
   const [Loading, SetLoading] = useState(false)
   const dispatch = useDispatch<AppDispatch>()
+
+  // Fetch User Tasks
   const GetUserTasks = async () => {
     SetLoading(true)
     const TasksFetched = await getUserTasks(User._id)
@@ -21,15 +25,19 @@ const UserTasks = () => {
       dispatch(setTasks(TasksFetched)) // Store tasks in Redux
       SetLoading(false)
     }
+    SetLoading(false)
   }
+
   useEffect(() => {
     if (User._id) {
       GetUserTasks()
     }
   }, [User._id])
+
   if (Loading) {
     return <TaskLoader />
   }
+
   return (
     <div className="my-10 px-4 sm:px-8">
       <div className="flex items-center justify-between mb-6">
@@ -43,11 +51,21 @@ const UserTasks = () => {
           Create Task
         </button>
       </div>
+
       {/* Modal for Task Creation */}
       <ModalForTaskCreation />
-      {/* Task Cards Layout */}
-      <Layout />
+
+      {/* Show message if no tasks are found */}
+      {tasks.length === 0 ? (
+        <div className="text-center text-gray-600 mt-10">
+          <p>No tasks available. Create a task to get started!</p>
+        </div>
+      ) : (
+        // Task Cards Layout
+        <Layout />
+      )}
     </div>
   )
 }
+
 export default UserTasks
