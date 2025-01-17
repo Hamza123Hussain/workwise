@@ -55,3 +55,15 @@ export interface EditTask {
   setDescription: (description: string) => void
   taskname: string
 }
+
+export interface RoleTask {
+  UserId?: string
+  TaskName: string
+  Description?: string
+  Priority: string
+  Completed?: boolean
+  PointsGained?: number
+  TotalPoints: number
+  DueDate?: string
+  _id?: string
+}
