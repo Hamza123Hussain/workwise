@@ -8,7 +8,8 @@ import { ChatSlice } from '../Slice/chatslice/chatslice'
 import { UserKpiSlice } from '../Slice/kpi/KpiSlice'
 import { KpiListSlice } from '../Slice/kpi/KpiListSlice'
 import { userSlice } from '../Slice/User_Selected_Slice/Slice'
-import { userTaskSlice } from '../Slice/UserTaskSlice/UsetTaskSlice'
+import { UserTasksSlice } from '../Slice/UserTaskSlice/UsetTaskSlice'
+
 const Store = configureStore({
   reducer: {
     user: UserSlice.reducer, // Add UserSlice reducer here
@@ -20,7 +21,7 @@ const Store = configureStore({
     Kpi: UserKpiSlice.reducer,
     KpiList: KpiListSlice.reducer,
     UserSelect: userSlice.reducer,
-    userTaskSlice: userTaskSlice.reducer,
+    userTaskSlice: UserTasksSlice.reducer,
   },
 })
 
