@@ -1,9 +1,20 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import { motion } from 'framer-motion'
 import Form from '@/components/Task/Create/Form/Form'
-const CreateTaskForm = () => {
+import { getUserTasks } from '@/functions/UserTasks/GetUserTasks'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/utils/Redux/Store/Store'
+const UserTasks = () => {
+  const User = useSelector((state: RootState) => state.user)
+  const GetUserTasks = async () => {
+    const TasksFetched = await getUserTasks(User._id)
+    if (TasksFetched) console.log('USER TASKS', TasksFetched)
+  }
+  useEffect(() => {
+    GetUserTasks()
+  }, [])
   const [isOpen, setIsOpen] = useState(false)
   return (
     <>
@@ -36,4 +47,4 @@ const CreateTaskForm = () => {
     </>
   )
 }
-export default CreateTaskForm
+export default UserTasks
