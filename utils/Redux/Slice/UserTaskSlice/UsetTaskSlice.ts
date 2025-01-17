@@ -1,32 +1,39 @@
+// src/utils/Redux/Slices/UserTasksSlice.ts
+import { RoleTask } from '@/utils/Interfaces/TaskformInterface'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RoleTask } from '@/utils/Interfaces/TaskformInterface' // Task interface
-// Define the initial state
-interface UserTaskState {
+
+interface UserTasksState {
   tasks: RoleTask[] // List of tasks
-  open: boolean // Loading state
+  open: boolean // Dialog open/close state
 }
-const initialState: UserTaskState = {
+
+const initialState: UserTasksState = {
   tasks: [],
   open: false,
 }
-// UserTask slice
-export const userTaskSlice = createSlice({
+
+export const UserTasksSlice = createSlice({
   name: 'userTasks',
   initialState,
   reducers: {
-    setopen: (state, action: PayloadAction<boolean>) => {
-      state.open = action.payload
-    },
-    setTasks: (state, action: PayloadAction<RoleTask[]>) => {
+    setTasks(state, action: PayloadAction<RoleTask[]>) {
+      // Sets the entire list of tasks
       state.tasks = action.payload
     },
-    clearTasks: (state) => {
+    setOpen(state, action: PayloadAction<boolean>) {
+      // Updates the dialog open/close state
+      state.open = action.payload
+    },
+    clearTasks(state) {
+      // Clears the task list
       state.tasks = []
     },
-    AddTask: (state, action) => {
+    addTask(state, action: PayloadAction<RoleTask>) {
+      // Adds a single task to the list
       state.tasks.push(action.payload)
     },
   },
 })
-// Export actions
-export const { setopen, setTasks, clearTasks } = userTaskSlice.actions
+
+// Export actions for use in components
+export const { setTasks, setOpen, clearTasks, addTask } = UserTasksSlice.actions
