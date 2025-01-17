@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getUserTasks } from '@/functions/UserTasks/GetUserTasks'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from '@/utils/Redux/Store/Store'
@@ -9,13 +9,17 @@ import {
 } from '@/utils/Redux/Slice/UserTaskSlice/UsetTaskSlice'
 import Layout from '@/components/Task/Card/Layout'
 import ModalForTaskCreation from '@/components/Task/Create/Modal'
+import TaskLoader from '@/components/Task/TaskLoader'
 const UserTasks = () => {
   const User = useSelector((state: RootState) => state.user)
+  const [Loading, SetLoading] = useState(false)
   const dispatch = useDispatch<AppDispatch>()
   const GetUserTasks = async () => {
+    SetLoading(true)
     const TasksFetched = await getUserTasks(User._id)
     if (TasksFetched) {
       dispatch(setTasks(TasksFetched)) // Store tasks in Redux
+      SetLoading(false)
     }
   }
   useEffect(() => {
@@ -23,6 +27,9 @@ const UserTasks = () => {
       GetUserTasks()
     }
   }, [User._id])
+  if (Loading) {
+    return <TaskLoader />
+  }
   return (
     <div className="my-10 px-4 sm:px-8">
       <div className="flex items-center justify-between mb-6">
