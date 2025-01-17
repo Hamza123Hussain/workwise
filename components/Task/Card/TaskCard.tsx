@@ -32,12 +32,12 @@ const TaskCard = ({ TaskDetails }: { TaskDetails: RoleTask }) => {
           Total Points: {TaskDetails.TotalPoints}
         </span>
       </div>
-      {/* Complete Task Button */}
-      {TaskDetails.Completed && (
-        <CompleteButton Completed={TaskDetails.Completed} />
-      )}
       {/* Delete Button */}
       {TaskDetails._id && <DeleteButton _id={TaskDetails._id} />}
+      {/* Complete Task Button */}
+      {TaskDetails.Completed !== undefined && (
+        <CompleteButton Completed={TaskDetails.Completed} />
+      )}
     </div>
   )
 }
