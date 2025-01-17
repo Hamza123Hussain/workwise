@@ -66,4 +66,8 @@ export interface RoleTask {
   TotalPoints: number
   DueDate?: string
   _id?: string
+  UserName?: string
+  UserEmail?: string
+  createdAt?: string
+  updatedAt?: string
 }
