@@ -1,10 +1,11 @@
 import { RoleTask } from '@/utils/Interfaces/TaskformInterface'
 import React from 'react'
-import { FaTasks } from 'react-icons/fa'
+import { FaTasks } from 'react-icons/fa' // Add FaTrash icon for the delete button
 import Priority_Date from './Priority_Date'
 import Description from './Description'
 import CompleteButton from './CompleteButton'
 import { getPriorityBg } from '@/functions/UserTasks/GetBgColoronPriority'
+import DeleteButton from './DeleteButton'
 const TaskCard = ({ TaskDetails }: { TaskDetails: RoleTask }) => {
   return (
     <div
@@ -35,6 +36,8 @@ const TaskCard = ({ TaskDetails }: { TaskDetails: RoleTask }) => {
       {TaskDetails.Completed && (
         <CompleteButton Completed={TaskDetails.Completed} />
       )}
+      {/* Delete Button */}
+      {TaskDetails._id && <DeleteButton _id={TaskDetails._id} />}
     </div>
   )
 }
