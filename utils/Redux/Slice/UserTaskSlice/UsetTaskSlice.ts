@@ -32,8 +32,29 @@ export const UserTasksSlice = createSlice({
       // Adds a single task to the list
       state.tasks.push(action.payload)
     },
+    deleteTask(state, action: PayloadAction<string>) {
+      // Deletes a task based on the task ID
+      state.tasks = state.tasks.filter((task) => task._id !== action.payload)
+    },
+    updateTask(state, action: PayloadAction<RoleTask>) {
+      // Updates a task based on the task ID
+      const updatedTask = action.payload
+      const taskIndex = state.tasks.findIndex(
+        (task) => task._id === updatedTask._id
+      )
+      if (taskIndex !== -1) {
+        state.tasks[taskIndex] = updatedTask // Update the task with new details
+      }
+    },
   },
 })
 
 // Export actions for use in components
-export const { setTasks, setOpen, clearTasks, addTask } = UserTasksSlice.actions
+export const {
+  setTasks,
+  setOpen,
+  clearTasks,
+  addTask,
+  deleteTask,
+  updateTask,
+} = UserTasksSlice.actions
