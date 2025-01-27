@@ -24,7 +24,7 @@ const SignIn = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault() // Prevent the default form submission
-    handleLoginClick(inputVal.email, inputVal.password, dispatch, Router)
+    handleLoginClick(inputVal.email, inputVal.password, dispatch)
   }
 
   return (
