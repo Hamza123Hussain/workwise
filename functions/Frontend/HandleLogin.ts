@@ -3,13 +3,13 @@ import { loginUser } from '../AUTH/LoginUser'
 import { handleSignOut } from '../AUTH/SignOut'
 import { AppDispatch } from '@/utils/Redux/Store/Store'
 import { ClearUser, GetUserData } from '@/utils/Redux/Slice/User/UserSlice'
-import { useRouter } from 'next/navigation'
-import { SendOtp } from './OTP/SendOtp'
+// import { useRouter } from 'next/navigation'
+// import { SendOtp } from './OTP/SendOtp'
 export const handleLoginClick = async (
   email: string,
   password: string,
-  dispatch: AppDispatch,
-  router: ReturnType<typeof useRouter> // Adjusted type to use ReturnType of useRouter
+  dispatch: AppDispatch
+  // router: ReturnType<typeof useRouter> // Adjusted type to use ReturnType of useRouter
 ): Promise<void> => {
   try {
     const data = await loginUser(email, password)
@@ -17,10 +17,10 @@ export const handleLoginClick = async (
       const encryptedData = encryptData(data)
       localStorage.setItem('UserData', encryptedData)
       dispatch(GetUserData(data))
-      const OtpSent = await SendOtp(email)
-      if (OtpSent) {
-        router.push('/otp') // Use router parameter
-      }
+      // const OtpSent = await SendOtp(email)
+      // if (OtpSent) {
+      //   router.push('/otp') // Use router parameter
+      // }
       scheduleSignout(dispatch) // Pass dispatch to scheduleSignout
     } else {
       console.error('Login failed')
