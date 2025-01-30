@@ -6,6 +6,7 @@ import { RootState } from '@/utils/Redux/Store/Store'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import KpiReportCard from './KpiReportCard'
+
 const Reports = () => {
   const currentDate = new Date()
   const year = currentDate.getFullYear()
@@ -13,6 +14,7 @@ const Reports = () => {
   const kpis = useSelector((state: RootState) => state.KpiList)
   const [loading, setLoading] = useState(true)
   const Dispatch = useDispatch()
+
   useEffect(() => {
     const fetchKpis = async () => {
       try {
@@ -27,6 +29,12 @@ const Reports = () => {
     }
     fetchKpis()
   }, [user._id, Dispatch])
+
+  // Print function
+  const handlePrint = () => {
+    window.print() // Triggers the print dialog
+  }
+
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -34,12 +42,21 @@ const Reports = () => {
       </div>
     )
   }
+
   return (
     <div className="mt-10 z-20">
       <div>
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-5">
           Performance Report - January {year}
         </h1>
+        {/* Print Button */}
+        <button
+          onClick={handlePrint}
+          className="mb-5 px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all"
+        >
+          Print Report
+        </button>
+
         {kpis.map((userKpi) => (
           <KpiReportCard userKpi={userKpi} key={userKpi.UserId} />
         ))}
@@ -47,4 +64,5 @@ const Reports = () => {
     </div>
   )
 }
+
 export default Reports
