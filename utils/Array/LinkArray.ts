@@ -60,6 +60,13 @@ export const links = [
   //   email: 'octtoppus1@gmail.com',
   // },
   {
+    href: '/NewReports',
+    label: 'Performance Report',
+    icon: ClipboardList,
+    adminOnly: true,
+    email: 'octtoppus1@gmail.com',
+  },
+  {
     href: '/users',
     label: 'All Users',
     icon: Users,
