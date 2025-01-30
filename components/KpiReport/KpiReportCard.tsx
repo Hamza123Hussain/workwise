@@ -32,15 +32,18 @@ const KpiReportCard = ({ userKpi }: { userKpi: Kpi }) => {
       </div>
 
       {/* Target Details Section */}
-      <h3 className="text-2xl font-semibold text-black mt-2">Targets</h3>
-      <div className="space-y-6 ">
-        {/* Loop through the sorted targets and display each target's details */}
-        {sortedTargets.map((target) => (
-          <TargetReportCard target={target} key={target.TargetName} />
-        ))}
+      <div className=" flex flex-col justify-between">
+        <h3 className="text-2xl font-semibold text-black my-4">Targets</h3>
+        <div className=" flex flex-col gap-2">
+          {/* Loop through the sorted targets and display each target's details */}
+          {sortedTargets.map((target) => (
+            <TargetReportCard target={target} key={target.TargetName} />
+          ))}
+        </div>
+
+        {/* Render a pie chart for the user's tasks */}
+        {renderPieChart(userKpi.Targets)}
       </div>
-      {/* Render a pie chart for the user's tasks */}
-      {renderPieChart(userKpi.Targets)}
     </div>
   )
 }
