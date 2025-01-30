@@ -9,6 +9,8 @@ const initialState: Kpi = {
   TotalPoints: 0,
   createdAt: undefined,
   updatedAt: undefined,
+  Salary: 0,
+  HoursWorked: 0,
 }
 export const UserKpiSlice = createSlice({
   name: 'UserKpi',
