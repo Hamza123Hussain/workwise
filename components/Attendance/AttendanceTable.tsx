@@ -13,8 +13,8 @@ const AttendanceTable = ({
     0
   )
   // Calculate remaining hours and attendance percentage
-  const remainingHours = 176 - HoursWorked
-  const attendancePercentage = ((HoursWorked / 176) * 100).toFixed(2)
+  const remainingHours = 184 - HoursWorked
+  const attendancePercentage = ((HoursWorked / 184) * 100).toFixed(2)
 
   // Define state to handle current page of cards (group of 3 cards at a time)
   const [currentPage, setCurrentPage] = useState(0)
