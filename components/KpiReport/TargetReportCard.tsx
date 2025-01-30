@@ -5,7 +5,7 @@ const TargetReportCard = ({ target }: { target: Target }) => {
   return (
     <div
       // Unique key for each target
-      className={`rounded-lg p-6 shadow-lg ${
+      className={`rounded-lg p-2 shadow-lg ${
         target.Priority === 'High'
           ? 'bg-gradient-to-r from-red-400 to-red-600 text-white'
           : target.Priority === 'Medium'
