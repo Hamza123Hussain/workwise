@@ -7,6 +7,8 @@ export interface Kpi {
   TotalPoints: number // Total available points
   createdAt?: Date // Timestamp for when the document was created
   updatedAt?: Date // Timestamp for when the document was last updated
+  Salary: number
+  HoursWorked: number
 }
 
 export interface Target {
