@@ -6,7 +6,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 const MonthlyHoursWorked = () => {
   const [HoursWorked, setHours] = useState<number>(0)
-  const TotalHours = 176 // Example total monthly working hours
+  const TotalHours = 184 // Example total monthly working hours
   const User = useSelector((state: RootState) => state.user)
   useEffect(() => {
     const GetHours = async () => {
