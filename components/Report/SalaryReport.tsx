@@ -76,7 +76,7 @@ const SalaryReport: React.FC<{ formattedTotalSalary: number }> = ({
     style: 'decimal',
     minimumFractionDigits: 0,
   }).format(275000)
-
+  console.log(formattedTotalSalary)
   return (
     <div className="flex flex-wrap justify-center items-center gap-4">
       {/* Doughnut Chart Component */}
