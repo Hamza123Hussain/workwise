@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
 import Loader from '@/components/NewReport/Loader'
-import { TaskPriorityChart } from '@/components/Report/TaskReport'
+// import { TaskPriorityChart } from '@/components/Report/TaskReport'
 import SalaryReport from '@/components/Report/SalaryReport'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
@@ -50,26 +50,26 @@ const AdminReports: React.FC = () => {
     return acc + element.Salary
   }, 0)
 
-  const LowTasks = kpis.reduce((acc, kpi) => {
-    const Lowtask = kpi.Targets.filter(
-      (target) => target.Priority === 'Low'
-    ).length
-    return acc + Lowtask
-  }, 0)
+  // const LowTasks = kpis.reduce((acc, kpi) => {
+  //   const Lowtask = kpi.Targets.filter(
+  //     (target) => target.Priority === 'Low'
+  //   ).length
+  //   return acc + Lowtask
+  // }, 0)
 
-  const HighTasks = kpis.reduce((acc, kpi) => {
-    const HighTask = kpi.Targets.filter(
-      (target) => target.Priority === 'High'
-    ).length
-    return acc + HighTask
-  }, 0)
+  // const HighTasks = kpis.reduce((acc, kpi) => {
+  //   const HighTask = kpi.Targets.filter(
+  //     (target) => target.Priority === 'High'
+  //   ).length
+  //   return acc + HighTask
+  // }, 0)
 
-  const TotalTasks = kpis.reduce((acc, kpi) => {
-    return acc + kpi.Targets.length
-  }, 0)
+  // const TotalTasks = kpis.reduce((acc, kpi) => {
+  //   return acc + kpi.Targets.length
+  // }, 0)
 
   return (
-    <div className="p-5 mt-10 z-20">
+    <div className="p-5 z-20">
       {loading && (
         <div className="flex justify-center items-center min-h-screen">
           <Loader />
@@ -84,8 +84,8 @@ const AdminReports: React.FC = () => {
           Download PDF
         </button>
       </div>
-      <div ref={reportRef} className="space-y-2">
-        <h1 className="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-5">
+      <div ref={reportRef} className="">
+        <h1 className="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-3 ">
           Performance Report - {'January'} {year}
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
@@ -99,16 +99,15 @@ const AdminReports: React.FC = () => {
             </p>
           )}
         </div>
-        <div>
+        {/* <div>
           <TaskPriorityChart
             lowPriorityTasks={LowTasks}
             highPriorityTasks={HighTasks}
             totalTasks={TotalTasks}
           />
-        </div>
-        <div>
-          <SalaryReport formattedTotalSalary={Totalsalary} />
-        </div>
+        </div> */}
+
+        <SalaryReport formattedTotalSalary={Totalsalary} />
       </div>
     </div>
   )
