@@ -1,11 +1,9 @@
 import React from 'react'
 import { MdPriorityHigh, MdDateRange } from 'react-icons/md'
-
 interface PriorityDateProps {
   Priority: string
   DueDate: string
 }
-
 const PriorityDate = ({ Priority, DueDate }: PriorityDateProps) => {
   const formatDueDate = (dateStr: string) => {
     if (!dateStr) return 'No due date'
@@ -17,7 +15,6 @@ const PriorityDate = ({ Priority, DueDate }: PriorityDateProps) => {
     }
     return date.toLocaleDateString('en-US', options)
   }
-
   return (
     <div className="space-y-2 p-3">
       {/* Priority */}
@@ -35,5 +32,4 @@ const PriorityDate = ({ Priority, DueDate }: PriorityDateProps) => {
     </div>
   )
 }
-
 export default PriorityDate
