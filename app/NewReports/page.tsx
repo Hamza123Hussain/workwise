@@ -15,6 +15,7 @@ const NewReports = () => {
   const kpis = useSelector((state: RootState) => state.KpiList)
   const [loading, setLoading] = useState(true)
   const Dispatch = useDispatch()
+
   useEffect(() => {
     const fetchKpis = async () => {
       try {
