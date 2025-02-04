@@ -22,25 +22,25 @@ const SalaryDoughnutChart: React.FC<SalaryChartProps> = ({
 }) => {
   const chartData = useMemo(() => {
     return {
-      labels: ['Total Salary', 'Remaining'],
+      labels: ['To Be Paid', 'Remaining'],
       datasets: [
         {
           label: 'Salary Distribution',
-          data: [totalSalary, totalSalary - tobePaid], // Corrected number formatting
-          backgroundColor: ['#3b82f6', '#e5e7eb'], // Blue for the salary, gray for remaining
+          data: [tobePaid, totalSalary - tobePaid],
+          backgroundColor: ['#3b82f6', '#e5e7eb'],
           borderWidth: 1,
         },
       ],
     }
-  }, [totalSalary])
+  }, [totalSalary, tobePaid])
 
   const chartOptions = {
     responsive: true,
     plugins: {
       title: {
         display: true,
-        font: { size: 16 },
-        padding: 20,
+        font: { size: 10 },
+        padding: 8,
       },
       tooltip: {
         callbacks: {
@@ -50,13 +50,13 @@ const SalaryDoughnutChart: React.FC<SalaryChartProps> = ({
         },
       },
     },
-    cutout: '50%', // To make it look like a doughnut
-    rotation: Math.PI, // Rotate the doughnut chart for better alignment
+    cutout: '60%',
+    rotation: Math.PI,
   }
 
   return (
-    <div className="rounded-lg w-full max-w-[320px] sm:max-w-[400px] mx-auto">
-      <h2 className="text-lg sm:text-xl font-bold text-center mb-4">
+    <div className="rounded-lg w-full max-w-[240px] sm:max-w-[280px] mx-auto">
+      <h2 className="text-sm sm:text-base font-bold text-center mb-3">
         Total Salary Distribution
       </h2>
       <Doughnut data={chartData} options={chartOptions} />
@@ -67,49 +67,37 @@ const SalaryDoughnutChart: React.FC<SalaryChartProps> = ({
 const SalaryReport: React.FC<{ formattedTotalSalary: number }> = ({
   formattedTotalSalary,
 }) => {
-  // Format total salary value
   const formattedTotalPaid = new Intl.NumberFormat('en-US', {
     style: 'decimal',
     minimumFractionDigits: 0,
-  }).format(formattedTotalSalary)
+  }).format(226732)
 
   const formattedTotalSalaryValue = new Intl.NumberFormat('en-US', {
     style: 'decimal',
     minimumFractionDigits: 0,
-  }).format(215000)
+  }).format(275000)
 
   return (
-    <div className="flex flex-wrap gap-2 justify-center items-center my-1">
+    <div className="flex flex-wrap justify-center items-center gap-4">
       {/* Doughnut Chart Component */}
-      <div className="flex justify-center items-center w-full max-w-sm">
-        <SalaryDoughnutChart
-          tobePaid={formattedTotalSalary}
-          totalSalary={215000}
-        />
+      <div className="flex justify-center items-center w-full max-w-72">
+        <SalaryDoughnutChart tobePaid={226732} totalSalary={275000} />
       </div>
 
       {/* Salary Details Section */}
-      <div className="flex flex-col gap-6 items-center">
-        <div className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-6 px-10 rounded-lg shadow-lg w-full max-w-md text-center">
-          <h2 className="text-xl sm:text-2xl font-bold tracking-wide">
-            Salary To Be Paid
-          </h2>
-          <div className="flex items-center justify-center mt-4">
-            <p className="text-3xl sm:text-4xl font-semibold">
-              PKR {formattedTotalPaid.toLocaleString()}
-            </p>
-          </div>
+      <div className="flex  gap-2 items-center">
+        <div className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-4 px-6 rounded-lg shadow-md w-full max-w-xs text-center">
+          <h2 className="text-sm sm:text-base font-bold">Salary To Be Paid</h2>
+          <p className="text-2xl sm:text-3xl font-semibold mt-2">
+            PKR {formattedTotalPaid.toLocaleString()}
+          </p>
         </div>
 
-        <div className="bg-gradient-to-r from-green-400 to-teal-500 text-white py-6 px-10 rounded-lg shadow-lg w-full max-w-md text-center">
-          <h2 className="text-xl sm:text-2xl font-bold tracking-wide">
-            Total Salary
-          </h2>
-          <div className="flex items-center justify-center mt-4">
-            <p className="text-3xl sm:text-4xl font-semibold">
-              PKR {formattedTotalSalaryValue.toLocaleString()}
-            </p>
-          </div>
+        <div className="bg-gradient-to-r from-green-400 to-teal-500 text-white py-4 px-6 rounded-lg shadow-md w-full max-w-xs text-center">
+          <h2 className="text-sm sm:text-base font-bold">Total Salary</h2>
+          <p className="text-2xl sm:text-3xl font-semibold mt-2">
+            PKR {formattedTotalSalaryValue.toLocaleString()}
+          </p>
         </div>
       </div>
     </div>
