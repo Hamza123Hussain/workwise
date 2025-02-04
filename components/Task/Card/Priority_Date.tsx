@@ -1,15 +1,15 @@
 import React from 'react'
-import { FaCalendarAlt, FaExclamationCircle } from 'react-icons/fa'
+import { MdPriorityHigh, MdDateRange } from 'react-icons/md'
 
-const Priority_Date = ({
-  Priority,
-  DueDate,
-}: {
+interface PriorityDateProps {
   Priority: string
   DueDate: string
-}) => {
-  const formatDueDate = (dueDate: string) => {
-    const date = new Date(dueDate)
+}
+
+const PriorityDate = ({ Priority, DueDate }: PriorityDateProps) => {
+  const formatDueDate = (dateStr: string) => {
+    if (!dateStr) return 'No due date'
+    const date = new Date(dateStr)
     const options: Intl.DateTimeFormatOptions = {
       year: 'numeric',
       month: 'long',
@@ -17,27 +17,23 @@ const Priority_Date = ({
     }
     return date.toLocaleDateString('en-US', options)
   }
-  return (
-    <>
-      {/* Priority */}
-      <div className="flex items-center mb-2">
-        <FaExclamationCircle className="mr-2 text-red-500" />{' '}
-        {/* Changed icon color */}
-        <span className="font-semibold text-lg">{Priority}</span>
-      </div>
 
-      {/* Due Date */}
-      <div className="flex items-center mb-2">
-        <FaCalendarAlt className="mr-2 text-yellow-500" />{' '}
-        {/* Changed icon color */}
-        <span className="text-lg">
-          {' '}
-          Due Date : {formatDueDate(DueDate ? DueDate : '')}
-        </span>{' '}
-        {/* Only shows the date */}
+  return (
+    <div className="space-y-2 p-3">
+      {/* Priority */}
+      <div className="flex items-center">
+        <MdPriorityHigh className="text-red-500 text-xl mr-2" />
+        <span className="text-gray-800 font-semibold text-lg">{Priority}</span>
       </div>
-    </>
+      {/* Due Date */}
+      <div className="flex items-center">
+        <MdDateRange className="text-yellow-500 text-xl mr-2" />
+        <span className="text-gray-700 text-lg">
+          Due Date: {formatDueDate(DueDate)}
+        </span>
+      </div>
+    </div>
   )
 }
 
-export default Priority_Date
+export default PriorityDate
