@@ -3,7 +3,12 @@ import { Cell, Pie, PieChart, Tooltip } from 'recharts'
 import AttendancePieChart from './AttendancePieChart'
 import SalaryPieChart from './SalaryPieChart'
 const COLORS = ['#E63946', '#F4A261', '#2A9D8F']
-export const renderPieChart = (targets: Target[]) => {
+export const renderPieChart = (
+  targets: Target[],
+  calculatedSalary: number,
+  HoursWorked: number,
+  Salary: number
+) => {
   const high = targets
     .filter((t) => t.Priority === 'High')
     .reduce((acc, element) => acc + element.TargetValue, 0)
@@ -66,8 +71,8 @@ export const renderPieChart = (targets: Target[]) => {
           </div>
         </div>
       </div>
-      <AttendancePieChart HoursWorked={176} />
-      <SalaryPieChart Salary={5000} />
+      <AttendancePieChart HoursWorked={HoursWorked} />
+      <SalaryPieChart Salary={Salary} calculatedsalary={calculatedSalary} />
     </div>
   )
 }
