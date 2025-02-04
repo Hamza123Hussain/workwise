@@ -8,25 +8,24 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const DeleteButton = ({ _id }: { _id: string }) => {
   const User = useSelector((state: RootState) => state.user)
-  const Dispatch = useDispatch()
-  // Delete Task function (replace this with the actual logic for deleting the task)
+  const dispatch = useDispatch()
+
   const handleDelete = async () => {
     const DeletedTask = await deleteTaskApi(User._id, _id)
     if (DeletedTask) {
-      Dispatch(deleteTask(_id))
-      toast.success('Task Has Been Deleted')
+      dispatch(deleteTask(_id))
+      toast.success('Task has been deleted.')
     }
   }
+
   return (
-    <div className="mt-4">
-      <button
-        onClick={handleDelete}
-        className="flex items-center text-red-600 hover:text-red-800 font-semibold"
-      >
-        <FaTrash className="mr-2 text-lg" />
-        Delete Task
-      </button>
-    </div>
+    <button
+      onClick={handleDelete}
+      className="flex items-center p-3 text-red-600 hover:text-red-800 font-semibold transition-colors duration-200"
+    >
+      <FaTrash className="mr-2 text-lg" />
+      Delete Task
+    </button>
   )
 }
 
