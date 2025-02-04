@@ -25,7 +25,11 @@ const TaskCard = ({ TaskDetails }: { TaskDetails: RoleTask }) => {
       />
       {/* Editable Description */}
       {TaskDetails.Description && (
-        <Description Description={TaskDetails.Description} />
+        <Description
+          taskId={TaskDetails._id}
+          Description={TaskDetails.Description}
+          userID={TaskDetails.UserId}
+        />
       )}
       {/* Total Points */}
       <div className="flex items-center justify-between sm:flex-row flex-col mb-4 p-3">
@@ -42,7 +46,12 @@ const TaskCard = ({ TaskDetails }: { TaskDetails: RoleTask }) => {
       )}
       {/* Complete Task Button */}
       {TaskDetails.Completed !== undefined && (
-        <CompleteButton Completed={TaskDetails.Completed} />
+        <CompleteButton
+          TotalPoints={TaskDetails.TotalPoints}
+          UserID={TaskDetails.UserId}
+          TaskId={TaskDetails._id}
+          Completed={TaskDetails.Completed}
+        />
       )}
     </div>
   )
