@@ -16,6 +16,13 @@ const KpiReportCard = ({ userKpi }: { userKpi: Kpi }) => {
     const priorityOrder = { High: 1, Medium: 2, Low: 3 } // Define priority order
     return priorityOrder[a.Priority] - priorityOrder[b.Priority] // Sort based on priority
   })
+  const taskCompletionPercentage =
+    (userKpi.PointsGained / userKpi.TotalPoints) * 100
+  const attendancePercentage = (userKpi.HoursWorked / 184) * 100
+  const performancePercentage =
+    attendancePercentage * 0.2 + taskCompletionPercentage * 0.8
+
+  const calculatedSalary = (userKpi.Salary * performancePercentage) / 100
   return (
     <div
       id={`kpi-${userKpi.UserId}`} // Unique identifier for each user's KPI card
@@ -42,7 +49,12 @@ const KpiReportCard = ({ userKpi }: { userKpi: Kpi }) => {
         </div>
 
         {/* Render a pie chart for the user's tasks */}
-        {renderPieChart(userKpi.Targets)}
+        {renderPieChart(
+          userKpi.Targets,
+          calculatedSalary,
+          userKpi.HoursWorked,
+          userKpi.Salary
+        )}
       </div>
     </div>
   )
