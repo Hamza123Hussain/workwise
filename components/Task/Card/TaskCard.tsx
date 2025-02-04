@@ -1,23 +1,24 @@
 import { RoleTask } from '@/utils/Interfaces/TaskformInterface'
 import React from 'react'
-import { FaTasks } from 'react-icons/fa' // Add FaTrash icon for the delete button
 import Priority_Date from './Priority_Date'
 import Description from './Description'
 import CompleteButton from './CompleteButton'
-import { getPriorityBg } from '@/functions/UserTasks/GetBgColoronPriority'
 import DeleteButton from './DeleteButton'
+import { RiCheckboxCircleFill } from 'react-icons/ri'
 const TaskCard = ({ TaskDetails }: { TaskDetails: RoleTask }) => {
   return (
     <div
-      className={`flex flex-col p-4 rounded-lg shadow-lg border transition-all duration-200 ${getPriorityBg(
-        TaskDetails.Priority
-      )} hover:shadow-xl`}
+      className={`overflow-hidden shadow-lg border ${
+        TaskDetails.Completed ? 'bg-green-400 text-white' : 'bg-white'
+      } border-gray-200 transition-transform transform hover:scale-105 duration-200`}
     >
-      {/* Task Name */}
-      <h1 className="text-2xl font-bold flex items-center mb-4">
-        <FaTasks className="mr-2 text-blue-500" /> {/* Changed icon color */}
-        {TaskDetails.TaskName}
-      </h1>
+      {/* Header with gradient background */}
+      <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4 flex items-center">
+        <RiCheckboxCircleFill className="text-white text-3xl mr-3" />
+        <h1 className="text-white text-2xl font-bold">
+          {TaskDetails.TaskName}
+        </h1>
+      </div>
       <Priority_Date
         Priority={TaskDetails.Priority}
         DueDate={TaskDetails.DueDate ? TaskDetails.DueDate : ''}
@@ -27,13 +28,18 @@ const TaskCard = ({ TaskDetails }: { TaskDetails: RoleTask }) => {
         <Description Description={TaskDetails.Description} />
       )}
       {/* Total Points */}
-      <div className="flex items-center mb-4">
+      <div className="flex items-center justify-between sm:flex-row flex-col mb-4 p-3">
+        <span className="font-semibold text-lg">
+          Points Gained: {TaskDetails.PointsGained}
+        </span>
         <span className="font-semibold text-lg">
           Total Points: {TaskDetails.TotalPoints}
         </span>
       </div>
       {/* Delete Button */}
-      {TaskDetails._id && <DeleteButton _id={TaskDetails._id} />}
+      {TaskDetails._id && TaskDetails.Completed !== true && (
+        <DeleteButton _id={TaskDetails._id} />
+      )}
       {/* Complete Task Button */}
       {TaskDetails.Completed !== undefined && (
         <CompleteButton Completed={TaskDetails.Completed} />
