@@ -1,14 +1,17 @@
+import { UpdateDescription } from '@/functions/UserTasks/UpdateDescription'
 import React, { useState } from 'react'
 import { AiOutlineEdit, AiOutlineSave, AiOutlineClose } from 'react-icons/ai'
-
 interface DescriptionProps {
   Description: string
+  taskId: string | undefined
+  userID: string | undefined
 }
-
-const Description = ({ Description }: DescriptionProps) => {
+const Description = ({ Description, userID, taskId }: DescriptionProps) => {
   const [description, setDescription] = useState(Description)
+  const UpdateTaskDescription = async () => {
+    await UpdateDescription(Description, userID, taskId)
+  }
   const [isEditing, setIsEditing] = useState(false)
-
   return (
     <div className="mt-4 p-3">
       <div className="flex items-center mb-2">
@@ -17,7 +20,10 @@ const Description = ({ Description }: DescriptionProps) => {
         </span>
         {isEditing ? (
           <AiOutlineSave
-            onClick={() => setIsEditing(false)}
+            onClick={() => {
+              setIsEditing(false)
+              UpdateTaskDescription()
+            }}
             className="text-green-500 cursor-pointer text-xl"
           />
         ) : (
@@ -32,7 +38,7 @@ const Description = ({ Description }: DescriptionProps) => {
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full border rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors duration-200"
+            className="w-full border text-black rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors duration-200"
             rows={4}
           />
           <button
@@ -51,5 +57,4 @@ const Description = ({ Description }: DescriptionProps) => {
     </div>
   )
 }
-
 export default Description
