@@ -36,14 +36,12 @@ export const UserTasksSlice = createSlice({
       // Deletes a task based on the task ID
       state.tasks = state.tasks.filter((task) => task._id !== action.payload)
     },
-    updateTask(state, action: PayloadAction<RoleTask>) {
-      // Updates a task based on the task ID
-      const updatedTask = action.payload
-      const taskIndex = state.tasks.findIndex(
-        (task) => task._id === updatedTask._id
-      )
+    CompleteTask(state, action) {
+      const taskId = action.payload._id
+      const taskIndex = state.tasks.findIndex((task) => task._id === taskId)
       if (taskIndex !== -1) {
-        state.tasks[taskIndex] = updatedTask // Update the task with new details
+        state.tasks[taskIndex].Completed = action.payload.Completed
+        state.tasks[taskIndex].PointsGained = state.tasks[taskIndex].TotalPoints
       }
     },
   },
@@ -56,5 +54,5 @@ export const {
   clearTasks,
   addTask,
   deleteTask,
-  updateTask,
+  CompleteTask,
 } = UserTasksSlice.actions
