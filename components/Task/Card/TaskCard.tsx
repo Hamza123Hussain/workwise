@@ -51,6 +51,7 @@ const TaskCard = ({ TaskDetails }: { TaskDetails: RoleTask }) => {
           UserID={TaskDetails.UserId}
           TaskId={TaskDetails._id}
           Completed={TaskDetails.Completed}
+          TargetName={TaskDetails.TaskName}
         />
       )}
     </div>
