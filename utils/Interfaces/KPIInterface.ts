@@ -9,6 +9,7 @@ export interface Kpi {
   updatedAt?: Date // Timestamp for when the document was last updated
   Salary: number
   HoursWorked: number
+  _id: string
 }
 
 export interface Target {
