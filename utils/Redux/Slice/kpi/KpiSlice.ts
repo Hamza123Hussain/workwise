@@ -1,6 +1,7 @@
 import { Kpi } from '@/utils/Interfaces/KPIInterface'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 const initialState: Kpi = {
+  _id: '',
   UserId: '',
   UserEmail: '',
   UserName: '',
