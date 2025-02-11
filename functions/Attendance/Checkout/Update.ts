@@ -1,5 +1,3 @@
-import { LocationCoords } from '@/utils/Interfaces/AttendanceInterface'
-import { getUserLocation } from './LocaitionGet'
 import toast from 'react-hot-toast'
 import { createNewAttendance } from '../NewAttendance'
 import { updateAttendance } from '../UpdateAttendance'
@@ -9,31 +7,19 @@ export const handleCheckInCheckOut = async (
   checkinStatus: boolean,
   attendanceId: string | null,
   setAttendanceId: (id: string | null) => void,
-  setCheckinStatus: (status: boolean) => void,
-  setLocation: (currentLocation: LocationCoords) => void
+  setCheckinStatus: (status: boolean) => void
 ) => {
   const time = currentTime.toISOString() // Convert to ISO string for uniformity
   try {
-    // Get and log the user's location during check-in/out
-    const location = await getUserLocation()
-    if (!location) {
-      toast.error('No location found')
-      return // Early exit if no location found
-    }
     if (!checkinStatus) {
       // Check-in process
       const newAttendance = await createNewAttendance(
         userEmail,
         time,
-        true,
-        location
+        checkinStatus
       )
       setAttendanceId(newAttendance.attendance._id)
-      setLocation({
-        latitude: newAttendance.attendance.latitude,
-        longitude: newAttendance.attendance.longitude,
-        location: newAttendance.attendance.Location,
-      })
+
       toast.success('You have Checked In')
       setCheckinStatus(true)
     } else {
@@ -44,8 +30,7 @@ export const handleCheckInCheckOut = async (
           Email: userEmail,
           id: attendanceId,
           ExitTime: exitTime.toISOString(), // Convert back to ISO string
-          CheckInStatus: false,
-          location,
+          CheckInStatus: checkinStatus,
         })
         toast.success('You have Checked Out')
         setCheckinStatus(false)
