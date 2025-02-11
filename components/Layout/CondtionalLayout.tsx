@@ -20,11 +20,6 @@ const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
     console.log('Checking if client-side:', isClient)
   }, [isClient])
 
-  // Debugging the user data
-  useEffect(() => {
-    console.log('User Data:', User)
-  }, [User])
-
   // Fetch and decrypt user data from localStorage
   useEffect(() => {
     const encryptedData = localStorage.getItem('UserData')
@@ -40,9 +35,6 @@ const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
       }
     }
   }, [dispatch])
-
-  // Log pathname
-  console.log('Current Pathname:', pathname)
 
   useEffect(() => {
     setIsClient(true)

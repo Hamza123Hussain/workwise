@@ -10,6 +10,7 @@ import {
   Rows3,
   BookOpen,
   StickyNote,
+  Rows4,
 } from 'lucide-react'
 import { BsPeopleFill } from 'react-icons/bs'
 import { FaRegCalendarAlt } from 'react-icons/fa'
@@ -100,6 +101,13 @@ export const links = [
     icon: StickyNote,
     adminOnly: true,
     email: 'octtoppus1@gmail.com',
+  },
+  {
+    href: '/usertask',
+    label: 'New Tasks',
+    icon: Rows4,
+    adminOnly: false,
+    email: '',
   },
   {
     href: '/Chats',
