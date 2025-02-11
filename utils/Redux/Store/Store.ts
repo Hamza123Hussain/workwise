@@ -9,6 +9,7 @@ import { UserKpiSlice } from '../Slice/kpi/KpiSlice'
 import { KpiListSlice } from '../Slice/kpi/KpiListSlice'
 import { userSlice } from '../Slice/User_Selected_Slice/Slice'
 import { UserTasksSlice } from '../Slice/UserTaskSlice/UsetTaskSlice'
+import { AttedanceSlice } from '../Slice/AttendanceSlice/Attendance_Slice'
 
 const Store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ const Store = configureStore({
     KpiList: KpiListSlice.reducer,
     UserSelect: userSlice.reducer,
     userTaskSlice: UserTasksSlice.reducer,
+    AttedanceSlice: AttedanceSlice.reducer,
   },
 })
 
