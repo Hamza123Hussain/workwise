@@ -1,4 +1,4 @@
-import { ApiUrl, LocationCoords } from '@/utils/Interfaces/AttendanceInterface'
+import { ApiUrl } from '@/utils/Interfaces/AttendanceInterface'
 import axios from 'axios'
 
 interface UpdateAttendanceData {
@@ -6,13 +6,12 @@ interface UpdateAttendanceData {
   id: string
   ExitTime: string
   CheckInStatus: boolean
-  location: LocationCoords
 }
 
 export const updateAttendance = async (data: UpdateAttendanceData) => {
   try {
-    const response = await axios.post(
-      `${ApiUrl}Api/Attendance/UpdateAttendance`,
+    const response = await axios.put(
+      `http://localhost:8000/Api/Attendance/UpdateAttendance`,
       data
     )
     console.log('Attendance Updated Successfully:', response.data)
