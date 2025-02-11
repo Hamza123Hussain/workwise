@@ -1,17 +1,21 @@
 import { GetMonthlyHours } from '@/functions/Attendance/GetMonthlyHours'
 import { RootState } from '@/utils/Redux/Store/Store'
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
+import { SetHoursWorked } from '@/utils/Redux/Slice/AttendanceSlice/Attendance_Slice'
 const MonthlyHoursWorked = () => {
-  const [HoursWorked, setHours] = useState<number>(0)
-  const TotalHours = 184 // Example total monthly working hours
+  const HoursWorked = useSelector(
+    (state: RootState) => state.AttedanceSlice.HoursWorked
+  )
+  const Dispatch = useDispatch()
+  const TotalHours = 160 // Example total monthly working hours
   const User = useSelector((state: RootState) => state.user)
   useEffect(() => {
     const GetHours = async () => {
       const hours = await GetMonthlyHours(User._id)
-      setHours(hours || 0)
+      Dispatch(SetHoursWorked(hours || 0))
     }
     GetHours()
   }, [User._id])
