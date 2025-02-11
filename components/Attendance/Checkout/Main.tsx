@@ -5,7 +5,6 @@ import { RootState } from '@/utils/Redux/Store/Store'
 import { CheckInProps } from '@/utils/Interfaces/Checkout_Interface'
 import { FaCheckCircle, FaSignOutAlt } from 'react-icons/fa'
 import clsx from 'clsx'
-
 const CheckIn: React.FC<CheckInProps> = ({
   setLoading,
   currentTime,
@@ -13,7 +12,6 @@ const CheckIn: React.FC<CheckInProps> = ({
   attendanceId,
   setAttendanceId,
   setCheckinStatus,
-  setLocation,
 }) => {
   const User = useSelector((state: RootState) => state.user)
 
@@ -25,12 +23,10 @@ const CheckIn: React.FC<CheckInProps> = ({
       checkinStatus,
       attendanceId,
       setAttendanceId,
-      setCheckinStatus,
-      setLocation
+      setCheckinStatus
     )
     setLoading(false)
   }
-
   return (
     <button
       onClick={handleButtonClick}
@@ -55,5 +51,4 @@ const CheckIn: React.FC<CheckInProps> = ({
     </button>
   )
 }
-
 export default CheckIn
