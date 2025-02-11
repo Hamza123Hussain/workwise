@@ -25,7 +25,6 @@ const Checkoutbtn = () => {
       if (response) {
         Dispatch(ToggleCheckin(!AttendanceDetails.checkinStatus))
         Dispatch(IncrementHoursWorked(response.attendance.Hours_Worked))
-        console.log('Attendance updated:', response)
       }
     } catch (error) {
       console.error('Update failed:', error)

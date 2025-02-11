@@ -1,5 +1,6 @@
 import { ApiUrl } from '@/utils/Interfaces/AttendanceInterface'
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 export const CheckIn = async (
   email: string,
@@ -20,7 +21,7 @@ export const CheckIn = async (
       )
 
       if (response.status === 201) {
-        alert('✅ Attendance recorded successfully!')
+        toast.success('YOU HAVE CHECKED IN!!')
         return response.data
       } else {
         alert('⚠️ Something went wrong. Please try again.')

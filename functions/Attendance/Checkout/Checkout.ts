@@ -1,5 +1,6 @@
 import { ApiUrl } from '@/utils/Interfaces/AttendanceInterface'
 import axios from 'axios'
+import toast from 'react-hot-toast'
 interface UpdateAttendanceParams {
   email: string
   id: string
@@ -25,7 +26,7 @@ export const updateAttendance = async ({
           CheckInStatus: checkInStatus,
         }
       )
-
+      toast.success('YOU HAVE CHECKED OUT!!')
       return response.data
     }
   } catch (error) {
