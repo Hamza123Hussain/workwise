@@ -1,25 +1,44 @@
 import { Target } from '@/utils/Interfaces/KPIInterface'
 import React from 'react'
-
+import { FaCheck } from 'react-icons/fa'
+import { ImCross } from 'react-icons/im'
+import { FcHighPriority, FcLowPriority, FcMediumPriority } from 'react-icons/fc'
 const TargetReportCard = ({ target }: { target: Target }) => {
   return (
     <div
       // Unique key for each target
-      className={`rounded-lg p-2 shadow-lg ${
+      className={`rounded-lg p-2 shadow-lg  text-white ${
         target.Priority === 'High'
-          ? 'bg-gradient-to-r from-red-400 to-red-600 text-white'
+          ? 'bg-[#FF4D4D] '
           : target.Priority === 'Medium'
-          ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-800'
-          : 'bg-gradient-to-r from-green-400 to-green-600 text-white'
+          ? 'bg-[#FFA500] '
+          : 'bg-[#22C55E]'
       } hover:scale-105 transition-transform duration-300 ease-in-out`}
     >
       {/* Target name */}
-      <p className="text-xl font-bold">{target.TargetName}</p>
+      <div className=" flex  justify-between">
+        <p className="text-xl font-bold">{target.TargetName}</p>
+        {target.Priority === 'High' ? (
+          <FcHighPriority size={40} />
+        ) : target.Priority === 'Medium' ? (
+          <FcMediumPriority size={40} />
+        ) : (
+          <FcLowPriority size={40} />
+        )}
+      </div>
       {/* Target achievement details */}
-      <p className="text-lg mt-2">
-        Achieved: <span className="font-semibold">{target.ValueAchieved}</span>{' '}
-        / <span className="font-semibold">{target.TargetValue}</span>
-      </p>
+      <div className=" flex items-center gap-2">
+        <h5>Achieved:</h5>
+        <p className="text-lg  flex">
+          <span className="font-semibold">{target.ValueAchieved}</span> /{' '}
+          <span className="font-semibold">{target.TargetValue}</span>
+        </p>
+        {target.ValueAchieved === target.TargetValue ? (
+          <FaCheck size={20} className=" text-green-500" />
+        ) : (
+          <ImCross size={20} className="text-red-500" />
+        )}
+      </div>
       {/* Target priority level */}
       <div className="flex justify-between items-center mt-3">
         <p className="text-sm font-medium">Priority: {target.Priority}</p>
