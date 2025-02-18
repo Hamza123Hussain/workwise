@@ -29,7 +29,7 @@ const TimeBtn: React.FC = () => {
               <ShowTime />
             </div>
           </div>
-          <div className="flex gap-4 mt-4">
+          <div className="flex sm:flex-row flex-col gap-4 mt-4">
             <div className="w w-full">
               {AttendanceDetails.checkinStatus ? (
                 <Checkoubtn />
