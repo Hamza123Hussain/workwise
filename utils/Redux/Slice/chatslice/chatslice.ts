@@ -1,23 +1,28 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 const initialState = {
   userId: '',
-  recipient: {
+  recipientDetails: {
     Name: '',
     Email: '',
-    _id: '',
+    UserID: '',
   },
   chatId: '',
+  UserActive: '',
 }
 export const ChatSlice = createSlice({
   name: 'Chat',
   initialState,
   reducers: {
-    SetRecipentID: (state, { payload }) => (
-      (state.recipient.Email = payload.Email),
-      (state.recipient.Name = payload.Name),
-      (state.recipient._id = payload._id)
-    ),
+    SetRecipentDetails: (
+      state,
+      action: PayloadAction<{ Name: string; Email: string; UserID: string }>
+    ) => {
+      // ✅ Fix: Modify state directly (DO NOT return a new object)
+      state.recipientDetails = action.payload
+    },
+    SetUserActive: (state, action) => (state.UserActive = action.payload),
     SetChatID: (state, { payload }) => (state.chatId = payload),
   },
 })
-export const { SetChatID, SetRecipentID } = ChatSlice.actions
+export const { SetChatID, SetRecipentDetails, SetUserActive } =
+  ChatSlice.actions
