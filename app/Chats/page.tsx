@@ -25,7 +25,7 @@ const Chats = () => {
           Chat Messages
         </h2> */}
 
-        <ChatMessages />
+        {/* <ChatMessages /> */}
         <InputBar />
       </div>
     </div>
