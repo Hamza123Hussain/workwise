@@ -1,18 +1,12 @@
-import { Message } from '@/utils/Interfaces/MessageInterface'
 import axios from 'axios'
 // Define the fetchMessages function with TypeScript compatibility
-export const fetchMessages = async (
-  chatId: string,
-  setMessages: (messages: Message[]) => void
-): Promise<void> => {
+export const fetchMessages = async (UserID: string, RecipentID: string) => {
   try {
-    const response = await axios.get<{ messages: Message[] }>(
-      `https://workwise-backend-puce.vercel.app/Api/Message/GetMessages`,
-      {
-        params: { chatId }, // Use query parameters for flexibility
-      }
+    const response = await axios.get(
+      `https://workwise-backend-puce.vercel.app/Api/Message/GetMessages?RecipentID=${UserID}&UserID=${RecipentID}`
     )
-    setMessages(response.data.messages) // Set the fetched messages
+    console.log('USER MESSAGES : ', response.data.messages)
+    return response.data.messages
   } catch (err) {
     console.error('Error fetching messages:', err)
   }
