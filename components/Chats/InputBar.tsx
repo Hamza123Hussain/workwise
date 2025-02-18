@@ -6,15 +6,18 @@ import { useSelector } from 'react-redux'
 
 const InputBar = () => {
   const [messageText, setMessageText] = useState('')
-  const Chat = useSelector((state: RootState) => state.Chat)
+  const Recipient = useSelector(
+    (state: RootState) => state.Chat.recipientDetails
+  )
   const User = useSelector((state: RootState) => state.user)
   const handleSendMessage = async () => {
     if (messageText.trim()) {
       await SendMessage(
         messageText,
-        User.Name,
-        Chat.recipient.Name,
-        `${Chat.recipient.Email}---${User.Email}`
+        User.Email,
+        Recipient.Email,
+        User._id,
+        Recipient.UserID
       )
       setMessageText('')
     }
