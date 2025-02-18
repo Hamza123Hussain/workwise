@@ -1,7 +1,6 @@
 import { ApiUrl } from '@/utils/Interfaces/AttendanceInterface'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-
 export const SendMessage = async (
   text: string,
   UserEmail: string,
@@ -16,7 +15,6 @@ export const SendMessage = async (
     if (!RecipentEmail) return toast.error('Recipient email is required')
     if (!UserID) return toast.error('Sender ID is required')
     if (!RecipentID) return toast.error('Recipient ID is required')
-
     // API request
     const response = await axios.post(`${ApiUrl}Api/Message/SendMessage`, {
       text,
@@ -25,7 +23,6 @@ export const SendMessage = async (
       UserID,
       RecipentID,
     })
-
     // Success response
     if (response.status === 201) {
       toast.success(response.data.message)
