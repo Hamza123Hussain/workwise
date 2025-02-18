@@ -1,62 +1,64 @@
 import { Allusers } from '@/functions/AUTH/Allusers'
 import { RootState } from '@/utils/Redux/Store/Store'
-import { UserFetched } from '@/utils/Interfaces/SignUpInterface'
-import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import ChatLoader from './ChatLoader'
-import { SetRecipentID } from '@/utils/Redux/Slice/chatslice/chatslice'
+import { GettingOnlyUserDetails, Userss } from '@/functions/Kpi/OnlyUserDetails'
+import Loader2 from '../Loader2'
+import { SetRecipentDetails } from '@/utils/Redux/Slice/chatslice/chatslice'
 const Users = () => {
   const Dispatch = useDispatch()
-  const [AllUsers, SetAllUsers] = useState<UserFetched[]>([])
+  const [AllUsers, SetAllUsers] = useState<Userss[]>([])
   const User = useSelector((state: RootState) => state.user)
   const [loading, setloading] = useState(false)
+  const [UserActive, SetUserActive] = useState('')
   useEffect(() => {
     const GetAllUsers = async () => {
       setloading(true)
-      const Users = await Allusers(User.Email)
-      if (Users) {
-        SetAllUsers(Users)
+      const GettingUsers = await GettingOnlyUserDetails(User._id)
+      if (GettingUsers) {
+        SetAllUsers(GettingUsers)
       }
     }
     GetAllUsers()
     setloading(false)
   }, [User.Email])
-  const SetRecipentData = (Name: string, Email: string) => {
+  const SetRecipentData = (Name: string, Email: string, UserID: string) => {
     Dispatch(
-      SetRecipentID({
+      SetRecipentDetails({
         Name,
         Email,
+        UserID,
       })
     )
+    SetUserActive(Name)
   }
   return (
     <div className="flex flex-col gap-3 h-[70vh] overflow-y-auto">
       {loading ? (
         <div className=" flex justify-center min-h-screen items-center">
-          <ChatLoader />
+          <Loader2 />
         </div>
       ) : (
         Allusers.length > 0 &&
         AllUsers.map((element) => (
           <div
-            onClick={() => SetRecipentData(element.Name, element.Email)}
-            key={element.Email}
-            className="flex items-center cursor-pointer gap-3 p-2 hover:bg-gray-700 rounded-lg transition-colors"
+            onClick={() =>
+              SetRecipentData(
+                element.UserName,
+                element.UserEmail,
+                element.UserId
+              )
+            }
+            key={element.UserEmail}
+            className={`flex items-center ${
+              element.UserName === UserActive ? 'bg-gray-700' : ''
+            } cursor-pointer gap-3 p-2 hover:bg-gray-700 rounded-lg transition-colors`}
           >
-            <Image
-              src={element.imageUrl}
-              alt="User Image"
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-            <h6 className="text-white font-medium">{element.Name}</h6>
+            <h6 className="text-white font-medium">{element.UserName}</h6>
           </div>
         ))
       )}
     </div>
   )
 }
-
 export default Users
