@@ -1,4 +1,4 @@
-export interface Message {
+export interface MessageInterface {
   recipientId: string
   text: string
   timestamp: number
