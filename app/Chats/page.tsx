@@ -21,9 +21,9 @@ const Chats = () => {
             View and send messages in real-time.
           </p>
         </header>
-        {/* <h2 className="text-lg font-semibold bg-white text-gray-800 mb-4">
-          Chat Messages
-        </h2> */}
+        <h2 className="text-lg font-semibold bg-white text-gray-800 mb-4">
+          <ChatMessages />
+        </h2>
 
         {/* <ChatMessages /> */}
         <InputBar />
