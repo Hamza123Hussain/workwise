@@ -10,12 +10,12 @@ import { useDispatch, useSelector } from 'react-redux'
 interface SingleUserProps {
   UserName: string
   UserEmail: string
-  UserId: string
+  UserID: string
 }
 const SingleUser: React.FC<SingleUserProps> = ({
   UserName,
   UserEmail,
-  UserId,
+  UserID,
 }) => {
   const User = useSelector((state: RootState) => state.user)
   const Recipient = useSelector(
@@ -45,7 +45,7 @@ const SingleUser: React.FC<SingleUserProps> = ({
   return (
     <div
       key={UserEmail}
-      onClick={() => SetRecipentData(UserName, UserEmail, UserId)}
+      onClick={() => SetRecipentData(UserName, UserEmail, UserID)}
       className={`flex items-center ${
         UserName === UserActive ? 'bg-gray-700' : ''
       } cursor-pointer gap-3 p-2 hover:bg-gray-700 rounded-lg transition-colors`}
