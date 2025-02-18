@@ -5,14 +5,21 @@ import { Message } from '@/utils/Interfaces/MessageInterface'
 import { fetchMessages } from '@/functions/Chats/GettingMessages'
 import SingleMessage from './SingleMessage'
 import ChatLoader from './ChatLoader'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/utils/Redux/Store/Store'
+
 const ChatMessages = () => {
   const [messages, setMessages] = useState<Message[]>([])
   const [loading, setLoading] = useState<boolean>(true)
+  const User = useSelector((state: RootState) => state.user)
+  const Recipient = useSelector(
+    (state: RootState) => state.Chat.recipientDetails
+  )
   const messageIds = new Set<string>() // To track unique message IDs
   useEffect(() => {
     setLoading(true)
     // Fetch initial messages
-    fetchMessages('user1-hamza', (fetchedMessages) => {
+    fetchMessages(`${Recipient.Email}-${User.Email}`, (fetchedMessages) => {
       // Add only unique messages to the state
       const uniqueMessages = fetchedMessages.filter(
         (message) => !messageIds.has(message.timestamp.toString())
