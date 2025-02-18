@@ -34,7 +34,7 @@ const Users = () => {
             UserName={element.UserName}
             key={element._id}
             UserEmail={element.UserEmail}
-            UserId={element._id}
+            UserID={element._id}
           />
         ))
       )}
