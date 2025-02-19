@@ -8,6 +8,7 @@ const initialState = {
   },
   chatId: '',
   UserActive: '',
+  ChatLoading: false,
 }
 export const ChatSlice = createSlice({
   name: 'Chat',
@@ -26,6 +27,9 @@ export const ChatSlice = createSlice({
     },
     SetUserActive: (state, action) => (state.UserActive = action.payload),
     SetChatID: (state, { payload }) => (state.chatId = payload),
+    SetChatLoading: (state) => {
+      state.ChatLoading = !state.ChatLoading
+    },
   },
 })
 export const {
@@ -33,4 +37,5 @@ export const {
   SetRecipentDetails,
   SetUserActive,
   ClearRecipentDetails,
+  SetChatLoading,
 } = ChatSlice.actions
