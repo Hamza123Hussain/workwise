@@ -20,7 +20,6 @@ const Users = () => {
     GetAllUsers()
     setloading(false)
   }, [User.Email])
-
   return (
     <div className="flex flex-col gap-3 h-[70vh] overflow-y-auto">
       {loading ? (

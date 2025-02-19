@@ -37,6 +37,7 @@ const SingleUser: React.FC<SingleUserProps> = ({
       })
     )
     SetUserActive(Name)
+    console.log('RECIPENT ID : ', Recipient.UserID)
     const UserMessages = await fetchMessages(User._id, Recipient.UserID)
     if (UserMessages) {
       Dispatch(FillUpMessages(UserMessages))

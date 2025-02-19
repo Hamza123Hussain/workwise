@@ -1,7 +1,7 @@
-import { Message } from '@/utils/Interfaces/MessageInterface'
+import { MessageInterface } from '@/utils/Interfaces/MessageInterface'
 import React from 'react'
 
-const SingleMessage = ({ message }: { message: Message }) => {
+const SingleMessage = ({ message }: { message: MessageInterface }) => {
   return (
     <li
       key={message.timestamp}
