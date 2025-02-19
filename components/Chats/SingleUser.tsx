@@ -1,5 +1,8 @@
 import { fetchMessages } from '@/functions/Chats/GettingMessages'
-import { SetRecipentDetails } from '@/utils/Redux/Slice/chatslice/chatslice'
+import {
+  SetChatLoading,
+  SetRecipentDetails,
+} from '@/utils/Redux/Slice/chatslice/chatslice'
 import {
   clearMessages,
   FillUpMessages,
@@ -29,6 +32,7 @@ const SingleUser: React.FC<SingleUserProps> = ({
   // 🔹 Fetch messages whenever the recipient changes
   useEffect(() => {
     const fetchUserMessages = async () => {
+      dispatch(SetChatLoading())
       // Ensure both user ID and recipient ID exist before fetching messages
       if (!User._id || !recipientDetails?.UserID) return
       // Fetch messages for the selected recipient
@@ -37,9 +41,8 @@ const SingleUser: React.FC<SingleUserProps> = ({
         recipientDetails.UserID
       )
       // If messages are received, update the Redux store
-      if (userMessages) {
-        dispatch(FillUpMessages(userMessages))
-      }
+      dispatch(FillUpMessages(userMessages))
+      dispatch(SetChatLoading())
     }
     fetchUserMessages()
   }, [recipientDetails, User._id, dispatch]) // Dependency array ensures this runs when recipient changes
@@ -53,10 +56,12 @@ const SingleUser: React.FC<SingleUserProps> = ({
       key={UserEmail}
       onClick={() => setRecipientData(UserName, UserEmail, UserID)}
       className={`flex items-center ${
-        recipientDetails?.UserID === UserID ? 'bg-green-700' : '' // ✅ Highlight only the selected user
-      } cursor-pointer gap-3 p-2 hover:bg-gray-700 rounded-lg transition-colors`}
+        recipientDetails?.UserID === UserID
+          ? 'border-2 border-white bg-green-700 '
+          : '' // ✅ Highlight only the selected user
+      } cursor-pointer gap-3 hover:bg-gray-700 p-2 rounded-lg transition-colors`}
     >
-      <h6 className="text-white font-medium">{UserName}</h6>
+      <h6 className={` text-white font-medium  `}>{UserName}</h6>
     </div>
   )
 }
