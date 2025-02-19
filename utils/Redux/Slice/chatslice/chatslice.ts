@@ -20,9 +20,17 @@ export const ChatSlice = createSlice({
       // ✅ Fix: Modify state directly (DO NOT return a new object)
       state.recipientDetails = action.payload
     },
+    ClearRecipentDetails: (state) => {
+      // ✅ Fix: Modify state directly (DO NOT return a new object)
+      state.recipientDetails = { Name: '', Email: '', UserID: '' }
+    },
     SetUserActive: (state, action) => (state.UserActive = action.payload),
     SetChatID: (state, { payload }) => (state.chatId = payload),
   },
 })
-export const { SetChatID, SetRecipentDetails, SetUserActive } =
-  ChatSlice.actions
+export const {
+  SetChatID,
+  SetRecipentDetails,
+  SetUserActive,
+  ClearRecipentDetails,
+} = ChatSlice.actions
