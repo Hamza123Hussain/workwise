@@ -12,7 +12,7 @@ const TaskStatus = () => {
   const fetchData = async () => {
     setLoading(true)
     try {
-      const data = await GetUserTasks(user._id)
+      const data = await GetUserTasks(user.Name, user.Email)
       if (data) {
         setTasks(data)
       }

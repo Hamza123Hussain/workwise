@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-// import TaskStatus from './TaskStatus'
+import TaskStatus from './TaskStatus'
 import TimeBtn from './TimeBtn'
 import Image from 'next/image'
 import ShowingKpi from './KPI/ShowingKpi'
@@ -47,7 +47,7 @@ const HomePage = () => {
         <div className="flex flex-col gap-5">
           <ShowingKpi />
           <TimeBtn />
-          {/* <TaskStatus /> */}
+          <TaskStatus />
         </div>
       </div>
     </div>
