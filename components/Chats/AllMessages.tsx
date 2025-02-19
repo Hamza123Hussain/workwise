@@ -2,8 +2,13 @@ import React from 'react'
 import SingleMessage from './SingleMessage'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
+import MessageLoader from './MessageLoader'
 const ChatMessages = () => {
   const messages = useSelector((state: RootState) => state.Messages.messages)
+  const ChatLoadingMesage = useSelector(
+    (state: RootState) => state.Messages.chatMessage
+  )
+  const ChatLoading = useSelector((state: RootState) => state.Chat.ChatLoading)
   // useEffect(() => {
   //   setLoading(true)
   //   // Listen for new messages in Firebase
@@ -25,15 +30,20 @@ const ChatMessages = () => {
   // }, [])
   return (
     <div className="flex flex-col gap-3 w-full p-4 h-[70vh] bg-white">
-      {messages.length === 0 ? (
+      {ChatLoading ? (
+        <div className=" flex justify-center items-center h-full ">
+          <MessageLoader />
+        </div>
+      ) : messages !== null && messages.length == 0 ? (
         <p className="text-center text-gray-500  overflow-y-auto">
-          No messages found for this chat.
+          {ChatLoadingMesage}
         </p>
       ) : (
         <ul className="space-y-3  overflow-y-auto bg-white">
-          {messages.map((message) => (
-            <SingleMessage message={message} key={message.timestamp} />
-          ))}
+          {messages !== null &&
+            messages.map((message) => (
+              <SingleMessage message={message} key={message.timestamp} />
+            ))}
         </ul>
       )}
     </div>
