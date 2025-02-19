@@ -12,7 +12,6 @@ const Chats = () => {
         <h2 className="text-lg font-semibold text-white mb-4">Users</h2>
         <Users />
       </div>
-
       {/* Chat Messages Section */}
       <div className="lg:w-3/4 w-full  shadow-md border-l-2 border-l-purple-500">
         <header className="bg-purple-500 text-white py-3 px-6">
