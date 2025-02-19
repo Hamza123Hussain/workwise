@@ -15,8 +15,8 @@ export const messageSlice = createSlice({
   initialState,
   reducers: {
     // ✅ Add a new message
-    FillUpMessages: (state, action) => {
-      state.messages = action.payload
+    FillUpMessages: (state, action: PayloadAction<MessageInterface[]>) => {
+      state.messages = Array.isArray(action.payload) ? action.payload : [] // Ensure it's an array
     },
     addMessage: (state, action: PayloadAction<MessageInterface>) => {
       state.messages.push(action.payload)
