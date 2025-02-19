@@ -33,7 +33,7 @@ const Users = () => {
             UserName={element.UserName}
             key={element._id}
             UserEmail={element.UserEmail}
-            UserID={element._id}
+            UserID={element.UserId}
           />
         ))
       )}
