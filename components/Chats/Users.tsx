@@ -21,7 +21,7 @@ const Users = () => {
     setloading(false)
   }, [User.Email])
   return (
-    <div className="flex flex-col gap-3 h-[70vh] overflow-y-auto">
+    <div className="flex flex-col gap-3 h-[15vh] lg:h-[70vh] overflow-y-auto">
       {loading ? (
         <div className=" flex justify-center min-h-screen items-center">
           <Loader2 />
