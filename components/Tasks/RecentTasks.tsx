@@ -14,7 +14,7 @@ const RecentTasks = () => {
   const fetchData = async () => {
     SetLoading(true)
     try {
-      const data = await GetUserTasks(user.Name, user.Email)
+      const data = await GetUserTasks(user._id)
       if (data) {
         setTasks(data)
       }
