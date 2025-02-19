@@ -2,12 +2,14 @@ import { MessageInterface } from '@/utils/Interfaces/MessageInterface'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface MessageState {
-  messages: MessageInterface[]
+  messages: MessageInterface[] | null
+  chatMessage: string
 }
 
 // ✅ Correct Initial State
 const initialState: MessageState = {
   messages: [],
+  chatMessage: 'NO CHATS HAVE BEEN SELECTED',
 }
 
 export const messageSlice = createSlice({
@@ -17,9 +19,11 @@ export const messageSlice = createSlice({
     // ✅ Add a new message
     FillUpMessages: (state, action: PayloadAction<MessageInterface[]>) => {
       state.messages = Array.isArray(action.payload) ? action.payload : [] // Ensure it's an array
+      if (state.messages.length === 0)
+        state.chatMessage = 'No Messages Have Been Found'
     },
     addMessage: (state, action: PayloadAction<MessageInterface>) => {
-      state.messages.push(action.payload)
+      if (state.messages) state.messages.push(action.payload)
     },
 
     // ✅ Update a message by timestamp
@@ -27,6 +31,7 @@ export const messageSlice = createSlice({
       state,
       action: PayloadAction<{ timestamp: number; newText: string }>
     ) => {
+      if (state.messages === null) return
       const message = state.messages.find(
         (msg) => msg.timestamp === action.payload.timestamp
       )
@@ -37,6 +42,7 @@ export const messageSlice = createSlice({
 
     // ✅ Delete a message by timestamp
     deleteMessage: (state, action: PayloadAction<number>) => {
+      if (state.messages === null) return
       state.messages = state.messages.filter(
         (msg) => msg.timestamp !== action.payload
       )
@@ -44,7 +50,7 @@ export const messageSlice = createSlice({
 
     // ✅ Clear all messages
     clearMessages: (state) => {
-      state.messages = []
+      state.messages = null
     },
   },
 })
