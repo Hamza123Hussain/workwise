@@ -8,7 +8,7 @@ export const fetchMessages = async (UserID: string, RecipentID: string) => {
     const response = await axios.get(
       `https://workwise-backend-puce.vercel.app/Api/Message/GetMessages?RecipentID=${RecipentID}&UserID=${UserID}`
     )
-    console.log('Messages:', response.data.messages)
+    // console.log('Messages:', response.data.messages)
     return response.data.messages
   } catch (err) {
     console.error('Error fetching messages:', err)
