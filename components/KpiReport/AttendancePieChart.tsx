@@ -1,7 +1,7 @@
 import { Cell, Pie, PieChart, Tooltip } from 'recharts'
 const COLORS = ['Black', 'Green']
 const AttendancePieChart = ({ HoursWorked }: { HoursWorked: number }) => {
-  const total = 184
+  const total = 160
 
   const data = [
     { name: 'Total Working Hours', value: total },
