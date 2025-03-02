@@ -1,6 +1,6 @@
 import { Kpi } from '@/utils/Interfaces/KPIInterface'
 import React from 'react'
-import { renderPieChart } from './PieChartTasks'
+import { renderPriorityChart } from './PieChartTasks'
 import TargetReportCard from './TargetReportCard'
 
 const KpiReportCard = ({ userKpi }: { userKpi: Kpi }) => {
@@ -43,7 +43,7 @@ const KpiReportCard = ({ userKpi }: { userKpi: Kpi }) => {
           ))}
         </div>
         {/* Render a pie chart for the user's tasks */}
-        {renderPieChart(
+        {renderPriorityChart(
           userKpi.Targets,
           calculatedSalary,
           userKpi.HoursWorked,
