@@ -1,64 +1,55 @@
-import { Cell, Pie, PieChart, Tooltip } from 'recharts'
+import { PieChart, Pie, Cell } from 'recharts'
 
-const COLORS = ['#F4A261', '#2A9D8F']
+const COLORS = ['#4A90E2', '#D3D3D3'] // Blue for attained, Light Gray for remaining
 
-const SalaryPieChart = ({
+const SalaryGaugeChart = ({
   Salary,
   calculatedsalary,
 }: {
   Salary: number
   calculatedsalary: number
 }) => {
-  // Ensure values are valid
-  const totalSalary = Math.max(0, Salary) // Salary cannot be negative
-  const attainedSalary = Math.max(0, calculatedsalary) // Salary attained cannot be negative
+  const percentage = ((calculatedsalary / Salary) * 100).toFixed(1)
+
   const data = [
-    { name: 'Total Salary', value: totalSalary },
-    { name: 'Salary Attained', value: attainedSalary },
+    { name: 'Attained', value: calculatedsalary },
+    { name: 'Remaining', value: Salary - calculatedsalary },
   ]
 
   return (
-    <div className="flex flex-col items-center">
-      {totalSalary > 0 ? ( // Show the chart only if Total Salary is valid
-        <>
-          <PieChart width={220} height={220}>
-            <Pie
-              data={data}
-              dataKey="value"
-              nameKey="name"
-              cx="50%"
-              cy="50%"
-              outerRadius={80}
-            >
-              {data.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                  className="cursor-pointer"
-                />
-              ))}
-            </Pie>
-            <Tooltip />
-          </PieChart>
+    <div className="flex flex-col items-center bg-white p-4 shadow-md rounded-lg">
+      <PieChart width={240} height={160}>
+        <Pie
+          data={data}
+          cx="50%"
+          cy="100%"
+          startAngle={180}
+          endAngle={0}
+          innerRadius={65}
+          outerRadius={80}
+          dataKey="value"
+          cornerRadius={10} // Rounded effect
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index]} />
+          ))}
+        </Pie>
+      </PieChart>
 
-          <div className="mt-4 text-center flex flex-col text-sm">
-            <p>
-              Total Salary:{' '}
-              <span className="font-bold">{totalSalary.toFixed(2)}</span>
-            </p>
-            <div className="flex items-center gap-2">
-              <p className="text-green-600">
-                <span className="font-bold mr-2">Salary Attained:</span>
-                {attainedSalary.toFixed(2)}
-              </p>
-            </div>
-          </div>
-        </>
-      ) : (
-        <p className="text-red-500 mt-4">Invalid Salary data provided.</p>
-      )}
+      {/* Salary Info */}
+      <div className="text-center mt-2">
+        <p className="text-gray-700 text-sm">
+          Total Salary:
+          <span className="font-bold text-gray-900 ml-1">
+            PKR {Salary.toFixed(2)}
+          </span>
+        </p>
+        <p className="text-blue-600 text-lg font-bold">
+          Salary Attained: PKR {calculatedsalary.toFixed(2)} ({percentage}%)
+        </p>
+      </div>
     </div>
   )
 }
 
-export default SalaryPieChart
+export default SalaryGaugeChart
