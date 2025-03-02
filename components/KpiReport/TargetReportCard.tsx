@@ -33,10 +33,10 @@ const TargetReportCard = ({ target }: { target: Target }) => {
           <span className="font-semibold">{target.ValueAchieved}</span> /{' '}
           <span className="font-semibold">{target.TargetValue}</span>
         </p>
-        {target.ValueAchieved === target.TargetValue ? (
-          <FaCheck size={20} className=" text-green-500" />
+        {target.ValueAchieved >= target.TargetValue ? (
+          <FaCheck size={20} className=" text-green-600" />
         ) : (
-          <ImCross size={20} className="text-red-500" />
+          <ImCross size={20} className="text-red-600" />
         )}
       </div>
       {/* Target priority level */}
