@@ -9,7 +9,7 @@ interface MessageState {
 // ✅ Correct Initial State
 const initialState: MessageState = {
   messages: [],
-  chatMessage: 'NO CHATS HAVE BEEN SELECTED',
+  chatMessage: 'NO CHAT HAS BEEN SELECTED',
 }
 
 export const messageSlice = createSlice({
