@@ -26,10 +26,8 @@ const UserTasks = () => {
     SetLoading(false)
   }
   useEffect(() => {
-    if (User._id) {
-      GetUserTasks()
-    }
-  }, [User._id])
+    GetUserTasks()
+  }, [])
 
   if (Loading) {
     return <TaskLoader />
