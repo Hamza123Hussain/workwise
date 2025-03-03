@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const getUserTasks = async (UserId: string) => {
   const Response = await axios.get(
-    `${ApiUrl}Api/UserTask/${UserId}/GetUserTasks`
+    `${ApiUrl}Api/UserTask/GetUserTasks?UserId=${UserId}`
   )
   try {
     if (Response.status === 200) {
