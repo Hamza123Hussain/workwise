@@ -76,7 +76,7 @@ const Dropdowns = () => {
           id="priorityFilter"
           className="border-2 border-white text-white p-2 rounded-lg 
            focus:outline-none focus:ring focus:ring-white bg-[#a56edd] transition ease-in-out"
-          value={SortTask.Prirority}
+          value={SortTask.Priority}
           onChange={(e) => Disptach(setPriority(e.target.value))}
         >
           <option value="All">All</option>
