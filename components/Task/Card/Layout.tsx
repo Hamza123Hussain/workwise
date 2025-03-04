@@ -31,7 +31,7 @@ const Layout = () => {
     SetFilteredTasks(filtered)
   }, [Filters, UserTasks])
   return (
-    <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+    <div className="grid gap-6 sm:grid-cols-2 mt-4 ">
       {FilteredTasks.length > 0 ? (
         FilteredTasks.map((task) => (
           <TaskCard key={task._id} TaskDetails={task} />
