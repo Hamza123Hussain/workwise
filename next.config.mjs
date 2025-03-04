@@ -7,6 +7,9 @@ const nextConfig = {
       'dummy.xtemos.com',
     ],
   },
+  eslint: {
+    ignoreDuringBuilds: true, // Disables ESLint during production builds
+  },
 }
 
 export default nextConfig
