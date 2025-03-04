@@ -9,6 +9,7 @@ import {
   BookOpen,
   StickyNote,
   Rows4,
+  Rows3,
 } from 'lucide-react'
 import { BsPeopleFill } from 'react-icons/bs'
 import { FaRegCalendarAlt } from 'react-icons/fa'
@@ -44,13 +45,13 @@ export const links = [
     adminOnly: true,
     email: 'octtoppus1@gmail.com',
   },
-  // {
-  //   href: '/All_Tasks',
-  //   label: 'All Task Details',
-  //   icon: Rows3,
-  //   adminOnly: false,
-  //   email: '',
-  // },
+  {
+    href: '/Tasks',
+    label: 'All Tasks',
+    icon: Rows3,
+    adminOnly: true,
+    email: 'octtoppus1@gmail.com',
+  },
   // {
   //   href: '/report',
   //   label: 'Report',
