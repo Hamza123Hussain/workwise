@@ -10,6 +10,7 @@ import {
 import Layout from '@/components/Task/Card/Layout'
 import ModalForTaskCreation from '@/components/Task/Create/Modal'
 import TaskLoader from '@/components/Task/TaskLoader'
+import Filters from '@/components/Task/Filters/Filters'
 const UserTasks = () => {
   const User = useSelector((state: RootState) => state.user)
   const tasks = useSelector((state: RootState) => state.userTaskSlice.tasks) // Access tasks from Redux
@@ -45,6 +46,7 @@ const UserTasks = () => {
           Create Task
         </button>
       </div>
+      <Filters />
       {/* Modal for Task Creation */}
       <ModalForTaskCreation />
       {/* Show message if no tasks are found */}
