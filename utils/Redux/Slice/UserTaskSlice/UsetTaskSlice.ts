@@ -44,9 +44,32 @@ export const UserTasksSlice = createSlice({
         state.tasks[taskIndex].PointsGained = state.tasks[taskIndex].TotalPoints
       }
     },
+    filterByYear: (state, action) => {
+      const selectedYear = action.payload // The year to filter
+      state.tasks = state.tasks.filter((task) => {
+        if (!task.createdAt) return false // Skip tasks without a valid date
+        const taskYear = new Date(task.createdAt).getFullYear()
+        return taskYear === selectedYear
+      })
+    },
+    filterByMonth: (state, action) => {
+      const selectedMonth = action.payload // Month (0-11) to filter
+
+      state.tasks = state.tasks.filter((task) => {
+        if (!task.createdAt) return false // Skip tasks without a valid date
+
+        const taskMonth = new Date(task.createdAt).getMonth()
+        return taskMonth === selectedMonth
+      })
+    },
+    filterByPriority: (state, action) => {
+      state.tasks = state.tasks.filter((task) => {
+        if (!task.Priority) return false // Skip tasks without a valid date
+        return task.Priority === action.payload
+      })
+    },
   },
 })
-
 // Export actions for use in components
 export const {
   setTasks,
@@ -55,4 +78,7 @@ export const {
   addTask,
   deleteTask,
   CompleteTask,
+  filterByMonth,
+  filterByPriority,
+  filterByYear,
 } = UserTasksSlice.actions
