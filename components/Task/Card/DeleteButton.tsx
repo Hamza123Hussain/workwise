@@ -24,7 +24,6 @@ const DeleteButton = ({ _id }: { _id: string }) => {
       className="flex items-center p-3 text-red-600 hover:text-red-800 font-semibold transition-colors duration-200"
     >
       <FaTrash className="mr-2 text-lg" />
-      Delete Task
     </button>
   )
 }
