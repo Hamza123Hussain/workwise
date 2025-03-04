@@ -1,3 +1,4 @@
+'use client'
 import { fetchUserTasks } from '@/functions/UserTasks/GetAllUserTasks'
 import { RoleTask } from '@/utils/Interfaces/TaskformInterface'
 import { RootState } from '@/utils/Redux/Store/Store'
