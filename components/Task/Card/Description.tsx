@@ -13,7 +13,7 @@ const Description = ({ Description, userID, taskId }: DescriptionProps) => {
   }
   const [isEditing, setIsEditing] = useState(false)
   return (
-    <div className="mt-4 p-3">
+    <div className="p-3">
       <div className="flex items-center mb-2">
         <span className="text-gray-800 font-semibold text-lg mr-2">
           Description:
