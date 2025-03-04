@@ -38,14 +38,14 @@ const TaskPage = () => {
           allTasks,
           SortTask.Status,
           SortTask.TimeFrame,
-          SortTask.Prirority,
+          SortTask.Priority,
           SortTask.Month
         ).length > 0 && !loading ? (
           filteredTasks(
             allTasks,
             SortTask.Status,
             SortTask.TimeFrame,
-            SortTask.Prirority,
+            SortTask.Priority,
             SortTask.Month
           ).map((task) => <TaskCard2 key={task.createdAt} TaskDetail={task} />)
         ) : (
