@@ -57,14 +57,14 @@ const UserTasks = () => {
           allTasks,
           SortTask.Status,
           SortTask.TimeFrame,
-          SortTask.Prirority,
+          SortTask.Priority,
           SortTask.Month
         ).length > 0 ? (
           filteredTasks(
             allTasks,
             SortTask.Status,
             SortTask.TimeFrame,
-            SortTask.Prirority,
+            SortTask.Priority,
             SortTask.Month
           ).map((task) => <TaskCard2 key={task.createdAt} TaskDetail={task} />)
         ) : (
