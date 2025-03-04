@@ -40,7 +40,7 @@ const CompleteButton = ({
     <button
       className={`w-full py-3 font-semibold text-lg ${
         Completed
-          ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
+          ? 'bg-white text-green-500 cursor-not-allowed'
           : 'bg-blue-500 text-white hover:bg-blue-600'
       }`}
       disabled={Completed}
