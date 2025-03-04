@@ -1,25 +1,18 @@
 import { ApiUrl } from '@/utils/Interfaces/AttendanceInterface'
 import axios from 'axios'
+
 export const fetchUserTasks = async (UserId: string) => {
   try {
     const response = await axios.get(
-      `${ApiUrl}Api/UserTask/GetUserTasks?UserId=${UserId}`
+      `${ApiUrl}Api/UserTask/AllTasks?UserId=${UserId}`
     )
+
     console.log('Response Status:', response.status)
-    if (response.status === 200) {
-      console.log('Tasks retrieved successfully:', response.data)
-      return {
-        success: true,
-        data: response.data.data,
-        status: response.status,
-      }
-    } else {
-      console.warn('Unexpected response:', response)
-      return {
-        success: false,
-        message: 'Unexpected response',
-        status: response.status,
-      }
+
+    return {
+      success: true,
+      data: response.data, // Ensure this is an array of tasks
+      status: response.status,
     }
   } catch (error: any) {
     if (axios.isAxiosError(error) && error.response) {
@@ -28,7 +21,7 @@ export const fetchUserTasks = async (UserId: string) => {
 
       return {
         success: false,
-        message: error.response.data.message,
+        message: error.response.data.message || 'Failed to fetch tasks',
         status: error.response.status,
       }
     } else {
