@@ -1,17 +1,14 @@
 // src/utils/Redux/Slices/UserTasksSlice.ts
 import { RoleTask } from '@/utils/Interfaces/TaskformInterface'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
 interface UserTasksState {
   tasks: RoleTask[] // List of tasks
   open: boolean // Dialog open/close state
 }
-
 const initialState: UserTasksState = {
   tasks: [],
   open: false,
 }
-
 export const UserTasksSlice = createSlice({
   name: 'userTasks',
   initialState,
