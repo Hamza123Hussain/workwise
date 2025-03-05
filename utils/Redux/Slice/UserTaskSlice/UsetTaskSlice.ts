@@ -29,8 +29,8 @@ export const UserTasksSlice = createSlice({
       state.tasks = []
     },
     addTask(state, action: PayloadAction<RoleTask>) {
-      // Adds a single task to the list
-      state.tasks.push(action.payload)
+      // Adds a single task to the beginning of the list
+      state.tasks.unshift(action.payload)
     },
     deleteTask(state, action: PayloadAction<string>) {
       // Deletes a task based on the task ID
