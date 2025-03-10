@@ -28,6 +28,7 @@ const TaskCard = ({ TaskDetails }: { TaskDetails: RoleTask }) => {
       </div>
       {/* Priority & Date */}
       <Priority_Date
+        CreatedAt={TaskDetails.createdAt}
         Priority={TaskDetails.Priority}
         DueDate={TaskDetails.DueDate ? TaskDetails.DueDate : ''}
       />
