@@ -1,7 +1,6 @@
 'use client'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useRouter } from 'next/navigation'
 import { handleLoginClick } from '@/functions/Frontend/HandleLogin'
 import Header from '../Layout/Header'
 
@@ -12,7 +11,6 @@ const SignIn = () => {
     password: '',
     rememberMe: false,
   })
-  const Router = useRouter()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, type, checked, value } = e.target
@@ -87,7 +85,7 @@ const SignIn = () => {
 
           {/* Sign Up Link */}
 
-          <p className="text-gray-400 text-xs text-left w-full mt-4">
+          {/* <p className="text-gray-400 text-xs text-left w-full mt-4">
             Don’t have an Account?{' '}
             <span
               onClick={() => Router.push('/signup')}
@@ -95,7 +93,7 @@ const SignIn = () => {
             >
               Sign Up
             </span>
-          </p>
+          </p> */}
         </div>
       </div>
     </div>
