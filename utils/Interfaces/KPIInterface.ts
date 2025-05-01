@@ -10,6 +10,7 @@ export interface Kpi {
   Salary: number
   HoursWorked: number
   _id: string
+  TotalSalary:number
 }
 
 export interface Target {
