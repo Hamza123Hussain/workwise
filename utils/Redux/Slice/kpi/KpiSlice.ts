@@ -12,6 +12,7 @@ const initialState: Kpi = {
   updatedAt: undefined,
   Salary: 0,
   HoursWorked: 0,
+  TotalSalary: 0,
 }
 export const UserKpiSlice = createSlice({
   name: 'UserKpi',
