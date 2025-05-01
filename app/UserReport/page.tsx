@@ -16,14 +16,13 @@ import {
 const COLORS = ['#60a5fa', '#facc15', '#f87171'] // Blue, Yellow, Red
 const UserReport = () => {
   const User = useSelector((state: RootState) => state.user)
-  const [count, setCount] = useState<number | null>(null)
+
   const [monthlyTasks, setMonthlyTasks] = useState<RoleTask[]>([])
   useEffect(() => {
     // Fetch user tasks for the current month
     const getMonthlyStats = async () => {
       const data = await getUserTasksForCurrentMonth(User._id)
       if (data) {
-        setCount(data.count)
         setMonthlyTasks(data.data)
       }
     }
