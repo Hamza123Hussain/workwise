@@ -7,7 +7,6 @@ import {
   Calendar,
   PieChart,
   BookOpen,
-  StickyNote,
   Rows4,
   Rows3,
 } from 'lucide-react'
@@ -94,13 +93,13 @@ export const links = [
     adminOnly: true,
     email: 'octtoppus1@gmail.com',
   },
-  {
-    href: '/Notice',
-    label: 'Notice',
-    icon: StickyNote,
-    adminOnly: true,
-    email: 'octtoppus1@gmail.com',
-  },
+  // {
+  //   href: '/Notice',
+  //   label: 'Notice',
+  //   icon: StickyNote,
+  //   adminOnly: true,
+  //   email: 'octtoppus1@gmail.com',
+  // },
   {
     href: '/usertask',
     label: 'Tasks',
@@ -116,8 +115,8 @@ export const links = [
     email: 'octtoppus1@gmail.com',
   },
   {
-    href: '/NewReport',
-    label: 'Report',
+    href: '/ReportSummary',
+    label: 'Report Summary',
     icon: FileText,
     adminOnly: true,
     email: 'octtoppus1@gmail.com',
