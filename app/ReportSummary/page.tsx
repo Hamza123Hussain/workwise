@@ -10,7 +10,7 @@ import html2canvas from 'html2canvas'
 import { GetAllKpi } from '@/functions/Kpi/GetAllKpis'
 import { setKpis } from '@/utils/Redux/Slice/kpi/KpiListSlice'
 import KpiReportCard from '@/components/Home/KPI/Card/KpiReportCard'
-
+import { TaskPriorityChart } from '@/components/Report/TaskReport'
 const AdminReports: React.FC = () => {
   const currentDate = new Date()
   const year = currentDate.getFullYear()
@@ -45,28 +45,23 @@ const AdminReports: React.FC = () => {
     pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight)
     pdf.save(`Performance_Report_${'January'}_${year}.pdf`)
   }
-
-  const Totalsalary = kpis.reduce((acc, element) => {
-    return acc + element.Salary
+  const LowTasks = kpis.reduce((acc, kpi) => {
+    const Lowtask = kpi.Targets.filter(
+      (target) => target.Priority === 'Low'
+    ).length
+    return acc + Lowtask
   }, 0)
 
-  // const LowTasks = kpis.reduce((acc, kpi) => {
-  //   const Lowtask = kpi.Targets.filter(
-  //     (target) => target.Priority === 'Low'
-  //   ).length
-  //   return acc + Lowtask
-  // }, 0)
+  const HighTasks = kpis.reduce((acc, kpi) => {
+    const HighTask = kpi.Targets.filter(
+      (target) => target.Priority === 'High'
+    ).length
+    return acc + HighTask
+  }, 0)
 
-  // const HighTasks = kpis.reduce((acc, kpi) => {
-  //   const HighTask = kpi.Targets.filter(
-  //     (target) => target.Priority === 'High'
-  //   ).length
-  //   return acc + HighTask
-  // }, 0)
-
-  // const TotalTasks = kpis.reduce((acc, kpi) => {
-  //   return acc + kpi.Targets.length
-  // }, 0)
+  const TotalTasks = kpis.reduce((acc, kpi) => {
+    return acc + kpi.Targets.length
+  }, 0)
 
   return (
     <div className="p-5 z-20">
@@ -86,9 +81,9 @@ const AdminReports: React.FC = () => {
       </div>
       <div ref={reportRef} className="">
         <h1 className="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-3 ">
-          Performance Report - {'January'} {year}
+          Performance Report - {'April'} {year}
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {kpis.length > 0 ? (
             kpis.map((report) => (
               <KpiReportCard report={report} key={report.UserId} />
@@ -99,15 +94,17 @@ const AdminReports: React.FC = () => {
             </p>
           )}
         </div>
-        {/* <div>
-          <TaskPriorityChart
-            lowPriorityTasks={LowTasks}
-            highPriorityTasks={HighTasks}
-            totalTasks={TotalTasks}
-          />
-        </div> */}
+        <div className=" flex items-center gap-5 justify-center">
+          <div>
+            <TaskPriorityChart
+              lowPriorityTasks={LowTasks}
+              highPriorityTasks={HighTasks}
+              totalTasks={TotalTasks}
+            />
+          </div>
 
-        <SalaryReport formattedTotalSalary={Totalsalary} />
+          <SalaryReport formattedTotalSalary={225000} />
+        </div>
       </div>
     </div>
   )
