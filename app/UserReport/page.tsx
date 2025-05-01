@@ -47,11 +47,8 @@ const UserReport = () => {
   ]
   return (
     <div className="my-10 px-4 sm:px-8">
-      <h2 className="font-semibold text-2xl text-[#8c5bff] text-center my-4">
-        Tasks of {User.Name}
-      </h2>
       {/* Chart container with shadow and rounded styling */}
-      <div className="w-full  p-6">
+      <div className=" mx-auto h-80  p-6">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
@@ -67,7 +64,12 @@ const UserReport = () => {
               ))}
             </Pie>
             <Tooltip />
-            <Legend verticalAlign="bottom" iconType="circle" height={36} />
+            <Legend
+              verticalAlign="bottom"
+              iconType="circle"
+              className=" text-[8px] space-x-5 my-3"
+              height={36}
+            />
           </PieChart>
         </ResponsiveContainer>
       </div>
