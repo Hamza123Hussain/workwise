@@ -9,9 +9,10 @@ import {
   BookOpen,
   Rows4,
   Rows3,
+  NotebookText,
 } from 'lucide-react'
-import { BsPeopleFill } from 'react-icons/bs'
-import { FaRegCalendarAlt } from 'react-icons/fa'
+// import { BsPeopleFill } from 'react-icons/bs'
+// import { FaRegCalendarAlt } from 'react-icons/fa'
 import { GrDocumentPerformance } from 'react-icons/gr'
 export const links = [
   { href: '/', label: 'Home', icon: House, adminOnly: false, email: '' },
@@ -79,13 +80,13 @@ export const links = [
     adminOnly: false,
     email: '',
   },
-  {
-    href: '/Candidates ',
-    label: 'Candidates  (under development)',
-    icon: BsPeopleFill,
-    adminOnly: true,
-    email: 'octtoppus1@gmail.com',
-  },
+  // {
+  //   href: '/Candidates ',
+  //   label: 'Candidates  (under development)',
+  //   icon: BsPeopleFill,
+  //   adminOnly: true,
+  //   email: 'octtoppus1@gmail.com',
+  // },
   {
     href: '/Kpis',
     label: 'Kpis',
@@ -93,13 +94,13 @@ export const links = [
     adminOnly: true,
     email: 'octtoppus1@gmail.com',
   },
-  // {
-  //   href: '/Notice',
-  //   label: 'Notice',
-  //   icon: StickyNote,
-  //   adminOnly: true,
-  //   email: 'octtoppus1@gmail.com',
-  // },
+  {
+    href: '/UserReport',
+    label: 'User Report',
+    icon: NotebookText,
+    adminOnly: false,
+    email: '',
+  },
   {
     href: '/usertask',
     label: 'Tasks',
@@ -107,13 +108,13 @@ export const links = [
     adminOnly: false,
     email: '',
   },
-  {
-    href: '/Chats',
-    label: 'Chats (under development)',
-    icon: FaRegCalendarAlt,
-    adminOnly: true,
-    email: 'octtoppus1@gmail.com',
-  },
+  // {
+  //   href: '/Chats',
+  //   label: 'Chats (under development)',
+  //   icon: FaRegCalendarAlt,
+  //   adminOnly: true,
+  //   email: 'octtoppus1@gmail.com',
+  // },
   {
     href: '/ReportSummary',
     label: 'Report Summary',
