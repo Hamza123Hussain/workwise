@@ -19,7 +19,6 @@ const AdminReports: React.FC = () => {
   const kpis = useSelector((state: RootState) => state.KpiList)
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
-
   useEffect(() => {
     const fetchKpis = async () => {
       try {
@@ -34,7 +33,6 @@ const AdminReports: React.FC = () => {
     }
     fetchKpis()
   }, [user._id, dispatch])
-
   const downloadPDF = async () => {
     if (!reportRef.current) return
     const canvas = await html2canvas(reportRef.current, { scale: 2 })
@@ -51,18 +49,15 @@ const AdminReports: React.FC = () => {
     ).length
     return acc + Lowtask
   }, 0)
-
   const HighTasks = kpis.reduce((acc, kpi) => {
     const HighTask = kpi.Targets.filter(
       (target) => target.Priority === 'High'
     ).length
     return acc + HighTask
   }, 0)
-
   const TotalTasks = kpis.reduce((acc, kpi) => {
     return acc + kpi.Targets.length
   }, 0)
-
   return (
     <div className="p-5 z-20">
       {loading && (
@@ -70,7 +65,6 @@ const AdminReports: React.FC = () => {
           <Loader />
         </div>
       )}
-
       <div className="flex justify-between items-center mb-1">
         <button
           onClick={downloadPDF}
@@ -94,20 +88,16 @@ const AdminReports: React.FC = () => {
             </p>
           )}
         </div>
-        <div className=" flex items-center gap-5 justify-center">
-          <div>
-            <TaskPriorityChart
-              lowPriorityTasks={LowTasks}
-              highPriorityTasks={HighTasks}
-              totalTasks={TotalTasks}
-            />
-          </div>
-
+        <div className=" flex flex-col items-center gap-2 justify-center">
+          <TaskPriorityChart
+            lowPriorityTasks={LowTasks}
+            highPriorityTasks={HighTasks}
+            totalTasks={TotalTasks}
+          />
           <SalaryReport formattedTotalSalary={225000} />
         </div>
       </div>
     </div>
   )
 }
-
 export default AdminReports
