@@ -21,7 +21,7 @@ const UserUserKpi = () => {
   }, [User._id])
 
   return (
-    <div className=" flex flex-col my-10 px-4 sm:px-8">
+    <div className=" flex flex-col  bg-slate-50  p-4 sm:p-8">
       <div className="my-10 px-4 sm:px-8">
         <h1 className=" text-center text-xl font-semibold">
           Report Of {User.Name}
