@@ -21,14 +21,14 @@ const UserUserKpi = () => {
   }, [User._id])
 
   return (
-    <div className=" flex flex-col">
+    <div className=" flex flex-col my-10 px-4 sm:px-8">
       <div className="my-10 px-4 sm:px-8">
         <h1 className=" text-center text-xl font-semibold">
           Report Of {User.Name}
         </h1>
         <TasksPerMonth monthlyTasks={monthlyTasks} />
+        <UserPerformanceSalary User={User} />
       </div>
-      <UserPerformanceSalary User={User} />
     </div>
   )
 }
