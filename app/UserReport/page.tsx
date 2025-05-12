@@ -5,7 +5,6 @@ import { RoleTask } from '@/utils/Interfaces/TaskformInterface'
 import { RootState } from '@/utils/Redux/Store/Store'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-
 const UserReport = () => {
   const User = useSelector((state: RootState) => state.user)
   const [monthlyTasks, setMonthlyTasks] = useState<RoleTask[]>([])
