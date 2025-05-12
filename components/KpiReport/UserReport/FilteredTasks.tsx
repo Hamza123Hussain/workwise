@@ -9,32 +9,35 @@ const FilteredTasks = ({
   TaskFilter: string
   monthlyTasks: RoleTask[]
 }) => {
+  const filtered = monthlyTasks.filter((task) => task.Priority === TaskFilter)
+
+  if (!TaskFilter) {
+    return (
+      <div className="flex items-center justify-center h-full text-gray-500 text-center px-4">
+        <p className="text-sm">
+          Please select a priority from the chart to view tasks.
+        </p>
+      </div>
+    )
+  }
+
+  if (filtered.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-full text-gray-500 text-center px-4">
+        <p className="text-sm">
+          No tasks found for <span className="font-semibold">{TaskFilter}</span>{' '}
+          priority.
+        </p>
+      </div>
+    )
+  }
+
   return (
-    <>
-      {TaskFilter === '' ? (
-        <div className="flex items-center justify-center h-full text-gray-500 text-center px-4">
-          <p className="text-sm font-medium">
-            Please select a priority from the chart to view tasks.
-          </p>
-        </div>
-      ) : monthlyTasks.filter((task) => task.Priority === TaskFilter).length ===
-        0 ? (
-        <div className="flex items-center justify-center h-full text-gray-500 text-center px-4">
-          <p className="text-sm font-medium">
-            No tasks found for{' '}
-            <span className="font-semibold">{TaskFilter}</span> priority.
-          </p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 h-72 w-full gap-4">
-          {monthlyTasks
-            .filter((task) => task.Priority === TaskFilter)
-            .map((element) => (
-              <SmallTaskCard TaskDetail={element} key={element._id} />
-            ))}
-        </div>
-      )}
-    </>
+    <div className="grid grid-cols-1 gap-4">
+      {filtered.map((task) => (
+        <SmallTaskCard TaskDetail={task} key={task._id} />
+      ))}
+    </div>
   )
 }
 
