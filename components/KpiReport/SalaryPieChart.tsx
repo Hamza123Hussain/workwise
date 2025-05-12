@@ -17,7 +17,7 @@ const SalaryGaugeChart = ({
   ]
 
   return (
-    <div className="flex flex-col items-center bg-white p-4 shadow-md rounded-lg">
+    <div className="flex flex-col items-center p-4 rounded-lg">
       <PieChart width={240} height={160}>
         <Pie
           data={data}
