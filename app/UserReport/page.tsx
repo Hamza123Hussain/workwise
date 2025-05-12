@@ -1,4 +1,5 @@
 'use client'
+import SalaryGaugeChart from '@/components/KpiReport/SalaryPieChart'
 import TasksPerMonth from '@/components/KpiReport/UserReport/TasksPerMonth'
 import { getUserTasksForCurrentMonth } from '@/functions/UserTasks/GetTasksForCurrentMonth'
 import { RoleTask } from '@/utils/Interfaces/TaskformInterface'
@@ -20,11 +21,14 @@ const UserReport = () => {
   }, [User._id])
   // Categorize tasks by priority
   return (
-    <div className="my-10 px-4 sm:px-8">
-      <h1 className=" text-center text-xl font-semibold">
-        Report Of {User.Name}
-      </h1>
-      <TasksPerMonth monthlyTasks={monthlyTasks} />
+    <div className=" flex flex-col">
+      <div className="my-10 px-4 sm:px-8">
+        <h1 className=" text-center text-xl font-semibold">
+          Report Of {User.Name}
+        </h1>
+        <TasksPerMonth monthlyTasks={monthlyTasks} />
+      </div>
+      <SalaryGaugeChart Salary={User.Salary} calculatedsalary={11} />
     </div>
   )
 }
