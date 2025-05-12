@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setUserKpi } from '@/utils/Redux/Slice/kpi/KpiSlice'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { User } from '@/utils/Interfaces/Report_Interface'
+import { FaBullseye } from 'react-icons/fa'
+import TargetsComponent from '@/components/Home/KPI/TargetsComponent'
 const UserPerformanceSalary = ({ User }: { User: User }) => {
   const Dispatch = useDispatch()
   // Categorize tasks by priority
@@ -27,13 +29,26 @@ const UserPerformanceSalary = ({ User }: { User: User }) => {
     if (User._id) fetchSingleKpi()
   }, [User._id, Dispatch])
   return (
-    <>
+    <div className=" flex flex-col sm:flex-row justify-center gap-10 w-full">
       <SalaryGaugeChart
         Salary={User.Salary}
         calculatedsalary={calculatedSalary}
       />
-    </>
+      <div className=" flex flex-col justify-center items-center ml-12">
+        <h2 className="text-lg font-bold text-gray-700 flex  items-center gap-2">
+          <FaBullseye /> Targets
+        </h2>
+        <div className="grid grid-cols-2 justify-center items-center border-2 border-gray-200 rounded-lg p-4 gap-10">
+          {UserKpi.Targets?.length ? (
+            UserKpi.Targets.map((target) => (
+              <TargetsComponent key={target.TargetName} target={target} />
+            ))
+          ) : (
+            <p className="text-gray-500">No targets available.</p>
+          )}
+        </div>
+      </div>
+    </div>
   )
 }
-
 export default UserPerformanceSalary
