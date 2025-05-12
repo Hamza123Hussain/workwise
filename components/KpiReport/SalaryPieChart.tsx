@@ -44,7 +44,7 @@ const SalaryGaugeChart = ({
             PKR {Salary.toFixed(2)}
           </span>
         </p>
-        <p className="text-blue-600 text-lg font-bold">
+        <p className="text-blue-600 text-lg text-nowrap font-bold">
           Salary Attained: PKR {calculatedsalary.toFixed(2)} ({percentage}%)
         </p>
       </div>
