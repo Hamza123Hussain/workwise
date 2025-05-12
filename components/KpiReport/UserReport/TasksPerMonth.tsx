@@ -28,7 +28,7 @@ const TasksPerMonth = ({ monthlyTasks }: { monthlyTasks: RoleTask[] }) => {
   ]
   return (
     <div className=" mx-auto p-6 flex justify-between flex-col sm:flex-row">
-      <div className=" w-1/2 h-72">
+      <div className=" w-full sm:w-1/2 h-72">
         <ResponsiveContainer>
           <PieChart>
             <Pie
