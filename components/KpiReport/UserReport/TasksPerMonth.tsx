@@ -8,6 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts'
+import FilteredTasks from './FilteredTasks'
 const TasksPerMonth = ({ monthlyTasks }: { monthlyTasks: RoleTask[] }) => {
   const [TaskFilter, SetFilter] = useState('')
   const COLORS = ['#60a5fa', '#facc15', '#f87171'] // Blue, Yellow, Red
@@ -26,15 +27,7 @@ const TasksPerMonth = ({ monthlyTasks }: { monthlyTasks: RoleTask[] }) => {
     { name: 'High', value: highPriorityTasks.length },
   ]
   return (
-    <div className=" mx-auto p-6 flex justify-between">
-      {TaskFilter && (
-        <div className="mt-4 text-center text-sm text-gray-700">
-          <span className="font-medium">
-            {monthlyTasks.filter((task) => task.Priority === TaskFilter).length}
-          </span>{' '}
-          tasks with <span className="font-bold">{TaskFilter}</span> priority
-        </div>
-      )}
+    <div className=" mx-auto p-6 flex justify-between flex-col sm:flex-row">
       <div className=" w-1/2 h-72">
         <ResponsiveContainer>
           <PieChart>
@@ -60,6 +53,10 @@ const TasksPerMonth = ({ monthlyTasks }: { monthlyTasks: RoleTask[] }) => {
             <Legend verticalAlign="bottom" iconType="circle" />
           </PieChart>
         </ResponsiveContainer>
+      </div>
+      <div className="w-full md:w-1/2 h-80 p-2 overflow-y-auto bg-gray-50 rounded-lg shadow-inner border border-gray-200">
+        {/* 📝 Conditional rendering for empty states */}
+        <FilteredTasks TaskFilter={TaskFilter} monthlyTasks={monthlyTasks} />
       </div>
     </div>
   )
