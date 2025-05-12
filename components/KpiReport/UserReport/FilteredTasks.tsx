@@ -26,7 +26,7 @@ const FilteredTasks = ({
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 h-72 w-full gap-4">
           {monthlyTasks
             .filter((task) => task.Priority === TaskFilter)
             .map((element) => (
