@@ -9,26 +9,20 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 import FilteredTasks from './FilteredTasks'
+
 const TasksPerMonth = ({ monthlyTasks }: { monthlyTasks: RoleTask[] }) => {
   const [TaskFilter, SetFilter] = useState('')
-  const COLORS = ['#60a5fa', '#facc15', '#f87171'] // Blue, Yellow, Red
-  const lowPriorityTasks = monthlyTasks.filter(
-    (task) => task.Priority === 'Low'
-  )
-  const mediumPriorityTasks = monthlyTasks.filter(
-    (task) => task.Priority === 'Medium'
-  )
-  const highPriorityTasks = monthlyTasks.filter(
-    (task) => task.Priority === 'High'
-  )
-  const data = [
-    { name: 'Low', value: lowPriorityTasks.length },
-    { name: 'Medium', value: mediumPriorityTasks.length },
-    { name: 'High', value: highPriorityTasks.length },
-  ]
+
+  const COLORS = ['#60a5fa', '#facc15', '#f87171']
+  const priorities = ['Low', 'Medium', 'High']
+  const data = priorities.map((priority) => ({
+    name: priority,
+    value: monthlyTasks.filter((task) => task.Priority === priority).length,
+  }))
+
   return (
-    <div className=" mx-auto p-6 flex justify-between flex-col sm:flex-row">
-      <div className=" w-full sm:w-1/2 h-72">
+    <div className="flex flex-col sm:flex-row gap-6 bg-white shadow-md p-4 rounded-lg">
+      <div className="w-full sm:w-1/2 h-72">
         <ResponsiveContainer>
           <PieChart>
             <Pie
@@ -38,13 +32,12 @@ const TasksPerMonth = ({ monthlyTasks }: { monthlyTasks: RoleTask[] }) => {
               outerRadius={90}
               dataKey="value"
               isAnimationActive
-              labelLine={false}
             >
               {data.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index]}
-                  onClick={() => SetFilter(entry.name)} // Set filter on slice click
+                  onClick={() => SetFilter(entry.name)}
                   cursor="pointer"
                 />
               ))}
@@ -54,11 +47,11 @@ const TasksPerMonth = ({ monthlyTasks }: { monthlyTasks: RoleTask[] }) => {
           </PieChart>
         </ResponsiveContainer>
       </div>
-      <div className="w-full md:w-1/2 h-80 p-2 overflow-y-auto bg-gray-50 rounded-lg shadow-inner border border-gray-200">
-        {/* 📝 Conditional rendering for empty states */}
+      <div className="w-full sm:w-1/2 h-72 overflow-y-auto bg-gray-50 rounded-lg border border-gray-200 p-3">
         <FilteredTasks TaskFilter={TaskFilter} monthlyTasks={monthlyTasks} />
       </div>
     </div>
   )
 }
+
 export default TasksPerMonth
