@@ -31,7 +31,7 @@ const Layout = () => {
   const canLoadLess = LoadMore > 20
   return (
     <div className="flex flex-col items-center px-4 py-8">
-      <div className="grid w-full max-w-6xl gap-6 sm:grid-cols-2">
+      <div className="grid w-full max-w-6xl gap-6 grid-cols-1 sm:grid-cols-2">
         {FilteredTasks.length > 0 ? (
           FilteredTasks.slice(0, LoadMore).map((task) => (
             <TaskCard key={task._id} TaskDetails={task} />
