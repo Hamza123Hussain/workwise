@@ -2,10 +2,8 @@ import { convertHoursToString } from '@/functions/Attendance/TimeFunctions'
 import { AttendanceRecord } from '../../utils/Interfaces/AttendanceInterface'
 import { motion } from 'framer-motion'
 import { FaSignInAlt, FaSignOutAlt, FaRegClock } from 'react-icons/fa'
-import { GiPauseButton } from 'react-icons/gi'
 import { IoMdTime } from 'react-icons/io'
 import { BsFillCalendarEventFill } from 'react-icons/bs'
-
 const AttendanceCard = ({ element }: { element: AttendanceRecord }) => {
   return (
     <motion.div
@@ -22,7 +20,6 @@ const AttendanceCard = ({ element }: { element: AttendanceRecord }) => {
             : '-'}
         </span>
       </div>
-
       {/* Attendance Details Section */}
       <div className="text-gray-800 space-y-3">
         {/* Entry Time */}
@@ -35,7 +32,6 @@ const AttendanceCard = ({ element }: { element: AttendanceRecord }) => {
             {element.entry ? new Date(element.entry).toLocaleTimeString() : '-'}
           </span>
         </div>
-
         {/* Exit Time */}
         <div className="flex items-center flex-col justify-between py-2 px-3 bg-gray-50 rounded-lg">
           <div className="flex  items-center gap-2 text-sm">
@@ -46,33 +42,14 @@ const AttendanceCard = ({ element }: { element: AttendanceRecord }) => {
             {element.exit ? new Date(element.exit).toLocaleTimeString() : '-'}
           </span>
         </div>
-
-        {/* Break Time */}
-        <div className="flex items-center flex-col justify-between py-2 px-3 bg-gray-50 rounded-lg">
-          <div className="flex items-center  gap-2 text-sm">
-            <GiPauseButton className="text-purple-600" />
-            <span className="font-medium">Break Time</span>
-          </div>
-          <span className="text-sm text-gray-600">
-            {element.Break_Time
-              ? convertHoursToString(element.Break_Time)
-              : '-'}
-          </span>
-        </div>
-
         {/* Hours Worked */}
         <div className="flex items-center flex-col  justify-between py-2 px-3 bg-gray-50 rounded-lg">
           <div className="flex items-center gap-2 text-sm">
             <FaRegClock className="text-purple-600" />
             <span className="font-medium">Hours Worked:</span>
           </div>
-          <span className="text-sm text-gray-600">
-            {element.Hours_Worked
-              ? convertHoursToString(element.Hours_Worked - element.Break_Time)
-              : '0 hrs'}
-          </span>
+          <span className="text-sm text-gray-600">element.Hours_Worked</span>
         </div>
-
         {/* Remaining Time */}
         <div className="flex items-center flex-col justify-between py-2 px-3 bg-gray-50 rounded-lg">
           <div className="flex items-center gap-2 text-sm">
@@ -83,9 +60,7 @@ const AttendanceCard = ({ element }: { element: AttendanceRecord }) => {
             {element.Hours_Worked
               ? element.Hours_Worked > 8
                 ? '0 hrs'
-                : convertHoursToString(
-                    8 + element.Break_Time - element.Hours_Worked
-                  )
+                : convertHoursToString(8 - element.Hours_Worked)
               : '8 hrs'}
           </span>
         </div>
@@ -93,5 +68,4 @@ const AttendanceCard = ({ element }: { element: AttendanceRecord }) => {
     </motion.div>
   )
 }
-
 export default AttendanceCard
