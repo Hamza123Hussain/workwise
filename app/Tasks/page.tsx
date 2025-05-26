@@ -60,7 +60,9 @@ const AllTasks = () => {
       {/* Task List */}
       <div className="grid gap-6 sm:grid-cols-2 ">
         {allTasks !== null ? (
-          allTasks.map((task) => <TaskCard key={task._id} TaskDetails={task} />)
+          allTasks
+            .slice(0, 4)
+            .map((task) => <TaskCard key={task._id} TaskDetails={task} />)
         ) : (
           <p className="text-center text-lg text-gray-700 col-span-full">
             ALL TASKS IS NULL RIGHT NOW
