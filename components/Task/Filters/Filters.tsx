@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { months } from '@/utils/Array/MonthsArray'
 import YearFilter from './YearFilter'
 import PriorityFilter from './PriorityFilter'
-const Filters = () => {
+const Filters = ({ Flag }: { Flag?: boolean }) => {
   const SortTask = useSelector((state: RootState) => state.sort)
   const Dispatch = useDispatch()
   const FilterTasksBy_Month = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -38,6 +38,7 @@ const Filters = () => {
           ))}
         </select>
       </div>
+      {Flag && <></>}
       {/* Priority Filter */}
       <PriorityFilter />
     </div>
