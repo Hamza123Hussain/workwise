@@ -48,7 +48,7 @@ const AttendanceCard = ({ element }: { element: AttendanceRecord }) => {
             <FaRegClock className="text-purple-600" />
             <span className="font-medium">Hours Worked:</span>
           </div>
-          <span className="text-sm text-gray-600">element.Hours_Worked</span>
+          <span className="text-sm text-gray-600">${element.Hours_Worked}</span>
         </div>
         {/* Remaining Time */}
         <div className="flex items-center flex-col justify-between py-2 px-3 bg-gray-50 rounded-lg">
