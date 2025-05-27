@@ -49,7 +49,9 @@ const AttendanceCard = ({ element }: { element: AttendanceRecord }) => {
             <span className="font-medium">Hours Worked:</span>
           </div>
           <span className="text-sm text-gray-600">
-            {element.Hours_Worked.toFixed(2)}
+            {element.Hours_Worked
+              ? convertHoursToString(element.Hours_Worked - element.Break_Time)
+              : '0 hrs'}
           </span>
         </div>
         {/* Remaining Time */}
