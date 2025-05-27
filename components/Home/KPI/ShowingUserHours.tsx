@@ -10,7 +10,7 @@ const MonthlyHoursWorked = () => {
     (state: RootState) => state.AttedanceSlice.HoursWorked
   )
   const Dispatch = useDispatch()
-  const TotalHours = 160 // Example total monthly working hours
+  const TotalHours = 176 // Example total monthly working hours
   const User = useSelector((state: RootState) => state.user)
   useEffect(() => {
     const GetHours = async () => {
