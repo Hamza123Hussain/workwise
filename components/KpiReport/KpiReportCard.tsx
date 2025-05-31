@@ -18,7 +18,7 @@ const KpiReportCard = ({ userKpi }: { userKpi: Kpi }) => {
   })
   const taskCompletionPercentage =
     (userKpi.PointsGained / userKpi.TotalPoints) * 100
-  const attendancePercentage = (userKpi.HoursWorked / 160) * 100
+  const attendancePercentage = (userKpi.HoursWorked / 176) * 100
   const performancePercentage =
     attendancePercentage * 0.2 + taskCompletionPercentage * 0.8
   const calculatedSalary = (userKpi.Salary * performancePercentage) / 100
