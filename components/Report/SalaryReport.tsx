@@ -70,7 +70,7 @@ const SalaryReport: React.FC<{ formattedTotalSalary: number }> = ({
   const formattedTotalPaid = new Intl.NumberFormat('en-US', {
     style: 'decimal',
     minimumFractionDigits: 0,
-  }).format(215548)
+  }).format(212035)
 
   const formattedTotalSalaryValue = new Intl.NumberFormat('en-US', {
     style: 'decimal',
