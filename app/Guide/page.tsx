@@ -28,13 +28,13 @@ const Guide: React.FC = () => {
               <h3 className="text-xl font-semibold text-gray-800">
                 Task Performance
               </h3>
-              <p className="text-xl text-[#5925da]">90%</p>
+              <p className="text-xl text-[#5925da]">80%</p>
             </div>
             <div className="text-center">
               <h3 className="text-xl font-semibold text-gray-800">
                 Attendance
               </h3>
-              <p className="text-xl text-[#5925da]">10%</p>
+              <p className="text-xl text-[#5925da]">20%</p>
             </div>
           </div>
         </div>
