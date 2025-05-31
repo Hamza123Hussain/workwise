@@ -3,7 +3,7 @@ const AttendanceSemiCircleChart = ({
 }: {
   HoursWorked: number
 }) => {
-  const total = 160
+  const total = 176
   const percentage = ((HoursWorked / total) * 100).toFixed(1)
 
   return (
