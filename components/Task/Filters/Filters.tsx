@@ -17,6 +17,24 @@ const Filters = ({ Flag }: { Flag?: boolean }) => {
   }
   return (
     <div className="flex gap-4 justify-end items-center">
+      <div className="flex flex-col">
+        <label htmlFor="monthFilter" className="font-medium text-[#ac58ff]">
+          Select Month
+        </label>
+        <select
+          id="monthFilter"
+          value={SortTask.Month}
+          onChange={(e) => FilterTasksBy_Month(e)}
+          className="border-2 border-white text-white p-2 rounded-lg 
+              focus:outline-none focus:ring focus:ring-white bg-[#a56edd] transition ease-in-out"
+        >
+          {months.map((month, index) => (
+            <option key={index} value={index}>
+              {month}
+            </option>
+          ))}
+        </select>
+      </div>
       {/* Year Filter */}
       <YearFilter />
       {/* Month Filter */}
