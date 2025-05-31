@@ -14,8 +14,7 @@ const KpiReportCard = ({ report }: { report: Kpi }) => {
     (report.PointsGained / report.TotalPoints) * 100
   const attendancePercentage = (report.HoursWorked / 160) * 100
   const performancePercentage =
-    attendancePercentage * 0.1 + taskCompletionPercentage * 0.9
-
+    attendancePercentage * 0.2 + taskCompletionPercentage * 0.8
   const calculatedSalary = (report.Salary * performancePercentage) / 100
   return (
     <div className="bg-white shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out rounded-xl p-8 border border-gray-300 max-w-md mx-auto">
