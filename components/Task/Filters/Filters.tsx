@@ -17,7 +17,7 @@ const Filters = ({ Flag }: { Flag?: boolean }) => {
   }
   return (
     <div className="flex gap-4 justify-end items-center">
-      <div className="flex flex-col">
+      {/* <div className="flex flex-col">
         <label htmlFor="monthFilter" className="font-medium text-[#ac58ff]">
           Select Month
         </label>
@@ -34,7 +34,7 @@ const Filters = ({ Flag }: { Flag?: boolean }) => {
             </option>
           ))}
         </select>
-      </div>
+      </div> */}
       {/* Year Filter */}
       <YearFilter />
       {/* Month Filter */}
