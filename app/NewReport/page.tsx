@@ -82,7 +82,7 @@ const AdminReports: React.FC = () => {
       </div>
       <div ref={reportRef} className="space-y-2">
         <h1 className="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-5">
-          Performance Report - {selectedMonth} {year}
+          Performance Report - August {year}
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {filteredReports.length > 0 ? (
