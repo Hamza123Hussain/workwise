@@ -1,4 +1,5 @@
 // Redux Toolkit provides helpers like createSlice, createAsyncThunk, PayloadAction
+import { GetInvoices } from '@/functions/Invoices/GetInvoices'
 import { Invoice } from '@/utils/Interfaces/InvoiceInterface'
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 // Axios is used for making HTTP requests to our backend API
@@ -25,8 +26,9 @@ export const fetchInvoices = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       // GET request to fetch all invoices
-      const res = await axios.get<Invoice[]>('/api/invoices')
-      return res.data // Data returned will be passed to reducers
+      const res = await GetInvoices('Hlk8DgN8pKf26WMI2wgP4bCY9oR2')
+      console.log('RESPONSE', res)
+      return res?.data // Data returned will be passed to reducers
     } catch (err) {
       // If API fails, reject with error message
       return rejectWithValue(err || 'Failed to fetch invoices')
