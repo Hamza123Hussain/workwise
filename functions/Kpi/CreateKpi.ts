@@ -28,7 +28,7 @@ export const createKPI = async (userId: string, targets: Array<object>) => {
     )
 
     // Handle the successful response
-    console.log('KPI created successfully:', response.data)
+    // console.log('KPI created successfully:', response.data)
     return response.data // Return the response data for further processing if needed
   } catch (error) {
     // Handle errors during the API call
