@@ -8,7 +8,7 @@ import { Invoice } from '@/utils/Interfaces/InvoiceInterface'
 // Dummy invoice data
 const initialInvoices: Invoice[] = [
   {
-    id: '1',
+    _id: '1',
     title: 'Website Design Invoice',
     description: 'Invoice for redesigning the Global Grads website',
     date: '2025-09-01',
@@ -18,7 +18,7 @@ const initialInvoices: Invoice[] = [
     financialYear: '2025-2026',
   },
   {
-    id: '2',
+    _id: '2',
     title: 'Cloud Hosting Fees',
     description: 'Invoice for September AWS Hosting',
     date: '2025-09-05',
@@ -28,7 +28,7 @@ const initialInvoices: Invoice[] = [
     financialYear: '2025-2026',
   },
   {
-    id: '3',
+    _id: '3',
     title: 'Software Subscription',
     description: 'Annual subscription for design tools',
     date: '2025-08-20',
@@ -113,7 +113,7 @@ const InvoiceList: React.FC = () => {
         ) : (
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 mt-6">
             {filteredInvoices.map((invoice) => (
-              <InvoiceCard invoice={invoice} key={invoice.id} />
+              <InvoiceCard invoice={invoice} key={invoice._id} />
             ))}
           </div>
         )}

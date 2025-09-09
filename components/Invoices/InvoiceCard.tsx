@@ -4,7 +4,7 @@ import React from 'react'
 const InvoiceCard = ({ invoice }: { invoice: Invoice }) => {
   return (
     <div
-      key={invoice.id}
+      key={invoice._id}
       className="bg-white shadow-md rounded-2xl p-6 flex flex-col justify-between border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
     >
       {/* Title + description */}

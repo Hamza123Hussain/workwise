@@ -8,7 +8,7 @@ interface Props {
 }
 
 const CreateInvoiceModal: React.FC<Props> = ({ onClose, onSave }) => {
-  const [formData, setFormData] = useState<Omit<Invoice, 'id'>>({
+  const [formData, setFormData] = useState<Omit<Invoice, '_id'>>({
     title: '',
     description: '',
     date: new Date().toISOString().split('T')[0],

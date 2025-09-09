@@ -109,7 +109,7 @@ export const invoiceSlice = createSlice({
       (state, action: PayloadAction<Invoice>) => {
         // Find the invoice in our state array
         const index = state.invoices.findIndex(
-          (inv) => inv.id === action.payload.id
+          (inv) => inv._id === action.payload._id
         )
         if (index !== -1) {
           // Replace the old invoice with the updated one
