@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const GetInvoices = async (Userid: string) => {
   const Response = await axios.post(
-    `${ApiUrl}Api/Invoice/CreateInvoice?Userid=${Userid}`
+    `${ApiUrl}Api/Invoice/GetInvoices?Userid=${Userid}`
   )
 
   try {
@@ -11,6 +11,7 @@ export const GetInvoices = async (Userid: string) => {
       console.log('Not Authorized To Acess This Route')
     }
     if (Response.status === 200) {
+      console.log('Response', Response)
       return Response.data
     }
   } catch (error) {
