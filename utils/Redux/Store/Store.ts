@@ -11,6 +11,7 @@ import { userSlice } from '../Slice/User_Selected_Slice/Slice'
 import { UserTasksSlice } from '../Slice/UserTaskSlice/UsetTaskSlice'
 import { AttedanceSlice } from '../Slice/AttendanceSlice/Attendance_Slice'
 import { messageSlice } from '../Slice/MessageSlice/MessageSlice'
+import { invoiceSlice } from '../Slice/InvoiceSlice/InvoiceSlice'
 
 const Store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ const Store = configureStore({
     userTaskSlice: UserTasksSlice.reducer,
     AttedanceSlice: AttedanceSlice.reducer,
     Messages: messageSlice.reducer,
+    Invoice: invoiceSlice.reducer,
   },
 })
 
