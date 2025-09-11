@@ -75,7 +75,7 @@ const AdminReports: React.FC = () => {
       </div>
       <div ref={reportRef} className="">
         <h1 className="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-3 ">
-          Performance Report - {'August'} {year}
+          Performance Report - {'September'} {year}
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {kpis.length > 0 ? (
