@@ -70,7 +70,7 @@ const SalaryReport: React.FC<{ formattedTotalSalary: number }> = ({
   const formattedTotalPaid = new Intl.NumberFormat('en-US', {
     style: 'decimal',
     minimumFractionDigits: 0,
-  }).format(52000)
+  }).format(150377)
 
   const formattedTotalSalaryValue = new Intl.NumberFormat('en-US', {
     style: 'decimal',
@@ -81,7 +81,7 @@ const SalaryReport: React.FC<{ formattedTotalSalary: number }> = ({
     <div className="flex flex-wrap justify-center items-center gap-4">
       {/* Doughnut Chart Component */}
       <div className="flex justify-center items-center w-full max-w-72">
-        <SalaryDoughnutChart tobePaid={52000} totalSalary={160000} />
+        <SalaryDoughnutChart tobePaid={150377} totalSalary={160000} />
       </div>
 
       {/* Salary Details Section */}
