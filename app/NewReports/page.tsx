@@ -49,7 +49,7 @@ const NewReports = () => {
       </div>
       <div ref={reportRef}>
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-5">
-          Performance Report - September {year}
+          Performance Report - October {year}
         </h1>
         {kpis.map((userKpi) => (
           <KpiReportCard userKpi={userKpi} key={userKpi.UserId} />
