@@ -16,8 +16,6 @@ const Invoices = () => {
 
   return (
     <>
-      {' '}
-      {loading && <p>Loading...</p>}
       <InvoiceList Invoices={invoices} />
     </>
   )
