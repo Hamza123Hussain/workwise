@@ -2,7 +2,7 @@ import { ApiUrl } from '@/utils/Interfaces/AttendanceInterface'
 import axios from 'axios'
 
 export const GetInvoices = async (Userid: string) => {
-  const Response = await axios.post(
+  const Response = await axios.get(
     `${ApiUrl}Api/Invoice/GetInvoices?Userid=${Userid}`
   )
 
