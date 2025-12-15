@@ -6,9 +6,9 @@ import { GetUserData } from '@/utils/Redux/Slice/User/UserSlice'
 import { usePathname } from 'next/navigation'
 import { decryptData } from '@/utils/Encryprion'
 import SignIn from '../Auth/SignIn'
-import Sidebar from '../Home/SideBar/SideBar'
 import HomePage from '../Home/Homepage'
 import Loader3 from '../Loader3'
+import Header from './Header'
 const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
   const User = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
@@ -43,8 +43,8 @@ const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
     ) // Show loading state
   }
   return User.Email ? (
-    <div className="flex bg-white min-h-screen w-[100vw]">
-      <Sidebar />
+    <div className="flex flex-col bg-white min-h-screen w-[100vw]">
+      <Header />
       <div className="flex-1">{!isAuthPage ? children : <HomePage />}</div>
     </div>
   ) : (
