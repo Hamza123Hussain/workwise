@@ -37,7 +37,7 @@ const InvoiceSummary = ({ Payments }: { Payments: any }) => {
         <h4 className=" text-[16px] font-medium text-[#475467]">Amount Due</h4>
         <div className=" flex items-center">
           <sup className=" text-[24px] text-[#D70808] font-bold">PKR</sup>
-          <h3 className=" text-[64px] text-[#D70808]">156,000</h3>
+          <h3 className=" text-[64px] text-[#D70808]">0</h3>
         </div>
       </div>
     </div>
