@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const Invoices = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const { invoices, loading } = useSelector((state: RootState) => state.Invoice)
+  const { invoices } = useSelector((state: RootState) => state.Invoice)
 
   // Fetch invoices on load
   useEffect(() => {
