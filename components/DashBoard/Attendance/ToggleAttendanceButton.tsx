@@ -13,10 +13,11 @@ import {
 
 const ToggleAttendanceButton = () => {
   const dispatch = useDispatch()
-
   const AttendanceDetails = useSelector(
     (state: RootState) => state.AttedanceSlice
   )
+
+  console.log('Attendance Details : ', AttendanceDetails)
   const UserEmail = useSelector((state: RootState) => state.user.Email)
 
   // -----------------------------
