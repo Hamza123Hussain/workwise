@@ -1,30 +1,29 @@
+import { ClearUser } from '@/utils/Redux/Slice/User/UserSlice'
 import { RootState } from '@/utils/Redux/Store/Store'
+import { LogOut } from 'lucide-react'
 import React from 'react'
-import { useSelector } from 'react-redux'
-import UpdateModal from './UpdateModal'
-import UserField from './UserField'
+import { useDispatch, useSelector } from 'react-redux'
+
 const ShowUser = () => {
+  const Dispatch = useDispatch()
   const User = useSelector((state: RootState) => state.user)
-  console.log(User)
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center p-6 bg-gray-100">
-      <h1 className="text-4xl my-8 font-semibold text-center text-gray-900">
-        User Profile
-      </h1>
-      <div className="w-full max-w-lg bg-white rounded-lg shadow-md p-6 space-y-6">
-        <div className="space-y-4">
-          <UserField Attribute={User.Name} Name="User Name" />
-          <UserField Attribute={User.Email} Name="User Email" />
-          <UserField Attribute={User.JobTitle} Name="Job Title" />
-          <UserField Attribute={User.Salary} Name="Salary" />
-          <UserField Attribute={User.imageUrl} Name="User Image" />
-        </div>
-        {/* Update Profile Button */}
-        <div className="flex justify-center">
-          <UpdateModal />
-        </div>
+    <div className=" border-[#ECECEE] border  rounded-lg p-1 px-3 gap-10 flex items-center ">
+      <div className=" flex items-center gap-2">
+        <img
+          alt="User Image"
+          width={40}
+          height={40}
+          src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
+        />
+        <h6 className=" uppercase">{User.Name}</h6>
       </div>
+      <LogOut
+        onClick={() => Dispatch(ClearUser())}
+        className=" cursor-pointer text-[#949494]"
+      />
     </div>
   )
 }
+
 export default ShowUser
