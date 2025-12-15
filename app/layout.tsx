@@ -31,7 +31,13 @@ export default function RootLayout({
         />
       </head>
       <body className={`$ antialiased bg-white`}>
-        <ReduxLayout>{children}</ReduxLayout>
+        <div className=" flex flex-col">
+          <div className="flex flex-col min-h-screen">
+            <main className="flex-1 min-h-screen overflow-y-auto bg-white ">
+              <ReduxLayout>{children}</ReduxLayout>
+            </main>
+          </div>
+        </div>
       </body>
     </html>
   )
