@@ -35,13 +35,13 @@ const AttendanceSection = () => {
           {percentage.toFixed(1)}%
         </h3>
       </div>
-      <div className=" bg-[#2F1E5E] w-full rounded-[100px]">
+      <div className="bg-[#2F1E5E] w-full rounded-[100px]">
         <div
-          className={` bg-[#6D3DF1] w-[${percentage.toFixed(
-            1
-          )}%] h-[19px] rounded-[100px] `}
-        ></div>
+          className="bg-[#6D3DF1] h-[19px] rounded-[100px] transition-all duration-300"
+          style={{ width: `${percentage.toFixed(1)}%` }}
+        />
       </div>
+
       <div className=" flex justify-end ">
         <h1 className="text-[#101828] font-medium text-[14px]">
           Total 176 hrs
