@@ -17,7 +17,7 @@ const PaymentTable = ({ Payments }: { Payments: any }) => {
 
       {/* ---------- TABLE ROWS ---------- */}
       <div className="flex flex-col divide-y divide-gray-200">
-        {Payments.map((payment) => {
+        {Payments.map((payment:any) => {
           // Determine color for status badge
           const statusColor =
             payment.Status.toLowerCase() === 'paid'
