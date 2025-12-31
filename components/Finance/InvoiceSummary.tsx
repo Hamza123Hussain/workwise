@@ -8,8 +8,18 @@ const InvoiceSummary = ({ Payments }: { Payments: any }) => {
     (payment: any) => payment.Status.toLowerCase() === 'unpaid'
   ).length
   const TotalAmountReceived = Payments.reduce((total: number, payment: any) => {
-    return total + parseFloat(payment.Amount)
+    return payment.Status.toLowerCase() !== 'unpaid'
+      ? total + parseFloat(payment.Amount)
+      : 0
   }, 0)
+  const TotalAmountTObeReceived = Payments.reduce(
+    (total: number, payment: any) => {
+      return payment.Status.toLowerCase() === 'unpaid'
+        ? total + parseFloat(payment.Amount)
+        : 0
+    },
+    0
+  )
   return (
     <div className=" grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-[20px] p-2 ">
       <div className=" rounded-[20px] p-[10px] bg-[#EFF4FF] flex flex-col">
@@ -37,7 +47,9 @@ const InvoiceSummary = ({ Payments }: { Payments: any }) => {
         <h4 className=" text-[16px] font-medium text-[#475467]">Amount Due</h4>
         <div className=" flex items-center">
           <sup className=" text-[24px] text-[#D70808] font-bold">PKR</sup>
-          <h3 className=" text-[64px] text-[#D70808]">0</h3>
+          <h3 className=" text-[64px] text-[#D70808]">
+            {TotalAmountTObeReceived}
+          </h3>
         </div>
       </div>
     </div>
