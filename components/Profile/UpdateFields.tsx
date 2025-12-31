@@ -6,7 +6,6 @@ import UpdateInputFields from './UpdateInputFields'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUser } from '@/functions/AUTH/UpdateUser'
-import { encryptData } from '@/utils/Encryprion'
 import { GetUserData } from '@/utils/Redux/Slice/User/UserSlice'
 import Loader from '../Loader'
 import ImagePreview from './ImagePreview'
@@ -18,8 +17,6 @@ const UpdateFields = ({ User }: { User?: UserFetched }) => {
     SetLoading(true)
     const Data = await updateUser(inputVal)
     if (Data) {
-      const encryptedData = encryptData(Data)
-      localStorage.setItem('UserData', encryptedData)
       Dispatch(GetUserData(Data))
       SetLoading(false)
     }
