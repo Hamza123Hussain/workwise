@@ -32,7 +32,11 @@ const Taskcard = ({ task }: { task: RoleTask }) => {
       )} relative`}
     >
       <div className="w-[25%] pl-4">
-        <span className={`text-[14px] font-medium ${'text-[#3E3E3E]'}`}>
+        <span
+          className={`text-[14px] font-medium ${
+            task.Completed ? 'line-through text-gray-500' : 'text-[#3E3E3E]'
+          }`}
+        >
           {task.TaskName}
         </span>
       </div>
@@ -40,14 +44,9 @@ const Taskcard = ({ task }: { task: RoleTask }) => {
         {task.DueDate ? formatDueDate(task.DueDate) : ''}
       </div>
       <div className="w-[35%] flex justify-center">
-        <input
-          type="text"
-          value={task.Description}
-          disabled
-          autoFocus
-          className="border border-[#DADADA] bg-white px-2 py-1 rounded-md w-[90%] text-[13px] text-[#475267] focus:outline-none focus:ring-1 focus:ring-[#B994E6]"
-        />
+        <TaskDescription task={task} />
       </div>
+      <TaskButtons task={task} />
     </div>
   )
 }
