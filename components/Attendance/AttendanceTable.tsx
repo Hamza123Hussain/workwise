@@ -17,7 +17,7 @@ const AttendanceTable = ({
   // Define state to handle current page of cards (group of 3 cards at a time)
   const [currentPage, setCurrentPage] = useState(0)
   // Define how many cards per page (3 cards per page)
-  const cardsPerPage = 3
+  const cardsPerPage = 2
   // Reverse attendance data to show the latest card first
   const reversedAttendance = [...Attendance].reverse()
   // Slice the attendance data to show only the cards for the current page
@@ -40,7 +40,7 @@ const AttendanceTable = ({
   return (
     <div className="mx-auto px-4 py-6 flex flex-col">
       {/* Attendance Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2  gap-6">
         {currentCards.map((element) => (
           <AttendanceCard key={element.id} element={element} />
         ))}
