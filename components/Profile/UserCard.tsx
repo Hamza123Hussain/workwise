@@ -4,23 +4,17 @@ import React from 'react'
 import UpdateModal from './UpdateModal'
 import toast from 'react-hot-toast'
 import deleteUser from '@/functions/AUTH/DeleteUser'
-import { useRouter } from 'next/navigation'
-
 const UserCard = ({ User }: { User: UserFetched }) => {
-  const Router = useRouter()
-
   const DeleteMe = async () => {
     try {
       const Data = await deleteUser(User.Email)
       if (Data) {
         toast.success('User Has Been Deleted')
-        Router.push('/')
       }
     } catch (error) {
       toast.error(`User is not being deleted: ${error}`)
     }
   }
-
   return (
     <div className="relative bg-[#bd8bff] text-white rounded-lg shadow-lg p-6 w-72 mx-auto transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
       {/* User Info Section */}
@@ -45,7 +39,6 @@ const UserCard = ({ User }: { User: UserFetched }) => {
           <p className="text-sm text-white">{User.JobTitle || 'N/A'}</p>
         </div>
       </div>
-
       {/* Action Buttons */}
       <div className="flex justify-between items-center">
         <UpdateModal User={User} />
@@ -59,5 +52,4 @@ const UserCard = ({ User }: { User: UserFetched }) => {
     </div>
   )
 }
-
 export default UserCard
