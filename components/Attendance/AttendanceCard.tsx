@@ -1,75 +1,52 @@
-import { convertHoursToString } from '@/functions/Attendance/TimeFunctions'
 import { AttendanceRecord } from '../../utils/Interfaces/AttendanceInterface'
-import { motion } from 'framer-motion'
-import { FaSignInAlt, FaSignOutAlt, FaRegClock } from 'react-icons/fa'
-import { IoMdTime } from 'react-icons/io'
-import { BsFillCalendarEventFill } from 'react-icons/bs'
+
 const AttendanceCard = ({ element }: { element: AttendanceRecord }) => {
+  // Safe date parsing (strict, no `any`)
+  const parseToDate = (value: Date | string): Date => {
+    return value instanceof Date ? value : new Date(value)
+  }
+  // Formatters (strict)
+  const formatDate = (value: Date | string): string => {
+    const d = parseToDate(value)
+    return isNaN(d.getTime()) ? '--' : d.toLocaleDateString()
+  }
+
+  const formatTime = (value: Date | string): string => {
+    const d = parseToDate(value)
+    return isNaN(d.getTime())
+      ? '--'
+      : d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  }
+
   return (
-    <motion.div
-      className="space-y-4 bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-      whileHover={{ scale: 1.05 }}
-      transition={{ duration: 0.3 }}
+    <div
+      key={element.id}
+      className="bg-[#FEFEFE] px-4 py-2 rounded-[5px] flex flex-col gap-2"
     >
-      {/* Date Section */}
-      <div className="flex items-center gap-2 text-xl font-semibold text-purple-600">
-        <BsFillCalendarEventFill className="text-lg" />
-        <span>
-          {element.currentDate
-            ? new Date(element.currentDate).toLocaleDateString()
-            : '-'}
-        </span>
-      </div>
-      {/* Attendance Details Section */}
-      <div className="text-gray-800 space-y-3">
-        {/* Entry Time */}
-        <div className="flex items-center flex-col justify-between py-2 px-3 bg-gray-50 rounded-lg">
-          <div className="flex  items-center gap-2 text-sm">
-            <FaSignInAlt className="text-purple-600" />
-            <span className="font-medium">Entry Time</span>
-          </div>
-          <span className="text-sm text-gray-600">
-            {element.entry ? new Date(element.entry).toLocaleTimeString() : '-'}
-          </span>
+      <h3 className="text-[14px] font-semibold text-[#101828]">
+        {formatDate(element.currentDate)}
+      </h3>
+
+      <div className="bg-[#F9FAFB] p-3 flex justify-between rounded-[12px] border border-[#EAECF0]">
+        <div className="flex flex-col">
+          <h3 className="text-[12px] font-medium text-[#475467]">
+            Total Hours
+          </h3>
+          <h3 className="text-[16px] font-medium text-[#344054]">
+            {element.Hours_Worked.toFixed(1)} hrs
+          </h3>
         </div>
-        {/* Exit Time */}
-        <div className="flex items-center flex-col justify-between py-2 px-3 bg-gray-50 rounded-lg">
-          <div className="flex  items-center gap-2 text-sm">
-            <FaSignOutAlt className="text-purple-600" />
-            <span className="font-medium">Exit Time</span>
-          </div>
-          <span className="text-sm text-gray-600">
-            {element.exit ? new Date(element.exit).toLocaleTimeString() : '-'}
-          </span>
-        </div>
-        {/* Hours Worked */}
-        <div className="flex items-center flex-col  justify-between py-2 px-3 bg-gray-50 rounded-lg">
-          <div className="flex items-center gap-2 text-sm">
-            <FaRegClock className="text-purple-600" />
-            <span className="font-medium">Hours Worked:</span>
-          </div>
-          <span className="text-sm text-gray-600">
-            {element.Hours_Worked
-              ? convertHoursToString(element.Hours_Worked - element.Break_Time)
-              : '0 hrs'}
-          </span>
-        </div>
-        {/* Remaining Time */}
-        <div className="flex items-center flex-col justify-between py-2 px-3 bg-gray-50 rounded-lg">
-          <div className="flex items-center gap-2 text-sm">
-            <IoMdTime className="text-purple-600" />
-            <span className="font-medium">Remaining Time:</span>
-          </div>
-          <span className="text-sm text-gray-600">
-            {element.Hours_Worked
-              ? element.Hours_Worked > 8
-                ? '0 hrs'
-                : convertHoursToString(8 - element.Hours_Worked)
-              : '8 hrs'}
-          </span>
+
+        <div className="flex flex-col">
+          <h3 className="text-[12px] font-medium text-[#475467]">
+            Clock In & Out
+          </h3>
+          <h3 className="text-[16px] font-medium text-[#344054]">
+            {formatTime(element.entry)} — {formatTime(element.exit)}
+          </h3>
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 export default AttendanceCard
