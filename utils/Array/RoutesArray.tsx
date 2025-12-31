@@ -1,4 +1,5 @@
 import { ChartPie, LayoutDashboard, Receipt } from 'lucide-react'
+import { BiTask } from 'react-icons/bi'
 
 export const Routes = [
   {
@@ -15,5 +16,15 @@ export const Routes = [
     Name: 'Invoices',
     Path: '/invoices',
     SVG: <Receipt />,
+  },
+  {
+    Name: 'Admin',
+    Path: '/Admin',
+    SVG: <Receipt />,
+  },
+  {
+    Name: 'TaskBoard',
+    Path: '/TaskBoard',
+    SVG: <BiTask />,
   },
 ]
