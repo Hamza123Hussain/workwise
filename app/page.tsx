@@ -14,6 +14,8 @@ import {
   SetAttendanceID,
   ToggleCheckin,
 } from '@/utils/Redux/Slice/AttendanceSlice/Attendance_Slice'
+import MainAdminBox from '@/components/AdminBox/MainAdminBox'
+import TaskBoardPage from '@/components/TaskBoard/DaliyTaskBoard'
 
 const HomePage = () => {
   const [RouteSelected, SetRouteSelected] = React.useState('Dashboard')
@@ -61,6 +63,10 @@ const HomePage = () => {
         <PerformanceReportPage />
       ) : RouteSelected === 'Invoices' ? (
         <MainFinanceComponent />
+      ) : RouteSelected === 'Admin' ? (
+        <MainAdminBox />
+      ) : RouteSelected === 'TaskBoard' ? (
+        <TaskBoardPage />
       ) : (
         ''
       )}
