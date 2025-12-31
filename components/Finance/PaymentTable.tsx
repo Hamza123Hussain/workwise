@@ -17,14 +17,22 @@ const PaymentTable = ({ Payments }: { Payments: any }) => {
 
       {/* ---------- TABLE ROWS ---------- */}
       <div className="flex flex-col divide-y divide-gray-200">
-        {Payments.map((payment:any) => {
-          // Determine color for status badge
+        {Payments.map((payment: any) => {
           const statusColor =
-            payment.Status.toLowerCase() === 'paid'
+            payment.Status?.toLowerCase() === 'paid'
               ? 'bg-[#0DB231]'
-              : payment.Status.toLowerCase() === 'unpaid'
-              ? 'bg-[#D70808] '
-              : 'bg-[#2160FF] ' // Partially Paid
+              : payment.Status?.toLowerCase() === 'unpaid'
+              ? 'bg-[#D70808]'
+              : 'bg-[#2160FF]' // Partially Paid
+
+          // Format date cleanly -> e.g., "12 Jan 2025"
+          const formattedDate = payment.CreatedOn
+            ? new Date(payment.CreatedOn).toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric',
+              })
+            : ''
 
           return (
             <div
@@ -33,13 +41,12 @@ const PaymentTable = ({ Payments }: { Payments: any }) => {
             >
               <span>{payment.InvoiceNumber}</span>
               <span>{payment.Customer}</span>
-              <span>{payment.CreatedOn}</span>
+              <span>{formattedDate}</span>
               <span>{payment.Amount}</span>
               <span>{payment.PaymentMode}</span>
 
-              {/* Status badge with dynamic color */}
               <span
-                className={`p-2 rounded-lg  text-white text-xs font-semibold   w-5/6 ${statusColor}`}
+                className={`p-2 rounded-lg text-white text-xs font-semibold w-5/6 ${statusColor}`}
               >
                 {payment.Status}
               </span>
