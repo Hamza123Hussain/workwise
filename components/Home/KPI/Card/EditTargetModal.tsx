@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Target, Kpi } from '@/utils/Interfaces/KPIInterface'
 import { updateKPI } from '@/functions/Kpi/UpdateKpi'
+import { updateKPITargets } from '@/functions/Kpi/UpdateKpiTargets'
 
 interface EditTargetsModalProps {
   user: Kpi
@@ -115,7 +116,7 @@ const EditTargetsModal: React.FC<EditTargetsModalProps> = ({
 
   const handleSubmit = async () => {
     try {
-      const data = await updateKPI(user.UserId, targets)
+      const data = await updateKPITargets(user.UserId, targets)
       if (data) {
         onUpdate(targets)
         onClose()
