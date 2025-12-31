@@ -22,7 +22,9 @@ const EmployeePerformanceCard = ({ element }: { element: Kpi }) => {
         <h3 className="text-2xl font-semibold text-gray-800">
           {element.UserName}
         </h3>
-        <p className="text-gray-600 text-sm">Technical Lead</p>
+        <p className="text-gray-600 text-sm">
+          {element.UserName == 'Saad Ali' ? 'Designer' : 'Technical Lead'}
+        </p>
       </div>
       {/* --- 5 METRICS --- */}
       <div className="grid grid-cols-5 divide-x divide-gray-200 text-sm font-medium">
