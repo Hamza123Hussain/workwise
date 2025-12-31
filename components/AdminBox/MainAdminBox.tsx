@@ -7,9 +7,10 @@ import Tasks from './MaintaskComponent'
 import AllUserData from './UsersComponent'
 import SignUp from './RegisterAUser'
 import RolesPage from '../RoleTask/Roles'
+import TasksFilter from './MaintaskComponent'
 
 const MainAdminBox = () => {
-  const [activeSection, setActiveSection] = useState('users')
+  const [activeSection, setActiveSection] = useState('kpi')
 
   const navButtonClass = (section: string) =>
     `px-5 py-3 rounded-md transition-all duration-200 font-medium
@@ -59,9 +60,8 @@ const MainAdminBox = () => {
 
       {/* 🔥 Main Content */}
       <main className="flex-1 p-6 overflow-y-auto">
-        {activeSection === 'users' && <AllUserData />}
         {activeSection === 'kpi' && <KPIComponent />}
-        {activeSection === 'tasks' && <Tasks />}
+        {activeSection === 'tasks' && <TasksFilter />}
         {activeSection === 'attendance' && <UserAttendance />}
         {activeSection === 'register' && <SignUp />}
         {activeSection === 'RoleTasks' && <RolesPage />}
