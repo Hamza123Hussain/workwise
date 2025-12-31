@@ -3,13 +3,10 @@ import { Invoice } from '@/utils/Interfaces/InvoiceInterface'
 import axios from 'axios'
 
 export const createInvoice = async (Userid: string, data: any) => {
-  const Response = await axios.post(
-    `http://localhost:8000/Api/Invoice/CreateInvoice`,
-    {
-      Userid,
-      data,
-    }
-  )
+  const Response = await axios.post(`${ApiUrl}Api/Invoice/CreateInvoice`, {
+    Userid,
+    data,
+  })
 
   try {
     if (Response.status === 404) {
