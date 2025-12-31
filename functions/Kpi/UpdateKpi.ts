@@ -1,16 +1,17 @@
+import { Target } from '@/utils/Interfaces/KPIInterface'
 import axios from 'axios'
 
-export const updateKPI = async (UserId: string, TargetName: string) => {
+export const updateKPI = async (UserId: string, Targets: Target[]) => {
   try {
     // ✅ Input Validation
-    if (!UserId || !TargetName) {
+    if (!UserId || !Targets) {
       throw new Error('Missing required fields: UserId, _id, or TargetName')
     }
 
     // ✅ Send API Request
     const response = await axios.put(
       `https://workwise-backend-puce.vercel.app/Api/KPI/UpdateKPI`,
-      { UserId, TargetName },
+      { UserId, Targets },
       { headers: { 'Content-Type': 'application/json' } } // Ensure JSON request
     )
 
