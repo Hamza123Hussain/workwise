@@ -142,7 +142,7 @@ const TasksFilter = () => {
       ) : tasks.length === 0 ? (
         <p className="text-white">No tasks found for selected filters</p>
       ) : (
-        <div className="flex flex-col gap-2 max-h-56 overflow-y-auto">
+        <div className="flex flex-col gap-2 max-h-80 overflow-y-auto">
           {tasks.map((task) => (
             <Taskcard task={task} key={task._id} />
           ))}
