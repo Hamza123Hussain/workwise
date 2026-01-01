@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Target, Kpi } from '@/utils/Interfaces/KPIInterface'
-import { updateKPI } from '@/functions/Kpi/UpdateKpi'
+
 import { updateKPITargets } from '@/functions/Kpi/UpdateKpiTargets'
 
 interface EditTargetsModalProps {
