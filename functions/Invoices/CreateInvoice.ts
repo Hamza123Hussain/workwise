@@ -1,5 +1,5 @@
 import { ApiUrl } from '@/utils/Interfaces/AttendanceInterface'
-import { Invoice } from '@/utils/Interfaces/InvoiceInterface'
+
 import axios from 'axios'
 
 export const createInvoice = async (Userid: string, data: any) => {
