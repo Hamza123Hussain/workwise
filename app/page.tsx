@@ -21,6 +21,18 @@ const HomePage = () => {
   const [RouteSelected, SetRouteSelected] = React.useState('Dashboard')
   const UserEmail = useSelector((state: RootState) => state.user.Email)
   const Dispatch = useDispatch()
+
+  // Define accessible routes based on email
+  const AccessibleRoutes = Routes.filter((route) => {
+    if (UserEmail === 'octtoppus1@gmail.com') {
+      // Full access for admin user
+      return true
+    } else {
+      // Limited access for others
+      return route.Name === 'Dashboard' || route.Name === 'TaskBoard'
+    }
+  })
+
   useEffect(() => {
     const GetCurrentAttendance = async () => {
       const AttendanceData = await CurrentAttendance(UserEmail)
@@ -35,11 +47,12 @@ const HomePage = () => {
     }
     GetCurrentAttendance()
   }, [])
+
   return (
     <div className=" bg-white mt-5 flex flex-col">
       <div className=" flex justify-between items-center px-4">
         <div className=" flex items-center gap-5">
-          {Routes.map((route) => (
+          {AccessibleRoutes.map((route) => (
             <div
               onClick={() => SetRouteSelected(route.Name)}
               key={route.Name}
