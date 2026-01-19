@@ -104,13 +104,13 @@ const TaskCard = ({
         {!isCompleted && (
           <>
             <button
-              className="hover:bg-gray-50 transition-colors"
+              className="hover:bg-gray-50 transition-colors rounded-sm p-2 bg-blue-400 text-white"
               onClick={onEdit}
             >
               Update
             </button>
             <button
-              className="hover:bg-red-600 transition-colors"
+              className="hover:bg-red-600 transition-colors rounded-sm p-2 bg-red-400 text-white"
               onClick={onDelete}
             >
               Delete
@@ -120,9 +120,8 @@ const TaskCard = ({
         <button
           onClick={onComplete}
           disabled={isCompleted || dueDatePassed} // Disable if completed or past due
-          className={
-            dueDatePassed && !isCompleted ? 'cursor-not-allowed opacity-50' : ''
-          }
+          className={`  rounded-sm p-2 bg-green-400 text-white
+            ${dueDatePassed && !isCompleted ? 'cursor-not-allowed opacity-50 bg-black text-white' : ''}`}
         >
           {isCompleted ? 'Completed' : 'Mark Complete'}
         </button>
