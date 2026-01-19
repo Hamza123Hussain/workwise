@@ -1,30 +1,134 @@
+'use client'
+
 import React from 'react'
-const TaskCard = ({ simpleTask }: { simpleTask: any }) => {
-  // Function to format dates to a readable format
-  const formatDate = (date: Date) => new Date(date).toLocaleDateString()
+
+const priorityStyles: Record<string, string> = {
+  Low: 'bg-green-100 text-green-800 border-green-200',
+  Medium: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+  High: 'bg-red-100 text-red-800 border-red-200',
+}
+
+const TaskCard = ({
+  simpleTask,
+  onEdit,
+  onDelete,
+  onComplete,
+}: {
+  simpleTask: any
+  onEdit: () => void
+  onDelete: () => void
+  onComplete: () => void
+}) => {
+  const formatDate = (date: string | Date) =>
+    new Date(date).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    })
+
+  const isCompleted = simpleTask.completed
+
+  // Disable "Mark Complete" if due date has passed
+  const dueDatePassed =
+    simpleTask.dueDate &&
+    new Date(simpleTask.dueDate).getTime() < new Date().getTime()
+
   return (
     <div
-      className={`w-full max-w-md rounded-2xl p-5 border ${'bg-white border-gray-200'} shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-[1.01]`}
+      className={`w-full p-5 rounded-2xl border ${
+        isCompleted ? 'bg-gray-100 border-gray-300' : 'bg-white border-gray-200'
+      } shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 hover:scale-[1.02]`}
     >
-      {/* Top Section */}
+      {/* Header */}
       <div className="flex justify-between items-start mb-3">
-        <div>
-          <h2 className="text-xl font-bold text-gray-800">
-            {simpleTask.description}
-          </h2>
-        </div>
+        <h2
+          className={`text-lg font-semibold ${
+            isCompleted ? 'text-gray-400 line-through' : 'text-gray-800'
+          }`}
+        >
+          {simpleTask.name || 'Untitled Task'}
+        </h2>
+
+        {simpleTask.priority && (
+          <span
+            className={`px-3 py-1 text-xs font-semibold rounded-full border ${
+              priorityStyles[simpleTask.priority]
+            } shadow-sm`}
+          >
+            {simpleTask.priority}
+          </span>
+        )}
       </div>
-      {/* Task Info */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 text-sm text-gray-700">
+
+      {/* Description */}
+      <p
+        className={`text-gray-600 mb-4 line-clamp-3 ${
+          isCompleted ? 'line-through text-gray-400' : ''
+        }`}
+      >
+        {simpleTask.description}
+      </p>
+
+      {/* Task Meta */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4 text-gray-700 mb-4 text-xs">
         <div>
-          <span className="font-semibold">User:</span> {simpleTask.createdBy}
+          <span className="font-semibold">Assigned:</span>{' '}
+          {simpleTask.assignedTo || '—'}
         </div>
         <div>
           <span className="font-semibold">Created:</span>{' '}
           {formatDate(simpleTask.createdAt)}
         </div>
+        <div>
+          <span className="font-semibold">Due:</span>{' '}
+          {simpleTask.dueDate ? formatDate(simpleTask.dueDate) : '—'}
+        </div>
+        <div>
+          <span className="font-semibold">Created By:</span>{' '}
+          {simpleTask.createdBy}
+        </div>
+        {isCompleted && (
+          <div className="col-span-full text-green-600 font-semibold mt-1">
+            ✔ Completed
+          </div>
+        )}
+        {dueDatePassed && !isCompleted && (
+          <div className="col-span-full text-red-600 font-semibold mt-1">
+            ⚠ Due date passed
+          </div>
+        )}
+      </div>
+
+      {/* Actions */}
+      <div className="flex justify-end gap-2 mt-2">
+        {!isCompleted && (
+          <>
+            <button
+              className="hover:bg-gray-50 transition-colors"
+              onClick={onEdit}
+            >
+              Update
+            </button>
+            <button
+              className="hover:bg-red-600 transition-colors"
+              onClick={onDelete}
+            >
+              Delete
+            </button>
+          </>
+        )}
+        <button
+          onClick={onComplete}
+          disabled={isCompleted || dueDatePassed} // Disable if completed or past due
+          className={
+            dueDatePassed && !isCompleted ? 'cursor-not-allowed opacity-50' : ''
+          }
+        >
+          {isCompleted ? 'Completed' : 'Mark Complete'}
+        </button>
       </div>
     </div>
   )
 }
+
 export default TaskCard
