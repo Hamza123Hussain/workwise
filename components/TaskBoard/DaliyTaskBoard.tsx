@@ -1,19 +1,35 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+
 import { Plus } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
 import toast from 'react-hot-toast'
 
-import AddTaskModal from './AddTaskModal'
 import TaskList from './TaskList'
-import { getTasksGroupedByDate } from '@/functions/Task/AllTasksBoard'
+import { getTasksGroupedByDate } from '@/functions/Task/GetTasksTaskBoard'
 import { addTask } from '@/functions/Task/AddTaskBoard'
+import { updateTask } from '@/functions/Task/UpdateTaskBoard'
+import AddTaskModal from './AddTaskModal'
+import ConfirmDeleteModal from './ConfirmDeleteModal'
+import { deleteTask } from '@/functions/Task/DeleteTaskBoard'
+import { completeTask } from '@/functions/Task/CompleteTask'
+
+type TaskFormData = {
+  name: string
+  description: string
+  assignedTo: string
+  priority: 'Low' | 'Medium' | 'High' | ''
+  dueDate: string
+}
 
 const TaskBoardPage = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [tasksByDate, setTasksByDate] = useState<Record<string, any[]>>({})
+  const [editTask, setEditTask] = useState<any>(null)
+  const [deleteTaskData, setDeleteTaskData] = useState<any>(null)
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
 
   const currentUser = useSelector((state: RootState) => state.user)
 
@@ -30,9 +46,17 @@ const TaskBoardPage = () => {
     fetchTasks()
   }, [])
 
-  const handleAddTask = async (description: string) => {
+  const handleAddTask = async (taskData: TaskFormData) => {
     try {
-      await addTask(description, currentUser.Name, currentUser.Email)
+      await addTask({
+        name: taskData.name,
+        description: taskData.description || '',
+        assignedTo: taskData.assignedTo,
+        priority: taskData.priority as 'Low' | 'Medium' | 'High',
+        dueDate: taskData.dueDate,
+        createdBy: currentUser.Name,
+        email: currentUser.Email,
+      })
       toast.success('Task added!')
       setModalOpen(false)
       fetchTasks()
@@ -41,12 +65,50 @@ const TaskBoardPage = () => {
     }
   }
 
+  const handleUpdateTask = async (updatedData: TaskFormData) => {
+    if (!editTask) return
+    try {
+      await updateTask(editTask._id, updatedData)
+      toast.success('Task updated!')
+      setEditTask(null)
+      fetchTasks()
+    } catch {
+      toast.error('Failed to update task')
+    }
+  }
+
+  const handleConfirmDelete = async () => {
+    if (!deleteTaskData) return
+    try {
+      await deleteTask(deleteTaskData._id)
+      toast.success('Task deleted!')
+      setDeleteModalOpen(false)
+      setDeleteTaskData(null)
+      fetchTasks()
+    } catch {
+      toast.error('Failed to delete task')
+    }
+  }
+
+  const handleCompleteTask = async (task: any) => {
+    try {
+      await completeTask(task._id, !task.completed)
+      toast.success('Task marked as completed!')
+      fetchTasks()
+    } catch {
+      toast.error('Failed to mark task as completed')
+    }
+  }
+
+  const filterTasksByUser = (tasks: any[]) => {
+    return tasks.filter((task) => task.assignedTo === currentUser.Name)
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       {/* Header */}
-      <Header date={new Date()} onAdd={() => setModalOpen(true)} />
-
-      {/* Modal */}
+      <Header onAdd={() => setModalOpen(true)} />
+      {/* Add Task Modal */}
       {modalOpen && (
         <AddTaskModal
           open={modalOpen}
@@ -55,26 +117,65 @@ const TaskBoardPage = () => {
         />
       )}
 
+      {/* Update Task Modal */}
+      {editTask && (
+        <AddTaskModal
+          open={!!editTask}
+          onClose={() => setEditTask(null)}
+          initialData={{
+            name: editTask.name,
+            description: editTask.description,
+            assignedTo: editTask.assignedTo,
+            priority: editTask.priority,
+            dueDate: editTask.dueDate.slice(0, 10),
+          }}
+          onSubmit={handleUpdateTask}
+        />
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {deleteModalOpen && deleteTaskData && (
+        <ConfirmDeleteModal
+          open={deleteModalOpen}
+          onClose={() => setDeleteModalOpen(false)}
+          onConfirm={handleConfirmDelete}
+        />
+      )}
+
       {/* Task Lists by Date */}
       {Object.keys(tasksByDate).length > 0 ? (
         Object.keys(tasksByDate)
-          .sort() // optional: keep chronological order
-          .map((date) => (
-            <div
-              key={date}
-              className="mb-6 p-4 border border-gray-200 rounded-lg bg-white shadow-sm"
-            >
-              <h3 className="text-lg font-semibold mb-2">
-                {new Date(date).toLocaleDateString('en-US', {
-                  weekday: 'long',
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
-                })}
-              </h3>
-              <TaskList tasks={tasksByDate[date]} />
-            </div>
-          ))
+          .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
+          .map((date) => {
+            const filteredTasks = filterTasksByUser(tasksByDate[date])
+            if (filteredTasks.length === 0) return null
+
+            return (
+              <div
+                key={date}
+                className="mb-6 p-4 border border-gray-200 rounded-lg bg-white shadow-sm"
+              >
+                <h3 className="text-lg font-semibold mb-2">
+                  {new Date(date).toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })}
+                </h3>
+
+                <TaskList
+                  tasks={filteredTasks}
+                  onEdit={(task) => setEditTask(task)}
+                  onDelete={(task) => {
+                    setDeleteTaskData(task)
+                    setDeleteModalOpen(true)
+                  }}
+                  onComplete={handleCompleteTask}
+                />
+              </div>
+            )
+          })
       ) : (
         <p className="text-gray-500">No tasks available.</p>
       )}
@@ -85,23 +186,10 @@ const TaskBoardPage = () => {
 export default TaskBoardPage
 
 // Header Component
-const Header = ({ date, onAdd }: { date: Date; onAdd: () => void }) => {
-  const currentDateStr = date.toLocaleDateString('en-US', {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  })
-
-  return (
-    <div className="flex justify-between items-center mb-6">
-      <h2 className="text-xl font-bold">{currentDateStr}</h2>
-      <button
-        className="flex items-center gap-2 rounded-md px-2 py-1 bg-black text-white"
-        onClick={onAdd}
-      >
-        <Plus size={18} /> Add Task
-      </button>
-    </div>
-  )
-}
+const Header = ({ onAdd }: { onAdd: () => void }) => (
+  <div className="flex justify-between items-center mb-6">
+    <button className="flex items-center gap-2" onClick={onAdd}>
+      <Plus size={18} /> Add Task
+    </button>
+  </div>
+)
