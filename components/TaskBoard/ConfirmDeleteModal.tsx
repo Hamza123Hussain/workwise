@@ -18,8 +18,18 @@ const ConfirmDeleteModal = ({
         <h3 className="text-lg font-bold mb-4">Delete Task</h3>
         <p className="mb-6">Are you sure you want to delete this task?</p>
         <div className="flex justify-center gap-2">
-          <button onClick={onClose}>Cancel</button>
-          <button onClick={onConfirm}>Delete</button>
+          <button
+            className=" rounded-sm p-2 bg-black text-white"
+            onClick={onClose}
+          >
+            Cancel
+          </button>
+          <button
+            className=" rounded-sm p-2 bg-red-500 text-white"
+            onClick={onConfirm}
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>
