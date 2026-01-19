@@ -120,8 +120,18 @@ const AddTaskModal = ({
         </div>
 
         <div className="flex justify-end gap-2">
-          <button onClick={onClose}>Cancel</button>
-          <button onClick={handleAdd}>{initialData ? 'Update' : 'Add'}</button>
+          <button
+            className=" rounded-sm p-2 bg-black text-white"
+            onClick={onClose}
+          >
+            Cancel
+          </button>
+          <button
+            className=" rounded-sm p-2 bg-green-400 text-white"
+            onClick={handleAdd}
+          >
+            {initialData ? 'Update' : 'Add'}
+          </button>
         </div>
       </div>
     </div>
