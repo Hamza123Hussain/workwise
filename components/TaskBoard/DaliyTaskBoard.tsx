@@ -188,7 +188,10 @@ export default TaskBoardPage
 // Header Component
 const Header = ({ onAdd }: { onAdd: () => void }) => (
   <div className="flex justify-between items-center mb-6">
-    <button className="flex items-center gap-2" onClick={onAdd}>
+    <button
+      className="flex items-center gap-2  rounded-sm p-2 bg-black text-white"
+      onClick={onAdd}
+    >
       <Plus size={18} /> Add Task
     </button>
   </div>
