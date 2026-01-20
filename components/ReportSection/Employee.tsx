@@ -31,26 +31,35 @@ const EmployeePerformanceCard = ({ element }: { element: Kpi }) => {
         <div
           className={`p-3 ${COLORS.HIGH_BG} flex items-center gap-2 text-red-700`}
         >
-          <p>High Priority:</p>
+          <p>High Priority Tasks:</p>
           <p className="font-bold">
-            {element.Targets.filter((t) => t.Priority === 'High').length}
+            {element.Targets.reduce(
+              (acc, t) => (t.Priority === 'High' ? acc + t.TargetValue : acc),
+              0,
+            )}
           </p>
         </div>
 
         <div
           className={`p-3 ${COLORS.MEDIUM_BG} flex items-center gap-2 text-orange-700`}
         >
-          <p>Medium:</p>
+          <p>Medium Priority Tasks:</p>
           <p className="font-bold">
-            {element.Targets.filter((t) => t.Priority === 'Medium').length}
+            {element.Targets.reduce(
+              (acc, t) => (t.Priority === 'Medium' ? acc + t.TargetValue : acc),
+              0,
+            )}
           </p>
         </div>
         <div
           className={`p-3 ${COLORS.LOW_BG} flex items-center gap-2 text-blue-700`}
         >
-          <p>Low:</p>
+          <p>Low Priority Tasks:</p>
           <p className="font-bold">
-            {element.Targets.filter((t) => t.Priority === 'Low').length}
+            {element.Targets.reduce(
+              (acc, t) => (t.Priority === 'Low' ? acc + t.TargetValue : acc),
+              0,
+            )}
           </p>
         </div>
         <div
@@ -82,7 +91,7 @@ const EmployeePerformanceCard = ({ element }: { element: Kpi }) => {
           <span className=" font-bold">
             PKR{' '}
             {new Intl.NumberFormat('en-PK').format(
-              Math.round(calculatedSalary)
+              Math.round(calculatedSalary),
             )}
           </span>
         </div>
