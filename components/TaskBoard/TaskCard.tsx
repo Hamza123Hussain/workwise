@@ -30,7 +30,7 @@ const TaskCard = ({
       month: 'short',
       day: 'numeric',
     })
-
+  console.log('Rendering TaskCard for task:', onDelete)
   const isCompleted = simpleTask.status === 'Completed'
   const dueDatePassed =
     simpleTask.dueDate &&
@@ -127,12 +127,6 @@ const TaskCard = ({
               onClick={onEdit}
             >
               Update
-            </button>
-            <button
-              className="hover:bg-red-600 transition-colors rounded-sm p-2 bg-red-400 text-white"
-              onClick={onDelete}
-            >
-              Delete
             </button>
           </>
         )}
