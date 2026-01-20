@@ -8,11 +8,13 @@ const TaskList = ({
   onEdit,
   onDelete,
   onComplete,
+  onUpdateStatus, // new prop
 }: {
   tasks: any[]
   onEdit: (task: any) => void
   onDelete: (task: any) => void
   onComplete: (task: any) => void
+  onUpdateStatus: (task: any, status: string) => void
 }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -24,6 +26,7 @@ const TaskList = ({
             onEdit={() => onEdit(task)}
             onDelete={() => onDelete(task)}
             onComplete={() => onComplete(task)}
+            onUpdateStatus={(status) => onUpdateStatus(task, status)}
           />
         ))
       ) : (
