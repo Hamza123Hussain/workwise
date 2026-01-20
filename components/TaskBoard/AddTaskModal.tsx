@@ -80,45 +80,49 @@ const AddTaskModal = ({
           className="mb-3 w-full rounded border px-3 py-2"
           rows={3}
         />
-        {/* Assigned To */}
-        <select
-          name="assignedTo"
-          value={formData.assignedTo}
-          onChange={handleChange}
-          className="mb-3 w-full rounded border px-3 py-2"
-        >
-          <option value="">Select User</option>
-          <option value={currentUser.Name}>{currentUser.Name}</option>
-        </select>
-        {/* Priority */}
-        <select
-          name="priority"
-          value={formData.priority}
-          onChange={handleChange}
-          className="mb-3 w-full rounded border px-3 py-2"
-        >
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-        </select>
-        {/* Due Date */}
-        <div className="mb-4">
-          <label
-            htmlFor="dueDate"
-            className="block mb-1 text-sm font-medium text-gray-700"
-          >
-            Due Date
-          </label>
-          <input
-            type="date"
-            id="dueDate"
-            name="dueDate"
-            value={formData.dueDate}
-            onChange={handleChange}
-            className="w-full rounded border px-3 py-2"
-          />
-        </div>
-
+        {initialData ? (
+          ''
+        ) : (
+          <>
+            <select
+              name="assignedTo"
+              value={formData.assignedTo}
+              onChange={handleChange}
+              className="mb-3 w-full rounded border px-3 py-2"
+            >
+              <option value="">Select User</option>
+              <option value={currentUser.Name}>{currentUser.Name}</option>
+            </select>
+            {/* Priority */}
+            <select
+              name="priority"
+              value={formData.priority}
+              onChange={handleChange}
+              className="mb-3 w-full rounded border px-3 py-2"
+            >
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+            {/* Due Date */}
+            <div className="mb-4">
+              <label
+                htmlFor="dueDate"
+                className="block mb-1 text-sm font-medium text-gray-700"
+              >
+                Due Date
+              </label>
+              <input
+                type="date"
+                id="dueDate"
+                name="dueDate"
+                value={formData.dueDate}
+                onChange={handleChange}
+                className="w-full rounded border px-3 py-2"
+              />
+            </div>
+          </>
+        )}
         <div className="flex justify-end gap-2">
           <button
             className=" rounded-sm p-2 bg-black text-white"
