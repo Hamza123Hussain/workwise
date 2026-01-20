@@ -1,20 +1,16 @@
 'use client'
 import React from 'react'
-
 const priorityStyles: Record<string, string> = {
   Low: 'bg-green-100 text-green-800 border-green-200',
   Medium: 'bg-yellow-100 text-yellow-800 border-yellow-200',
   High: 'bg-red-100 text-red-800 border-red-200',
 }
-
 const statusStyles: Record<string, string> = {
   'Not Started': 'bg-gray-200 text-gray-800',
   'In Progress': 'bg-blue-200 text-blue-800',
   'In Review': 'bg-purple-200 text-purple-800',
   Completed: 'bg-green-200 text-green-800',
 }
-
-// Inside TaskCard
 const TaskCard = ({
   simpleTask,
   onEdit,
@@ -35,20 +31,18 @@ const TaskCard = ({
       day: 'numeric',
     })
 
-  const isCompleted = simpleTask.completed || simpleTask.status === 'Completed'
+  const isCompleted = simpleTask.status === 'Completed'
   const dueDatePassed =
     simpleTask.dueDate &&
     new Date(simpleTask.dueDate).setHours(0, 0, 0, 0) <
       new Date().setHours(0, 0, 0, 0)
-
   const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newStatus = e.target.value
     onUpdateStatus(newStatus)
-    if (newStatus === 'Completed' && !isCompleted) {
+    if (newStatus === 'Completed') {
       onComplete()
     }
   }
-
   return (
     <div
       className={`w-full p-5 rounded-2xl border ${
@@ -71,9 +65,7 @@ const TaskCard = ({
             {simpleTask.priority}
           </span>
         )}
-      </div>
-
-      {/* Description */}
+      </div>{' '}
       <p
         className={`text-gray-600 mb-4 line-clamp-3 ${
           isCompleted ? 'line-through text-gray-400' : ''
@@ -81,7 +73,6 @@ const TaskCard = ({
       >
         {simpleTask.description}
       </p>
-
       {/* Status Dropdown */}
       <div className="flex items-center gap-2 mb-2">
         <span className="text-xs font-semibold">Status:</span>
@@ -98,7 +89,6 @@ const TaskCard = ({
           ))}
         </select>
       </div>
-
       {/* Task Meta */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4 text-gray-700 mb-4 text-xs">
         <div>
@@ -119,7 +109,7 @@ const TaskCard = ({
         </div>
         {isCompleted && (
           <div className="col-span-full text-green-600 font-semibold mt-1">
-            ✔ Completed on: {formatDate(simpleTask.completedAt || new Date())}
+            ✔ Completed on: {formatDate(simpleTask.completeddate)}
           </div>
         )}
         {dueDatePassed && !isCompleted && (
@@ -128,7 +118,6 @@ const TaskCard = ({
           </div>
         )}
       </div>
-
       {/* Actions */}
       <div className="flex justify-end gap-2 mt-2">
         {!isCompleted && (
@@ -151,5 +140,4 @@ const TaskCard = ({
     </div>
   )
 }
-
 export default TaskCard
