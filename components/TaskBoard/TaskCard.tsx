@@ -5,7 +5,17 @@ const priorityStyles: Record<string, string> = {
   Medium: 'bg-yellow-100 text-yellow-800 border-yellow-200',
   High: 'bg-red-100 text-red-800 border-red-200',
 }
-const TaskCard = ({ simpleTask, onEdit, onDelete, onComplete }: any) => {
+const TaskCard = ({
+  simpleTask,
+  onEdit,
+  onDelete,
+  onComplete,
+}: {
+  simpleTask: any
+  onEdit: () => void
+  onDelete: () => void
+  onComplete: () => void
+}) => {
   const formatDate = (date: string | Date) =>
     new Date(date).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -17,6 +27,7 @@ const TaskCard = ({ simpleTask, onEdit, onDelete, onComplete }: any) => {
     simpleTask.dueDate &&
     new Date(simpleTask.dueDate).setHours(0, 0, 0, 0) <
       new Date().setHours(0, 0, 0, 0)
+
   return (
     <div
       className={`w-full p-5 rounded-2xl border ${
@@ -67,7 +78,7 @@ const TaskCard = ({ simpleTask, onEdit, onDelete, onComplete }: any) => {
         </div>
         {isCompleted && (
           <div className="col-span-full text-green-600 font-semibold mt-1">
-            ✔ Completed on: {formatDate(simpleTask.completedAt || new Date())}
+            ✔ Completed
           </div>
         )}
         {dueDatePassed && !isCompleted && (
@@ -76,18 +87,17 @@ const TaskCard = ({ simpleTask, onEdit, onDelete, onComplete }: any) => {
           </div>
         )}
       </div>
-      {/* Actions */}
       <div className="flex justify-end gap-2 mt-2">
         {!isCompleted && (
           <>
             <button
-              className="hover:bg-gray-50 transition-colors"
+              className="hover:bg-gray-50 transition-colors rounded-sm p-2 bg-blue-400 text-white"
               onClick={onEdit}
             >
               Update
             </button>
             <button
-              className="hover:bg-red-600 transition-colors"
+              className="hover:bg-red-600 transition-colors rounded-sm p-2 bg-red-400 text-white"
               onClick={onDelete}
             >
               Delete
@@ -96,10 +106,9 @@ const TaskCard = ({ simpleTask, onEdit, onDelete, onComplete }: any) => {
         )}
         <button
           onClick={onComplete}
-          disabled={isCompleted || dueDatePassed}
-          className={
-            dueDatePassed && !isCompleted ? 'cursor-not-allowed opacity-50' : ''
-          }
+          disabled={isCompleted || dueDatePassed} // Disable if completed or past due
+          className={`  rounded-sm p-2 bg-green-400 text-white
+            ${dueDatePassed && !isCompleted ? 'cursor-not-allowed opacity-50 bg-black text-white' : ''}`}
         >
           {isCompleted ? 'Completed' : 'Mark Complete'}
         </button>
