@@ -1,45 +1,28 @@
 'use client'
-
 import React from 'react'
-
 const priorityStyles: Record<string, string> = {
   Low: 'bg-green-100 text-green-800 border-green-200',
   Medium: 'bg-yellow-100 text-yellow-800 border-yellow-200',
   High: 'bg-red-100 text-red-800 border-red-200',
 }
-
-const TaskCard = ({
-  simpleTask,
-  onEdit,
-  onDelete,
-  onComplete,
-}: {
-  simpleTask: any
-  onEdit: () => void
-  onDelete: () => void
-  onComplete: () => void
-}) => {
+const TaskCard = ({ simpleTask, onEdit, onDelete, onComplete }: any) => {
   const formatDate = (date: string | Date) =>
     new Date(date).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
     })
-
   const isCompleted = simpleTask.completed
-
-  // Disable "Mark Complete" if due date has passed
   const dueDatePassed =
     simpleTask.dueDate &&
-    new Date(simpleTask.dueDate).getTime() < new Date().getTime()
-
+    new Date(simpleTask.dueDate).setHours(0, 0, 0, 0) <
+      new Date().setHours(0, 0, 0, 0)
   return (
     <div
       className={`w-full p-5 rounded-2xl border ${
         isCompleted ? 'bg-gray-100 border-gray-300' : 'bg-white border-gray-200'
       } shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 hover:scale-[1.02]`}
     >
-      {/* Header */}
       <div className="flex justify-between items-start mb-3">
         <h2
           className={`text-lg font-semibold ${
@@ -48,7 +31,6 @@ const TaskCard = ({
         >
           {simpleTask.name || 'Untitled Task'}
         </h2>
-
         {simpleTask.priority && (
           <span
             className={`px-3 py-1 text-xs font-semibold rounded-full border ${
@@ -59,8 +41,6 @@ const TaskCard = ({
           </span>
         )}
       </div>
-
-      {/* Description */}
       <p
         className={`text-gray-600 mb-4 line-clamp-3 ${
           isCompleted ? 'line-through text-gray-400' : ''
@@ -68,8 +48,6 @@ const TaskCard = ({
       >
         {simpleTask.description}
       </p>
-
-      {/* Task Meta */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4 text-gray-700 mb-4 text-xs">
         <div>
           <span className="font-semibold">Assigned:</span>{' '}
@@ -89,7 +67,7 @@ const TaskCard = ({
         </div>
         {isCompleted && (
           <div className="col-span-full text-green-600 font-semibold mt-1">
-            ✔ Completed
+            ✔ Completed on: {formatDate(simpleTask.completedAt || new Date())}
           </div>
         )}
         {dueDatePassed && !isCompleted && (
@@ -98,19 +76,18 @@ const TaskCard = ({
           </div>
         )}
       </div>
-
       {/* Actions */}
       <div className="flex justify-end gap-2 mt-2">
         {!isCompleted && (
           <>
             <button
-              className="hover:bg-gray-50 transition-colors rounded-sm p-2 bg-blue-400 text-white"
+              className="hover:bg-gray-50 transition-colors"
               onClick={onEdit}
             >
               Update
             </button>
             <button
-              className="hover:bg-red-600 transition-colors rounded-sm p-2 bg-red-400 text-white"
+              className="hover:bg-red-600 transition-colors"
               onClick={onDelete}
             >
               Delete
@@ -119,9 +96,10 @@ const TaskCard = ({
         )}
         <button
           onClick={onComplete}
-          disabled={isCompleted || dueDatePassed} // Disable if completed or past due
-          className={`  rounded-sm p-2 bg-green-400 text-white
-            ${dueDatePassed && !isCompleted ? 'cursor-not-allowed opacity-50 bg-black text-white' : ''}`}
+          disabled={isCompleted || dueDatePassed}
+          className={
+            dueDatePassed && !isCompleted ? 'cursor-not-allowed opacity-50' : ''
+          }
         >
           {isCompleted ? 'Completed' : 'Mark Complete'}
         </button>
