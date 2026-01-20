@@ -79,7 +79,7 @@ const TaskCard = ({
         <select
           value={simpleTask.status || 'Not Started'}
           onChange={handleStatusChange}
-          disabled={isCompleted}
+          disabled={dueDatePassed || isCompleted}
           className="text-xs rounded-md border px-2 py-1"
         >
           {Object.keys(statusStyles).map((status) => (
