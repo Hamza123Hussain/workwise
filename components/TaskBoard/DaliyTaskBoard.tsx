@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-
 import { Plus } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
@@ -77,7 +76,7 @@ const TaskBoardPage = () => {
     }
   }
 
-  const handleConfirmDelete = async () => {
+  const handleDeleteTask = async () => {
     if (!deleteTaskData) return
     try {
       await deleteTask(deleteTaskData._id)
@@ -92,11 +91,26 @@ const TaskBoardPage = () => {
 
   const handleCompleteTask = async (task: any) => {
     try {
-      await completeTask(task._id, !task.completed)
+      await completeTask(task._id, true)
       toast.success('Task marked as completed!')
       fetchTasks()
     } catch {
       toast.error('Failed to mark task as completed')
+    }
+  }
+
+  // **New: Update status**
+  const handleUpdateStatus = async (task: any, status: string) => {
+    try {
+      // await updateTask(task._id,  status ) // update status in backend
+      toast.success('Status updated!')
+      if (status === 'Completed' && !task.completed) {
+        await handleCompleteTask(task)
+      } else {
+        fetchTasks()
+      }
+    } catch {
+      toast.error('Failed to update status')
     }
   }
 
@@ -108,6 +122,7 @@ const TaskBoardPage = () => {
     <div className="min-h-screen bg-gray-50 p-6">
       {/* Header */}
       <Header onAdd={() => setModalOpen(true)} />
+
       {/* Add Task Modal */}
       {modalOpen && (
         <AddTaskModal
@@ -138,7 +153,7 @@ const TaskBoardPage = () => {
         <ConfirmDeleteModal
           open={deleteModalOpen}
           onClose={() => setDeleteModalOpen(false)}
-          onConfirm={handleConfirmDelete}
+          onConfirm={handleDeleteTask}
         />
       )}
 
@@ -172,6 +187,7 @@ const TaskBoardPage = () => {
                     setDeleteModalOpen(true)
                   }}
                   onComplete={handleCompleteTask}
+                  onUpdateStatus={handleUpdateStatus} // propagate status update
                 />
               </div>
             )
@@ -189,7 +205,7 @@ export default TaskBoardPage
 const Header = ({ onAdd }: { onAdd: () => void }) => (
   <div className="flex justify-between items-center mb-6">
     <button
-      className="flex items-center gap-2  rounded-sm p-2 bg-black text-white"
+      className="flex items-center gap-2 rounded-sm p-2 bg-black text-white"
       onClick={onAdd}
     >
       <Plus size={18} /> Add Task
