@@ -1,20 +1,32 @@
 'use client'
 import React from 'react'
+
 const priorityStyles: Record<string, string> = {
   Low: 'bg-green-100 text-green-800 border-green-200',
   Medium: 'bg-yellow-100 text-yellow-800 border-yellow-200',
   High: 'bg-red-100 text-red-800 border-red-200',
 }
+
+const statusStyles: Record<string, string> = {
+  'Not Started': 'bg-gray-200 text-gray-800',
+  'In Progress': 'bg-blue-200 text-blue-800',
+  'In Review': 'bg-purple-200 text-purple-800',
+  Completed: 'bg-green-200 text-green-800',
+}
+
+// Inside TaskCard
 const TaskCard = ({
   simpleTask,
   onEdit,
   onDelete,
   onComplete,
+  onUpdateStatus, // new prop
 }: {
   simpleTask: any
   onEdit: () => void
   onDelete: () => void
   onComplete: () => void
+  onUpdateStatus: (status: string) => void
 }) => {
   const formatDate = (date: string | Date) =>
     new Date(date).toLocaleDateString('en-US', {
@@ -22,11 +34,20 @@ const TaskCard = ({
       month: 'short',
       day: 'numeric',
     })
-  const isCompleted = simpleTask.completed
+
+  const isCompleted = simpleTask.completed || simpleTask.status === 'Completed'
   const dueDatePassed =
     simpleTask.dueDate &&
     new Date(simpleTask.dueDate).setHours(0, 0, 0, 0) <
       new Date().setHours(0, 0, 0, 0)
+
+  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newStatus = e.target.value
+    onUpdateStatus(newStatus)
+    if (newStatus === 'Completed' && !isCompleted) {
+      onComplete()
+    }
+  }
 
   return (
     <div
@@ -34,6 +55,7 @@ const TaskCard = ({
         isCompleted ? 'bg-gray-100 border-gray-300' : 'bg-white border-gray-200'
       } shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 hover:scale-[1.02]`}
     >
+      {/* Header */}
       <div className="flex justify-between items-start mb-3">
         <h2
           className={`text-lg font-semibold ${
@@ -44,14 +66,14 @@ const TaskCard = ({
         </h2>
         {simpleTask.priority && (
           <span
-            className={`px-3 py-1 text-xs font-semibold rounded-full border ${
-              priorityStyles[simpleTask.priority]
-            } shadow-sm`}
+            className={`px-3 py-1 text-xs font-semibold rounded-full border ${priorityStyles[simpleTask.priority]} shadow-sm`}
           >
             {simpleTask.priority}
           </span>
         )}
       </div>
+
+      {/* Description */}
       <p
         className={`text-gray-600 mb-4 line-clamp-3 ${
           isCompleted ? 'line-through text-gray-400' : ''
@@ -59,6 +81,25 @@ const TaskCard = ({
       >
         {simpleTask.description}
       </p>
+
+      {/* Status Dropdown */}
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-xs font-semibold">Status:</span>
+        <select
+          value={simpleTask.status || 'Not Started'}
+          onChange={handleStatusChange}
+          disabled={isCompleted}
+          className="text-xs rounded-md border px-2 py-1"
+        >
+          {Object.keys(statusStyles).map((status) => (
+            <option key={status} value={status}>
+              {status}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Task Meta */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4 text-gray-700 mb-4 text-xs">
         <div>
           <span className="font-semibold">Assigned:</span>{' '}
@@ -78,7 +119,7 @@ const TaskCard = ({
         </div>
         {isCompleted && (
           <div className="col-span-full text-green-600 font-semibold mt-1">
-            ✔ Completed
+            ✔ Completed on: {formatDate(simpleTask.completedAt || new Date())}
           </div>
         )}
         {dueDatePassed && !isCompleted && (
@@ -87,6 +128,8 @@ const TaskCard = ({
           </div>
         )}
       </div>
+
+      {/* Actions */}
       <div className="flex justify-end gap-2 mt-2">
         {!isCompleted && (
           <>
@@ -104,14 +147,6 @@ const TaskCard = ({
             </button>
           </>
         )}
-        <button
-          onClick={onComplete}
-          disabled={isCompleted || dueDatePassed} // Disable if completed or past due
-          className={`  rounded-sm p-2 bg-green-400 text-white
-            ${dueDatePassed && !isCompleted ? 'cursor-not-allowed opacity-50 bg-black text-white' : ''}`}
-        >
-          {isCompleted ? 'Completed' : 'Mark Complete'}
-        </button>
       </div>
     </div>
   )
