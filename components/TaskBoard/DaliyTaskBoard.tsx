@@ -14,6 +14,7 @@ import AddTaskModal from './AddTaskModal'
 import ConfirmDeleteModal from './ConfirmDeleteModal'
 import { deleteTask } from '@/functions/Task/DeleteTaskBoard'
 import { completeTask } from '@/functions/Task/CompleteTask'
+import { updateTaskStatus } from '@/functions/Task/UpdateTaskStatus'
 
 type TaskFormData = {
   name: string
@@ -102,13 +103,10 @@ const TaskBoardPage = () => {
   // **New: Update status**
   const handleUpdateStatus = async (task: any, status: string) => {
     try {
-      // await updateTask(task._id,  status ) // update status in backend
+      await updateTaskStatus(task._id, status) // update status in backend
       toast.success('Status updated!')
-      if (status === 'Completed' && !task.completed) {
-        await handleCompleteTask(task)
-      } else {
-        fetchTasks()
-      }
+
+      fetchTasks()
     } catch {
       toast.error('Failed to update status')
     }
