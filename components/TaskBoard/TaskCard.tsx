@@ -78,7 +78,7 @@ const TaskCard = ({
         <span className="text-xs font-semibold">Status:</span>
         <select
           value={simpleTask.status || 'Not Started'}
-          onChange={handleStatusChange}
+          onChange={(e) => handleStatusChange(e)}
           disabled={dueDatePassed || isCompleted}
           className="text-xs rounded-md border px-2 py-1"
         >
