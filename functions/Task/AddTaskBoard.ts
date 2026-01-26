@@ -8,6 +8,7 @@ export type TaskPayload = {
   dueDate: string
   createdBy: string
   email: string
+  type?: string
 }
 
 //----------------------------------
