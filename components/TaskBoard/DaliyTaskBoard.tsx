@@ -22,6 +22,7 @@ type TaskFormData = {
   assignedTo: string
   priority: 'Low' | 'Medium' | 'High' | ''
   dueDate: string
+  type?: string
 }
 
 const TaskBoardPage = () => {
@@ -56,6 +57,7 @@ const TaskBoardPage = () => {
         dueDate: taskData.dueDate,
         createdBy: currentUser.Name,
         email: currentUser.Email,
+        type: taskData.type,
       })
       toast.success('Task added!')
       setModalOpen(false)
@@ -92,9 +94,17 @@ const TaskBoardPage = () => {
 
   const handleCompleteTask = async (task: any) => {
     try {
-      await completeTask(task._id, true)
-      toast.success('Task marked as completed!')
-      fetchTasks()
+      const result = await completeTask(
+        task._id,
+        true,
+        currentUser._id,
+        task.type,
+      )
+      if (result) {
+        toast.success('Task marked as completed!')
+        fetchTasks()
+        console.log('Task Details : ', task)
+      }
     } catch {
       toast.error('Failed to mark task as completed')
     }
@@ -105,9 +115,9 @@ const TaskBoardPage = () => {
     try {
       await updateTaskStatus(task._id, status) // update status in backend
       toast.success('Status updated!')
-
-      fetchTasks()
-    } catch {
+      fetchTasks() // refresh list
+    } catch (err) {
+      console.error('Error updating task status:', err)
       toast.error('Failed to update status')
     }
   }
@@ -141,6 +151,7 @@ const TaskBoardPage = () => {
             assignedTo: editTask.assignedTo,
             priority: editTask.priority,
             dueDate: editTask.dueDate.slice(0, 10),
+            type: editTask.type,
           }}
           onSubmit={handleUpdateTask}
         />
