@@ -1,59 +1,109 @@
 import React, { useEffect, useState } from 'react'
-import KpiCard from '../Home/KPI/Card/KpiCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
 import { GetAllKpi } from '@/functions/Kpi/GetAllKpis'
 import { setKpis } from '@/utils/Redux/Slice/kpi/KpiListSlice'
-import { KpiModal } from '../Home/KPI/CreateKpi/CreateModal'
-import { motion } from 'framer-motion'
+import DeleteConfirmModal from '../DashBoard/Kpi/DeleteConfirmModal'
+import CreateEditKpiModal from '../DashBoard/Kpi/CreateEditModal'
+import KPICard from '../DashBoard/Kpi/KpiCard'
+import toast from 'react-hot-toast'
+import { deleteKPI } from '@/functions/Kpi/DeleteKPi'
 const KPIComponent = () => {
+  const dispatch = useDispatch()
   const user = useSelector((state: RootState) => state.user)
   const kpis = useSelector((state: RootState) => state.KpiList)
+
   const [loading, setLoading] = useState(true)
-  const Dispatch = useDispatch()
+  const [createOpen, setCreateOpen] = useState(false)
+  const [editOpen, setEditOpen] = useState(false)
+  const [deleteOpen, setDeleteOpen] = useState(false)
+  const [selectedKpi, setSelectedKpi] = useState<any>(null)
+
   useEffect(() => {
-    const fetchKpis = async () => {
-      try {
-        setLoading(true)
-        const Data = await GetAllKpi(user._id)
-        if (Data) Dispatch(setKpis(Data))
-      } catch (error) {
-        console.error('Error fetching KPIs:', error)
-      } finally {
-        setLoading(false)
-      }
+    const fetch = async () => {
+      setLoading(true)
+      const data = await GetAllKpi(user._id)
+      if (data) dispatch(setKpis(data))
+      setLoading(false)
     }
-    fetchKpis()
-  }, [user._id, Dispatch])
+    fetch()
+  }, [user._id, dispatch])
+  const handleConfirmDelete = async () => {
+    if (!selectedKpi?._id) return
+
+    try {
+      const result = await deleteKPI(selectedKpi.UserId, selectedKpi._id)
+      if (result.success) {
+        toast.success('KPI deleted successfully!')
+        // Refresh the KPI list
+        const data = await GetAllKpi(user._id)
+        if (data) dispatch(setKpis(data))
+      } else {
+        toast.error('Error: ' + result.error)
+      }
+    } catch (err: any) {
+      console.error(err)
+      toast.error('An unexpected error occurred')
+    } finally {
+      setDeleteOpen(false)
+      setSelectedKpi(null)
+    }
+  }
+
   return (
-    <div className="p-6  min-h-screen">
-      <h2 className="text-3xl font-extrabold text-purple-700 mb-8 text-center">
-        All KPIs
-      </h2>
-      <div className=" flex justify-end mb-5">
-        <KpiModal />
-      </div>
-      {loading ? (
-        <div className="flex justify-center items-center h-full">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="text-lg font-semibold text-purple-600"
-          >
-            Loading KPIs...
-          </motion.div>
-        </div>
-      ) : kpis.length === 0 ? (
-        <div className="text-gray-600 text-center text-lg">
-          No KPIs found. Please check back later.
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 h-80 overflow-y-scroll   gap-6">
-          {kpis.map((kpi) => (
-            <KpiCard key={kpi.UserId} kpi={kpi} />
+    <div className="p-6 min-h-screen bg-gray-50">
+      <h1 className="text-2xl font-bold mb-6">My KPIs</h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        {!loading &&
+          kpis?.map((kpi: any) => (
+            <KPICard
+              key={kpi._id}
+              kpi={kpi}
+              onEdit={() => {
+                setSelectedKpi(kpi)
+                setEditOpen(true)
+              }}
+              onDelete={() => {
+                setSelectedKpi(kpi)
+                setDeleteOpen(true)
+              }}
+            />
           ))}
-        </div>
+      </div>
+
+      {/* Add KPI */}
+      <button
+        onClick={() => setCreateOpen(true)}
+        className="fixed bottom-6 right-6 bg-blue-600 text-white px-5 py-3 rounded-full shadow-lg"
+      >
+        + Add KPI
+      </button>
+
+      {/* Modals */}
+      {createOpen && (
+        <CreateEditKpiModal
+          mode="create"
+          onClose={() => setCreateOpen(false)}
+        />
+      )}
+
+      {editOpen && selectedKpi && (
+        <CreateEditKpiModal
+          mode="edit"
+          kpi={selectedKpi}
+          onClose={() => setEditOpen(false)}
+        />
+      )}
+
+      {deleteOpen && selectedKpi && (
+        <DeleteConfirmModal
+          onCancel={() => setDeleteOpen(false)}
+          onConfirm={() => {
+            handleConfirmDelete()
+            setDeleteOpen(false)
+          }}
+        />
       )}
     </div>
   )
