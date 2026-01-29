@@ -1,28 +1,37 @@
 'use client'
 import React from 'react'
+
 const priorityStyles: Record<string, string> = {
   Low: 'bg-green-100 text-green-800 border-green-200',
   Medium: 'bg-yellow-100 text-yellow-800 border-yellow-200',
   High: 'bg-red-100 text-red-800 border-red-200',
 }
+
 const statusStyles: Record<string, string> = {
   'Not Started': 'bg-gray-200 text-gray-800',
   'In Progress': 'bg-blue-200 text-blue-800',
   'In Review': 'bg-purple-200 text-purple-800',
   Completed: 'bg-green-200 text-green-800',
 }
+
+const instagramTypes = [
+  'PowerPulse Instagram Posts/Reels',
+  'Global Grads Instagram Posts/Reels',
+  'Octtoppus Instagram Posts/Reels',
+]
+
 const TaskCard = ({
   simpleTask,
   onEdit,
-  onDelete,
   onComplete,
-  onUpdateStatus, // new prop
+  onUpdateStatus,
+  onUpdatePosting,
 }: {
   simpleTask: any
   onEdit: () => void
-  onDelete: () => void
   onComplete: () => void
   onUpdateStatus: (status: string) => void
+  onUpdatePosting?: (platform: string, status: boolean) => void
 }) => {
   const formatDate = (date: string | Date) =>
     new Date(date).toLocaleDateString('en-US', {
@@ -30,19 +39,40 @@ const TaskCard = ({
       month: 'short',
       day: 'numeric',
     })
-  console.log('Rendering TaskCard for task:', onDelete)
+
   const isCompleted = simpleTask.status === 'Completed'
   const dueDatePassed =
     simpleTask.dueDate &&
     new Date(simpleTask.dueDate).setHours(0, 0, 0, 0) <
       new Date().setHours(0, 0, 0, 0)
+
+  // Check if all Posting checkboxes are done (for Instagram tasks)
+  const allPostingDone =
+    instagramTypes.includes(simpleTask.type) &&
+    simpleTask.Posting &&
+    simpleTask.Posting.every((p: any) => p.Status === true)
+
   const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newStatus = e.target.value
+
+    // Prevent "Completed" if not all postings done
+    if (newStatus === 'Completed' && !allPostingDone) {
+      alert('Cannot mark as Completed until all postings are done!')
+      return
+    }
+
     onUpdateStatus(newStatus)
     if (newStatus === 'Completed') {
       onComplete()
     }
   }
+
+  const handlePostingChange = (platform: string, checked: boolean) => {
+    if (onUpdatePosting) {
+      onUpdatePosting(platform, checked)
+    }
+  }
+
   return (
     <div
       className={`w-full p-5 rounded-2xl border ${
@@ -65,7 +95,9 @@ const TaskCard = ({
             {simpleTask.priority}
           </span>
         )}
-      </div>{' '}
+      </div>
+
+      {/* Description */}
       <p
         className={`text-gray-600 mb-4 line-clamp-3 ${
           isCompleted ? 'line-through text-gray-400' : ''
@@ -73,22 +105,51 @@ const TaskCard = ({
       >
         {simpleTask.description}
       </p>
+
       {/* Status Dropdown */}
       <div className="flex items-center gap-2 mb-2">
         <span className="text-xs font-semibold">Status:</span>
         <select
           value={simpleTask.status || 'Not Started'}
           onChange={(e) => handleStatusChange(e)}
-          disabled={dueDatePassed || isCompleted}
+          disabled={dueDatePassed || isCompleted} // Only disable for due date passed or already completed
           className="text-xs rounded-md border px-2 py-1"
         >
           {Object.keys(statusStyles).map((status) => (
-            <option key={status} value={status}>
+            <option
+              key={status}
+              value={status}
+              disabled={status === 'Completed' && !allPostingDone} // disable only Completed if postings incomplete
+            >
               {status}
             </option>
           ))}
         </select>
       </div>
+
+      {/* Posting Checkboxes */}
+      {instagramTypes.includes(simpleTask.type) && simpleTask.Posting && (
+        <div className="mb-4">
+          <span className="text-xs font-semibold">Posting:</span>
+          <div className="flex gap-3 mt-1">
+            {simpleTask.Posting.map((p: any) => (
+              <label key={p.Name} className="flex items-center gap-1 text-sm">
+                <input
+                  type="checkbox"
+                  checked={p.Status}
+                  onChange={(e) =>
+                    handlePostingChange(p.Name, e.target.checked)
+                  }
+                  disabled={isCompleted}
+                  className="rounded border-gray-300"
+                />
+                {p.Name}
+              </label>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Task Meta */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4 text-gray-700 mb-4 text-xs">
         <div>
@@ -118,20 +179,20 @@ const TaskCard = ({
           </div>
         )}
       </div>
+
       {/* Actions */}
       <div className="flex justify-end gap-2 mt-2">
         {!isCompleted && (
-          <>
-            <button
-              className="hover:bg-gray-50 transition-colors rounded-sm p-2 bg-blue-400 text-white"
-              onClick={onEdit}
-            >
-              Update
-            </button>
-          </>
+          <button
+            className="hover:bg-gray-50 transition-colors rounded-sm p-2 bg-blue-400 text-white"
+            onClick={onEdit}
+          >
+            Update
+          </button>
         )}
       </div>
     </div>
   )
 }
+
 export default TaskCard
