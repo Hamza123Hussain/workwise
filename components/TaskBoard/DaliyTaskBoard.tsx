@@ -1,17 +1,17 @@
 'use client'
-
 import React, { useEffect, useState } from 'react'
 import { Plus } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/utils/Redux/Store/Store'
 import toast from 'react-hot-toast'
+import axios from 'axios'
 
 import TaskList from './TaskList'
-import { getTasksGroupedByDate } from '@/functions/Task/GetTasksTaskBoard'
-import { addTask } from '@/functions/Task/AddTaskBoard'
-import { updateTask } from '@/functions/Task/UpdateTaskBoard'
 import AddTaskModal from './AddTaskModal'
 import ConfirmDeleteModal from './ConfirmDeleteModal'
+import { getTasksGroupedByDate } from '@/functions/Task/AllTasksBoard'
+import { addTask } from '@/functions/Task/AddTaskBoard'
+import { updateTask } from '@/functions/Task/UpdateTaskBoard'
 import { deleteTask } from '@/functions/Task/DeleteTaskBoard'
 import { completeTask } from '@/functions/Task/CompleteTask'
 import { updateTaskStatus } from '@/functions/Task/UpdateTaskStatus'
@@ -20,7 +20,7 @@ type TaskFormData = {
   name: string
   description: string
   assignedTo: string
-  priority: 'Low' | 'Medium' | 'High' | ''
+  priority: any
   dueDate: string
   type?: string
 }
@@ -53,7 +53,7 @@ const TaskBoardPage = () => {
         name: taskData.name,
         description: taskData.description || '',
         assignedTo: taskData.assignedTo,
-        priority: taskData.priority as 'Low' | 'Medium' | 'High',
+        priority: taskData.priority,
         dueDate: taskData.dueDate,
         createdBy: currentUser.Name,
         email: currentUser.Email,
@@ -94,31 +94,63 @@ const TaskBoardPage = () => {
 
   const handleCompleteTask = async (task: any) => {
     try {
-      const result = await completeTask(
-        task._id,
-        true,
-        currentUser._id,
-        task.type,
-      )
-      if (result) {
-        toast.success('Task marked as completed!')
-        fetchTasks()
-        console.log('Task Details : ', task)
-      }
+      await completeTask(task._id, true, currentUser._id, task.type)
+      toast.success('Task marked as completed!')
+      // update locally
+      fetchTasks()
     } catch {
       toast.error('Failed to mark task as completed')
     }
   }
 
-  // **New: Update status**
   const handleUpdateStatus = async (task: any, status: string) => {
     try {
-      await updateTaskStatus(task._id, status) // update status in backend
+      await updateTaskStatus(task._id, status)
       toast.success('Status updated!')
-      fetchTasks() // refresh list
+      // update locally
+      const updatedTasks = { ...tasksByDate }
+      Object.keys(updatedTasks).forEach((date) => {
+        updatedTasks[date] = updatedTasks[date].map((t) =>
+          t._id === task._id ? { ...t, status } : t,
+        )
+      })
+      setTasksByDate(updatedTasks)
     } catch (err) {
       console.error('Error updating task status:', err)
       toast.error('Failed to update status')
+    }
+  }
+
+  const handleUpdatePosting = async (
+    task: any,
+    platform: string,
+    status: boolean,
+  ) => {
+    try {
+      await axios.put(
+        `https://crm-backend-wcpj.vercel.app/Api/TaskBoard/UpdatePosting?taskId=${task._id}`,
+        { platform, status },
+      )
+      toast.success(`${platform} updated!`)
+      // update locally immediately
+      const updatedTasks = { ...tasksByDate }
+      Object.keys(updatedTasks).forEach((date) => {
+        updatedTasks[date] = updatedTasks[date].map((t) => {
+          if (t._id === task._id) {
+            return {
+              ...t,
+              Posting: t.Posting.map((p: any) =>
+                p.Name === platform ? { ...p, Status: status } : p,
+              ),
+            }
+          }
+          return t
+        })
+      })
+      setTasksByDate(updatedTasks)
+    } catch (err) {
+      console.error('Error updating posting:', err)
+      toast.error('Failed to update posting')
     }
   }
 
@@ -196,7 +228,8 @@ const TaskBoardPage = () => {
                     setDeleteModalOpen(true)
                   }}
                   onComplete={handleCompleteTask}
-                  onUpdateStatus={handleUpdateStatus} // propagate status update
+                  onUpdateStatus={handleUpdateStatus}
+                  onUpdatePosting={handleUpdatePosting}
                 />
               </div>
             )
