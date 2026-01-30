@@ -23,12 +23,14 @@ const instagramTypes = [
 const TaskCard = ({
   simpleTask,
   onEdit,
+ 
   onComplete,
   onUpdateStatus,
   onUpdatePosting,
 }: {
   simpleTask: any
   onEdit: () => void
+
   onComplete: () => void
   onUpdateStatus: (status: string) => void
   onUpdatePosting?: (platform: string, status: boolean) => void
@@ -46,17 +48,24 @@ const TaskCard = ({
     new Date(simpleTask.dueDate).setHours(0, 0, 0, 0) <
       new Date().setHours(0, 0, 0, 0)
 
-  // Check if all Posting checkboxes are done (for Instagram tasks)
+  // Only relevant for Instagram-type tasks
   const allPostingDone =
     instagramTypes.includes(simpleTask.type) &&
     simpleTask.Posting &&
     simpleTask.Posting.every((p: any) => p.Status === true)
 
+  // Handle status change
   const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newStatus = e.target.value
 
-    // Prevent "Completed" if not all postings done
-    if (newStatus === 'Completed' && !allPostingDone) {
+    // Only block Completed for Instagram tasks if posting incomplete
+    const requiresPostingComplete = instagramTypes.includes(simpleTask.type)
+
+    if (
+      newStatus === 'Completed' &&
+      requiresPostingComplete &&
+      !allPostingDone
+    ) {
       alert('Cannot mark as Completed until all postings are done!')
       return
     }
@@ -68,9 +77,7 @@ const TaskCard = ({
   }
 
   const handlePostingChange = (platform: string, checked: boolean) => {
-    if (onUpdatePosting) {
-      onUpdatePosting(platform, checked)
-    }
+    onUpdatePosting?.(platform, checked)
   }
 
   return (
@@ -88,6 +95,7 @@ const TaskCard = ({
         >
           {simpleTask.name || 'Untitled Task'}
         </h2>
+
         {simpleTask.priority && (
           <span
             className={`px-3 py-1 text-xs font-semibold rounded-full border ${priorityStyles[simpleTask.priority]} shadow-sm`}
@@ -106,20 +114,24 @@ const TaskCard = ({
         {simpleTask.description}
       </p>
 
-      {/* Status Dropdown */}
+      {/* Status */}
       <div className="flex items-center gap-2 mb-2">
         <span className="text-xs font-semibold">Status:</span>
         <select
           value={simpleTask.status || 'Not Started'}
-          onChange={(e) => handleStatusChange(e)}
-          disabled={dueDatePassed || isCompleted} // Only disable for due date passed or already completed
+          onChange={handleStatusChange}
+          disabled={dueDatePassed || isCompleted}
           className="text-xs rounded-md border px-2 py-1"
         >
           {Object.keys(statusStyles).map((status) => (
             <option
               key={status}
               value={status}
-              disabled={status === 'Completed' && !allPostingDone} // disable only Completed if postings incomplete
+              disabled={
+                status === 'Completed' &&
+                instagramTypes.includes(simpleTask.type) &&
+                !allPostingDone
+              }
             >
               {status}
             </option>
@@ -127,7 +139,7 @@ const TaskCard = ({
         </select>
       </div>
 
-      {/* Posting Checkboxes */}
+      {/* Posting (Instagram only) */}
       {instagramTypes.includes(simpleTask.type) && simpleTask.Posting && (
         <div className="mb-4">
           <span className="text-xs font-semibold">Posting:</span>
@@ -150,7 +162,7 @@ const TaskCard = ({
         </div>
       )}
 
-      {/* Task Meta */}
+      {/* Meta Info */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4 text-gray-700 mb-4 text-xs">
         <div>
           <span className="font-semibold">Assigned:</span>{' '}
@@ -183,12 +195,16 @@ const TaskCard = ({
       {/* Actions */}
       <div className="flex justify-end gap-2 mt-2">
         {!isCompleted && (
-          <button
-            className="hover:bg-gray-50 transition-colors rounded-sm p-2 bg-blue-400 text-white"
-            onClick={onEdit}
-          >
-            Update
-          </button>
+          <>
+            <button
+              className="p-2 bg-blue-500 text-white rounded"
+              onClick={onEdit}
+            >
+              Update
+            </button>
+
+    
+          </>
         )}
       </div>
     </div>
