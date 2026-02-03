@@ -36,7 +36,7 @@ const KPIComponent = () => {
       if (result.success) {
         toast.success('KPI deleted successfully!')
         // Refresh the KPI list
-        const data = await GetAllKpi(user._id)
+        const data = await GetAllKpi(user.Email)
         if (data) dispatch(setKpis(data))
       } else {
         toast.error('Error: ' + result.error)
