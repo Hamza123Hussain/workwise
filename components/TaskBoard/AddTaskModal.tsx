@@ -3,12 +3,14 @@ import { useSelector } from 'react-redux'
 import { fetchRoleBasedTasks } from '@/functions/UserTasks/GetRoleBasedTask'
 import { RootState } from '@/utils/Redux/Store/Store'
 import TaskTypeSelect, { TaskFormData } from './TaskTypeSelect'
+
 type Props = {
   open: boolean
   onClose: () => void
   onSubmit: (data: TaskFormData) => void
   initialData?: TaskFormData
 }
+
 const EMPTY_FORM: TaskFormData = {
   name: '',
   description: '',
@@ -17,6 +19,7 @@ const EMPTY_FORM: TaskFormData = {
   dueDate: '',
   type: '',
 }
+
 const AddTaskModal: React.FC<Props> = ({
   open,
   onClose,
@@ -24,23 +27,22 @@ const AddTaskModal: React.FC<Props> = ({
   initialData,
 }) => {
   const currentUser = useSelector((state: RootState) => state.user)
-  // Stores available task templates
+
+  // ✅ HRM addition: role-based task templates
   const [userTasks, setUserTasks] = useState<any[]>([])
-  // Controlled form state
+
   const [formData, setFormData] = useState<TaskFormData>(
     initialData ?? EMPTY_FORM,
   )
-  /**
-   * Sync form when editing a task
-   */
+
+  // Sync form when editing
   useEffect(() => {
     if (initialData) {
       setFormData(initialData)
     }
   }, [initialData])
-  /**
-   * Fetch role-based tasks once
-   */
+
+  // ✅ HRM addition: fetch role-based tasks
   useEffect(() => {
     const getUserTasks = async () => {
       try {
@@ -52,9 +54,7 @@ const AddTaskModal: React.FC<Props> = ({
     }
     getUserTasks()
   }, [currentUser._id])
-  /**
-   * Generic input handler
-   */
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -63,9 +63,8 @@ const AddTaskModal: React.FC<Props> = ({
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
-  /**
-   * Task type change → auto set priority
-   */
+
+  // ✅ HRM addition: task type → auto priority / points
   const handleTaskTypeChange = (type: string) => {
     const selectedTask = userTasks.find((task) => task.TaskName === type)
     setFormData((prev) => ({
@@ -76,9 +75,6 @@ const AddTaskModal: React.FC<Props> = ({
     }))
   }
 
-  /**
-   * Validation + submit
-   */
   const handleSubmit = () => {
     const { name, description, assignedTo, dueDate } = formData
     if (!name.trim()) return alert('Task name is required')
@@ -88,13 +84,16 @@ const AddTaskModal: React.FC<Props> = ({
     onSubmit(formData)
     onClose()
   }
+
   if (!open) return null
+
   return (
     <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded shadow-md w-full max-w-md">
         <h3 className="text-lg font-semibold mb-4">
           {initialData ? 'Update Task' : 'Add Task'}
         </h3>
+
         {/* Task Name */}
         <input
           name="name"
@@ -103,12 +102,14 @@ const AddTaskModal: React.FC<Props> = ({
           onChange={handleChange}
           className="mb-3 w-full rounded border px-3 py-2"
         />
-        {/* Task Type */}
+
+        {/* ✅ HRM addition: Task Type */}
         <TaskTypeSelect
           value={formData.type}
           tasks={userTasks}
           onChange={handleTaskTypeChange}
         />
+
         {/* Description */}
         <textarea
           name="description"
@@ -118,6 +119,7 @@ const AddTaskModal: React.FC<Props> = ({
           className="mb-3 w-full rounded border px-3 py-2"
           rows={3}
         />
+
         {/* Only show these on create */}
         {!initialData && (
           <>
@@ -131,6 +133,7 @@ const AddTaskModal: React.FC<Props> = ({
               <option value="">Select User</option>
               <option value={currentUser.Name}>{currentUser.Name}</option>
             </select>
+
             {/* Priority */}
             <select
               name="priority"
@@ -142,6 +145,7 @@ const AddTaskModal: React.FC<Props> = ({
               <option value="Medium">Medium</option>
               <option value="High">High</option>
             </select>
+
             {/* Due Date */}
             <input
               type="date"
@@ -152,6 +156,7 @@ const AddTaskModal: React.FC<Props> = ({
             />
           </>
         )}
+
         {/* Actions */}
         <div className="flex justify-end gap-2">
           <button className="p-2 bg-black text-white rounded" onClick={onClose}>
@@ -168,4 +173,5 @@ const AddTaskModal: React.FC<Props> = ({
     </div>
   )
 }
+
 export default AddTaskModal
