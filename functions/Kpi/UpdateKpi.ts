@@ -2,30 +2,25 @@ import axios from 'axios'
 
 export const updateKPI = async (UserId: string, TargetName: string) => {
   try {
-    // ✅ Input Validation
-    if (!UserId || !TargetName) {
-      throw new Error('Missing required fields: UserId, _id, or TargetName')
+    if (!UserId || TargetName === '') {
+      throw new Error('Missing required fields')
     }
 
-    // ✅ Send API Request
     const response = await axios.put(
-      `https://workwise-backend-puce.vercel.app/Api/KPI/UpdateKPI`,
+      `https://workwise-backend-puce.vercel.app/Api/KPI/UpdateKpiForTaskBoard`,
       { UserId, TargetName },
-      { headers: { 'Content-Type': 'application/json' } } // Ensure JSON request
+      { headers: { 'Content-Type': 'application/json' } },
     )
 
-    // ✅ Success Response
     return {
       success: true,
+      data: response.data.updatedKPI,
       message: response.data.message,
-      updatedKPI: response.data.updatedKPI,
     }
-  } catch (error) {
-    // ❌ Improved Error Handling
+  } catch (error: any) {
     return {
       success: false,
-      message: error || 'Failed to update KPI. Try again!',
-      error: error,
+      message: error?.response?.data?.message || 'Failed to update KPI',
     }
   }
 }
