@@ -105,7 +105,7 @@ const TaskBoardPage = () => {
 
   const handleUpdateStatus = async (task: any, status: string) => {
     try {
-      await updateTaskStatus(task._id, status)
+      await updateTaskStatus(task._id, status, currentUser._id, task.type)
       toast.success('Status updated!')
       // update locally
       const updatedTasks = { ...tasksByDate }
