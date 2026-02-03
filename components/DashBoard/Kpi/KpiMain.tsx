@@ -36,16 +36,9 @@ const KpiMain = () => {
           <span className="text-[24px] font-bold text-[#4E6747]">
             {"KPI's"}
           </span>
-          <div className="flex items-center justify-between gap-[10px]">
+          <div className="flex flex-col items-center justify-between gap-[10px]">
+            <OverallTarget />
             <div className="bg-white py-[10px] rounded-[8px] w-full max-h-80 overflow-y-auto px-2 flex flex-col">
-              <div className="flex justify-between items-center border-b-2 border-[#E8FFE8]">
-                <h3 className="text-[14px] font-semibold text-[#4E6747]">
-                  Project Name
-                </h3>
-                <h3 className="text-[14px] font-semibold text-[#4E6747]">
-                  Targets
-                </h3>
-              </div>
               <div>
                 {Userkpi?.Targets?.map((target, index) => (
                   <KpiRow
@@ -57,7 +50,6 @@ const KpiMain = () => {
                 ))}
               </div>
             </div>
-            <OverallTarget />
           </div>
         </div>
       )}
