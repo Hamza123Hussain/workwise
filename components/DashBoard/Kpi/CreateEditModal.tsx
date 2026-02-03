@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { TargetInput } from './TargetInputandUserselect'
 import { createKPI, updateKPI } from '@/functions/Kpi/CreateAndUpdateKpi'
 import toast from 'react-hot-toast'
+import { AssignedUserSelect } from './AssignedUsers'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/utils/Redux/Store/Store'
 
 const emptyTarget = {
   TargetName: '',
@@ -25,8 +28,8 @@ const CreateEditKpiModal: React.FC<Props> = ({ mode, kpi, onClose }) => {
   const [hours, setHours] = useState(kpi?.HoursWorked || '')
   const [targets, setTargets] = useState<any[]>(kpi?.Targets || [emptyTarget])
   const [loading, setLoading] = useState(false)
-  const [selectedUserId, setSelectedUserId] = useState(kpi?.UserId || '')
-
+  const [selectedUserId, setSelectedUserId] = useState<any>('')
+  const userSelect = useSelector((state: RootState) => state.UserSelect)
   // Update targets if KPI changes
   useEffect(() => {
     if (mode === 'edit' && kpi) {
@@ -35,7 +38,8 @@ const CreateEditKpiModal: React.FC<Props> = ({ mode, kpi, onClose }) => {
       setTargets(kpi.Targets)
       setSelectedUserId(kpi.UserId)
     }
-  }, [mode, kpi])
+    setSelectedUserId(userSelect.id)
+  }, [mode, kpi, userSelect])
 
   // Handle changes for each target
   const handleTargetChange = (
@@ -147,7 +151,7 @@ const CreateEditKpiModal: React.FC<Props> = ({ mode, kpi, onClose }) => {
               showAssignedUser={mode === 'create'} // only show when creating
             />
           ))}
-
+          <AssignedUserSelect />
           <button
             onClick={() => setTargets([...targets, emptyTarget])}
             className="text-blue-600 text-sm"
