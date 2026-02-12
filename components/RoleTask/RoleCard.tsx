@@ -5,7 +5,13 @@ import DeleteConfirm from './DeleteRole'
 import { RootState } from '@/utils/Redux/Store/Store'
 import UpdateRoleModal from './UpdateRole'
 
-export default function RoleCard({ role }: any) {
+export default function RoleCard({
+  role,
+  onUpdate,
+}: {
+  role: any
+  onUpdate: () => void
+}) {
   const User = useSelector((state: RootState) => state.user)
 
   if (!role)
@@ -25,7 +31,7 @@ export default function RoleCard({ role }: any) {
             {role.UsersAssigned?.length || 0} users assigned
           </p>
         </div>
-        <UpdateRoleModal role={role} userId={User._id} />
+        <UpdateRoleModal role={role} userId={User._id} onUpdate={onUpdate} />
       </div>
 
       {/* TASK LIST */}
@@ -42,6 +48,7 @@ export default function RoleCard({ role }: any) {
                 TaskID={task._id}
                 RoleTasksId={role._id}
                 userId={User._id}
+                onDeleted={onUpdate}
               />
             </div>
 
