@@ -7,7 +7,11 @@ import Loader from '@/components/Loader'
 import { Allusers } from '@/functions/AUTH/Allusers'
 import { TaskManager } from './TaskManager'
 import { UserSelector } from './UserSelector'
-export default function AddRoleForm() {
+export default function AddRoleForm({
+  onRoleCreated,
+}: {
+  onRoleCreated: () => void
+}) {
   const user = useSelector((state: any) => state.user)
   const [roleName, setRoleName] = useState('')
   const [tasks, setTasks] = useState<Task[]>([])
@@ -40,6 +44,7 @@ export default function AddRoleForm() {
       setRoleName('')
       setTasks([])
       setSelectedUsers([])
+      onRoleCreated()
     }
   }
   if (loading)
