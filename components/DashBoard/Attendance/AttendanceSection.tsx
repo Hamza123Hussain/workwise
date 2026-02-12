@@ -7,10 +7,10 @@ import { GetMonthlyHours } from '@/functions/Attendance/GetMonthlyHours'
 import { SetHoursWorked } from '@/utils/Redux/Slice/AttendanceSlice/Attendance_Slice'
 const AttendanceSection = () => {
   const HoursWorked = useSelector(
-    (state: RootState) => state.AttedanceSlice.HoursWorked
+    (state: RootState) => state.AttedanceSlice.HoursWorked,
   )
   const Dispatch = useDispatch()
-  const TotalHours = 176 // Example total monthly working hours
+  const TotalHours = 160 // Example total monthly working hours
   const User = useSelector((state: RootState) => state.user)
   useEffect(() => {
     const GetHours = async () => {
@@ -20,7 +20,6 @@ const AttendanceSection = () => {
     GetHours()
   }, [User._id, Dispatch])
   const percentage = (HoursWorked / TotalHours) * 100
-
   return (
     <div className=" flex flex-col py-5 px-[10px] rounded-[20px] min-w-[25vw] bg-[#E5EDFF] shadow-sm shadow-[#2F1E5E40]">
       <h3 className=" text-[24px] text-[#b0bcce] font-bold ">Attendance</h3>
@@ -41,10 +40,9 @@ const AttendanceSection = () => {
           style={{ width: `${percentage.toFixed(1)}%` }}
         />
       </div>
-
       <div className=" flex justify-end ">
         <h1 className="text-[#101828] font-medium text-[14px]">
-          Total 176 hrs
+          Total 160 hrs
         </h1>
       </div>
       <AttendanceButton />
@@ -52,5 +50,4 @@ const AttendanceSection = () => {
     </div>
   )
 }
-
 export default AttendanceSection
