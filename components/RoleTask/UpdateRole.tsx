@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 import { Allusers } from '@/functions/AUTH/Allusers'
 import UpdateTaskTab from './UpdateTaskTab'
 import UpdateUserTab from './UpdateUserTab'
-export default function UpdateRoleModal({ role, userId }: any) {
+export default function UpdateRoleModal({ role, userId, onUpdate }: any) {
   const [open, setOpen] = useState(false)
   const [tab, setTab] = useState<'tasks' | 'users'>('tasks')
   const [allEmployees, setAllEmployees] = useState([])
@@ -26,8 +26,8 @@ export default function UpdateRoleModal({ role, userId }: any) {
     // payload contains either Tasks, Users, RemoveTaskId, or RemoveUserId
     const response = await UpdateRoleTasks(role._id, userId, payload)
     if (response) {
-      toast.success('Role updated successfully')
-      // Optional: window.location.reload() or a parent state refresh
+      toast.success('Updated successfully')
+      onUpdate()
     }
   }
   return (
