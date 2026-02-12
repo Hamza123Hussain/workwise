@@ -16,7 +16,7 @@ const KPICard = ({ kpi, onEdit, onDelete }: any) => {
       <div className="grid grid-cols-3 text-center mb-4">
         <div>
           <p className="text-xs text-gray-400">Hours</p>
-          <p className="font-bold">{kpi.HoursWorked}</p>
+          <p className="font-bold">{kpi.HoursWorked.toFixed(0)}</p>
         </div>
         <div>
           <p className="text-xs text-gray-400">Salary</p>
