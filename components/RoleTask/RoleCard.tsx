@@ -1,8 +1,9 @@
 'use client'
 import { useSelector } from 'react-redux'
 import DeleteConfirm from './DeleteRole'
-import UpdateRoleModal from './UpdateRole'
+
 import { RootState } from '@/utils/Redux/Store/Store'
+import UpdateRoleModal from './UpdateRole'
 
 export default function RoleCard({ role }: any) {
   const User = useSelector((state: RootState) => state.user)
@@ -37,7 +38,11 @@ export default function RoleCard({ role }: any) {
             {/* TITLE + DELETE */}
             <div className="flex justify-between items-start">
               <h3 className="font-bold text-lg">{task.TaskName}</h3>
-              <DeleteConfirm RoleTasksId={role._id} userId={User._id} />
+              <DeleteConfirm
+                TaskID={task._id}
+                RoleTasksId={role._id}
+                userId={User._id}
+              />
             </div>
 
             {/* DESCRIPTION */}
@@ -52,8 +57,8 @@ export default function RoleCard({ role }: any) {
                   task.Priority === 'High'
                     ? 'bg-red-500'
                     : task.Priority === 'Medium'
-                    ? 'bg-yellow-500'
-                    : 'bg-green-600'
+                      ? 'bg-yellow-500'
+                      : 'bg-green-600'
                 }`}
               >
                 {task.Priority} Priority
