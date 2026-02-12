@@ -2,7 +2,7 @@ import { Kpi } from '@/utils/Interfaces/KPIInterface'
 import React from 'react'
 import { COLORS, TaskItem } from './TaskItem'
 const EmployeePerformanceCard = ({ element }: { element: Kpi }) => {
-  const attendance = ((element.HoursWorked / 176) * 100).toFixed(2)
+  const attendance = ((element.HoursWorked / 160) * 100).toFixed(2)
   const performance = (
     (element.PointsGained / element.TotalPoints) *
     100
@@ -14,7 +14,7 @@ const EmployeePerformanceCard = ({ element }: { element: Kpi }) => {
   const calculatedSalary =
     element.TotalSalary *
     (0.8 * (element.PointsGained / element.TotalPoints) +
-      0.2 * (element.HoursWorked / 176))
+      0.2 * (element.HoursWorked / 160))
   return (
     <div className="mx-auto border border-gray-200 shadow-md rounded-xl overflow-hidden">
       {/* --- HEADER --- */}
