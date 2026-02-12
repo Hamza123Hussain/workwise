@@ -1,120 +1,124 @@
 'use client'
-
-import { CreateRoleTasks, Task } from '@/functions/Roles/CreateNewRole'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import toast from 'react-hot-toast'
-
-interface AddRoleFormProps {
-  userId: string
-}
-
-export default function AddRoleForm({ userId }: AddRoleFormProps) {
-  const [role, setRole] = useState('')
+import { CreateRoleTasks, Task } from '@/functions/Roles/CreateNewRole'
+import Loader from '@/components/Loader'
+import { Allusers } from '@/functions/AUTH/Allusers'
+import { TaskManager } from './TaskManager'
+import { UserSelector } from './UserSelector'
+export default function AddRoleForm() {
+  const user = useSelector((state: any) => state.user)
+  const [roleName, setRoleName] = useState('')
   const [tasks, setTasks] = useState<Task[]>([])
-  const [taskName, setTaskName] = useState('')
-  const [taskPriority, setTaskPriority] = useState<'Low' | 'Medium' | 'High'>(
-    'Low'
-  )
-  const [loading, setLoading] = useState(false)
-
-  const handleAddTask = () => {
-    if (!taskName.trim()) {
-      toast.error('Task name cannot be empty')
-      return
+  const [allUsers, setAllUsers] = useState([])
+  const [selectedUsers, setSelectedUsers] = useState<
+    { UserId: string; UserName: string }[]
+  >([])
+  const [loading, setLoading] = useState(true)
+  const [submitting, setSubmitting] = useState(false)
+  // Fetch Users on Mount
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const data = await Allusers(user.Email)
+      if (data) setAllUsers(data)
+      setLoading(false)
     }
-
-    setTasks([...tasks, { TaskName: taskName, Priority: taskPriority }])
-    setTaskName('')
-    setTaskPriority('Low')
-  }
-
+    fetchUsers()
+  }, [user])
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!role.trim()) {
-      toast.error('Role name cannot be empty')
-      return
-    }
-
-    setLoading(true)
-    const response = await CreateRoleTasks(userId, role, tasks)
-    setLoading(false)
-
+    if (!roleName.trim()) return toast.error('Please enter a role name')
+    if (selectedUsers.length === 0)
+      return toast.error('Assign at least one user')
+    setSubmitting(true)
+    // Send only the UserId to the backend as it expects { UserId: string }[]
+    const formattedUsers = selectedUsers.map((u) => ({ UserId: u.UserId }))
+    const response = await CreateRoleTasks(roleName, tasks, formattedUsers)
+    setSubmitting(false)
     if (response) {
-      toast.success('Role and tasks created successfully')
-      setRole('')
+      setRoleName('')
       setTasks([])
+      setSelectedUsers([])
     }
   }
-
-  return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      {/* Role Input */}
-      <input
-        className="border rounded px-3 py-2"
-        value={role}
-        onChange={(e) => setRole(e.target.value)}
-        placeholder="New role name"
-        required
-      />
-
-      {/* Task Inputs */}
-      <div className="flex gap-2 items-center">
-        <input
-          className="border rounded px-3 py-2 flex-1"
-          value={taskName}
-          onChange={(e) => setTaskName(e.target.value)}
-          placeholder="Task name"
-        />
-        <select
-          value={taskPriority}
-          onChange={(e) =>
-            setTaskPriority(e.target.value as 'Low' | 'Medium' | 'High')
-          }
-          className="border rounded px-3 py-2"
-        >
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-        </select>
-        <button
-          type="button"
-          onClick={handleAddTask}
-          className="bg-green-600 text-white px-4 rounded"
-        >
-          Add Task
-        </button>
+  if (loading)
+    return (
+      <div className="flex justify-center p-20">
+        <Loader />
       </div>
-
-      {/* Task List Preview */}
-      {tasks.length > 0 && (
-        <ul className="border rounded p-2">
-          {tasks.map((task, index) => (
-            <li key={index} className="flex justify-between">
-              <span>
-                {task.TaskName} - <strong>{task.Priority}</strong>
-              </span>
-              <button
-                type="button"
-                onClick={() => setTasks(tasks.filter((_, i) => i !== index))}
-                className="text-red-500"
-              >
-                Remove
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {/* Submit Button */}
-      <button
-        type="submit"
-        className={`bg-blue-600 text-white px-4 py-2 rounded ${
-          loading ? 'opacity-50 cursor-not-allowed' : ''
-        }`}
-        disabled={loading}
+    )
+  return (
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-xl rounded-2xl border border-gray-100 mt-10">
+      <header className="mb-8 border-b pb-4">
+        <h1 className="text-2xl font-extrabold text-gray-900">
+          Create Organizational Role
+        </h1>
+        <p className="text-gray-500 text-sm">
+          Define a role, assign tasks, and link employees.
+        </p>
+      </header>
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 md:grid-cols-2 gap-8"
       >
-        {loading ? 'Creating...' : 'Add Role & Tasks'}
-      </button>
-    </form>
+        {/* Left Column: Role & Users */}
+        <div className="space-y-6">
+          <div className="flex flex-col gap-2">
+            <label className="text-sm font-semibold text-gray-700">
+              Role Identity
+            </label>
+            <input
+              className="border rounded-lg px-4 py-3 text-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              value={roleName}
+              onChange={(e) => setRoleName(e.target.value)}
+              placeholder="e.g. Frontend Lead"
+              required
+            />
+          </div>
+          <UserSelector
+            allUsers={allUsers}
+            selectedUsers={selectedUsers}
+            onAddUser={(u) => {
+              if (!selectedUsers.find((curr) => curr.UserId === u._id)) {
+                setSelectedUsers([
+                  ...selectedUsers,
+                  { UserId: u._id, UserName: u.Name },
+                ])
+              }
+            }}
+            onRemoveUser={(id) =>
+              setSelectedUsers(selectedUsers.filter((u) => u.UserId !== id))
+            }
+          />
+        </div>
+        {/* Right Column: Tasks */}
+        <div className="bg-gray-50 p-4 rounded-xl">
+          <TaskManager
+            tasks={tasks}
+            onAddTask={(newTask) => setTasks([...tasks, newTask])}
+            onRemoveTask={(index) =>
+              setTasks(tasks.filter((_, i) => i !== index))
+            }
+          />
+        </div>
+        {/* Full Width Footer */}
+        <div className="md:col-span-2 pt-6">
+          <button
+            type="submit"
+            disabled={submitting}
+            className={`w-full py-4 rounded-xl font-bold text-white transition-all shadow-lg ${
+              submitting
+                ? 'bg-gray-400'
+                : 'bg-gradient-to-r from-blue-600 to-indigo-700 hover:scale-[1.01] active:scale-95'
+            }`}
+          >
+            {submitting
+              ? 'Processing Deployment...'
+              : 'Deploy Role & Notify Users'}
+          </button>
+        </div>
+      </form>
+    </div>
   )
 }
