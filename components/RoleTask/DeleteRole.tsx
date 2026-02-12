@@ -1,8 +1,7 @@
 'use client'
-import { DeleteRoleTasks } from '@/functions/Roles/DeleteRoleTask'
-import toast from 'react-hot-toast'
-
+import { UpdateRoleTasks } from '@/functions/Roles/UpdateRoletask'
 interface DeleteConfirmProps {
+  TaskID: string
   RoleTasksId: string
   userId: string
 }
@@ -10,15 +9,19 @@ interface DeleteConfirmProps {
 export default function DeleteConfirm({
   RoleTasksId,
   userId,
+  TaskID,
 }: DeleteConfirmProps) {
-  const handleDelete = async () => {
-    const response = await DeleteRoleTasks(RoleTasksId, userId)
-    if (response) toast.success('Role has been deleted')
+  // Example function call inside DeleteConfirm
+  const handleDeleteTask = async () => {
+    if (confirm('Delete this task?')) {
+      await UpdateRoleTasks(RoleTasksId, userId, { RemoveTaskId: TaskID })
+      // trigger refresh
+    }
   }
 
   return (
     <button
-      onClick={handleDelete}
+      onClick={handleDeleteTask}
       className="bg-red-500 text-white px-3 py-1 rounded"
     >
       Delete
