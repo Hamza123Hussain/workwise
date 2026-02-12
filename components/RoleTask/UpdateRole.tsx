@@ -1,105 +1,78 @@
 'use client'
-import { UpdateRoleTasks, Task } from '@/functions/Roles/UpdateRoletask'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { UpdateRoleTasks } from '@/functions/Roles/UpdateRoletask'
+import { RootState } from '@/utils/Redux/Store/Store'
 import toast from 'react-hot-toast'
-
-interface UpdateRoleModalProps {
-  role: {
-    _id: string
-    RoleName: string
-  }
-  userId: string // pass the logged-in user ID dynamically
-}
-
-export default function UpdateRoleModal({
-  role,
-  userId,
-}: UpdateRoleModalProps) {
+import { Allusers } from '@/functions/AUTH/Allusers'
+import UpdateTaskTab from './UpdateTaskTab'
+import UpdateUserTab from './UpdateUserTab'
+export default function UpdateRoleModal({ role, userId }: any) {
   const [open, setOpen] = useState(false)
-  const [taskName, setTaskName] = useState('')
-  const [priority, setPriority] = useState<'Low' | 'Medium' | 'High'>('Low')
-  const [loading, setLoading] = useState(false)
-
-  const handleAddTask = async () => {
-    if (!taskName.trim()) {
-      toast.error('Task name cannot be empty')
-      return
+  const [tab, setTab] = useState<'tasks' | 'users'>('tasks')
+  const [allEmployees, setAllEmployees] = useState([])
+  const currentUser = useSelector((state: RootState) => state.user)
+  // Fetch Users internally when modal opens
+  useEffect(() => {
+    if (open) {
+      const fetchUsers = async () => {
+        const data = await Allusers(currentUser.Email)
+        if (data) setAllEmployees(data)
+      }
+      fetchUsers()
     }
-
-    setLoading(true)
-
-    const newTask: Task = {
-      TaskName: taskName,
-      Priority: priority,
-    }
-
-    const response = await UpdateRoleTasks(role._id, userId, [newTask])
-    setLoading(false)
-
+  }, [open, currentUser.Email])
+  const handleUpdate = async (payload: any) => {
+    // payload contains either Tasks, Users, RemoveTaskId, or RemoveUserId
+    const response = await UpdateRoleTasks(role._id, userId, payload)
     if (response) {
-      setTaskName('')
-      toast.success('Task added successfully')
-      setOpen(false)
-    } else {
-      toast.error('Failed to add task')
+      toast.success('Role updated successfully')
+      // Optional: window.location.reload() or a parent state refresh
     }
   }
-
   return (
     <>
       <button
-        className="px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700 transition"
+        className="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg transition backdrop-blur-md border border-white/30"
         onClick={() => setOpen(true)}
       >
-        + Add Task
+        Manage Role
       </button>
-
       {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="bg-white rounded-xl text-black shadow-lg p-6 w-[380px] max-w-full">
-            <h3 className="text-xl font-semibold mb-4">
-              Add Task to{' '}
-              <span className="text-purple-600">{role.RoleName}</span>
-            </h3>
-
-            <div className="flex flex-col gap-3">
-              <input
-                className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                placeholder="Task name"
-                value={taskName}
-                onChange={(e) => setTaskName(e.target.value)}
-              />
-
-              <select
-                className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                value={priority}
-                onChange={(e) =>
-                  setPriority(e.target.value as 'Low' | 'Medium' | 'High')
-                }
-              >
-                <option>Low</option>
-                <option>Medium</option>
-                <option>High</option>
-              </select>
-            </div>
-
-            <div className="flex justify-end gap-3 mt-6">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden text-gray-800 animate-in fade-in zoom-in duration-200">
+            {/* Header / Tabs */}
+            <div className="flex bg-gray-50 border-b">
               <button
-                className="px-4 py-2 rounded-lg border hover:bg-gray-100 transition"
-                onClick={() => setOpen(false)}
+                className={`flex-1 py-4 font-bold transition ${tab === 'tasks' ? 'bg-white text-indigo-600 border-t-4 border-indigo-600' : 'text-gray-400 hover:text-gray-600'}`}
+                onClick={() => setTab('tasks')}
               >
-                Cancel
+                Tasks
               </button>
               <button
-                className={`px-4 py-2 rounded-lg text-black ${
-                  loading
-                    ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-purple-600 hover:bg-purple-700'
-                } transition`}
-                onClick={handleAddTask}
-                disabled={loading}
+                className={`flex-1 py-4 font-bold transition ${tab === 'users' ? 'bg-white text-indigo-600 border-t-4 border-indigo-600' : 'text-gray-400 hover:text-gray-600'}`}
+                onClick={() => setTab('users')}
               >
-                {loading ? 'Saving...' : 'Save'}
+                Users
+              </button>
+            </div>
+            <div className="p-6">
+              {tab === 'tasks' ? (
+                <UpdateTaskTab onUpdate={handleUpdate} />
+              ) : (
+                <UpdateUserTab
+                  role={role}
+                  allEmployees={allEmployees}
+                  onUpdate={handleUpdate}
+                />
+              )}
+            </div>
+            <div className="bg-gray-50 p-4 flex justify-end">
+              <button
+                onClick={() => setOpen(false)}
+                className="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold rounded-lg transition"
+              >
+                Close
               </button>
             </div>
           </div>
