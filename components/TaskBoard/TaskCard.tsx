@@ -65,14 +65,11 @@ const TaskCard = ({
       alert('Cannot mark as Completed until all postings are done!')
       return
     }
-
     onUpdateStatus(newStatus)
   }
-
   const handlePostingChange = (platform: string, checked: boolean) => {
     onUpdatePosting?.(platform, checked)
   }
-
   return (
     <div
       className={`w-full p-5 rounded-2xl border ${
@@ -184,7 +181,6 @@ const TaskCard = ({
           </div>
         )}
       </div>
-
       {/* Actions */}
       <div className="flex justify-end gap-2 mt-2">
         {!isCompleted && (
@@ -201,5 +197,4 @@ const TaskCard = ({
     </div>
   )
 }
-
 export default TaskCard
