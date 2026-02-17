@@ -28,12 +28,12 @@ const AddTaskModal: React.FC<Props> = ({
 }) => {
   const currentUser = useSelector((state: RootState) => state.user)
 
-  // ✅ HRM addition: role-based task templates
   const [userTasks, setUserTasks] = useState<any[]>([])
 
-  const [formData, setFormData] = useState<TaskFormData>(
-    initialData ?? EMPTY_FORM,
-  )
+  const [formData, setFormData] = useState<TaskFormData>({
+    ...(initialData ?? EMPTY_FORM),
+    assignedTo: initialData?.assignedTo ?? currentUser?.Name ?? '',
+  })
 
   // Sync form when editing
   useEffect(() => {
@@ -42,18 +42,30 @@ const AddTaskModal: React.FC<Props> = ({
     }
   }, [initialData])
 
-  // ✅ HRM addition: fetch role-based tasks
+  // Ensure assignedTo is always current user (when creating)
+  useEffect(() => {
+    if (!initialData && currentUser?.Name) {
+      setFormData((prev) => ({
+        ...prev,
+        assignedTo: currentUser.Name,
+      }))
+    }
+  }, [currentUser?.Name, initialData])
+
+  // Fetch role-based tasks
   useEffect(() => {
     const getUserTasks = async () => {
       try {
+        if (!currentUser?._id) return
         const data = await fetchRoleBasedTasks(currentUser._id)
         if (data) setUserTasks(data)
       } catch (error) {
         console.error('Error fetching tasks:', error)
       }
     }
+
     getUserTasks()
-  }, [currentUser._id])
+  }, [currentUser?._id])
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -64,9 +76,10 @@ const AddTaskModal: React.FC<Props> = ({
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  // ✅ HRM addition: task type → auto priority / points
+  // Task type → auto priority / points
   const handleTaskTypeChange = (type: string) => {
     const selectedTask = userTasks.find((task) => task.TaskName === type)
+
     setFormData((prev) => ({
       ...prev,
       type,
@@ -77,10 +90,12 @@ const AddTaskModal: React.FC<Props> = ({
 
   const handleSubmit = () => {
     const { name, description, assignedTo, dueDate } = formData
+
     if (!name.trim()) return alert('Task name is required')
     if (!description.trim()) return alert('Task description is required')
-    if (!assignedTo) return alert('Please select a user')
+    if (!assignedTo) return alert('Assigned user missing')
     if (!dueDate) return alert('Please select a due date')
+
     onSubmit(formData)
     onClose()
   }
@@ -103,7 +118,7 @@ const AddTaskModal: React.FC<Props> = ({
           className="mb-3 w-full rounded border px-3 py-2"
         />
 
-        {/* ✅ HRM addition: Task Type */}
+        {/* Task Type */}
         <TaskTypeSelect
           value={formData.type}
           tasks={userTasks}
@@ -120,24 +135,20 @@ const AddTaskModal: React.FC<Props> = ({
           rows={3}
         />
 
-        {/* Only show these on create */}
         {!initialData && (
           <>
-            {/* Assigned To */}
-            <select
+            {/* Assigned To (Auto-filled & Disabled) */}
+            <input
               name="assignedTo"
               value={formData.assignedTo}
-              onChange={handleChange}
-              className="mb-3 w-full rounded border px-3 py-2"
-            >
-              <option value="">Select User</option>
-              <option value={currentUser.Name}>{currentUser.Name}</option>
-            </select>
-            {/* Priority */}
+              disabled
+              className="mb-3 w-full rounded border px-3 py-2 bg-gray-100 cursor-not-allowed"
+            />
+
+            {/* Priority (Auto-controlled & Disabled) */}
             <select
               name="priority"
               value={formData.priority}
-              onChange={handleChange}
               disabled
               className="mb-3 w-full rounded border px-3 py-2 bg-gray-100 cursor-not-allowed"
             >
