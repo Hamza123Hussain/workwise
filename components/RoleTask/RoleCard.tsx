@@ -52,11 +52,6 @@ export default function RoleCard({
               />
             </div>
 
-            {/* DESCRIPTION */}
-            {task.Description && (
-              <p className="text-sm text-gray-600">{task.Description}</p>
-            )}
-
             {/* BADGE */}
             <div className="flex">
               <span
