@@ -13,7 +13,6 @@ import { getTasksGroupedByDate } from '@/functions/Task/AllTasksBoard'
 import { addTask } from '@/functions/Task/AddTaskBoard'
 import { updateTask } from '@/functions/Task/UpdateTaskBoard'
 import { deleteTask } from '@/functions/Task/DeleteTaskBoard'
-import { completeTask } from '@/functions/Task/CompleteTask'
 import { updateTaskStatus } from '@/functions/Task/UpdateTaskStatus'
 
 type TaskFormData = {
@@ -89,17 +88,6 @@ const TaskBoardPage = () => {
       fetchTasks()
     } catch {
       toast.error('Failed to delete task')
-    }
-  }
-
-  const handleCompleteTask = async (task: any) => {
-    try {
-      await completeTask(task._id, true, currentUser._id, task.type)
-      toast.success('Task marked as completed!')
-      // update locally
-      fetchTasks()
-    } catch {
-      toast.error('Failed to mark task as completed')
     }
   }
 
@@ -227,7 +215,6 @@ const TaskBoardPage = () => {
                     setDeleteTaskData(task)
                     setDeleteModalOpen(true)
                   }}
-                  onComplete={handleCompleteTask}
                   onUpdateStatus={handleUpdateStatus}
                   onUpdatePosting={handleUpdatePosting}
                 />
