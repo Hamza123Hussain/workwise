@@ -23,15 +23,11 @@ const instagramTypes = [
 const TaskCard = ({
   simpleTask,
   onEdit,
-
-  onComplete,
   onUpdateStatus,
   onUpdatePosting,
 }: {
   simpleTask: any
   onEdit: () => void
-
-  onComplete: () => void
   onUpdateStatus: (status: string) => void
   onUpdatePosting?: (platform: string, status: boolean) => void
 }) => {
@@ -71,9 +67,6 @@ const TaskCard = ({
     }
 
     onUpdateStatus(newStatus)
-    if (newStatus === 'Completed') {
-      onComplete()
-    }
   }
 
   const handlePostingChange = (platform: string, checked: boolean) => {
