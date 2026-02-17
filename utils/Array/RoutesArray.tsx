@@ -12,11 +12,11 @@ export const Routes = [
     Path: '/reports',
     SVG: <ChartPie />,
   },
-  {
-    Name: 'Invoices',
-    Path: '/invoices',
-    SVG: <Receipt />,
-  },
+  // {
+  //   Name: 'Invoices',
+  //   Path: '/invoices',
+  //   SVG: <Receipt />,
+  // },
   {
     Name: 'Admin',
     Path: '/Admin',
