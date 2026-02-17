@@ -1,7 +1,7 @@
 // components/TaskTypeSelect.tsx
 import React from 'react'
 
-export type Priority = 'Low' | 'Medium' | 'High'
+export type Priority = 'Low' | 'Medium' | 'High' | ''
 
 export type TaskFormData = {
   name: string
