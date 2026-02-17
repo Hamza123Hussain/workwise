@@ -133,13 +133,13 @@ const AddTaskModal: React.FC<Props> = ({
               <option value="">Select User</option>
               <option value={currentUser.Name}>{currentUser.Name}</option>
             </select>
-
             {/* Priority */}
             <select
               name="priority"
               value={formData.priority}
               onChange={handleChange}
-              className="mb-3 w-full rounded border px-3 py-2"
+              disabled
+              className="mb-3 w-full rounded border px-3 py-2 bg-gray-100 cursor-not-allowed"
             >
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
