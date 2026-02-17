@@ -5,14 +5,12 @@ import TaskCard from './TaskCard'
 const TaskList = ({
   tasks,
   onEdit,
-  onComplete,
   onUpdateStatus,
   onUpdatePosting,
 }: {
   tasks: any[]
   onEdit: (task: any) => void
   onDelete: (task: any) => void
-  onComplete: (task: any) => void
   onUpdateStatus: (task: any, status: string) => void
   onUpdatePosting?: (task: any, platform: string, status: boolean) => void
 }) => {
@@ -24,7 +22,6 @@ const TaskList = ({
             key={task._id}
             simpleTask={task}
             onEdit={() => onEdit(task)}
-            onComplete={() => onComplete(task)}
             onUpdateStatus={(status) => onUpdateStatus(task, status)}
             onUpdatePosting={(platform, status) =>
               onUpdatePosting && onUpdatePosting(task, platform, status)
