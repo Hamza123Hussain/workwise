@@ -1,34 +1,26 @@
 import { RootState } from '@/utils/Redux/Store/Store'
 import React from 'react'
 import { useSelector } from 'react-redux'
-
 const TargetCategories = () => {
   const TotalTargets = useSelector((state: RootState) => state.Kpi.Targets)
-
   const calculatePriorityData = (priority: string) => {
     const filtered = TotalTargets.filter(
       (target) => target.Priority === priority,
     )
-
     const totalValue = filtered.reduce(
       (acc, target) => acc + target.TargetValue,
       0,
     )
-
     const achievedValue = filtered.reduce(
       (acc, target) => acc + target.ValueAchieved,
       0,
     )
-
     const percentage = totalValue === 0 ? 0 : (achievedValue / totalValue) * 100
-
     return { totalValue, achievedValue, percentage }
   }
-
   const low = calculatePriorityData('Low')
   const medium = calculatePriorityData('Medium')
   const high = calculatePriorityData('High')
-
   return (
     <div className="flex flex-col gap-4">
       {/* LOW */}
@@ -46,7 +38,6 @@ const TargetCategories = () => {
           />
         </div>
       </div>
-
       {/* MEDIUM */}
       <div>
         <div className="flex items-center justify-end gap-2 mr-1">
@@ -62,7 +53,6 @@ const TargetCategories = () => {
           />
         </div>
       </div>
-
       {/* HIGH */}
       <div>
         <div className="flex items-center justify-end gap-2 mr-1">
@@ -81,5 +71,4 @@ const TargetCategories = () => {
     </div>
   )
 }
-
 export default TargetCategories
