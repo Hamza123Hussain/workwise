@@ -15,7 +15,7 @@ const EMPTY_FORM: TaskFormData = {
   name: '',
   description: '',
   assignedTo: '',
-  priority: 'Medium',
+  priority: '',
   dueDate: '',
   type: '',
 }
