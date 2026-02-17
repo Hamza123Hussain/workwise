@@ -23,7 +23,7 @@ const instagramTypes = [
 const TaskCard = ({
   simpleTask,
   onEdit,
- 
+
   onComplete,
   onUpdateStatus,
   onUpdatePosting,
@@ -182,7 +182,7 @@ const TaskCard = ({
         </div>
         {isCompleted && (
           <div className="col-span-full text-green-600 font-semibold mt-1">
-            ✔ Completed on: {formatDate(simpleTask.completeddate)}
+            ✔ Completed
           </div>
         )}
         {dueDatePassed && !isCompleted && (
@@ -202,8 +202,6 @@ const TaskCard = ({
             >
               Update
             </button>
-
-    
           </>
         )}
       </div>
