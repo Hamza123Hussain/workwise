@@ -7,6 +7,9 @@ import { AttendanceRecord } from '@/utils/Interfaces/AttendanceInterface'
 import Loader from '@/components/NewReport/Loader'
 
 const AttendanceRecords: React.FC = () => {
+  const HoursWorked = useSelector(
+    (state: RootState) => state.AttedanceSlice.HoursWorked,
+  )
   const user = useSelector((state: RootState) => state.user)
   const Month = useSelector((state: RootState) => state.sort.Month)
 
@@ -41,7 +44,7 @@ const AttendanceRecords: React.FC = () => {
         const attendance = await getAttendance(
           setLoading,
           user.Email,
-          user.Name
+          user.Name,
         )
 
         if (Array.isArray(attendance)) {
@@ -58,7 +61,7 @@ const AttendanceRecords: React.FC = () => {
     }
 
     fetchAttendance()
-  }, [user.Email, user.Name])
+  }, [user.Email, user.Name, HoursWorked])
 
   // Filtering strictly typed
   const filteredAttendance = userAttendance
