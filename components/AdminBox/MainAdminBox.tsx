@@ -5,7 +5,6 @@ import KPIComponent from './KPIComponent'
 import UserAttendance from './MainAttendance'
 import SignUp from './RegisterAUser'
 import RolesPage from '../RoleTask/Roles'
-import TasksFilter from './MaintaskComponent'
 
 const MainAdminBox = () => {
   const [activeSection, setActiveSection] = useState('kpi')
@@ -62,7 +61,6 @@ const MainAdminBox = () => {
       {/* 🔥 Main Content */}
       <main className="flex-1 p-6 overflow-y-auto">
         {activeSection === 'kpi' && <KPIComponent />}
-        {activeSection === 'tasks' && <TasksFilter />}
         {activeSection === 'attendance' && <UserAttendance />}
         {activeSection === 'register' && <SignUp />}
         {activeSection === 'RoleTasks' && <RolesPage />}
