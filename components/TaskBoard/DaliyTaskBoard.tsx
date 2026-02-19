@@ -30,6 +30,7 @@ const TaskBoardPage = () => {
   const [editTask, setEditTask] = useState<any>(null)
   const [deleteTaskData, setDeleteTaskData] = useState<any>(null)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+  const [selectedUser, setSelectedUser] = useState<string>('all')
 
   const currentUser = useSelector((state: RootState) => state.user)
 
@@ -49,14 +50,9 @@ const TaskBoardPage = () => {
   const handleAddTask = async (taskData: TaskFormData) => {
     try {
       await addTask({
-        name: taskData.name,
-        description: taskData.description || '',
-        assignedTo: taskData.assignedTo,
-        priority: taskData.priority,
-        dueDate: taskData.dueDate,
+        ...taskData,
         createdBy: currentUser.Name,
         email: currentUser.Email,
-        type: taskData.type,
       })
       toast.success('Task added!')
       setModalOpen(false)
@@ -95,7 +91,7 @@ const TaskBoardPage = () => {
     try {
       await updateTaskStatus(task._id, status, currentUser._id, task.type)
       toast.success('Status updated!')
-      // update locally
+
       const updatedTasks = { ...tasksByDate }
       Object.keys(updatedTasks).forEach((date) => {
         updatedTasks[date] = updatedTasks[date].map((t) =>
@@ -103,8 +99,7 @@ const TaskBoardPage = () => {
         )
       })
       setTasksByDate(updatedTasks)
-    } catch (err) {
-      console.error('Error updating task status:', err)
+    } catch {
       toast.error('Failed to update status')
     }
   }
@@ -120,7 +115,7 @@ const TaskBoardPage = () => {
         { platform, status },
       )
       toast.success(`${platform} updated!`)
-      // update locally immediately
+
       const updatedTasks = { ...tasksByDate }
       Object.keys(updatedTasks).forEach((date) => {
         updatedTasks[date] = updatedTasks[date].map((t) => {
@@ -136,22 +131,40 @@ const TaskBoardPage = () => {
         })
       })
       setTasksByDate(updatedTasks)
-    } catch (err) {
-      console.error('Error updating posting:', err)
+    } catch {
       toast.error('Failed to update posting')
     }
   }
 
+  // FIXED: Corrected filtering logic and syntax
   const filterTasksByUser = (tasks: any[]) => {
+    if (currentUser.Name === 'Hamza Hussain') {
+      if (selectedUser === 'all') return tasks
+      return tasks.filter((task) => task.assignedTo === selectedUser)
+    }
     return tasks.filter((task) => task.assignedTo === currentUser.Name)
   }
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-      {/* Header */}
       <Header onAdd={() => setModalOpen(true)} />
 
-      {/* Add Task Modal */}
+      {currentUser.Name === 'Hamza Hussain' && (
+        <div className="mb-6 flex justify-end">
+          <select
+            value={selectedUser}
+            onChange={(e) => setSelectedUser(e.target.value)}
+            className="rounded-md border border-gray-300 px-3 py-2 text-sm"
+          >
+            <option value="all">All Users</option>
+            <option value="Hamza Hussain">Hamza Hussain</option>
+            <option value="Waqas Ali">Waqas Ali</option>
+            <option value="Inza Riaz">Inza Riaz</option>
+            <option value="Saad Ali">Saad Ali</option>
+          </select>
+        </div>
+      )}
+
       {modalOpen && (
         <AddTaskModal
           open={modalOpen}
@@ -160,7 +173,6 @@ const TaskBoardPage = () => {
         />
       )}
 
-      {/* Update Task Modal */}
       {editTask && (
         <AddTaskModal
           open={!!editTask}
@@ -177,7 +189,6 @@ const TaskBoardPage = () => {
         />
       )}
 
-      {/* Delete Confirmation Modal */}
       {deleteModalOpen && deleteTaskData && (
         <ConfirmDeleteModal
           open={deleteModalOpen}
@@ -186,7 +197,6 @@ const TaskBoardPage = () => {
         />
       )}
 
-      {/* Task Lists by Date */}
       {Object.keys(tasksByDate).length > 0 ? (
         Object.keys(tasksByDate)
           .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
@@ -207,7 +217,6 @@ const TaskBoardPage = () => {
                     year: 'numeric',
                   })}
                 </h3>
-
                 <TaskList
                   tasks={filteredTasks}
                   onEdit={(task) => setEditTask(task)}
@@ -228,16 +237,16 @@ const TaskBoardPage = () => {
   )
 }
 
-export default TaskBoardPage
-
-// Header Component
+// FIXED: Moved Header outside the main component scope
 const Header = ({ onAdd }: { onAdd: () => void }) => (
   <div className="flex justify-between items-center mb-6">
     <button
-      className="flex items-center gap-2 rounded-sm p-2 bg-black text-white"
+      className="flex items-center gap-2 rounded-sm p-2 bg-black text-white hover:bg-gray-800 transition-colors"
       onClick={onAdd}
     >
       <Plus size={18} /> Add Task
     </button>
   </div>
 )
+
+export default TaskBoardPage
