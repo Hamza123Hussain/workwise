@@ -18,7 +18,7 @@ const TotalStatsCard = ({
     const totalPointsGained = kpis.reduce((a, k: Kpi) => a + k.PointsGained, 0)
     const TotalHours = kpis.reduce(
       (a, element: Kpi) => a + element.HoursWorked,
-      0
+      0,
     )
     return {
       totalPoints,
@@ -27,9 +27,9 @@ const TotalStatsCard = ({
     }
   }, [kpis])
   const performancePercent = ((totalPointsGained / totalPoints) * 100).toFixed(
-    2
+    2,
   )
-  const AttendancePercent = (TotalHours / (kpis.length * 176)) * 100
+  const AttendancePercent = (TotalHours / (kpis.length * 130)) * 100
   return (
     <div className="bg-[#eff4ff] p-6 rounded-xl shadow-md flex flex-col justify-between">
       <div>
