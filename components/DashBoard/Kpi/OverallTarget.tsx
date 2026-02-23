@@ -6,11 +6,11 @@ const OverallTarget = () => {
   const Userkpi = useSelector((state: RootState) => state.Kpi)
   const TotalPoints = Userkpi.Targets.reduce(
     (acc, target) => acc + target.TotalPoints,
-    0
+    0,
   )
   const PointsGained = Userkpi.Targets.reduce(
     (acc, target) => acc + target.PointsGained,
-    0
+    0,
   )
   const percentage =
     TotalPoints > 0 ? ((PointsGained / TotalPoints) * 100).toFixed(1) : '0'
@@ -50,7 +50,7 @@ const OverallTarget = () => {
         <div className="text-[14px] font-bold flex gap-1 items-center text-[#3D85F1] mt-1">
           <span className="text-[#475267]">Points :</span>
           <span>
-            {PointsGained} / {TotalPoints}
+            {Userkpi.PointsGained} / {Userkpi.TotalPoints}
           </span>
         </div>
       </div>
