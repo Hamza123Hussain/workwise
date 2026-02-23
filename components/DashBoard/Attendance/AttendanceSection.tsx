@@ -10,7 +10,7 @@ const AttendanceSection = () => {
     (state: RootState) => state.AttedanceSlice.HoursWorked,
   )
   const Dispatch = useDispatch()
-  const TotalHours = 160 // Example total monthly working hours
+  const TotalHours = 130 // Example total monthly working hours
   const User = useSelector((state: RootState) => state.user)
   useEffect(() => {
     const GetHours = async () => {
@@ -42,7 +42,7 @@ const AttendanceSection = () => {
       </div>
       <div className=" flex justify-end ">
         <h1 className="text-[#101828] font-medium text-[14px]">
-          Total 160 hrs
+          Total 130 hrs
         </h1>
       </div>
       <AttendanceButton />
