@@ -14,15 +14,6 @@ const OverallTarget = () => {
   )
   const percentage =
     TotalPoints > 0 ? ((PointsGained / TotalPoints) * 100).toFixed(1) : '0'
-  const PointsSalary =
-    TotalPoints > 0
-      ? Userkpi.TotalSalary * 0.8 * (PointsGained / TotalPoints)
-      : 0
-  const AttendanceSalary =
-    Userkpi.HoursWorked > 0
-      ? Userkpi.TotalSalary * 0.2 * (Userkpi.HoursWorked / 176)
-      : 0
-  const FinalSalary = (PointsSalary + AttendanceSalary).toFixed(0)
   const formatNumber = (num: number | string) =>
     Number(num).toLocaleString('en-US')
   return (
@@ -32,9 +23,6 @@ const OverallTarget = () => {
       </div>
       <div className="flex justify-between items-center">
         <h1 className="text-[40px] font-bold text-[#3D85F1]">{percentage}%</h1>
-        <h2 className="text-[28px] font-bold text-[#475267]">
-          Rs. {formatNumber(FinalSalary)}
-        </h2>
       </div>
       <div className="w-full h-[19px] bg-[#1E3A5E] rounded-[100px] overflow-hidden">
         <div
