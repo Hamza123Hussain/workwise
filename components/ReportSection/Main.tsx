@@ -77,7 +77,8 @@ export default function PerformanceReportPage() {
               Performance Report
             </h2>
             <p className="text-gray-500 text-sm">
-           April 2026
+              {now.toLocaleString('default', { month: 'long' })}
+              {'  '} {now.getFullYear()}
             </p>
           </div>
         </div>
